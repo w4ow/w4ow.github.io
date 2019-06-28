@@ -22,11 +22,11 @@
       
         <tags>
             
-            <tag> Ubuntu </tag>
-            
             <tag> PyTorch </tag>
             
             <tag> MacOS </tag>
+            
+            <tag> Ubuntu </tag>
             
         </tags>
       
@@ -80,9 +80,9 @@
       
         <tags>
             
-            <tag> LLVM </tag>
-            
             <tag> Ubuntu </tag>
+            
+            <tag> LLVM </tag>
             
         </tags>
       
