@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Introduction to Array</title>
+      <link href="/2019/06/29/computer_science/data_structure/array/"/>
+      <url>/2019/06/29/computer_science/data_structure/array/</url>
+      
+        <content type="html"><![CDATA[<p>学习数组时的一个简单的笔记</p><hr><a id="more"></a><ol><li>对于一个只声明未赋值的int型数组，如果该数组为全局变量，该数组会被初始化为0，若为局部变量，则被初始化为乱值</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Science </category>
+          
+          <category> Data Structure </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Data Structure </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>MacOS/Ubuntu 18.10 安装PyTorch</title>
       <link href="/2019/03/30/computer_science/computer_basic/PyTorch_for_Linux/"/>
       <url>/2019/03/30/computer_science/computer_basic/PyTorch_for_Linux/</url>
@@ -80,9 +107,9 @@
       
         <tags>
             
-            <tag> Ubuntu </tag>
-            
             <tag> LLVM </tag>
+            
+            <tag> Ubuntu </tag>
             
         </tags>
       
