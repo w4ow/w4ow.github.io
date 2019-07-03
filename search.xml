@@ -4,11 +4,38 @@
   
     
     <entry>
+      <title>C++中的关键字const</title>
+      <link href="/2019/07/03/computer_science/C&amp;C++/const_in_C++/"/>
+      <url>/2019/07/03/computer_science/C&amp;C++/const_in_C++/</url>
+      
+        <content type="html"><![CDATA[<p>关键字const相关知识点整理</p><hr><a id="more"></a><h2 id="const和-define区别"><a href="#const和-define区别" class="headerlink" title="const和#define区别"></a>const和#define区别</h2><ol><li>宏定义的本质是文本替换，编译器会在编译之前将所有的宏定义替换，它的生命周期仅存在于编译器；宏定义没有数据类型</li><li>const常量存在于程序的数据段，并在<strong>堆栈</strong>分配了地址空间。它的生命周期一直存在；const常量有数据类型</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Science </category>
+          
+          <category> C++ </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Introduction to Array</title>
       <link href="/2019/06/29/computer_science/data_structure/array/"/>
       <url>/2019/06/29/computer_science/data_structure/array/</url>
       
-        <content type="html"><![CDATA[<p>学习数组时的一个简单的笔记</p><hr><a id="more"></a><ol><li>对于一个只声明未赋值的int型数组，如果该数组为全局变量，该数组会被初始化为0，若为局部变量，则被初始化为乱值</li></ol>]]></content>
+        <content type="html"><![CDATA[<p>学习数组时的一个简单的笔记</p><hr><a id="more"></a><h2 id="数组及其初始化"><a href="#数组及其初始化" class="headerlink" title="数组及其初始化"></a>数组及其初始化</h2><p>对于一个只声明未赋值的int型数组，如果该数组为全局变量，该数组会被初始化为0，若为局部变量，则被初始化为乱值；</p><hr><h2 id="矩阵的压缩存储"><a href="#矩阵的压缩存储" class="headerlink" title="矩阵的压缩存储"></a>矩阵的压缩存储</h2><p><strong>稀疏矩阵</strong>：对于一个稀疏矩阵(即矩阵中的大部分元素为0)，可以使用三元组表示法对其压缩。在一个三元组中，每一个一个条目都形如(行号, 列号, 值)，稀疏矩阵中的每一个非零值由三元组表中的条目唯一表示。稀疏矩阵经过三元组压缩存储后，会失去随机存取能力；</p><p><strong>特殊矩阵</strong>：特殊矩阵形如上三角矩阵、对角矩阵、对称矩阵等，特殊矩阵的压缩存储并不会丧失随机存取的能力。</p><hr>]]></content>
       
       
       <categories>
@@ -23,6 +50,8 @@
         <tags>
             
             <tag> Data Structure </tag>
+            
+            <tag> Array </tag>
             
         </tags>
       
@@ -81,6 +110,8 @@
         <tags>
             
             <tag> Data Structure </tag>
+            
+            <tag> Queue </tag>
             
         </tags>
       

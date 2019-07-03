@@ -314,9 +314,11 @@
 <hr>
 <a id="more"></a>
 
-<ol>
-<li>对于一个只声明未赋值的int型数组，如果该数组为全局变量，该数组会被初始化为0，若为局部变量，则被初始化为乱值</li>
-</ol>
+<h2 id="数组及其初始化"><a href="#数组及其初始化" class="headerlink" title="数组及其初始化"></a>数组及其初始化</h2><p>对于一个只声明未赋值的int型数组，如果该数组为全局变量，该数组会被初始化为0，若为局部变量，则被初始化为乱值；</p>
+<hr>
+<h2 id="矩阵的压缩存储"><a href="#矩阵的压缩存储" class="headerlink" title="矩阵的压缩存储"></a>矩阵的压缩存储</h2><p><strong>稀疏矩阵</strong>：对于一个稀疏矩阵(即矩阵中的大部分元素为0)，可以使用三元组表示法对其压缩。在一个三元组中，每一个一个条目都形如(行号, 列号, 值)，稀疏矩阵中的每一个非零值由三元组表中的条目唯一表示。稀疏矩阵经过三元组压缩存储后，会失去随机存取能力；</p>
+<p><strong>特殊矩阵</strong>：特殊矩阵形如上三角矩阵、对角矩阵、对称矩阵等，特殊矩阵的压缩存储并不会丧失随机存取的能力。</p>
+<hr>
 
         </div>
         
@@ -340,7 +342,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Data-Structure/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Data Structure</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Data-Structure/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Data Structure</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Array/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Array</p></a></div>
 
 
         
@@ -357,6 +359,25 @@
         
         
             <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                            <h4>
+                                <a href="/2019/07/03/computer_science/C&amp;C++/const_in_C++/" rel="prev" title="C++中的关键字const">
+                                  
+                                      C++中的关键字const
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/C/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>C++</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
                 
                 
                     <section class="next">
@@ -459,6 +480,20 @@
           
           
             
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组及其初始化"><span class="toc-text">数组及其初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#矩阵的压缩存储"><span class="toc-text">矩阵的压缩存储</span></a></li></ol>
+    </div>
+  </section>
+
 
           
         
@@ -552,7 +587,9 @@
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(7)</div></a></li>
+          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(8)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/C/" href="/categories/Computer-Science/C/"><div class='name'>C++</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Computer-Basic/" href="/categories/Computer-Science/Computer-Basic/"><div class='name'>Computer Basic</div><div class='badge'>(4)</div></a></li>
         
@@ -587,7 +624,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/Data-Structure/" style="font-size: 24px; color: #555">Data Structure</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/PC/" style="font-size: 14px; color: #999">PC</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Ubuntu/" style="font-size: 24px; color: #555">Ubuntu</a>
+      <a href="/tags/Array/" style="font-size: 14px; color: #999">Array</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/Data-Structure/" style="font-size: 24px; color: #555">Data Structure</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/PC/" style="font-size: 14px; color: #999">PC</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Queue/" style="font-size: 14px; color: #999">Queue</a> <a href="/tags/Ubuntu/" style="font-size: 24px; color: #555">Ubuntu</a>
     </div>
   </section>
 
