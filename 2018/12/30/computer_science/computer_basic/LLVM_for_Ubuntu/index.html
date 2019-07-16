@@ -315,55 +315,56 @@
 <a id="more"></a>
 
 <h2 id="1-安装cmake"><a href="#1-安装cmake" class="headerlink" title="1.安装cmake"></a>1.安装cmake</h2><p>安装LLVM需要使用cmake，可以使用如下命令安装:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install cmake</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install cmake</span><br></pre></td></tr></table></figure>
 
 <h2 id="2-修改swap分区-可选，不推荐"><a href="#2-修改swap分区-可选，不推荐" class="headerlink" title="2.修改swap分区(可选，不推荐)"></a>2.修改swap分区(可选，不推荐)</h2><p>从源码安装LLVM Debug版本时，链接过程会占用大量内存，因此可以尝试使用修改sawp分区加快安装进程。步骤如下：</p>
 <ol>
 <li>查看系统中已有的交换空间,如果没有条目或swap为0则说明没有可用交换空间:</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo swapon --show</span><br><span class="line">or</span><br><span class="line">free -h</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo swapon --show</span><br><span class="line">or</span><br><span class="line">free -h</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
 <li>检查磁盘使用情况,一般/dev下的设备是我们的磁盘，swap分区应小于此值</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>在根目录(/)下创建名为swapfile的swap文件， 一般我们使用fallocate命令， 建议将swap分区设为20G以满足安装LLVM需求。</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo swapoff -a     # 先关闭所有的swap分区，否则可能因为系统中存在swap分区而报错fallocate: fallocate failed: Text file busy，</span><br><span class="line">sudo fallocate -l 20G /swapfile     # 创建swapfile</span><br><span class="line">ls -lh /swapfile    # 验证是否成功创建swapfile，</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo swapoff -a     # 先关闭所有的swap分区，否则可能因为系统中存在swap分区而报错fallocate: fallocate failed: Text file busy，</span><br><span class="line">sudo fallocate -l 20G /swapfile     # 创建swapfile</span><br><span class="line">ls -lh /swapfile    # 验证是否成功创建swapfile，</span><br></pre></td></tr></table></figure>
 
 <p>　　如果显示<em>-rw——1 root root 20G 日期 /swapfile</em> 则表示创建成功</p>
 <ol start="4">
 <li>启用交换文件</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 600 /swapfile    # 锁定swapfile权限</span><br><span class="line">sudo mkswap /swapfile       # 将文件标记为交换空间</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 600 /swapfile    # 锁定swapfile权限</span><br><span class="line">sudo mkswap /swapfile       # 将文件标记为交换空间</span><br></pre></td></tr></table></figure>
 
 <p>　　若显示:<em>Setting up swapspace……</em> 则表示成功标记swapfile，标记之后启用该文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo swapon /swapfile   # 启用</span><br><span class="line">free -h                 # 验证</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo swapon /swapfile   # 启用</span><br><span class="line">free -h                 # 验证</span><br></pre></td></tr></table></figure>
 
 <ol start="5">
 <li>永久保留swap文件：虽然我们更改了swap分区，但是重启后不会保留设置，因此可以将将swap文件添加到/etc/fstab来将其永久保留</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/fstab /etc/fstab.bak   # 备份</span><br><span class="line">echo &apos;/swapfile none swap sw 0 0&apos; | sudo tee -a /etc/fstab  # 将swap文件信息添加到/etc/fstab文件</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/fstab /etc/fstab.bak   # 备份</span><br><span class="line">echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab  # 将swap文件信息添加到/etc/fstab文件</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h2 id="3-安装LLVM-8-0-Debug版本"><a href="#3-安装LLVM-8-0-Debug版本" class="headerlink" title="3.安装LLVM-8.0 Debug版本"></a>3.安装LLVM-8.0 Debug版本</h2><ol>
 <li>首先去<a href="http://releases.llvm.org/download.html#8.0.0" target="_blank" rel="noopener">LLVM官网</a>下载必要的软件包;</li>
 <li>获取源码:</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 在适当位置放置LLVM源码，此处放在home下</span><br><span class="line">cd ~</span><br><span class="line">mkdir tmp</span><br><span class="line"></span><br><span class="line"># 解压LLVM源码</span><br><span class="line">cd tmp</span><br><span class="line">tar -Jxvg llvm-7.0.0.src.tar.xz</span><br><span class="line">mv llvm-7.0.0.src llvm</span><br><span class="line"></span><br><span class="line"># 解压clang源码(此时在tmp目录下)</span><br><span class="line">cd llvm/tools</span><br><span class="line">tar -Jxvg cfe-7.0.0.src.tar.xz</span><br><span class="line">mv cfe-7.0.0.src clang</span><br><span class="line"></span><br><span class="line"># 解压clang-tools-extra源码(此时在tmp/llvm/tools目录下)</span><br><span class="line">cd clang/tools</span><br><span class="line">tar -Jxvg clang-tools-extra-7.0.0.src.tar.xz</span><br><span class="line">mv clang-tools-extra-7.0.0.src extra</span><br><span class="line"></span><br><span class="line"># 解压compiler-rt源码(此时在tmp/llvm/tools/clang/tools目录下)</span><br><span class="line">cd ~/tmp/llvm/projects</span><br><span class="line">tar -Jxvg compiler-rt-7.0.0.src.tar.xz</span><br><span class="line">mv compiler-rt-7.0.0.src compiler-rt</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 在适当位置放置LLVM源码，此处放在home下</span><br><span class="line">cd ~</span><br><span class="line">mkdir tmp</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 解压LLVM源码</span><br><span class="line">cd tmp</span><br><span class="line">tar -Jxvg llvm-7.0.0.src.tar.xz</span><br><span class="line">mv llvm-7.0.0.src llvm</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 解压clang源码(此时在tmp目录下)</span><br><span class="line">cd llvm/tools</span><br><span class="line">tar -Jxvg cfe-7.0.0.src.tar.xz</span><br><span class="line">mv cfe-7.0.0.src clang</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 解压clang-tools-extra源码(此时在tmp/llvm/tools目录下)</span><br><span class="line">cd clang/tools</span><br><span class="line">tar -Jxvg clang-tools-extra-7.0.0.src.tar.xz</span><br><span class="line">mv clang-tools-extra-7.0.0.src extra</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 解压compiler-rt源码(此时在tmp/llvm/tools/clang/tools目录下)</span><br><span class="line">cd ~/tmp/llvm/projects</span><br><span class="line">tar -Jxvg compiler-rt-7.0.0.src.tar.xz</span><br><span class="line">mv compiler-rt-7.0.0.src compiler-rt</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>开始安装</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 在tmp目录下新建build文件夹</span><br><span class="line">cd build</span><br><span class="line">cmake -G &quot;Unix Makefiles&quot; -DCMAKE_BUILD_TYPE=Debug ../llvm</span><br><span class="line">make -j2 # 使用两个CPU核安装，该步骤既慢且卡，推荐设置为核心数一半</span><br><span class="line">sudo make install</span><br><span class="line"></span><br><span class="line"># 将路径添加到环境变量中</span><br><span class="line">cd ~</span><br><span class="line">vim .bashrc</span><br><span class="line">export PATH=/usr/lib/llvm-7/bin</span><br><span class="line">export LD_LIBRARY_PATH=/usr/lib/llvm-7/lib</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 在tmp目录下新建build文件夹</span><br><span class="line">cd build</span><br><span class="line">cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ../llvm</span><br><span class="line">make -j2 # 使用两个CPU核安装，该步骤既慢且卡，推荐设置为核心数一半</span><br><span class="line">sudo make install</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 将路径添加到环境变量中</span><br><span class="line">cd ~</span><br><span class="line">vim .bashrc</span><br><span class="line">export PATH=/usr/lib/llvm-7/bin</span><br><span class="line">export LD_LIBRARY_PATH=/usr/lib/llvm-7/lib</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li>重启终端并测试</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">clang -v</span><br><span class="line">clang++ -v</span><br><span class="line">clang test.c</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">clang -v</span><br><span class="line">clang++ -v</span><br><span class="line">clang test.c</span><br></pre></td></tr></table></figure>
+
+
         </div>
         
           

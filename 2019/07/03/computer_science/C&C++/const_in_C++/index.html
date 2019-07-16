@@ -322,17 +322,17 @@
 <li>定义常量;</li>
 <li>修饰函数形参：当函数参数为用户自定义类型或抽象数据类型时，将“值传递”改为const引用传递可以提高效率。例如如下两个函数，第一个函数效率较低，因为函数体内会产生一个A类型的临时对象用于复制a，浪费存储空间，临时对象的构造、复制、析构消耗时间。第二个函数使用“引用传递”，不需要产生临时对象，但是如果是简单地引用可能会改变a的值，所以可以加一个const:</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">void fun(A a);</span><br><span class="line">void fun(A const &amp;a);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(A a)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(A <span class="keyword">const</span> &amp;a)</span></span>;</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>修饰函数的返回值：被const修饰的指针函数，因为其返回值是const类型，所以其返回值只能返回给const常量:</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const char *GetChar()&#123;&#125;;</span><br><span class="line">char *ch = GetChar();       // error</span><br><span class="line">const char *ch = GetChar()  //correct</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">const</span> <span class="keyword">char</span> *<span class="title">GetChar</span><span class="params">()</span></span>&#123;&#125;;</span><br><span class="line"><span class="keyword">char</span> *ch = GetChar();       <span class="comment">// error</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *ch = GetChar()  <span class="comment">//correct</span></span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li>const修饰类的成员函数：任何不会修改数据成员的函数都应该用const修饰，防止修改数据成员。其形式如下:</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int GeoCount() const;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GeoCount</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br></pre></td></tr></table></figure>
 
 <h2 id="3-静态变量static"><a href="#3-静态变量static" class="headerlink" title="3. 静态变量static"></a>3. 静态变量static</h2><h3 id="1-static的作用"><a href="#1-static的作用" class="headerlink" title="1. static的作用"></a>1. static的作用</h3><ol>
 <li>一个static变量可以维持其值在被调用的过程中不变；</li>

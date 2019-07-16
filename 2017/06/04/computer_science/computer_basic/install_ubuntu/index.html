@@ -331,12 +331,12 @@
 <ol>
 <li>打开Terminal安装dconf-editor</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install dconf-editor</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install dconf-editor</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
 <li>在终端打开dconf-editor</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dconf-editor</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dconf-editor</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>dconf-editor ➜ org ➜ gnome ➜ setting-deamon ➜ plugins ➜ color ➜ night-light-temperature</li>
@@ -344,7 +344,7 @@
 </ol>
 <hr>
 <h2 id="6-系统美化"><a href="#6-系统美化" class="headerlink" title="6. 系统美化"></a>6. 系统美化</h2><p>安装Tweaks工具用以配置桌面</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update </span><br><span class="line">sudo apt install gnome-tweak-tool</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install gnome-tweak-tool</span><br></pre></td></tr></table></figure>
 
 <p>在应用菜单中打开Tweaks，在Window Titlebars中可以将窗口按钮调至左侧，在Tweaks ➜ Desktop中可以将桌面上令人捉急的Trash图标抹去。默认情况下无法通过Tweaks修改Shell外观，因此需要安装扩展，打开应用中心，找到Add-ons ➜ Shell Extension ➜ User Themes ➜ 安装。推荐的扩展还有：</p>
 <ul>
@@ -355,27 +355,27 @@
 <h2 id="7-配置终端"><a href="#7-配置终端" class="headerlink" title="7. 配置终端"></a>7. 配置终端</h2><ol>
 <li>安装zsh与git</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install zsh </span><br><span class="line">sudo apt install git</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install zsh </span><br><span class="line">sudo apt install git</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
 <li>安装oh-my-zsh</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>将Shell切换到zsh，登出并重新登入</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li>在Home下的.zshrc文件中可以更换主题，个人比较喜欢ys主题</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME=&quot;ys&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME="ys"</span><br></pre></td></tr></table></figure>
 
 <ol start="5">
 <li>安装一些强大的zsh插件<br>首当其冲的插件就是incr，一个超级强大的自动补全插件，下载该插件到Home目录下的/.oh-my-zsh/plugins/incr下，在.zshrc文件中添加命令：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.oh-my-zsh/plugins/incr/incr*.zsh</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.oh-my-zsh/plugins/incr/incr*.zsh</span><br></pre></td></tr></table></figure>
 
 <ol start="6">
 <li>同时还推荐一些其他的插件，例如extract，在plugins=()语句括号中添加extract即可。</li>
