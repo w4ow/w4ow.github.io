@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>MacOS/Ubuntu 18.10 安装PyTorch | Simita</title>
+  <title>Ubuntu 18.10安装与配置 | Simita</title>
   
   
 
@@ -228,8 +228,8 @@
         
   
     <h1 class="title">
-      <a href="/2019/03/30/computer_science/computer_basic/PyTorch_for_Linux/">
-        MacOS/Ubuntu 18.10 安装PyTorch
+      <a href="/2017/06/04/computer_science/Linux/install_ubuntu/">
+        Ubuntu 18.10安装与配置
       </a>
     </h1>
   
@@ -258,7 +258,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-03-30</p>
+    <p>2017-06-04</p>
   </a>
 </div>
 
@@ -268,9 +268,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Computer-Science/Computer-Basic/' rel="nofollow">
+    <a href='/categories/Computer-Science/Ubuntu/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Computer Science&nbsp;/&nbsp;Computer Basic</p>
+      <p>Computer Science&nbsp;/&nbsp;Ubuntu</p>
     </a>
   </div>
 
@@ -310,31 +310,76 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <p>MacOS/Ubuntu 18.10 安装PyTorch</p>
+          <p>Ubuntu 18.10安装与配置</p>
 <a id="more"></a>
 
 <hr>
-<h2 id="1-MacOS-Ubuntu-18-10-安装Conda管理环境"><a href="#1-MacOS-Ubuntu-18-10-安装Conda管理环境" class="headerlink" title="1. MacOS/Ubuntu 18.10 安装Conda管理环境"></a>1. MacOS/Ubuntu 18.10 安装Conda管理环境</h2><p>MacOS下前往Anaconda官网下载安装即可<br>Linux下，从官网下载的是一个.sh文件，下载后终端执行zsh xxxx.sh并根据指示安装即可.<br>如果安装后使用zsh启动conda显示找不到conda，可以在.zshrc文件中添加<em>export PATH=”/home/user_name/anaconda3/bin:$PATH”</em>并source一下即可</p>
+<h2 id="1-安装Ubuntu-18-10"><a href="#1-安装Ubuntu-18-10" class="headerlink" title="1. 安装Ubuntu 18.10"></a>1. 安装Ubuntu 18.10</h2><p>安装过程不多说，安装镜像可以去<a href="http://mirrors.ustc.edu.cn/" target="_blank" rel="noopener">中科大镜像</a>下载。</p>
 <hr>
-<h2 id="2-MacOS-Ubuntu-18中安装PyTorch"><a href="#2-MacOS-Ubuntu-18中安装PyTorch" class="headerlink" title="2. MacOS/Ubuntu 18中安装PyTorch"></a>2. MacOS/Ubuntu 18中安装PyTorch</h2><ol>
-<li>(可选) 为了避免各种软件的版本冲突问题，推荐使用python虚拟环境，在虚拟环境中安装pytorch</li>
+<h2 id="2-安装搜狗输入法"><a href="#2-安装搜狗输入法" class="headerlink" title="2. 安装搜狗输入法"></a>2. 安装搜狗输入法</h2><ol>
+<li>前往<a href="https://pinyin.sogou.com/linux/?r=pinyin" target="_blank" rel="noopener">搜狗输入法官网</a>下载deb安装文件，双击安装；</li>
+<li>前往Settings ➜ Region &amp; Language ➜ Nanage Installed Languages， 将键盘输入系统改为fcixt；</li>
+<li>当前帐号注销并重新登入，打开应用菜单找到Fcitx Config Tool， 点击右下角的+，取消选定“只展示当前语言”，搜索”sogou”找到并添加搜狗输入法；</li>
+<li>重启系统。</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create -n environment_name python=X.X (2.7/3.6)   # 创建虚拟环境</span><br><span class="line">conda info --env    # 显示所有的conda虚拟环境</span><br><span class="line">conda activate environment_name # 激活虚拟环境</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="3-修改软件源"><a href="#3-修改软件源" class="headerlink" title="3. 修改软件源"></a>3. 修改软件源</h2><p>应用菜单 ➜ Software &amp; Updates ➜ Download from ➜ Other ➜ China ➜ mirrors.ustc.edu.cn</p>
+<hr>
+<h2 id="4-安装Chrome"><a href="#4-安装Chrome" class="headerlink" title="4. 安装Chrome"></a>4. 安装Chrome</h2><p>前往<a href="https://www.google.cn/intl/zh-CN_ALL/chrome/" target="_blank" rel="noopener">Chrome官网</a>下载.deb安装包，双击安装即可。</p>
+<hr>
+<h2 id="5-开启夜览模式"><a href="#5-开启夜览模式" class="headerlink" title="5. 开启夜览模式"></a>5. 开启夜览模式</h2><p>夜览可以在Setting ➜ Device ➜ Night Light开启，但是默认的暖度过高，需要调整：</p>
+<ol>
+<li>打开Terminal安装dconf-editor</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install dconf-editor</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
-<li>修改安装镜像源并安装PyTorch，由于国外的conda源安装速度很慢，因此建议改为清华源</li>
+<li>在终端打开dconf-editor</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> for Anaconda</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> for PyTroch</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/</span><br><span class="line"></span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dconf-editor</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
-<li>安装PyTorch</li>
+<li>dconf-editor ➜ org ➜ gnome ➜ setting-deamon ➜ plugins ➜ color ➜ night-light-temperature</li>
+<li>关闭”Use default value”，并将温度值调到合适的值，一般5500比较合适</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch torchvision</span><br><span class="line">conda deactivate    # 使用结束后退出虚拟环境</span><br></pre></td></tr></table></figure>
-
 <hr>
-<h2 id="3-虚拟环境中安装jupyter"><a href="#3-虚拟环境中安装jupyter" class="headerlink" title="3. 虚拟环境中安装jupyter"></a>3. 虚拟环境中安装jupyter</h2><p>如果是新建的虚拟环境，即使你之前已经安装了anaconda，也有可能需要重新在虚拟环境中重新安装jupyter</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install jupyter</span><br></pre></td></tr></table></figure>
+<h2 id="6-系统美化"><a href="#6-系统美化" class="headerlink" title="6. 系统美化"></a>6. 系统美化</h2><p>安装Tweaks工具用以配置桌面</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install gnome-tweak-tool</span><br></pre></td></tr></table></figure>
 
+<p>在应用菜单中打开Tweaks，在Window Titlebars中可以将窗口按钮调至左侧，在Tweaks ➜ Desktop中可以将桌面上令人捉急的Trash图标抹去。默认情况下无法通过Tweaks修改Shell外观，因此需要安装扩展，打开应用中心，找到Add-ons ➜ Shell Extension ➜ User Themes ➜ 安装。推荐的扩展还有：</p>
+<ul>
+<li>Weather In The Clock，点击屏幕上方的时间可以展示天气;</li>
+<li>Dash to Dock，将Ubuntu原生应用栏变得和MacOS一样，不过默认的会自动隐藏，因此需要到应用中心中该扩展的设置里关闭autohide Hide Top Bar，自动隐藏顶部栏；</li>
+</ul>
+<hr>
+<h2 id="7-配置终端"><a href="#7-配置终端" class="headerlink" title="7. 配置终端"></a>7. 配置终端</h2><ol>
+<li>安装zsh与git</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install zsh </span><br><span class="line">sudo apt install git</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>安装oh-my-zsh</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>将Shell切换到zsh，登出并重新登入</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>在Home下的.zshrc文件中可以更换主题，个人比较喜欢ys主题</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME="ys"</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>安装一些强大的zsh插件<br>首当其冲的插件就是incr，一个超级强大的自动补全插件，下载该插件到Home目录下的/.oh-my-zsh/plugins/incr下，在.zshrc文件中添加命令：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.oh-my-zsh/plugins/incr/incr*.zsh</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>同时还推荐一些其他的插件，例如extract，在plugins=()语句括号中添加extract即可。</li>
+</ol>
 
         </div>
         
@@ -346,10 +391,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2018-03-30T00:00:00+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2017-06-04T00:00:00+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>last updated at Mar 30, 2018</p>
+    <p>last updated at Jun 4, 2017</p>
   </a>
 </div>
 
@@ -358,7 +403,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Ubuntu/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Ubuntu</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/PyTorch/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>PyTorch</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/MacOS/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>MacOS</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Ubuntu/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Ubuntu</p></a></div>
 
 
         
@@ -380,16 +425,16 @@
                         <span class="art-item-left">
                             <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
                             <h4>
-                                <a href="/2019/06/29/computer_science/data_structure/array/" rel="prev" title="Introduction to Array">
+                                <a href="/2018/12/30/computer_science/Linux/LLVM_for_Ubuntu/" rel="prev" title="Ubuntu 18.10安装LLVM">
                                   
-                                      Introduction to Array
+                                      Ubuntu 18.10安装LLVM
                                   
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/Data-Structure/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Data Structure</a> <a class="tag" href="/tags/Array/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Array</a>
+                                    <a class="tag" href="/tags/LLVM/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>LLVM</a> <a class="tag" href="/tags/Ubuntu/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Ubuntu</a>
                                 </h6>
                             
                         </span>
@@ -400,16 +445,16 @@
                         <span class="art-item-right" aria-hidden="true">
                             <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2019/03/04/computer_science/data_structure/Queue/" rel="prev" title="Introduction to Queue">
+                                <a href="/2016/09/23/computer_science/data_structure/introduction/" rel="prev" title="Introduction To Data Structure">
                                     
-                                        Introduction to Queue
+                                        Introduction To Data Structure
                                     
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/Data-Structure/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Data Structure</a> <a class="tag" href="/tags/Queue/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Queue</a>
+                                    <a class="tag" href="/tags/Data-Structure/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Data Structure</a>
                                 </h6>
                             
                         </span>
@@ -440,7 +485,7 @@
 
   <script>
     window.subData = {
-      title: 'MacOS/Ubuntu 18.10 安装PyTorch',
+      title: 'Ubuntu 18.10安装与配置',
       tools: true
     }
   </script>
@@ -468,7 +513,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-MacOS-Ubuntu-18-10-安装Conda管理环境"><span class="toc-text">1. MacOS/Ubuntu 18.10 安装Conda管理环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-MacOS-Ubuntu-18中安装PyTorch"><span class="toc-text">2. MacOS/Ubuntu 18中安装PyTorch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-虚拟环境中安装jupyter"><span class="toc-text">3. 虚拟环境中安装jupyter</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-安装Ubuntu-18-10"><span class="toc-text">1. 安装Ubuntu 18.10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-安装搜狗输入法"><span class="toc-text">2. 安装搜狗输入法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-修改软件源"><span class="toc-text">3. 修改软件源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-安装Chrome"><span class="toc-text">4. 安装Chrome</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-开启夜览模式"><span class="toc-text">5. 开启夜览模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-系统美化"><span class="toc-text">6. 系统美化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-配置终端"><span class="toc-text">7. 配置终端</span></a></li></ol>
     </div>
   </section>
 
@@ -569,9 +614,11 @@
         
           <li><a class="flat-box child" title="/categories/Computer-Science/C/" href="/categories/Computer-Science/C/"><div class='name'>C++</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Computer-Science/Computer-Basic/" href="/categories/Computer-Science/Computer-Basic/"><div class='name'>Computer Basic</div><div class='badge'>(4)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Computer-Science/Computer-Basic/" href="/categories/Computer-Science/Computer-Basic/"><div class='name'>Computer Basic</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Data-Structure/" href="/categories/Computer-Science/Data-Structure/"><div class='name'>Data Structure</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Ubuntu/" href="/categories/Computer-Science/Ubuntu/"><div class='name'>Ubuntu</div><div class='badge'>(3)</div></a></li>
         
       </ul>
     </div>
