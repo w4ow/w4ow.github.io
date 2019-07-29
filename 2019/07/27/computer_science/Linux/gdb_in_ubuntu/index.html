@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Archives: 2014/2 | Simita</title>
+  <title>Ubuntu下GDB的使用 | Simita</title>
   
   
 
@@ -44,7 +44,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover  half'>
+    <cover class='cover post half'>
       
         
   <h1 class='title'>Simita</h1>
@@ -213,22 +213,11 @@
   <div class="l_body">
     <div class='body-wrapper'>
       <div class='l_main'>
-	
-		
-  <section class="post-list">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
   
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -237,11 +226,13 @@
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/2014/02/23/computer_science/computer_basic/introduction/">
-      Introduction To Computer
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/2019/07/27/computer_science/Linux/gdb_in_ubuntu/">
+        Ubuntu下GDB的使用
+      </a>
+    </h1>
+  
 
 
       
@@ -267,7 +258,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2014-02-23</p>
+    <p>2019-07-27</p>
   </a>
 </div>
 
@@ -277,9 +268,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Computer-Science/Computer-Basic/' rel="nofollow">
+    <a href='/categories/Computer-Science/Ubuntu/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Computer Science&nbsp;/&nbsp;Computer Basic</p>
+      <p>Computer Science&nbsp;/&nbsp;Ubuntu</p>
     </a>
   </div>
 
@@ -288,6 +279,19 @@
         
           
             
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
 
           
         
@@ -304,43 +308,129 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p><a href="https://book.douban.com/subject/30823911/" target="_blank" rel="noopener">《计算机组装与维修技术》</a>阅读笔记</p>
-      
-        <div class="readmore">
-          <a href="/2014/02/23/computer_science/computer_basic/introduction/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            Read More
-          </a>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <p>最近项目中经常需要使用GDB，因此总结了一下在使用GDB时遇到的技巧</p>
+<hr>
+<a id="more"></a>
+
+<h2 id="1-使用GDB调试可执行文件"><a href="#1-使用GDB调试可执行文件" class="headerlink" title="1. 使用GDB调试可执行文件"></a>1. 使用GDB调试可执行文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gdb a.out               <span class="comment"># 不带参数</span></span><br><span class="line">或</span><br><span class="line">gdb --args a.out 参数   <span class="comment"># 带参数</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-GDB常用命令"><a href="#2-GDB常用命令" class="headerlink" title="2. GDB常用命令"></a>2. GDB常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">r [args]                <span class="comment"># 带参数从头开始执行程序</span></span><br><span class="line">b arg                   <span class="comment"># 在arg处设置断点，arg可以为行数、地址</span></span><br><span class="line">b xxx <span class="keyword">if</span> (condition)    <span class="comment"># 条件断点</span></span><br><span class="line">b test.c:30 <span class="keyword">if</span> n==100   <span class="comment"># 当变量n等于100的时候在test.c的30行处加断点</span></span><br><span class="line">n (next)                <span class="comment"># 单步执行，如遇函数则直接返回函数的执行结果</span></span><br><span class="line">s (step)                <span class="comment"># 单步执行，如遇函数则进入函数体执行</span></span><br><span class="line">stop                    <span class="comment"># 停止执行</span></span><br><span class="line">q (quit)                <span class="comment"># 退出GDB</span></span><br><span class="line">until                   <span class="comment"># 当不想反复执行循环时，可以用until跳出循环</span></span><br><span class="line">finish                  <span class="comment"># 跳出当前函数</span></span><br><span class="line">c (<span class="built_in">continue</span>)            <span class="comment"># 继续执行，直到下一个断点或程序结束</span></span><br><span class="line">p arg                   <span class="comment"># 打印出arg的值，arg可以为变量或地址</span></span><br><span class="line">i <span class="built_in">source</span>                <span class="comment"># 查看当前程序</span></span><br><span class="line">i b                     <span class="comment"># 查看arg，arg可以为断点、变量值、</span></span><br><span class="line">i args                  <span class="comment"># 打印出当前函数的参数值</span></span><br><span class="line">i locals                <span class="comment"># 打印出当前函数中所有局部变量值</span></span><br><span class="line">i r (r_name)            <span class="comment"># 查看所有寄存器(寄存器r_name)的值</span></span><br><span class="line">i threads               <span class="comment"># 查看线程</span></span><br><span class="line">d b                     <span class="comment"># 删除断点，b为断点编号</span></span><br><span class="line">bt                      <span class="comment"># 查看函数的back trace</span></span><br><span class="line">l (list) arg            <span class="comment"># 显示arg附近的前后共10行代码，arg可以为行数或函数名</span></span><br><span class="line">watch arg               <span class="comment"># 设置监控，在arg改变时停止(需要先加断点)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-设置断点"><a href="#3-设置断点" class="headerlink" title="3. 设置断点"></a>3. 设置断点</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当欲设断点在当前文件中时，可以b+行数或b+函数名</span></span><br><span class="line">b 45/main</span><br><span class="line"><span class="comment"># 当欲设断点在其他文件中时，b 文件名:行数</span></span><br><span class="line">b head.cpp:45</span><br></pre></td></tr></table></figure>
+
+
         </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <hr>
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-07-27T22:00:00+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>last updated at Jul 27, 2019</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/GDB/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>GDB</p></a></div>
+
+
+        
+      
+        
+          
+
+        
       
     </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/PC/" rel="nofollow"><i class="fas fa-tag fa-fw"></i>PC</a>
-        
-      </div>
-    
   </section>
-</article>
 
-          </div>
+
         
-      
-    
-  </section>
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                            <h4>
+                                <a href="/2019/07/29/computer_science/C&amp;C++/data_type_in_C++/" rel="prev" title="C++中的数据类型及其大小">
+                                  
+                                      C++中的数据类型及其大小
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/C/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>C++</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2019/07/03/computer_science/C&amp;C++/const_define_static_in_C++/" rel="prev" title="C++中const、define和static">
+                                    
+                                        C++中const、define和static
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/C/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>C++</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
   
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
 
   
 
 
-	
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Ubuntu下GDB的使用',
+      tools: true
+    }
+  </script>
+
+
 </div>
 <aside class='l_side'>
   
@@ -353,6 +443,20 @@
           
           
             
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-使用GDB调试可执行文件"><span class="toc-text">1. 使用GDB调试可执行文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-GDB常用命令"><span class="toc-text">2. GDB常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-设置断点"><span class="toc-text">3. 设置断点</span></a></li></ol>
+    </div>
+  </section>
+
 
           
         
@@ -520,14 +624,6 @@
   </div> -->
 </footer>
 <script>setLoadingBarProgress(80);</script>
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
 
 
       <script>setLoadingBarProgress(60);</script>
