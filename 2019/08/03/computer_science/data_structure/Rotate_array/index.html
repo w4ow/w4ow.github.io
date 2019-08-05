@@ -373,7 +373,11 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j:nums)</span><br><span class="line">            <span class="keyword">if</span> (!i || j &gt; nums[i - <span class="number">1</span>])</span><br><span class="line">                nums[i++] = j;</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <h2 id="3-买卖股票的最佳时机II"><a href="#3-买卖股票的最佳时机II" class="headerlink" title="3. 买卖股票的最佳时机II"></a>3. 买卖股票的最佳时机II</h2><p>给定一个数组，它的第i个元素是一支给定股票第i天的价格。设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
+<p><strong>示例1</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: [7,1,5,3,6,4]</span><br><span class="line">输出: 7</span><br><span class="line">解释: 在第2天（股票价格=1）的时候买入，在第3天（股票价格=5）的时候卖出,</span><br><span class="line">    　这笔交易所能获得利润=5-1=4。随后，在第4天（股票价格=3）的时候买入，</span><br><span class="line">    　在第5天（股票价格=6）的时候卖出,这笔交易所能获得利润=6-3=3。</span><br></pre></td></tr></table></figure>
 
+<p><strong>示例2</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,3,4,5]</span><br><span class="line">输出: 4</span><br><span class="line">解释: 在第1天（股票价格=1）的时候买入，在第5天（股票价格=5）的时候卖出,</span><br><span class="line">    　这笔交易所能获得利润=5-1=4。注意你不能在第1天和第2天接连购买股票，</span><br><span class="line">    　之后再将它们卖出。因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。</span><br></pre></td></tr></table></figure>
         </div>
         
           
@@ -396,7 +400,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/LeetCode/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>LeetCode</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Array/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Array</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Array/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Array</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/LeetCode/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>LeetCode</p></a></div>
 
 
         
