@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>C++中的内联函数 | Simita</title>
+  <title>C++中结构体和类的区别 | Simita</title>
   
   
 
@@ -230,8 +230,8 @@
         
   
     <h1 class="title">
-      <a href="/2019/07/30/computer_science/C&C++/inline_in_C++/">
-        C++中的内联函数
+      <a href="/2019/08/10/computer_science/C&C++/different_between_struct_and_class/">
+        C++中结构体和类的区别
       </a>
     </h1>
   
@@ -260,7 +260,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-07-30</p>
+    <p>2019-08-10</p>
   </a>
 </div>
 
@@ -312,56 +312,17 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <p>内联函数相关知识点梳理</p>
+          <p>C++中结构体和类的区别</p>
 <hr>
 <a id="more"></a>
 
-<h2 id="1-内联函数的作用"><a href="#1-内联函数的作用" class="headerlink" title="1. 内联函数的作用"></a>1. 内联函数的作用</h2><p>引入内联函数inline的主要目的是，用它来代替C或C++中的表达式形式的宏定义，从而解决程序中函数调用的效率问题。在C或C++中，可以如下定义一个宏：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Expression(a, b) (((a) + (b)) * ((a) - (b)))</span></span><br></pre></td></tr></table></figure>
-
-<p>该宏定义用于计算两数的和差积。这种宏在形式上类似于函数，但它<strong>使用预处理器实现</strong>，没有参数压栈、代码生成等操作，因而效率很高。但与此同时，这种宏<strong>不能进行参数有效性检测</strong>，不能享受C++编译器类型检查带来的好处，因此这种宏的使用有一定的隐患和局限性。</p>
-<p>另外，在C++的类中，当一个操作涉及到保护成员和私有成员时，类的访问控制机制使得这些成员不能通过上面的宏进行操作。</p>
-<p>为此，inline推出的作用就是取代这种表达式形式的宏定义，消除表达式宏的缺点，继承表达式宏的优点。</p>
-<h2 id="2-inline与宏定义的区别"><a href="#2-inline与宏定义的区别" class="headerlink" title="2. inline与宏定义的区别"></a>2. inline与宏定义的区别</h2><ul>
-<li>inline函数的本质是一个函数，而宏不是；</li>
-</ul>
-<ul>
-<li>inline函数在编译时展开，宏在预编译时展开；</li>
-</ul>
-<ul>
-<li>在编译时，inline函数可以直接被嵌入到目标代码中，而宏只是一个简单的文本替换；</li>
-</ul>
-<ul>
-<li>inline可以完成参数类型检查、语法检查等编译功能，宏则不具备这样的功能；</li>
-</ul>
-<ul>
-<li>宏定义时容易出现二义性(一般需要加很多括号以解决这个问题)，inline则不会出现这样的问题(本质是函数)。</li>
-</ul>
-<h2 id="3-inline的优点"><a href="#3-inline的优点" class="headerlink" title="3. inline的优点"></a>3. inline的优点</h2><ul>
-<li>inline定义的类的内联函数，函数的代码被放入符号表中，在使用时直接进行替换，像宏一样展开，没有了调用的开销，效率很高；</li>
-</ul>
-<ul>
-<li>类的内联函数是一个真正的函数，在调用一个内联函数时，编译器会对其进行参数类型检查等相关检查，消除了隐患和局限性；</li>
-</ul>
-<ul>
-<li>inline可以作为某个类的成员函数，可以使用所在类的保护成员变量和私有成员变量。</li>
-</ul>
-<h2 id="4-inline的使用场合"><a href="#4-inline的使用场合" class="headerlink" title="4. inline的使用场合"></a>4. inline的使用场合</h2><ul>
-<li>用于取代表达式形式的宏定义；</li>
-</ul>
-<ul>
-<li>用于C++类中私有成员或保护成员的存取函数定义。一般而言，类的外部想要访问类的私有成员，需要使用接口函数来对这些私有成员进行读写，如果将这些读写私有成员的函数定义为内联函数则能获得较高的效率(符号表替换)。需要注意的是，<strong>定义在类体内的函数会被自动转换成内联函数</strong>。</li>
-</ul>
-<h2 id="5-inline的缺点"><a href="#5-inline的缺点" class="headerlink" title="5. inline的缺点"></a>5. inline的缺点</h2><p><strong>inline是以代码复制为代价的</strong>，仅仅省去了函数调用的开销，从而提高函数的执行效率。<strong>若函数体内代码的执行时间相比于函数调用的开销大，那么使用inline的效率收益则较低</strong>。另外，<strong>每一处内联函数的调用都需要复制代码</strong>，会使程序的总代码量增大，消耗更多的内存空间。因此以下情况下不适合使用inline：</p>
-<ul>
-<li>函数体内代码较长：使用inline将导致较高的内存消耗；</li>
-</ul>
-<ul>
-<li>函数体内出现循环：执行函数体内的代码的时间会比函数调用的开销大；</li>
-</ul>
-<ul>
-<li>不用于类的构造函数和析构函数。</li>
-</ul>
+<h2 id="1-C和C-中struct的不同"><a href="#1-C和C-中struct的不同" class="headerlink" title="1. C和C++中struct的不同"></a>1. C和C++中struct的不同</h2><ol>
+<li>C中的结构体只能定义成员变量，不能定义成员函数，C++可以；</li>
+<li>C++为C语言中的结构体引入了成员函数、访问控制权限、继承、包含多态等面向对象特性；</li>
+<li>C语言中，空结构体的大小为0，而C++中空结构体（属于空类）的大小为1;</li>
+<li>C++中之所以要引入结构体，是为了保持和C程序的兼容性。C++中不使用结构体丝毫不会影响程序的表达能力，但有时仍会在C++中使用结构体，这是因为使用结构体将不同类型数据组成整体便于保存数据。（若用类来保存，因类中成员默认为私有，还要为每个数据成员特定函数来读取和改写各个属性，比较麻烦。）</li>
+</ol>
+<h2 id="2-C-中struct和class的不同"><a href="#2-C-中struct和class的不同" class="headerlink" title="2. C++中struct和class的不同"></a>2. C++中struct和class的不同</h2><p>C++中struct和class唯一的不同是<strong>struct和class具有不同的默认访问控制属性</strong>，class中的成员的默认控制访问属性为private，而struct中的默认访问控制属性为public。</p>
 
         </div>
         
@@ -373,10 +334,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-07-30T09:45:00+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-08-10T00:00:00+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>last updated at Jul 30, 2019</p>
+    <p>last updated at Aug 10, 2019</p>
   </a>
 </div>
 
@@ -403,40 +364,21 @@
         
             <div class="prev-next">
                 
-                    <section class="prev">
-                        <span class="art-item-left">
-                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
-                            <h4>
-                                <a href="/2019/08/03/computer_science/LeetCode/Primary_Algorithm_Array/" rel="prev" title="LeetCode 探索初级算法 数组">
-                                  
-                                      LeetCode 探索初级算法 数组
-                                  
-                                </a>
-                            </h4>
-                            
-                                
-                                <h6 class="tags">
-                                    <a class="tag" href="/tags/Array/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Array</a> <a class="tag" href="/tags/LeetCode/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>LeetCode</a>
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
                             <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2019/07/29/computer_science/C&amp;C++/data_type_in_C++/" rel="prev" title="C++中的数据类型及其大小">
+                                <a href="/2019/08/08/computer_science/Algorithm/sort/" rel="prev" title="常见排序算法总结与比较">
                                     
-                                        C++中的数据类型及其大小
+                                        常见排序算法总结与比较
                                     
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/C/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>C++</a>
+                                    <a class="tag" href="/tags/Sort/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Sort</a>
                                 </h6>
                             
                         </span>
@@ -463,11 +405,49 @@
 
 <!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
 
+  <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX","TeX"],
+      linebreaks: { automatic:true },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+      Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+  });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += (all[i].SourceElement().parentNode.className ? ' ' : '') + 'has-jax';
+    }
+  });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
 
 
   <script>
     window.subData = {
-      title: 'C++中的内联函数',
+      title: 'C++中结构体和类的区别',
       tools: true
     }
   </script>
@@ -495,7 +475,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-内联函数的作用"><span class="toc-text">1. 内联函数的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-inline与宏定义的区别"><span class="toc-text">2. inline与宏定义的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-inline的优点"><span class="toc-text">3. inline的优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-inline的使用场合"><span class="toc-text">4. inline的使用场合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-inline的缺点"><span class="toc-text">5. inline的缺点</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-C和C-中struct的不同"><span class="toc-text">1. C和C++中struct的不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-C-中struct和class的不同"><span class="toc-text">2. C++中struct和class的不同</span></a></li></ol>
     </div>
   </section>
 
