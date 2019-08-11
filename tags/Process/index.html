@@ -312,47 +312,13 @@
     <div class="article-entry" itemprop="articleBody">
       <p>为了有效的管理CPU，OS引入进程的概念，即以进程为基本单位来实现CPU的分配与执行。</p>
 <hr>
-<h2 id="1-进程的概念"><a href="#1-进程的概念" class="headerlink" title="1. 进程的概念"></a>1. 进程的概念</h2><h3 id="1-1-程序的顺序执行"><a href="#1-1-程序的顺序执行" class="headerlink" title="1.1 程序的顺序执行"></a>1.1 程序的顺序执行</h3><p>在计算机中常使用程序这个概念，<strong>程序是一个在时间上严格按先后次序操作实现算法功能的指令序列</strong>，程序本身是静态的，是指令编译出的结果。在单道程序设计环境中，程序总是顺序执行的，若有多个程序，则各个程序试一次呗调入内存的。程序的顺行执行有以下三个特点：</p>
-<ol>
-<li>顺序性。CPU严格按照程序规定的顺序(即指令顺序)执行程序的操作，每个操作都必须在前一个操作结束后才能执行；</li>
-<li>封闭性。程序一旦开始执行，其结果仅由初始条件和程序本身操作决定，不受外界因素影响；</li>
-<li>可再现性。当初始条件相同，程序的运行结果也相同。</li>
-</ol>
-<p>单道程序的顺序性、封闭性和可再现性给程序的编制、调试带来了便利，但是资源利用率底。</p>
-<h3 id="1-2-程序的并发执行"><a href="#1-2-程序的并发执行" class="headerlink" title="1.2 程序的并发执行"></a>1.2 程序的并发执行</h3><h3 id="1-3-进程"><a href="#1-3-进程" class="headerlink" title="1.3 进程"></a>1.3 进程</h3><h4 id="1-3-1-进程的定义"><a href="#1-3-1-进程的定义" class="headerlink" title="1.3.1. 进程的定义"></a>1.3.1. 进程的定义</h4><p>单道程序环境下，程序与CPU执行的活动是一致的。多道环境下，并发破坏了程序的封闭性和可再现性，程序与CPU执行的活动不再一一对应。<strong>程序是完成某一特定功能的指令序列，是一个静态过程</strong>，而CPU执行的活动是一个动态的过程。因此20世纪60年代Dijkstra引入了进程的概念。他给出的进程定义是：<strong>行为的规则称为程序，程序在CPU上执行时的活动称为进程</strong>。</p>
-<h4 id="1-3-2-进程的结构"><a href="#1-3-2-进程的结构" class="headerlink" title="1.3.2. 进程的结构"></a>1.3.2. 进程的结构</h4><p>通常程序是不能并发执行的，<strong>为了使程序及它所要使用的资源能独立运行，OS为程序配置了一个特殊的数据结构进程控制块PCB(Process Control Block)</strong>，PCB用来存储程序向前执行过程中所要记录的有关运行信息，即该进程动态之行的相关资料。因此：</p>
-<center>进程实体 = 程序段 + 相关数据段 + PCB</center>
-
-<h4 id="1-3-3-进程的特征"><a href="#1-3-3-进程的特征" class="headerlink" title="1.3.3. 进程的特征"></a>1.3.3. 进程的特征</h4><p>进程作为OS的一个实体有以下5个特征。</p>
-<ol>
-<li>动态性。进程是程序的一次执行，因此进程是动态的，具有生命期。</li>
-<li>并发性。多个进程实体在一段时间内能够并发执行，从而提高系统资源利用率。</li>
-<li>独立性。每个进程都是一个独立运行的基本单位，也是系统进行资源分配和调度的基本单位。</li>
-<li>异步性。各进程按各自独立的、不可预知的速度向前推进。对单CPU系统而言，任何时刻只能有一个进程占用CPU。</li>
-<li>结构性。每个进程的结构都由程序段、数据段和PCB组成。</li>
-</ol>
-<h4 id="1-3-4-进程和程序的区别"><a href="#1-3-4-进程和程序的区别" class="headerlink" title="1.3.4. 进程和程序的区别"></a>1.3.4. 进程和程序的区别</h4><ol>
-<li>程序是指令的有序集合，是静态的；Process是程序在CPU上的一次执行，是动态的；</li>
-<li>程序作为软件可以长期保存；Process有自己的生命周期；</li>
-<li>程序不会占有和调度资源；Process会为其分配和调度资源；</li>
-<li>进程与程序之间无一一对应关系，一个程序可以多次执行产生多个进程，不同进程也可以包含同一个程序；</li>
-<li>程序是记录在存储介质上的指令有序集合；进程则由程序段、数据段、PCB组成。</li>
-</ol>
-<h2 id="2-进程的状态及转换"><a href="#2-进程的状态及转换" class="headerlink" title="2. 进程的状态及转换"></a>2. 进程的状态及转换</h2><h3 id="2-1-5状态进程模型"><a href="#2-1-5状态进程模型" class="headerlink" title="2.1. 5状态进程模型"></a>2.1. 5状态进程模型</h3><p>进程有5个状态：创建、就绪、运行、阻塞、终止，下面对其一一说明。</p>
-<ol>
-<li>进程的创建。通常有4件事会导致新进程的产生：<ul>
-<li>在一个批处理环境中，为了响应一个任务的要求而产生进程；</li>
-<li>在一个交互式环境中，当一个新用户企图登录时会产生进程；</li>
-<li>操作系统代替用户程序产生进程；</li>
-<li>由用户程序产生进程。通常进程都是由操作系统产生的，但是一个进程也可以产生另一个进程，分别称为父进程和子进程。</li>
-</ul>
-</li>
-<li>进程的终止。当一个进程执行到自然结束点，或因不可克服的错误而不得不取消时，或被拥有特定权限的进程取消时，该进程进入终止态。处于终止态的进程不能被再次调度执行，与其相关的数据信息由OS临时保存，随后OS逐步释放为其分配的资源，最后释放PCB。</li>
-<li>进程的就绪。进程获得了除CPU之外的所需资源，一旦得到CPU就可运行。就绪状态的进程会组成就绪队列。</li>
-<li>进程的运行。进程获得了CPU和其他资源，正在CPU上运行时的状态。</li>
-<li>进程的阻塞。进程运行中发生了某种等待事件(如I/O操作)而暂时不能运行的状态，此状态的进程不能竞争CPU，而需要等事件完成后转到就绪态才能竞争。</li>
-</ol>
-
+      
+        <div class="readmore">
+          <a href="/2015/03/07/computer_science/Operating_System/process/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            Read More
+          </a>
+        </div>
       
     </div>
     
@@ -524,11 +490,11 @@
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(20)</div></a></li>
+          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(21)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Algorithm/" href="/categories/Computer-Science/Algorithm/"><div class='name'>Algorithm</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Computer-Science/C-C/" href="/categories/Computer-Science/C-C/"><div class='name'>C & C++</div><div class='badge'>(4)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Computer-Science/C-C/" href="/categories/Computer-Science/C-C/"><div class='name'>C & C++</div><div class='badge'>(5)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Computer-Basic/" href="/categories/Computer-Science/Computer-Basic/"><div class='name'>Computer Basic</div><div class='badge'>(2)</div></a></li>
         
