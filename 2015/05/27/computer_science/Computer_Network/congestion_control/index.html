@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Tag: C++ | Simita</title>
+  <title>TCP中的拥塞控制简介 | Simita</title>
   
   
 
@@ -46,7 +46,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover  half'>
+    <cover class='cover post half'>
       
         
   <h1 class='title'>Simita</h1>
@@ -214,33 +214,12 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      
-<div class='l_main'>
+      <div class='l_main'>
   
-    
-      
-  <section class="post-list">
-    
-      
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
+
   
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -249,11 +228,13 @@
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/2019/08/11/computer_science/C&C++/C++14新特性/">
-      C++11/14/17新特性简单总结
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/2015/05/27/computer_science/Computer_Network/congestion_control/">
+        TCP中的拥塞控制简介
+      </a>
+    </h1>
+  
 
 
       
@@ -279,7 +260,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-08-11</p>
+    <p>2015-05-27</p>
   </a>
 </div>
 
@@ -289,9 +270,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Computer-Science/C-C/' rel="nofollow">
+    <a href='/categories/Computer-Science/Computer-Network/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Computer Science&nbsp;/&nbsp;C & C++</p>
+      <p>Computer Science&nbsp;/&nbsp;Computer Network</p>
     </a>
   </div>
 
@@ -300,6 +281,19 @@
         
           
             
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
 
           
         
@@ -316,460 +310,131 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>C++11/14/17新特性简单总结</p>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <p>TCP中的拥塞控制的目的是控制网络拥塞的出现，网络拥塞的原因多种多样，比如某结点的缓存太小、某段链路带宽太低等等。为了防止网络拥塞，V.Jacobson在1988年的论文中提出了用于TCP的拥塞控制，由慢开始和拥塞避免组成，后来在TCP Reno版本中又加入了快重传和快恢复。这4种技术能够很好的避免网络拥塞。</p>
 <hr>
-      
-        <div class="readmore">
-          <a href="/2019/08/11/computer_science/C&C++/C++14新特性/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            Read More
-          </a>
+<a id="more"></a>
+
+<h2 id="1-慢开始"><a href="#1-慢开始" class="headerlink" title="1. 慢开始"></a>1. 慢开始</h2><p>如果将网络通路比作高速公路，那么我们可以想象一下，如果这条路的出口只有一个车道，而入口却有很多车道，那么这条路必然会造成拥塞。慢开始就是针对这一情况而提出的。其基本思想是逐渐增大发送的数据大小(即拥塞窗口)直到指定的阈值(即慢开始阈值)。</p>
+<p>在慢开始中，发送端除了要维护正常情况下根据接收端发来的窗口大小字段值而调整的<strong>发送窗口</strong>外，还要维护一个<strong>拥塞窗口(Congestion Window, CWND)</strong>，CWND的目的是为了避免发生拥塞，最终<strong>允许发送的字节数是CWND和发送窗口两者中的最小值</strong>。</p>
+<p>下面介绍慢开始的具体步骤(假设CWND总是小于发送窗口)：</p>
+<ol>
+<li>在TCP传输连接建立时，发送端将CWND初始化为该连接上当前使用的最大数据段大小(Maximum Segment Size, MSS)，即CWND=MSS，然后发送端发送一个MSS大小的数据段M1。</li>
+<li>如果在定时器过期前发送端收到了该数据段的确认(即对M1的确认)，则发送端将CWND大小翻倍，即CWND=2MSS，并发送2MSS大小的数据，假定发送的数据段位M2、M3。</li>
+<li>同样的，如果在定时器过期前发送端接收到确定(收到M3的确认即可，即只用确认最后一个)，再次将CWND翻倍，并以此类推。</li>
+<li>当出现数据丢失时，需要将<strong>慢开始阈值(Slow Start Threshold, SSTHRESH)</strong>设置为当前CWND的一半，并将CWND重设为1MSS。并重新开始慢开始，此时若CWND再次达到SSTHRESH便停止使用慢开始，转用拥塞避免。</li>
+</ol>
+<p>值得注意的是，一般SSTHRESH初始值为64KB。</p>
+<!-- <fancybox> -->
+<p><img src="/2015/05/27/computer_science/Computer_Network/congestion_control/13afefqewf23232f.png" alt="1"></p>
+<!-- </fancybox> -->
+
+<h2 id="2-拥塞避免"><a href="#2-拥塞避免" class="headerlink" title="2. 拥塞避免"></a>2. 拥塞避免</h2><p>拥塞避免的基本思想是，当CWND再次达到SSTHRESH时，让拥塞窗口的大小每经过一个RTT(数据传输往返时间)时仅增加1MSS。如果这时还是发生了数据丢失，同样的还是把SSTHRESH设为当前CWND的一半，把CWND设为1MSS，并重新开始慢开始。</p>
+<h2 id="3-快重传-快恢复"><a href="#3-快重传-快恢复" class="headerlink" title="3. 快重传/快恢复"></a>3. 快重传/快恢复</h2><p>快重传的基本思想是，当接收端收到一个不是按序到达的数据段时，TCP实体迅速发送一个重复ACK数据段，而不用等到有数据需要发送时才顺带发出重复ACK。在连续收到3个重复ACK数据段后，即认为对应确认号字段的数据丢失，TCP不等重传定时器超时就会重传丢失的数据段。</p>
+<p>快恢复是在快重传发挥作用时，确切的说是收到第三个重复ACK时，把当前CWND设为当前SSTHRESH的一半，以减轻网络负载，然后执行拥塞避免算法。</p>
+
         </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/C/" rel="nofollow"><i class="fas fa-tag fa-fw"></i>C++</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/08/10/computer_science/C&C++/different_between_struct_and_class/">
-      C++中结构体和类的区别
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
         
           
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="http://fengggggggg.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>V17</p>
-    </a>
-  </div>
 
 
-          
+  <section class='meta' id="footer-meta">
+    <hr>
+    <div class='new-meta-box'>
+      
         
-          
-            <div class="new-meta-item date">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2015-05-27T21:12:00+08:00">
   <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-08-10</p>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>last updated at May 27, 2015</p>
   </a>
 </div>
 
-          
         
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Computer-Science/C-C/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Computer Science&nbsp;/&nbsp;C & C++</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
       
-        <hr>
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Network/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Network</p></a></div>
+
+
+        
+      
+        
+          
+
+        
       
     </div>
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>C++中结构体和类的区别</p>
-<hr>
-      
-        <div class="readmore">
-          <a href="/2019/08/10/computer_science/C&C++/different_between_struct_and_class/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
         
-          <a href="/tags/C/" rel="nofollow"><i class="fas fa-tag fa-fw"></i>C++</a>
         
-      </div>
-    
-  </section>
-</article>
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                            <h4>
+                                <a href="/2016/09/23/computer_science/Data_Structure/introduction/" rel="prev" title="Introduction To Data Structure">
+                                  
+                                      Introduction To Data Structure
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Data-Structure/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Data Structure</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2015/03/22/computer_science/Computer_Network/physical_layer_in_network/" rel="prev" title="计算机网络物理层简介">
+                                    
+                                        计算机网络物理层简介
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Network/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Network</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
   
 
 
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/07/30/computer_science/C&C++/inline_in_C++/">
-      C++中的内联函数
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="http://fengggggggg.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>V17</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-07-30</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Computer-Science/C-C/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Computer Science&nbsp;/&nbsp;C & C++</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>内联函数相关知识点梳理</p>
-<hr>
-      
-        <div class="readmore">
-          <a href="/2019/07/30/computer_science/C&C++/inline_in_C++/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/C/" rel="nofollow"><i class="fas fa-tag fa-fw"></i>C++</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
   
 
 
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/07/29/computer_science/C&C++/data_type_in_C++/">
-      C++中的数据类型及其大小
-    </a>
-  </h2>
 
 
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="http://fengggggggg.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>V17</p>
-    </a>
-  </div>
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
 
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-07-29</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Computer-Science/C-C/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Computer Science&nbsp;/&nbsp;C & C++</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>在C/C++中的数据类型及其所占空间大小总结</p>
-<hr>
-      
-        <div class="readmore">
-          <a href="/2019/07/29/computer_science/C&C++/data_type_in_C++/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/C/" rel="nofollow"><i class="fas fa-tag fa-fw"></i>C++</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/07/03/computer_science/C&C++/const_define_static_in_C++/">
-      C++中const、define和static
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="http://fengggggggg.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>V17</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-07-03</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Computer-Science/C-C/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Computer Science&nbsp;/&nbsp;C & C++</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>关键字const、define和static相关知识点整理</p>
-<hr>
-      
-        <div class="readmore">
-          <a href="/2019/07/03/computer_science/C&C++/const_define_static_in_C++/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/C/" rel="nofollow"><i class="fas fa-tag fa-fw"></i>C++</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-      <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+  <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     "HTML-CSS": {
@@ -806,13 +471,17 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-    
-
-  
 
 
-    
-  
+
+  <script>
+    window.subData = {
+      title: 'TCP中的拥塞控制简介',
+      tools: true
+    }
+  </script>
+
+
 </div>
 <aside class='l_side'>
   
@@ -825,6 +494,20 @@
           
           
             
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-慢开始"><span class="toc-text">1. 慢开始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-拥塞避免"><span class="toc-text">2. 拥塞避免</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-快重传-快恢复"><span class="toc-text">3. 快重传/快恢复</span></a></li></ol>
+    </div>
+  </section>
+
 
           
         

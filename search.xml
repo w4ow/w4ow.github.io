@@ -448,11 +448,11 @@
     
     
     <entry>
-      <title>计算机网络的拓扑结构</title>
-      <link href="/2015/03/22/computer_science/Computer_Network/topology_of_network/"/>
-      <url>/2015/03/22/computer_science/Computer_Network/topology_of_network/</url>
+      <title>TCP中的拥塞控制简介</title>
+      <link href="/2015/05/27/computer_science/Computer_Network/congestion_control/"/>
+      <url>/2015/05/27/computer_science/Computer_Network/congestion_control/</url>
       
-        <content type="html"><![CDATA[<p>计算机网络拓扑结构是指网络中各个端点之间的逻辑结构，本文对其进行简单介绍</p><hr><a id="more"></a><h2 id="1-网络拓扑中的基本概念"><a href="#1-网络拓扑中的基本概念" class="headerlink" title="1. 网络拓扑中的基本概念"></a>1. 网络拓扑中的基本概念</h2><ol><li>节点：即一个网络端口，如PC；</li><li>结点：通常连接了多个节点，如路由器和交换机；</li><li>链路：两个节点之间的线路；</li><li>通路：两个节点之间的通信线路，可能包含多条链路。</li></ol><h2 id="2-星型拓扑结构"><a href="#2-星型拓扑结构" class="headerlink" title="2. 星型拓扑结构"></a>2. 星型拓扑结构</h2><p>目前应用最广的一种拓扑结构，各节点以交换机或集线器等设备连接在一起，其优点包括<strong>扩展方便</strong>、<strong>网速较快</strong>、<strong>易于维护</strong>，但缺点也很明显：<strong>核心交换机负载过重</strong>、<strong>通信过于依赖核心交换机</strong>等。</p><h2 id="3-环形拓扑结构"><a href="#3-环形拓扑结构" class="headerlink" title="3. 环形拓扑结构"></a>3. 环形拓扑结构</h2><p>这种网络因为传输速率低、扩展性差，已经被淘汰不用了，使用这种结构的有令牌环网。</p><h2 id="4-总线型拓扑结构"><a href="#4-总线型拓扑结构" class="headerlink" title="4. 总线型拓扑结构"></a>4. 总线型拓扑结构</h2><p>该结构中，所有设备都连接到一条总线上，和环形拓扑不同的是不形成闭环。总线型拓扑结构会在总线两端加装“终接器”的设备，主要用于与总线进行阻抗匹配，最大限度吸收传送端部的能量，避免信号反射回总线产生不必要的干扰。其优点有：<strong>结构简单</strong>、<strong>易于扩展</strong>、<strong>易于维护</strong>，缺点有：<strong>传输速率低</strong>、<strong>故障诊断苦难</strong>、<strong>难以实现大规模扩展</strong>；</p><h2 id="4-树形拓扑结构"><a href="#4-树形拓扑结构" class="headerlink" title="4. 树形拓扑结构"></a>4. 树形拓扑结构</h2><p>树根为核心交换机，叶节点为终端设备</p><h2 id="5-网状拓扑结构"><a href="#5-网状拓扑结构" class="headerlink" title="5. 网状拓扑结构"></a>5. 网状拓扑结构</h2><p>网络可靠性高、布线复杂</p><h2 id="6-混合型拓扑结构"><a href="#6-混合型拓扑结构" class="headerlink" title="6. 混合型拓扑结构"></a>6. 混合型拓扑结构</h2><p>应用广泛、维护困难</p><h2 id="7-WLAN的拓扑结构"><a href="#7-WLAN的拓扑结构" class="headerlink" title="7. WLAN的拓扑结构"></a>7. WLAN的拓扑结构</h2><ol><li>Ad-Hoc：点对点连接方式，只能单点通信，性能较差；</li><li>Infrastructure：和星型拓扑类似。</li></ol>]]></content>
+        <content type="html"><![CDATA[<p>TCP中的拥塞控制的目的是控制网络拥塞的出现，网络拥塞的原因多种多样，比如某结点的缓存太小、某段链路带宽太低等等。为了防止网络拥塞，V.Jacobson在1988年的论文中提出了用于TCP的拥塞控制，由慢开始和拥塞避免组成，后来在TCP Reno版本中又加入了快重传和快恢复。这4种技术能够很好的避免网络拥塞。</p><hr><a id="more"></a><h2 id="1-慢开始"><a href="#1-慢开始" class="headerlink" title="1. 慢开始"></a>1. 慢开始</h2><p>如果将网络通路比作高速公路，那么我们可以想象一下，如果这条路的出口只有一个车道，而入口却有很多车道，那么这条路必然会造成拥塞。慢开始就是针对这一情况而提出的。其基本思想是逐渐增大发送的数据大小(即拥塞窗口)直到指定的阈值(即慢开始阈值)。</p><p>在慢开始中，发送端除了要维护正常情况下根据接收端发来的窗口大小字段值而调整的<strong>发送窗口</strong>外，还要维护一个<strong>拥塞窗口(Congestion Window, CWND)</strong>，CWND的目的是为了避免发生拥塞，最终<strong>允许发送的字节数是CWND和发送窗口两者中的最小值</strong>。</p><p>下面介绍慢开始的具体步骤(假设CWND总是小于发送窗口)：</p><ol><li>在TCP传输连接建立时，发送端将CWND初始化为该连接上当前使用的最大数据段大小(Maximum Segment Size, MSS)，即CWND=MSS，然后发送端发送一个MSS大小的数据段M1。</li><li>如果在定时器过期前发送端收到了该数据段的确认(即对M1的确认)，则发送端将CWND大小翻倍，即CWND=2MSS，并发送2MSS大小的数据，假定发送的数据段位M2、M3。</li><li>同样的，如果在定时器过期前发送端接收到确定(收到M3的确认即可，即只用确认最后一个)，再次将CWND翻倍，并以此类推。</li><li>当出现数据丢失时，需要将<strong>慢开始阈值(Slow Start Threshold, SSTHRESH)</strong>设置为当前CWND的一半，并将CWND重设为1MSS。并重新开始慢开始，此时若CWND再次达到SSTHRESH便停止使用慢开始，转用拥塞避免。</li></ol><p>值得注意的是，一般SSTHRESH初始值为64KB。</p><!-- <fancybox> --><p><img src="/2015/05/27/computer_science/Computer_Network/congestion_control/13afefqewf23232f.png" alt="1"></p><!-- </fancybox> --><h2 id="2-拥塞避免"><a href="#2-拥塞避免" class="headerlink" title="2. 拥塞避免"></a>2. 拥塞避免</h2><p>拥塞避免的基本思想是，当CWND再次达到SSTHRESH时，让拥塞窗口的大小每经过一个RTT(数据传输往返时间)时仅增加1MSS。如果这时还是发生了数据丢失，同样的还是把SSTHRESH设为当前CWND的一半，把CWND设为1MSS，并重新开始慢开始。</p><h2 id="3-快重传-快恢复"><a href="#3-快重传-快恢复" class="headerlink" title="3. 快重传/快恢复"></a>3. 快重传/快恢复</h2><p>快重传的基本思想是，当接收端收到一个不是按序到达的数据段时，TCP实体迅速发送一个重复ACK数据段，而不用等到有数据需要发送时才顺带发出重复ACK。在连续收到3个重复ACK数据段后，即认为对应确认号字段的数据丢失，TCP不等重传定时器超时就会重传丢失的数据段。</p><p>快恢复是在快重传发挥作用时，确切的说是收到第三个重复ACK时，把当前CWND设为当前SSTHRESH的一半，以减轻网络负载，然后执行拥塞避免算法。</p>]]></content>
       
       
       <categories>
@@ -480,6 +480,33 @@
       <url>/2015/03/22/computer_science/Computer_Network/physical_layer_in_network/</url>
       
         <content type="html"><![CDATA[<p>物理层是OSI体系结构中的最底层，而在TCP/IP协议中并没有单独的物理层，其功能由网络访问层实现。本文介绍物理层的几个特性与协议</p><hr><a id="more"></a><h2 id="1-物理层的主要作用"><a href="#1-物理层的主要作用" class="headerlink" title="1. 物理层的主要作用"></a>1. 物理层的主要作用</h2><p>物理层有如下几个作用</p><ul><li>构建数据通路：即两个通信端之间的可以连续传输数据的物理通路</li><li>透明传输：作为物理通路的材质可能有很多，例如双绞线、光纤等，物理层需要确保数据对这些材质透明，即不管什么材质都不影响数据传输</li><li>传输数据：既然是通路其基本功能就是传输数据。物理层的<strong>基本传输单元是bit</strong></li><li>数据编码：不同传输介质所支持的数据编码可能不同，如归零码、曼彻斯特码、差分曼彻斯特码等。物理层需要确保不同编码的数据能够正常在通路上传输</li><li>数据传输管理：对比特流的数据传输流量控制、差错控制、物理线路的激活与释放等</li></ul><h2 id="2-物理层特性"><a href="#2-物理层特性" class="headerlink" title="2. 物理层特性"></a>2. 物理层特性</h2><p>物理层需要规范其接口的特性，有了统一的标准，不同的厂商能够以相同的标准来实现彼此产品的互联</p><ol><li>机械特性：定义了传输介质接线器、物理接口的形状和尺寸、引线数目和排列顺序以及连接器与接口之间的固定和锁定装置</li><li>电气特性：规定了在通路上传输比特流时线路上信号电压的高低、阻抗匹配情况，以及传输速率和传输距离限制等参数属性，主要分为三类：<ul><li>非平衡型</li><li>差分接收器的非平衡型</li><li>平衡型</li></ul></li><li>功能特性：指传输介质中各条线上所出现的某一电平的含义，以及物理接口各条信号线的用途，包括：接口信号线的功能规定，接口信号线的功能分类。</li><li>规程特性：利用接口传输比特流的全过程以及各项用于传输的事件发生的合法顺序，包括事件的执行顺序和数据传输方式，即在物理连接建立、维持和交换信息时，DTE/DEC双方在各自电路上的动作顺序。</li></ol><h2 id="3-物理层传输介质"><a href="#3-物理层传输介质" class="headerlink" title="3. 物理层传输介质"></a>3. 物理层传输介质</h2><ol><li>导向性传输介质<ul><li>双绞线</li><li>同轴电缆</li><li>光纤</li></ul></li><li>非导向性传输介质<ul><li>短波无线传输</li><li>地面微波接力通信</li><li>卫星通信</li></ul></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Science </category>
+          
+          <category> Computer Network </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Network </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>计算机网络的拓扑结构</title>
+      <link href="/2015/03/22/computer_science/Computer_Network/topology_of_network/"/>
+      <url>/2015/03/22/computer_science/Computer_Network/topology_of_network/</url>
+      
+        <content type="html"><![CDATA[<p>计算机网络拓扑结构是指网络中各个端点之间的逻辑结构，本文对其进行简单介绍</p><hr><a id="more"></a><h2 id="1-网络拓扑中的基本概念"><a href="#1-网络拓扑中的基本概念" class="headerlink" title="1. 网络拓扑中的基本概念"></a>1. 网络拓扑中的基本概念</h2><ol><li>节点：即一个网络端口，如PC；</li><li>结点：通常连接了多个节点，如路由器和交换机；</li><li>链路：两个节点之间的线路；</li><li>通路：两个节点之间的通信线路，可能包含多条链路。</li></ol><h2 id="2-星型拓扑结构"><a href="#2-星型拓扑结构" class="headerlink" title="2. 星型拓扑结构"></a>2. 星型拓扑结构</h2><p>目前应用最广的一种拓扑结构，各节点以交换机或集线器等设备连接在一起，其优点包括<strong>扩展方便</strong>、<strong>网速较快</strong>、<strong>易于维护</strong>，但缺点也很明显：<strong>核心交换机负载过重</strong>、<strong>通信过于依赖核心交换机</strong>等。</p><h2 id="3-环形拓扑结构"><a href="#3-环形拓扑结构" class="headerlink" title="3. 环形拓扑结构"></a>3. 环形拓扑结构</h2><p>这种网络因为传输速率低、扩展性差，已经被淘汰不用了，使用这种结构的有令牌环网。</p><h2 id="4-总线型拓扑结构"><a href="#4-总线型拓扑结构" class="headerlink" title="4. 总线型拓扑结构"></a>4. 总线型拓扑结构</h2><p>该结构中，所有设备都连接到一条总线上，和环形拓扑不同的是不形成闭环。总线型拓扑结构会在总线两端加装“终接器”的设备，主要用于与总线进行阻抗匹配，最大限度吸收传送端部的能量，避免信号反射回总线产生不必要的干扰。其优点有：<strong>结构简单</strong>、<strong>易于扩展</strong>、<strong>易于维护</strong>，缺点有：<strong>传输速率低</strong>、<strong>故障诊断苦难</strong>、<strong>难以实现大规模扩展</strong>；</p><h2 id="4-树形拓扑结构"><a href="#4-树形拓扑结构" class="headerlink" title="4. 树形拓扑结构"></a>4. 树形拓扑结构</h2><p>树根为核心交换机，叶节点为终端设备</p><h2 id="5-网状拓扑结构"><a href="#5-网状拓扑结构" class="headerlink" title="5. 网状拓扑结构"></a>5. 网状拓扑结构</h2><p>网络可靠性高、布线复杂</p><h2 id="6-混合型拓扑结构"><a href="#6-混合型拓扑结构" class="headerlink" title="6. 混合型拓扑结构"></a>6. 混合型拓扑结构</h2><p>应用广泛、维护困难</p><h2 id="7-WLAN的拓扑结构"><a href="#7-WLAN的拓扑结构" class="headerlink" title="7. WLAN的拓扑结构"></a>7. WLAN的拓扑结构</h2><ol><li>Ad-Hoc：点对点连接方式，只能单点通信，性能较差；</li><li>Infrastructure：和星型拓扑类似。</li></ol>]]></content>
       
       
       <categories>
