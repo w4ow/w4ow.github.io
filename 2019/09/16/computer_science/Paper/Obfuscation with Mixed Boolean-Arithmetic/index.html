@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Obfuscation with Mixed Boolean-Arithmetic | Simita</title>
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/css/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <h1 class='title'>Simita</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/categories/Computer-Science"
+            
+            
+            id="categoriesComputer-Science">
+            <i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Mathematics"
+            
+            
+            id="categoriesMathematics">
+            <i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Books"
+            
+            
+            id="categoriesBooks">
+            <i class='fas fa-book-reader fa-fw'></i>&nbsp;BOOKS
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          Simita
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/categories/Computer-Science"
+                  
+                  
+                  id="categoriesComputer-Science">
+									<i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/Mathematics"
+                  
+                  
+                  id="categoriesMathematics">
+									<i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/Books"
+                  
+                  
+                  id="categoriesBooks">
+									<i class='fas fa-book-reader fa-fw'></i>&nbsp;BOOKS
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Computer-Science"
+                
+                  rel="nofollow"
+                
+                
+                id="categoriesComputer-Science">
+								<i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Mathematics"
+                
+                
+                id="categoriesMathematics">
+								<i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Books"
+                
+                
+                id="categoriesBooks">
+								<i class='fas fa-book-reader fa-fw'></i>&nbsp;BOOKS
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;ARCHIVE
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/"
+                
+                  rel="nofollow"
+                
+                
+                id="categories">
+								<i class='fas fa-folder-open fa-fw'></i>&nbsp;CATEGORIES
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/tags/"
+                
+                  rel="nofollow"
+                
+                
+                id="tags">
+								<i class='fas fa-tags fa-fw'></i>&nbsp;TAGS
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2019/09/16/computer_science/Paper/Obfuscation with Mixed Boolean-Arithmetic/">
+        Obfuscation with Mixed Boolean-Arithmetic
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="http://fengggggggg.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>Simita</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-09-16</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Computer-Science/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Computer Science</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <p>论文翻译及整理<br>论文作者: Ninon Eyrolles</p>
+<hr>
+<a id="more"></a>
+
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>软件保护的目的：保护程序免受不必要的分析；<br>软件保护的原因：保护知识产权、防止未授权访问等；<br>软件保护的关键：<strong>多样性</strong>，程序分析通常基于模式识别，这意味着当一段代码与其语义相关联时，它可以在程序的其他位置，甚至在其他程序中识别出来。此外，<strong>生成相同软件的多种实例</strong>(即程序代码不同但功能相同)可以降低分析的可复现性。</p>
+<p>程序<strong>混淆</strong>是指对代码进行转换使程序变的难以理解。多样性旨在降低对不同实例的分析的可重复性，而程序混淆旨在使一个特定实例的分析尽可能复杂。混淆以两种主要方式隐藏软件的语义：1.改变code和data(例如，改变数据的值)，2.添加无关信息(例如垃圾代码)。本文研究的混淆技术使用上述两种方法来混淆常见的数学表达式。使用混合布尔算术(Mixed Boolean-Arithmetic, MBA)表达式重写转换操作符，并在混淆过程中添加无用的运算符和常量。同时本文也着重研究了MBA反渗透和MBA反混淆。</p>
+<h3 id="文章贡献"><a href="#文章贡献" class="headerlink" title="文章贡献"></a>文章贡献</h3><p>在这项工作中作者解决了如下几个问题：</p>
+<ul>
+<li>提供先进的MBA混淆技术：该领域比较年轻，相关文献很少。本文从公共混淆的例子中重建了MBA混淆技术。</li>
+<li>阐述了混淆表达式的简化定义：本文分析了反混淆的难点，并定义了MBA表达式简单度量。</li>
+<li>生成反混淆(简化)算法：提供用于分析和自动化逆转混淆技术的开源工具。</li>
+<li>评估针对表达式和常量的MBA混淆技术的健壮性：本文将健壮性定义为对混淆表达式进行反混淆的难度。</li>
+<li>提供新想法提高健壮性：我们使用一般反混淆效技术以及我们的简化算法提出了几个想法，用于提高MBA混淆技术的整体健壮性。</li>
+</ul>
+<h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><h3 id="1-1-软件混淆"><a href="#1-1-软件混淆" class="headerlink" title="1.1 软件混淆"></a>1.1 软件混淆</h3><h4 id="1-1-1-定义"><a href="#1-1-1-定义" class="headerlink" title="1.1.1 定义"></a>1.1.1 定义</h4><p><strong>混淆是对程序的动态转换行为，其目的是使程序的分析变的困难，同时保证程序的可观察性</strong>。混淆通常有三个属性：</p>
+<ul>
+<li>功能：混淆后的程序必须具有与原始程序相同的功能；</li>
+<li>效率：与原始程序相比，混淆后的程序的大小和执行时间必须是可接受的。</li>
+<li>健壮性：混淆程序必须比原始程序更难分析。</li>
+</ul>
+<h4 id="1-1-2-应用"><a href="#1-1-2-应用" class="headerlink" title="1.1.2 应用"></a>1.1.2 应用</h4><p>软件混淆应用领域包括软件加密、打包、反调试或防篡改等。混淆存在于软件的上下文中，这意味着分析者具有该程序的实例并以及该程序的执行的环境—-在白盒设计领域，它被称为<strong>白盒攻击上下文</strong>。分析已完成并分发的产品的过程称为<strong>逆向工程</strong>，其目的是理解程序的特征，从而描述程序的形式、算法、协议或在开发中的错误。这里，这些描述可以用伪代码、带输入和参数的标准算法的名称、源代码描述(反编译)等表示。程序的逆向工程通常被认为是混淆的逆向实践，该技术在1.3节中介绍。</p>
+<p>软件分析的目的有很多：非授权使用软件、提取秘密或专有信息、重新分发、出于安全目的的分析或互操作性。混淆一般在以下领域提供针对逆向工程的保护：</p>
+<ul>
+<li>恶意软件：混淆变换会造成混淆和多态，从而允许恶意软件避免反病毒引擎自动签名检测。此外，混淆还会减慢反向工程师分析恶意软件以进行进一步检测或调查的工作。</li>
+<li>保护知识产权：混淆可以保护商业软件中包含的算法或协议，例如Skype、DropBox。</li>
+<li>权限管理：无论是通过许可检查来保护对软件的访问，还是通过数字版权管理(DRM)方案保护数字内容，这些技术通常都会嵌入关键信息(例如加密密钥和协议)，并且使用混淆来保护这些信息。嵌入在程序中的DRM方案(例如VOD服务或视频游戏保护)目前是现代环境中混淆的主要来源之一。</li>
+<li>保护个人或敏感数据：例如，在移动应用程序中，设备中保存了大量敏感数据(例如银行帐户详细信息)。混淆可以帮助保护这些数据以及处理它的协议。</li>
+</ul>
+<h3 id="1-2-理论混淆和实际混淆"><a href="#1-2-理论混淆和实际混淆" class="headerlink" title="1.2 理论混淆和实际混淆"></a>1.2 理论混淆和实际混淆</h3><p>理论混淆又被称为密码混淆，实际混淆即商用解决方案。</p>
+<h4 id="1-2-1-密码混淆"><a href="#1-2-1-密码混淆" class="headerlink" title="1.2.1 密码混淆"></a>1.2.1 密码混淆</h4><p>密码混淆旨在为混淆提供一个正式的上下文，特别是围绕量化分析给定程序$P$的混淆程序$\mathcal O(P)$的难度。</p>
+<p>软件混淆的正式研究由Barak等人发起，他们引入了虚拟黑匣子(VBB)的概念作为混淆程序的最佳属性。VBB保证任何可以从程序$\mathcal O(P)$的输入/输出行为中学到的，从$P$中也可以学到。 Barak提出了<strong>不可区分混淆</strong>的定义：如果两个相同大小的程序P1和P2实现相同的功能，则它们的混淆$\mathcal O(P_1)$和$\mathcal O(P_2)$应无法区分。</p>
+<p>Goldwasser等人提供了<strong>最佳可能混淆</strong>的定义：从$\mathcal O(P)$中提取的任何信息都可以通过类似大小的其他功能相同的的程序取得。 他们还证明，对于有效的混淆器，不可区分混淆和最佳混淆是等价的。</p>
+<p>2013年，Garg等人提出了通用的不可区分混淆，该混淆基于三个组成部分：作为计算模型的分支程序，完全同态加密和多线性映射。</p>
+<h4 id="1-2-2-实际混淆"><a href="#1-2-2-实际混淆" class="headerlink" title="1.2.2 实际混淆"></a>1.2.2 实际混淆</h4><p>密码混淆在实际上难以应用，因此商用混淆一般都是基于不同程序转换的组合。一些最常用的商业混淆器是strong.protect和Arxan3。混淆器可以将其技术应用于程序的不同表示，主要是源代码，中间表示(IR)或汇编语言。混淆器设计者的主要问题是在混淆带来的保护和性能下降(在内存、执行时间等方面)之间找到正确的权衡。</p>
+<h5 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h5><p>在源代码上操作的obfuscator混淆器被称为source-to-source obfuscator，并且允许使用利用输入编程语言的特定性的混淆技术。因为混淆步骤是在编译之前进行的，因此它也更容易集成到现有的编译链中。源到源的混淆也可以用于解释性语言。这种方法的主要缺点是它将自己限制为一种编程语言。</p>
+<h5 id="中间代码"><a href="#中间代码" class="headerlink" title="中间代码"></a>中间代码</h5><p>中间代码IR被编译器、虚拟机或逆向工程框架等用来表示代码。它旨在独立于任何源语言或目标语言。因此，在IR级别上工作的混淆器比源到源混淆器更通用，并且能够处理来自各种源语言和目标汇编语言的程序，但同时该类混淆器集成更加困难，因为它需要将混淆器添加到现有的编译工具链中。</p>
+<h5 id="汇编语言"><a href="#汇编语言" class="headerlink" title="汇编语言"></a>汇编语言</h5><p>与IR和源码相比，汇编级混淆器会导致大量信息的丢失，因此很难实现仅在汇编时工作的通用混淆器。但是，虚拟化保护技术可以直接应用于二进制程序，受保护的代码在与标准CPU不同的虚拟CPU上运行。实现虚拟化的商业混淆器的一个示例是VMProtect。<br>除了虚拟化之外，在汇编语言上操作的变换通常属于较大的软件保护领域，更具体地说，涉及防篡改(例如完整性检查)或打包(例如程序的加密)。</p>
+<h3 id="1-3-程序分析"><a href="#1-3-程序分析" class="headerlink" title="1.3 程序分析"></a>1.3 程序分析</h3><h2 id="2-已有工作"><a href="#2-已有工作" class="headerlink" title="2. 已有工作"></a>2. 已有工作</h2><h2 id="3-MBA复杂性"><a href="#3-MBA复杂性" class="headerlink" title="3. MBA复杂性"></a>3. MBA复杂性</h2><h2 id="4-MBA混淆技术分析"><a href="#4-MBA混淆技术分析" class="headerlink" title="4. MBA混淆技术分析"></a>4. MBA混淆技术分析</h2><h2 id="5-MBA混淆技术的健壮性"><a href="#5-MBA混淆技术的健壮性" class="headerlink" title="5. MBA混淆技术的健壮性"></a>5. MBA混淆技术的健壮性</h2><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2>
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <hr>
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-16T13:00:00+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>last updated at Sep 16, 2019</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Software-Obfuscation/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Software Obfuscation</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+            <div class="prev-next">
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2019/09/16/Books/a biography of zhou en-lai/" rel="prev" title="《周恩来传》时间线整理">
+                                    
+                                        《周恩来传》时间线整理
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Biography/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Biography</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+  <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX","TeX"],
+      linebreaks: { automatic:true },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+      Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+  });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += (all[i].SourceElement().parentNode.className ? ' ' : '') + 'has-jax';
+    }
+  });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+  <script>
+    window.subData = {
+      title: 'Obfuscation with Mixed Boolean-Arithmetic',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+        
+      
+        
+          
+          
+            
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文章贡献"><span class="toc-text">文章贡献</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-背景"><span class="toc-text">1. 背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-软件混淆"><span class="toc-text">1.1 软件混淆</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-定义"><span class="toc-text">1.1.1 定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-应用"><span class="toc-text">1.1.2 应用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-理论混淆和实际混淆"><span class="toc-text">1.2 理论混淆和实际混淆</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-1-密码混淆"><span class="toc-text">1.2.1 密码混淆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-2-实际混淆"><span class="toc-text">1.2.2 实际混淆</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#源代码"><span class="toc-text">源代码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#中间代码"><span class="toc-text">中间代码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#汇编语言"><span class="toc-text">汇编语言</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-程序分析"><span class="toc-text">1.3 程序分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-已有工作"><span class="toc-text">2. 已有工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-MBA复杂性"><span class="toc-text">3. MBA复杂性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-MBA混淆技术分析"><span class="toc-text">4. MBA混淆技术分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-MBA混淆技术的健壮性"><span class="toc-text">5. MBA混淆技术的健壮性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-text">结论</span></a></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;NAVIGATION</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-home fa-fw" aria-hidden="true"></i>
+          
+          HOME
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/"
+          
+            rel="nofollow"
+          
+          
+          id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          ARCHIVE
+        </a></li>
+      
+        <li><a class="flat-box" title="/tags/" href="/tags/"
+          
+            rel="nofollow"
+          
+          
+          id="tags">
+          
+            <i class="fas fa-tags fa-fw" aria-hidden="true"></i>
+          
+          TAGES
+        </a></li>
+      
+        <li><a class="flat-box" title="/categories/" href="/categories/"
+          
+            rel="nofollow"
+          
+          
+          id="categories">
+          
+            <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+          
+          CATEGS
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/categories/"
+    title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/Books/" href="/categories/Books/"><div class='name'>Books</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(30)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Algorithm/" href="/categories/Computer-Science/Algorithm/"><div class='name'>Algorithm</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/C-C/" href="/categories/Computer-Science/C-C/"><div class='name'>C & C++</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Computer-Basic/" href="/categories/Computer-Science/Computer-Basic/"><div class='name'>Computer Basic</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Computer-Network/" href="/categories/Computer-Science/Computer-Network/"><div class='name'>Computer Network</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Data-Structure/" href="/categories/Computer-Science/Data-Structure/"><div class='name'>Data Structure</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/LeetCode/" href="/categories/Computer-Science/LeetCode/"><div class='name'>LeetCode</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Linux/" href="/categories/Computer-Science/Linux/"><div class='name'>Linux</div><div class='badge'>(6)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Operating-System/" href="/categories/Computer-Science/Operating-System/"><div class='name'>Operating System</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(1)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/tags/"
+    title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/Algorithm/" style="font-size: 14px; color: #999">Algorithm</a> <a href="/tags/Array/" style="font-size: 16.5px; color: #888">Array</a> <a href="/tags/Basic/" style="font-size: 16.5px; color: #888">Basic</a> <a href="/tags/Biography/" style="font-size: 14px; color: #999">Biography</a> <a href="/tags/C/" style="font-size: 24px; color: #555">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Data-Structure/" style="font-size: 16.5px; color: #888">Data Structure</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/LeetCode/" style="font-size: 16.5px; color: #888">LeetCode</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/Network/" style="font-size: 21.5px; color: #666">Network</a> <a href="/tags/Process/" style="font-size: 19px; color: #777">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/Queue/" style="font-size: 14px; color: #999">Queue</a> <a href="/tags/Route/" style="font-size: 14px; color: #999">Route</a> <a href="/tags/Software-Obfuscation/" style="font-size: 14px; color: #999">Software Obfuscation</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Syntia/" style="font-size: 14px; color: #999">Syntia</a> <a href="/tags/Ubuntu/" style="font-size: 19px; color: #777">Ubuntu</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+  <br>
+  <!-- <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div> -->
+  <!-- <div>
+    Use
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    as theme
+    
+      , 
+      total visits
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      times
+    
+    . 
+  </div> -->
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
