@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Tag: notebook | Simita</title>
+  <title>Install Syntia with Ubuntu 18.04 | Simita</title>
   
   
 
@@ -46,7 +46,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover  half'>
+    <cover class='cover post half'>
       
         
   <h1 class='title'>Simita</h1>
@@ -259,27 +259,12 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      
-<div class='l_main'>
+      <div class='l_main'>
   
-    
-      
-  <section class="post-list">
-    
-      
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
+
   
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -288,11 +273,13 @@
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/2019/10/20/computer_science/Tools/add_kernel_to_notebook/">
-      Jupyter Notebook中添加Python kernel的方法
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/2019/09/09/computer_science/Information_Security/syntia_install/">
+        Install Syntia with Ubuntu 18.04
+      </a>
+    </h1>
+  
 
 
       
@@ -309,7 +296,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-10-20</p>
+    <p>2019-09-09</p>
   </a>
 </div>
 
@@ -319,9 +306,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Computer-Science/Tools/' rel="nofollow">
+    <a href='/categories/Computer-Science/Information-Security/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Computer Science&nbsp;/&nbsp;Tools</p>
+      <p>Computer Science&nbsp;/&nbsp;Information Security</p>
     </a>
   </div>
 
@@ -330,6 +317,8 @@
         
           
             
+  
+
 
           
         
@@ -346,141 +335,175 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>在通过Anaconda使用Jupyter时，有时我们创建了多个Python环境(包括虚拟环境)，但是启动Jupyter Notebook后，在<em>新建</em>notebook选项中却找不到我们所创建的Python环境，此时我们可以通过向notebook中添加Python kernel解决该问题。</p>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <p><a href="https://github.com/RUB-SysSec/syntia" target="_blank" rel="noopener">Syntia</a>是基于程序合成的反混淆框架，它使用程序跟踪作为一个blackbox来产生随机的输入输出对，利用这些输入输出对，程序合成器可以学习代码的底层语义。本文介绍了Ubuntu下安装syntia</p>
 <hr>
-      
-        <div class="readmore">
-          <a href="/2019/10/20/computer_science/Tools/add_kernel_to_notebook/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            Read More
-          </a>
+<a id="more"></a>
+
+<h2 id="1-下载源码"><a href="#1-下载源码" class="headerlink" title="1. 下载源码"></a>1. 下载源码</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/RUB-SysSec/syntia</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-安装第三方Python库Syntia"><a href="#2-安装第三方Python库Syntia" class="headerlink" title="2. 安装第三方Python库Syntia"></a>2. 安装第三方Python库Syntia</h2><p>syntia是一个第三方Python库，使用的是<strong>Python2</strong>。为了避免Python版本紊乱，可以使用conda创建一个Python2.7的虚拟环境，在该环境中安装syntia。在下载的源码中有setup.py文件，使用下面命令可以安装该Python库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-安装依赖软件"><a href="#3-安装依赖软件" class="headerlink" title="3. 安装依赖软件"></a>3. 安装依赖软件</h2><p>依赖软件包含在<em>install_deps.sh</em>脚本文件中，原则上可以通过执行该脚本文件来安装4个依赖，但是实际操作却总是报错。因此我使用手动安装</p>
+<h3 id="3-1-安装Unicorn"><a href="#3-1-安装Unicorn" class="headerlink" title="3.1 安装Unicorn"></a>3.1 安装Unicorn</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/unicorn-engine/unicorn.git</span><br><span class="line"></span><br><span class="line">cd unicorn</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile</span></span><br><span class="line">./make.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># install</span></span><br><span class="line">sudo ./make.sh install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证，命令执行后出现success，可认为是安装成功了</span></span><br><span class="line">./samples/sample_all.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-安装Capstone"><a href="#3-2-安装Capstone" class="headerlink" title="3.2 安装Capstone"></a>3.2 安装Capstone</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/aquynh/capstone.git</span><br><span class="line"></span><br><span class="line">cd capstone</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile</span></span><br><span class="line">./make.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># install</span></span><br><span class="line">sudo ./make.sh install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证，我也不清楚验证结果是什么样代表正确安装</span></span><br><span class="line">./tests/test*</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-安装Miasm"><a href="#3-3-安装Miasm" class="headerlink" title="3.3 安装Miasm"></a>3.3 安装Miasm</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 安装额外Python依赖库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/serpilliere/elfesteem.git elfesteem</span><br><span class="line"></span><br><span class="line">cd elfesteem</span><br><span class="line"></span><br><span class="line">python setup.py build</span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 安装miasm</span></span><br><span class="line"></span><br><span class="line">cd ..</span><br><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/cea-sec/miasm.git</span><br><span class="line"></span><br><span class="line">cd miasm</span><br><span class="line"></span><br><span class="line">python setup.py build</span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证</span></span><br><span class="line"><span class="comment"># 可以通过在Python编程环境中import miasm来验证，若不报错则说明成功安装</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-安装Z3"><a href="#3-4-安装Z3" class="headerlink" title="3.4 安装Z3"></a>3.4 安装Z3</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/Z3Prover/z3.git</span><br><span class="line"></span><br><span class="line">cd z3</span><br><span class="line"></span><br><span class="line">python scripts/mk_make.py --python</span><br><span class="line"></span><br><span class="line">cd build</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line">make install    <span class="comment"># 该语句执行后会打印 Z3 was successfully installed.</span></span><br></pre></td></tr></table></figure>
+
+
         </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/notebook/" rel="nofollow"><i class="fas fa-tag fa-fw"></i>notebook</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/10/15/computer_science/Tools/change_work_dir_of_notebook/">
-      修改jupyter notebook默认工作路径
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
         
           
-        
-          
-            
 
-          
+
+  <section class='meta' id="footer-meta">
+    <hr>
+    <div class='new-meta-box'>
+      
         
-          
-            <div class="new-meta-item date">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-09T00:00:00+08:00">
   <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-10-15</p>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>last updated at Sep 9, 2019</p>
   </a>
 </div>
 
-          
         
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Computer-Science/Tools/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Computer Science&nbsp;/&nbsp;Tools</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
       
-        <hr>
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/MBA-Obfuscation/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>MBA Obfuscation</p></a></div>
+
+
+        
+      
+        
+          
+
+        
       
     </div>
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>修改jupyter notebook默认工作路径</p>
-<hr>
-      
-        <div class="readmore">
-          <a href="/2019/10/15/computer_science/Tools/change_work_dir_of_notebook/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
         
-          <a href="/tags/notebook/" rel="nofollow"><i class="fas fa-tag fa-fw"></i>notebook</a>
         
-      </div>
-    
-  </section>
-</article>
-
-          </div>
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                            <h4>
+                                <a href="/2019/09/09/computer_science/Tools/python_virtualenv_conda/" rel="prev" title="使用conda管理Python虚拟环境">
+                                  
+                                      使用conda管理Python虚拟环境
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Conda/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Conda</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2019/09/05/mathematics/entropy_weight_method/" rel="prev" title="熵权法">
+                                    
+                                        熵权法
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Mathematics/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Mathematics</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
         
-      
-    
-  </section>
+      </section>
+    </article>
   
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
 
   
 
 
-    
   
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+  <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX","TeX"],
+      linebreaks: { automatic:true },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+      Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+  });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += (all[i].SourceElement().parentNode.className ? ' ' : '') + 'has-jax';
+    }
+  });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+  <script>
+    window.subData = {
+      title: 'Install Syntia with Ubuntu 18.04',
+      tools: true
+    }
+  </script>
+
+
 </div>
 <aside class='l_side'>
   
@@ -493,6 +516,20 @@
           
           
             
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-下载源码"><span class="toc-text">1. 下载源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-安装第三方Python库Syntia"><span class="toc-text">2. 安装第三方Python库Syntia</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-安装依赖软件"><span class="toc-text">3. 安装依赖软件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-安装Unicorn"><span class="toc-text">3.1 安装Unicorn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-安装Capstone"><span class="toc-text">3.2 安装Capstone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-安装Miasm"><span class="toc-text">3.3 安装Miasm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-安装Z3"><span class="toc-text">3.4 安装Z3</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
 
           
         
@@ -590,7 +627,7 @@
         
           <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(34)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Computer-Science/Algorithm/" href="/categories/Computer-Science/Algorithm/"><div class='name'>Algorithm</div><div class='badge'>(2)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Computer-Science/Algorithm/" href="/categories/Computer-Science/Algorithm/"><div class='name'>Algorithm</div><div class='badge'>(4)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Computer-Science/C-C/" href="/categories/Computer-Science/C-C/"><div class='name'>C & C++</div><div class='badge'>(5)</div></a></li>
         
@@ -600,13 +637,13 @@
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Data-Structure/" href="/categories/Computer-Science/Data-Structure/"><div class='name'>Data Structure</div><div class='badge'>(3)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Computer-Science/LeetCode/" href="/categories/Computer-Science/LeetCode/"><div class='name'>LeetCode</div><div class='badge'>(2)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Computer-Science/Information-Security/" href="/categories/Computer-Science/Information-Security/"><div class='name'>Information Security</div><div class='badge'>(3)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Computer-Science/Linux/" href="/categories/Computer-Science/Linux/"><div class='name'>Linux</div><div class='badge'>(6)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Computer-Science/Linux/" href="/categories/Computer-Science/Linux/"><div class='name'>Linux</div><div class='badge'>(4)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Operating-System/" href="/categories/Computer-Science/Operating-System/"><div class='name'>Operating System</div><div class='badge'>(5)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(3)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(4)</div></a></li>
         
           <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(1)</div></a></li>
         
@@ -639,7 +676,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/Algorithm/" style="font-size: 14px; color: #999">Algorithm</a> <a href="/tags/Array/" style="font-size: 16.5px; color: #888">Array</a> <a href="/tags/Basic/" style="font-size: 16.5px; color: #888">Basic</a> <a href="/tags/Biography/" style="font-size: 14px; color: #999">Biography</a> <a href="/tags/C/" style="font-size: 24px; color: #555">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Data-Structure/" style="font-size: 16.5px; color: #888">Data Structure</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Latex/" style="font-size: 14px; color: #999">Latex</a> <a href="/tags/LeetCode/" style="font-size: 16.5px; color: #888">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 16.5px; color: #888">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/Network/" style="font-size: 21.5px; color: #666">Network</a> <a href="/tags/Process/" style="font-size: 19px; color: #777">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/Queue/" style="font-size: 14px; color: #999">Queue</a> <a href="/tags/Route/" style="font-size: 14px; color: #999">Route</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Syntia/" style="font-size: 14px; color: #999">Syntia</a> <a href="/tags/Ubuntu/" style="font-size: 19px; color: #777">Ubuntu</a> <a href="/tags/notebook/" style="font-size: 16.5px; color: #888">notebook</a>
+      <a href="/tags/Algorithm/" style="font-size: 14px; color: #999">Algorithm</a> <a href="/tags/Array/" style="font-size: 16.5px; color: #888">Array</a> <a href="/tags/Basic/" style="font-size: 16.5px; color: #888">Basic</a> <a href="/tags/Biography/" style="font-size: 14px; color: #999">Biography</a> <a href="/tags/C/" style="font-size: 24px; color: #555">C++</a> <a href="/tags/Conda/" style="font-size: 19px; color: #777">Conda</a> <a href="/tags/Data-Structure/" style="font-size: 16.5px; color: #888">Data Structure</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Latex/" style="font-size: 14px; color: #999">Latex</a> <a href="/tags/LeetCode/" style="font-size: 16.5px; color: #888">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 19px; color: #777">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/Network/" style="font-size: 21.5px; color: #666">Network</a> <a href="/tags/Process/" style="font-size: 19px; color: #777">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Queue/" style="font-size: 14px; color: #999">Queue</a> <a href="/tags/Route/" style="font-size: 14px; color: #999">Route</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Ubuntu/" style="font-size: 19px; color: #777">Ubuntu</a>
     </div>
   </section>
 
