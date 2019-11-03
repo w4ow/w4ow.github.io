@@ -4,33 +4,6 @@
   
     
     <entry>
-      <title>Learning a SAT solver from single-bit super-vision</title>
-      <link href="/2019/10/24/computer_science/Machine-Learning/NeuroSAT/"/>
-      <url>/2019/10/24/computer_science/Machine-Learning/NeuroSAT/</url>
-      
-        <content type="html"><![CDATA[<p><a href="https://arxiv.org/abs/1802.03685" target="_blank" rel="noopener">Paper Address</a></p><p>本文介绍了一种消息传递神经网络–NeuroSAT，NeuroSAT在经过训练后可以用作分类器来预测SAT问题的可满足性，并进一步的可以学习解决SAT问题。尽管与最先进的SAT求解器相比没有竞争力，但NeuroSAT只需运行更多的迭代就可以解决更复杂、更困难的问题。仅对随机SAT问题进行训练后，在测试时它就可以解决多种SAT问题，包括对图着色、团检测、支配集问题和顶点覆盖问题进行编码，所有这些问题都在较小的随机图上分布。</p><hr><h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>SAT问题(Satisfiability)是计算机科学中最基本的问题之一，同时也是NP完全问题，该问题可以规约为在搜索空间中找到一个合适的赋值。在实际中，通过构造SAT可以解决常规的搜索问题，例如硬件和软件验证、测试模式生成、计划、调度和组合运算。基于回溯搜索的现代SAT求解器能够解决具有数百万个变量的实际问题。</p><p>本文开发了一种新颖的消息传递神经网络(MPNN)，NeuroSAT，并将其训练为分类器，以预测随机SAT问题数据集的可满足性。在训练时，对于每个SAT问题，我们仅向NeuroSAT提供一点监督，以指示该问题是否可满足。在对新的SAT问题进行预测时，我们发现NeuroSAT以低置信度猜测该SAT无法满足，同时开始寻找该SAT的解决方案，直到找到解决方案为止，此时它会收敛并以很高的置信度猜测该SAT可满足。该解决方案本身几乎总是可以从网络激活中自动解码，从而使NeuroSAT成为端到端SAT求解器。</p><p>尽管与最先进的SAT解算器相比没有竞争力，但是NeuroSAT可以通过增加迭代来解决更困难的SAT问题。 尽管在训练过程中仅运行了几十次迭代，但在测试时，NeuroSAT在经过数百甚至数千次迭代后仍能找到解决更难问题的解决方案。NeuroSAT学习过程并非产生传统的分类器，而是产生了可以无限期运行以寻找各种难度问题的解决方案的过程。</p><h2 id="2-Problem-Setup"><a href="#2-Problem-Setup" class="headerlink" title="2. Problem Setup"></a>2. Problem Setup</h2><p><strong>Background.</strong> 命题逻辑公式是由True、False、变量、析取、合取等构成的布尔表达式。如果公式中的变量存在使得公式为True的取值，则该公式是可满足的，因此该公式的求值为1。例如，公式$(x_1 \lor x_2 \lor x_3)\land \lnot(x_1\land x_2\land x_3)$是可满足的($x_1=1,x_2=0,x_3=1$)。合取范式<a href="https://zh.wikipedia.org/wiki/合取范式" target="_blank" rel="noopener">CNF的定义</a>不多说。SAT问题可以规约成一个CNF公式，其目的是确定该公式是否可满足。我们用$n$表示SAT问题中变量的数量，用$m$表示子句的数量。</p><p><strong>Classification task.</strong> 对于一个SAT问题$P$，$\phi (P)$为真当且仅当$P$是可满足的时。我们的首要目标是学习一个近似于$\phi$的分类器。给定SAT问题的分布$\Psi$，我们从$P\sim\Psi$采样问题$P$，并用现用的SAT求解器计算$\phi(P)$，并以$(P,\phi(P))$的形式构造数据集$\mathcal{D}<em>{train},\mathcal{D}</em>{test}$。在测试时，我们输入$P$，并预测$\phi(P)$。</p><h2 id="3-模型"><a href="#3-模型" class="headerlink" title="3. 模型"></a>3. 模型</h2><p>SAT结构简单易于编码到向量空间中。但是，CNF的语法规则会忽略置换不变性和否定不变性。例如，CNF的可满足性不受变量的排列、子句的排列、子句中每个命题的排列的影响。CNF的可满足性也不受否定每个命题的影响(e.g., 否定$(1|\bar{2},\bar{1}|\bar{2})$中的$x_1$得到$(\bar{1}|\bar{2},\bar{1}|\bar{2}$，可满足性不变)。</p><p>NeuroSAT能够实现置换不变性和否定不变性。我们将SAT问题编码为无向图，其中每个命题和每个子句都是一个节点(向量表示)，每个命题和包含该命题的子句之间的有一条边，每两个互补命题(e.g. $x_i,\bar{x_i}$)之间有一条特殊边(详见Fig.2)。NeuroSAT通过边传递“消息”来迭代地优化节点向量。在每个时间步骤中，NeuroSAT更新每个命题和每个子句的向量。一次迭代包括两个阶段。首先，每个子句从其相邻的命题中接收消息，并相应地更新其向量。接下来，每个命题从其相邻子句及其互补命题中接收消息，然后相应地更新其向量(详见Fig.2)。</p><p>整个模型使用两个向量$(\mathrm{L_{init}},\mathrm{C_{init}})$、三个多层感知机$(\mathrm{L_{msg}},\mathrm{C_{msg}},\mathrm{L_{vote}})$以及两个LSTM$(\mathrm{L_u},\mathrm{C_u})$作为参数。在每个时间步$t$, 都有2个矩阵$L^{(t)} \in \mathbb{R}^{2n \times d}$和$C^{(t)}\in \mathbb{R}^{m \times d}$，$L^{(t)}$的第$i$行包含有命题$\mathcal{l}<em>i$的编码向量，$C^{(t)}$的第$j$行包含了子句$c_j$的编码向量，这两个矩阵使用$(\mathrm{L</em>{init}},\mathrm{C_{init}})$初始化。<br>对$(\mathrm{L_u},\mathrm{C_u})$还有隐藏层状态$(L_h^{(t)} \in \mathbb{R}^{2n\times d},C_h^{(t)} \in \mathbb{R}^{m\times d})$, 隐藏层状态使用0矩阵初始化。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Computer Science </category>
-          
-          <category> Machine Learning </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> ML </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Jupyter Notebook中添加、删除Python kernel的方法</title>
       <link href="/2019/10/20/computer_science/Tools/manage_kernel_of_notebook/"/>
       <url>/2019/10/20/computer_science/Tools/manage_kernel_of_notebook/</url>
@@ -768,11 +741,11 @@
     
     
     <entry>
-      <title>计算机网络的拓扑结构</title>
-      <link href="/2015/03/22/computer_science/Computer-Network/topology_of_network/"/>
-      <url>/2015/03/22/computer_science/Computer-Network/topology_of_network/</url>
+      <title>计算机网络物理层简介</title>
+      <link href="/2015/03/22/computer_science/Computer-Network/physical_layer_in_network/"/>
+      <url>/2015/03/22/computer_science/Computer-Network/physical_layer_in_network/</url>
       
-        <content type="html"><![CDATA[<p>计算机网络拓扑结构是指网络中各个端点之间的逻辑结构，本文对其进行简单介绍</p><hr><a id="more"></a><h2 id="1-网络拓扑中的基本概念"><a href="#1-网络拓扑中的基本概念" class="headerlink" title="1. 网络拓扑中的基本概念"></a>1. 网络拓扑中的基本概念</h2><ol><li>节点：即一个网络端口，如PC；</li><li>结点：通常连接了多个节点，如路由器和交换机；</li><li>链路：两个节点之间的线路；</li><li>通路：两个节点之间的通信线路，可能包含多条链路。</li></ol><h2 id="2-星型拓扑结构"><a href="#2-星型拓扑结构" class="headerlink" title="2. 星型拓扑结构"></a>2. 星型拓扑结构</h2><p>目前应用最广的一种拓扑结构，各节点以交换机或集线器等设备连接在一起，其优点包括<strong>扩展方便</strong>、<strong>网速较快</strong>、<strong>易于维护</strong>，但缺点也很明显：<strong>核心交换机负载过重</strong>、<strong>通信过于依赖核心交换机</strong>等。</p><h2 id="3-环形拓扑结构"><a href="#3-环形拓扑结构" class="headerlink" title="3. 环形拓扑结构"></a>3. 环形拓扑结构</h2><p>这种网络因为传输速率低、扩展性差，已经被淘汰不用了，使用这种结构的有令牌环网。</p><h2 id="4-总线型拓扑结构"><a href="#4-总线型拓扑结构" class="headerlink" title="4. 总线型拓扑结构"></a>4. 总线型拓扑结构</h2><p>该结构中，所有设备都连接到一条总线上，和环形拓扑不同的是不形成闭环。总线型拓扑结构会在总线两端加装“终接器”的设备，主要用于与总线进行阻抗匹配，最大限度吸收传送端部的能量，避免信号反射回总线产生不必要的干扰。其优点有：<strong>结构简单</strong>、<strong>易于扩展</strong>、<strong>易于维护</strong>，缺点有：<strong>传输速率低</strong>、<strong>故障诊断苦难</strong>、<strong>难以实现大规模扩展</strong>；</p><h2 id="4-树形拓扑结构"><a href="#4-树形拓扑结构" class="headerlink" title="4. 树形拓扑结构"></a>4. 树形拓扑结构</h2><p>树根为核心交换机，叶节点为终端设备</p><h2 id="5-网状拓扑结构"><a href="#5-网状拓扑结构" class="headerlink" title="5. 网状拓扑结构"></a>5. 网状拓扑结构</h2><p>网络可靠性高、布线复杂</p><h2 id="6-混合型拓扑结构"><a href="#6-混合型拓扑结构" class="headerlink" title="6. 混合型拓扑结构"></a>6. 混合型拓扑结构</h2><p>应用广泛、维护困难</p><h2 id="7-WLAN的拓扑结构"><a href="#7-WLAN的拓扑结构" class="headerlink" title="7. WLAN的拓扑结构"></a>7. WLAN的拓扑结构</h2><ol><li>Ad-Hoc：点对点连接方式，只能单点通信，性能较差；</li><li>Infrastructure：和星型拓扑类似。</li></ol>]]></content>
+        <content type="html"><![CDATA[<p>物理层是OSI体系结构中的最底层，而在TCP/IP协议中并没有单独的物理层，其功能由网络访问层实现。本文介绍物理层的几个特性与协议</p><hr><a id="more"></a><h2 id="1-物理层的主要作用"><a href="#1-物理层的主要作用" class="headerlink" title="1. 物理层的主要作用"></a>1. 物理层的主要作用</h2><p>物理层有如下几个作用</p><ul><li>构建数据通路：即两个通信端之间的可以连续传输数据的物理通路</li><li>透明传输：作为物理通路的材质可能有很多，例如双绞线、光纤等，物理层需要确保数据对这些材质透明，即不管什么材质都不影响数据传输</li><li>传输数据：既然是通路其基本功能就是传输数据。物理层的<strong>基本传输单元是bit</strong></li><li>数据编码：不同传输介质所支持的数据编码可能不同，如归零码、曼彻斯特码、差分曼彻斯特码等。物理层需要确保不同编码的数据能够正常在通路上传输</li><li>数据传输管理：对比特流的数据传输流量控制、差错控制、物理线路的激活与释放等</li></ul><h2 id="2-物理层特性"><a href="#2-物理层特性" class="headerlink" title="2. 物理层特性"></a>2. 物理层特性</h2><p>物理层需要规范其接口的特性，有了统一的标准，不同的厂商能够以相同的标准来实现彼此产品的互联</p><ol><li>机械特性：定义了传输介质接线器、物理接口的形状和尺寸、引线数目和排列顺序以及连接器与接口之间的固定和锁定装置</li><li>电气特性：规定了在通路上传输比特流时线路上信号电压的高低、阻抗匹配情况，以及传输速率和传输距离限制等参数属性，主要分为三类：<ul><li>非平衡型</li><li>差分接收器的非平衡型</li><li>平衡型</li></ul></li><li>功能特性：指传输介质中各条线上所出现的某一电平的含义，以及物理接口各条信号线的用途，包括：接口信号线的功能规定，接口信号线的功能分类。</li><li>规程特性：利用接口传输比特流的全过程以及各项用于传输的事件发生的合法顺序，包括事件的执行顺序和数据传输方式，即在物理连接建立、维持和交换信息时，DTE/DEC双方在各自电路上的动作顺序。</li></ol><h2 id="3-物理层传输介质"><a href="#3-物理层传输介质" class="headerlink" title="3. 物理层传输介质"></a>3. 物理层传输介质</h2><ol><li>导向性传输介质<ul><li>双绞线</li><li>同轴电缆</li><li>光纤</li></ul></li><li>非导向性传输介质<ul><li>短波无线传输</li><li>地面微波接力通信</li><li>卫星通信</li></ul></li></ol>]]></content>
       
       
       <categories>
@@ -795,11 +768,11 @@
     
     
     <entry>
-      <title>计算机网络物理层简介</title>
-      <link href="/2015/03/22/computer_science/Computer-Network/physical_layer_in_network/"/>
-      <url>/2015/03/22/computer_science/Computer-Network/physical_layer_in_network/</url>
+      <title>计算机网络的拓扑结构</title>
+      <link href="/2015/03/22/computer_science/Computer-Network/topology_of_network/"/>
+      <url>/2015/03/22/computer_science/Computer-Network/topology_of_network/</url>
       
-        <content type="html"><![CDATA[<p>物理层是OSI体系结构中的最底层，而在TCP/IP协议中并没有单独的物理层，其功能由网络访问层实现。本文介绍物理层的几个特性与协议</p><hr><a id="more"></a><h2 id="1-物理层的主要作用"><a href="#1-物理层的主要作用" class="headerlink" title="1. 物理层的主要作用"></a>1. 物理层的主要作用</h2><p>物理层有如下几个作用</p><ul><li>构建数据通路：即两个通信端之间的可以连续传输数据的物理通路</li><li>透明传输：作为物理通路的材质可能有很多，例如双绞线、光纤等，物理层需要确保数据对这些材质透明，即不管什么材质都不影响数据传输</li><li>传输数据：既然是通路其基本功能就是传输数据。物理层的<strong>基本传输单元是bit</strong></li><li>数据编码：不同传输介质所支持的数据编码可能不同，如归零码、曼彻斯特码、差分曼彻斯特码等。物理层需要确保不同编码的数据能够正常在通路上传输</li><li>数据传输管理：对比特流的数据传输流量控制、差错控制、物理线路的激活与释放等</li></ul><h2 id="2-物理层特性"><a href="#2-物理层特性" class="headerlink" title="2. 物理层特性"></a>2. 物理层特性</h2><p>物理层需要规范其接口的特性，有了统一的标准，不同的厂商能够以相同的标准来实现彼此产品的互联</p><ol><li>机械特性：定义了传输介质接线器、物理接口的形状和尺寸、引线数目和排列顺序以及连接器与接口之间的固定和锁定装置</li><li>电气特性：规定了在通路上传输比特流时线路上信号电压的高低、阻抗匹配情况，以及传输速率和传输距离限制等参数属性，主要分为三类：<ul><li>非平衡型</li><li>差分接收器的非平衡型</li><li>平衡型</li></ul></li><li>功能特性：指传输介质中各条线上所出现的某一电平的含义，以及物理接口各条信号线的用途，包括：接口信号线的功能规定，接口信号线的功能分类。</li><li>规程特性：利用接口传输比特流的全过程以及各项用于传输的事件发生的合法顺序，包括事件的执行顺序和数据传输方式，即在物理连接建立、维持和交换信息时，DTE/DEC双方在各自电路上的动作顺序。</li></ol><h2 id="3-物理层传输介质"><a href="#3-物理层传输介质" class="headerlink" title="3. 物理层传输介质"></a>3. 物理层传输介质</h2><ol><li>导向性传输介质<ul><li>双绞线</li><li>同轴电缆</li><li>光纤</li></ul></li><li>非导向性传输介质<ul><li>短波无线传输</li><li>地面微波接力通信</li><li>卫星通信</li></ul></li></ol>]]></content>
+        <content type="html"><![CDATA[<p>计算机网络拓扑结构是指网络中各个端点之间的逻辑结构，本文对其进行简单介绍</p><hr><a id="more"></a><h2 id="1-网络拓扑中的基本概念"><a href="#1-网络拓扑中的基本概念" class="headerlink" title="1. 网络拓扑中的基本概念"></a>1. 网络拓扑中的基本概念</h2><ol><li>节点：即一个网络端口，如PC；</li><li>结点：通常连接了多个节点，如路由器和交换机；</li><li>链路：两个节点之间的线路；</li><li>通路：两个节点之间的通信线路，可能包含多条链路。</li></ol><h2 id="2-星型拓扑结构"><a href="#2-星型拓扑结构" class="headerlink" title="2. 星型拓扑结构"></a>2. 星型拓扑结构</h2><p>目前应用最广的一种拓扑结构，各节点以交换机或集线器等设备连接在一起，其优点包括<strong>扩展方便</strong>、<strong>网速较快</strong>、<strong>易于维护</strong>，但缺点也很明显：<strong>核心交换机负载过重</strong>、<strong>通信过于依赖核心交换机</strong>等。</p><h2 id="3-环形拓扑结构"><a href="#3-环形拓扑结构" class="headerlink" title="3. 环形拓扑结构"></a>3. 环形拓扑结构</h2><p>这种网络因为传输速率低、扩展性差，已经被淘汰不用了，使用这种结构的有令牌环网。</p><h2 id="4-总线型拓扑结构"><a href="#4-总线型拓扑结构" class="headerlink" title="4. 总线型拓扑结构"></a>4. 总线型拓扑结构</h2><p>该结构中，所有设备都连接到一条总线上，和环形拓扑不同的是不形成闭环。总线型拓扑结构会在总线两端加装“终接器”的设备，主要用于与总线进行阻抗匹配，最大限度吸收传送端部的能量，避免信号反射回总线产生不必要的干扰。其优点有：<strong>结构简单</strong>、<strong>易于扩展</strong>、<strong>易于维护</strong>，缺点有：<strong>传输速率低</strong>、<strong>故障诊断苦难</strong>、<strong>难以实现大规模扩展</strong>；</p><h2 id="4-树形拓扑结构"><a href="#4-树形拓扑结构" class="headerlink" title="4. 树形拓扑结构"></a>4. 树形拓扑结构</h2><p>树根为核心交换机，叶节点为终端设备</p><h2 id="5-网状拓扑结构"><a href="#5-网状拓扑结构" class="headerlink" title="5. 网状拓扑结构"></a>5. 网状拓扑结构</h2><p>网络可靠性高、布线复杂</p><h2 id="6-混合型拓扑结构"><a href="#6-混合型拓扑结构" class="headerlink" title="6. 混合型拓扑结构"></a>6. 混合型拓扑结构</h2><p>应用广泛、维护困难</p><h2 id="7-WLAN的拓扑结构"><a href="#7-WLAN的拓扑结构" class="headerlink" title="7. WLAN的拓扑结构"></a>7. WLAN的拓扑结构</h2><ol><li>Ad-Hoc：点对点连接方式，只能单点通信，性能较差；</li><li>Infrastructure：和星型拓扑类似。</li></ol>]]></content>
       
       
       <categories>
