@@ -341,7 +341,9 @@
 <hr>
 <a id="more"></a>
 
-<h2 id="1-安装Anaconda"><a href="#1-安装Anaconda" class="headerlink" title="1. 安装Anaconda"></a>1. 安装Anaconda</h2><p>可以在Anaconda官网下载相应Python版本的软件</p>
+<h2 id="1-安装Anaconda"><a href="#1-安装Anaconda" class="headerlink" title="1. 安装Anaconda"></a>1. 安装Anaconda</h2><p>可以在Anaconda官网下载相应Python版本的软件，或者使用如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.continuum.io/archive/Anaconda3-2018.12-Linux-x86_64.sh</span><br><span class="line"></span><br><span class="line">bash Anaconda3-2018.12-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
 <h2 id="2-创建Python虚拟环境"><a href="#2-创建Python虚拟环境" class="headerlink" title="2. 创建Python虚拟环境"></a>2. 创建Python虚拟环境</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n virtual_env_name python=x.x</span><br></pre></td></tr></table></figure>
 
 <h2 id="3-激活-关闭虚拟环境"><a href="#3-激活-关闭虚拟环境" class="headerlink" title="3. 激活/关闭虚拟环境"></a>3. 激活/关闭虚拟环境</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 激活</span></span><br><span class="line">source activate virtual_env_name</span><br><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">source deactivate</span><br></pre></td></tr></table></figure>
@@ -350,7 +352,7 @@
 
 <h2 id="5-删除虚拟环境"><a href="#5-删除虚拟环境" class="headerlink" title="5. 删除虚拟环境"></a>5. 删除虚拟环境</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env remove -n(--name) virtual_env_name</span><br></pre></td></tr></table></figure>
 
-<h2 id="6-常用conda命令"><a href="#6-常用conda命令" class="headerlink" title="6. 常用conda命令"></a>6. 常用conda命令</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env list  <span class="comment"># 列出所有已创建的虚拟环境</span></span><br></pre></td></tr></table></figure>
+<h2 id="6-常用conda命令"><a href="#6-常用conda命令" class="headerlink" title="6. 常用conda命令"></a>6. 常用conda命令</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda env list  <span class="comment"># 列出所有已创建的虚拟环境</span></span><br><span class="line">conda upgrade conda <span class="comment"># 升级</span></span><br></pre></td></tr></table></figure>
 
 
         </div>
