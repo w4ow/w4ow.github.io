@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Introduction To Data Structure | Simita</title>
+  <title>Tag: Vim | Simita</title>
   
   
 
@@ -46,7 +46,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover post half'>
+    <cover class='cover  half'>
       
         
   <h1 class='title'>Simita</h1>
@@ -250,12 +250,25 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      <div class='l_main'>
-  
-
-  
-    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
       
+<div class='l_main'>
+  
+    
+      
+  <section class="post-list">
+    
+      
+        
+          
+        
+      
+    
+    
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
 
 
   <section class='meta'>
@@ -264,13 +277,11 @@
     <div class="meta" id="header-meta">
       
         
-  
-    <h1 class="title">
-      <a href="/2016/09/23/computer_science/Data-Structure/introduction/">
-        Introduction To Data Structure
-      </a>
-    </h1>
-  
+  <h2 class="title">
+    <a href="/2020/07/30/computer_science/Linux/vim-cmd/">
+      Vim常用命令
+    </a>
+  </h2>
 
 
       
@@ -287,7 +298,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2016-09-23</p>
+    <p>2020-07-30</p>
   </a>
 </div>
 
@@ -297,9 +308,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Computer-Science/Data-Structure/' rel="nofollow">
+    <a href='/categories/Computer-Science/Linux/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Computer Science&nbsp;/&nbsp;Data Structure</p>
+      <p>Computer Science&nbsp;/&nbsp;Linux</p>
     </a>
   </div>
 
@@ -308,8 +319,6 @@
         
           
             
-  
-
 
           
         
@@ -326,197 +335,45 @@
   </section>
 
 
-      <section class="article typo">
-        <div class="article-entry" itemprop="articleBody">
-          <p>对常见数据结构的一个简单地总结</p>
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>Vim常用快捷键即命令</p>
 <hr>
-<a id="more"></a>
-
-<h2 id="1-数据结构定义"><a href="#1-数据结构定义" class="headerlink" title="1. 数据结构定义"></a>1. 数据结构定义</h2><p>数据结构是指<strong>相互之间存在着一种或多种关系的数据元素的集合和该集合中数据元素之间的关系组成</strong>，记为：</p>
-<center>$Data Structure = (D, R)$</center>
-其中$D$是数据元素的集合，$R$是$D$中元素之间的关系的集合。  
-
-<p>通俗的理解，<strong>数据结构=逻辑结构(线性、非线性) + 存储结构(顺序、链式、索引、散列)</strong></p>
-<ul>
-<li>逻辑结构：数据元素间抽象化的相互关系</li>
-<li>存储结构：数据在计算机中的存储形式，也是物理结构</li>
-</ul>
-<hr>
-<h2 id="2-逻辑结构"><a href="#2-逻辑结构" class="headerlink" title="2. 逻辑结构"></a>2. 逻辑结构</h2><p>数据的逻辑结构是指数据之间的逻辑关系，比如一对一、一对多、多对一、多对多等。通常，逻辑关系可以分为两种：线性关系和非线性关系。线性关系指：<strong>除第一个外，每个元素有且只有一个前驱；除最后一个元素外，每个元素有且只有一个后继</strong>。</p>
-<p>常见的逻辑结构有以下几种：</p>
-<ul>
-<li><strong>集合</strong>：数据元素间没有任何关系</li>
-<li><strong>线性结构</strong>：数据元素间存在线性关系</li>
-<li><strong>树</strong>：数据元素间有层次关系</li>
-<li><strong>图</strong>：数据元素间you网状关系</li>
-</ul>
-<p><strong>常见的线性结构</strong>：线性表、栈、队列、双队列、数组、串等<br><strong>常见的非线性结构</strong>：多维数组、树、图、广义表等</p>
-<hr>
-<h2 id="3-存储结构"><a href="#3-存储结构" class="headerlink" title="3. 存储结构"></a>3. 存储结构</h2><p>数据的存储结构是指数据在计算机中的存储形式，也是数据的物理结构。</p>
-<p>常见的存储结构有以下几种：</p>
-<ol>
-<li><strong>顺序存储</strong>：逻辑上相邻的节点存储在物理位置上相邻的存储单元中，节点之间的逻辑关系由存储单元的邻接关系体现<ul>
-<li>优点：可实现对节点的随机存取</li>
-<li>缺点：不便于插入、删除，因为要大量移动数据</li>
-</ul>
-</li>
-<li><strong>链式存储</strong>：逻辑上相邻的节点在物理存储上不相邻，而是通过指针等体现逻辑关系<ul>
-<li>优点：便于插入、删除，存储密度比顺序存储小</li>
-<li>缺点：不便于查找</li>
-</ul>
-</li>
-<li><strong>索引存储</strong>：通过建立索引表来标识节点的地址</li>
-<li><strong>散列存储</strong>：根据节点的关键字直接计算出节点的存储地址</li>
-</ol>
-
+      
+        <div class="readmore">
+          <a href="/2020/07/30/computer_science/Linux/vim-cmd/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            Read More
+          </a>
         </div>
-        
-          
-
-
-  <section class='meta' id="footer-meta">
-    <hr>
-    <div class='new-meta-box'>
-      
-        
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2014-09-23T00:00:00+08:00">
-  <a class='notlink'>
-    <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>last updated at Sep 23, 2014</p>
-  </a>
-</div>
-
-        
-      
-        
-          
-  
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Data-Structure/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Data Structure</p></a></div>
-
-
-        
-      
-        
-          
-
-        
       
     </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Vim/" rel="nofollow"><i class="fas fa-tag fa-fw"></i>Vim</a>
+        
+      </div>
+    
   </section>
+</article>
 
-
+          </div>
         
-        
-            <div class="prev-next">
-                
-                    <section class="prev">
-                        <span class="art-item-left">
-                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
-                            <h4>
-                                <a href="/2017/06/04/computer_science/Linux/install_ubuntu/" rel="prev" title="Ubuntu 18.10安装与配置">
-                                  
-                                      Ubuntu 18.10安装与配置
-                                  
-                                </a>
-                            </h4>
-                            
-                                
-                                <h6 class="tags">
-                                    <a class="tag" href="/tags/Ubuntu/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Ubuntu</a>
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
-                
-                    <section class="next">
-                        <span class="art-item-right" aria-hidden="true">
-                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
-                            <h4>
-                                <a href="/2015/05/27/computer_science/Computer-Network/congestion_control/" rel="prev" title="TCP中的拥塞控制简介">
-                                    
-                                        TCP中的拥塞控制简介
-                                    
-                                </a>
-                            </h4>
-                            
-                                
-                                <h6 class="tags">
-                                    <a class="tag" href="/tags/Network/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Network</a>
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
-            </div>
-        
-      </section>
-    </article>
+      
+    
+  </section>
   
-
-  
-    <!-- 显示推荐文章和评论 -->
-
-
+    
+    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+    
+    
 
   
 
 
+    
   
-
-
-
-
-<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
-
-  <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    "HTML-CSS": {
-      preferredFont: "TeX",
-      availableFonts: ["STIX","TeX"],
-      linebreaks: { automatic:true },
-      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-      inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-      processEscapes: true,
-      ignoreClass: "tex2jax_ignore|dno",
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: { autoNumber: "AMS" },
-      noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-      Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-  });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += (all[i].SourceElement().parentNode.className ? ' ' : '') + 'has-jax';
-    }
-  });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
-
-
-  <script>
-    window.subData = {
-      title: 'Introduction To Data Structure',
-      tools: true
-    }
-  </script>
-
-
 </div>
 <aside class='l_side'>
   
@@ -529,20 +386,6 @@
           
           
             
-  <section class='widget toc-wrapper'>
-    
-<header class='pure'>
-  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
-  
-    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
-  
-</header>
-
-    <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-数据结构定义"><span class="toc-text">1. 数据结构定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-逻辑结构"><span class="toc-text">2. 逻辑结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-存储结构"><span class="toc-text">3. 存储结构</span></a></li></ol>
-    </div>
-  </section>
-
 
           
         

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Introduction To Data Structure | Simita</title>
+  <title>Vim常用命令 | Simita</title>
   
   
 
@@ -266,8 +266,8 @@
         
   
     <h1 class="title">
-      <a href="/2016/09/23/computer_science/Data-Structure/introduction/">
-        Introduction To Data Structure
+      <a href="/2020/07/30/computer_science/Linux/vim-cmd/">
+        Vim常用命令
       </a>
     </h1>
   
@@ -287,7 +287,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2016-09-23</p>
+    <p>2020-07-30</p>
   </a>
 </div>
 
@@ -297,9 +297,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Computer-Science/Data-Structure/' rel="nofollow">
+    <a href='/categories/Computer-Science/Linux/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Computer Science&nbsp;/&nbsp;Data Structure</p>
+      <p>Computer Science&nbsp;/&nbsp;Linux</p>
     </a>
   </div>
 
@@ -328,47 +328,15 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <p>对常见数据结构的一个简单地总结</p>
+          <p>Vim常用快捷键即命令</p>
 <hr>
 <a id="more"></a>
 
-<h2 id="1-数据结构定义"><a href="#1-数据结构定义" class="headerlink" title="1. 数据结构定义"></a>1. 数据结构定义</h2><p>数据结构是指<strong>相互之间存在着一种或多种关系的数据元素的集合和该集合中数据元素之间的关系组成</strong>，记为：</p>
-<center>$Data Structure = (D, R)$</center>
-其中$D$是数据元素的集合，$R$是$D$中元素之间的关系的集合。  
+<h2 id="1-快捷键及命令"><a href="#1-快捷键及命令" class="headerlink" title="1. 快捷键及命令"></a>1. 快捷键及命令</h2><h3 id="1-光标移动"><a href="#1-光标移动" class="headerlink" title="1 光标移动"></a>1 光标移动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gg # 跳至文档首部</span><br><span class="line">G # 跳至文档结尾</span><br><span class="line">^ # 跳至行首</span><br><span class="line"><span class="meta">$</span> # 跳至行尾</span><br><span class="line">ngg/nG # 跳至第n行</span><br><span class="line">:n # 跳至n行</span><br></pre></td></tr></table></figure>
 
-<p>通俗的理解，<strong>数据结构=逻辑结构(线性、非线性) + 存储结构(顺序、链式、索引、散列)</strong></p>
-<ul>
-<li>逻辑结构：数据元素间抽象化的相互关系</li>
-<li>存储结构：数据在计算机中的存储形式，也是物理结构</li>
-</ul>
-<hr>
-<h2 id="2-逻辑结构"><a href="#2-逻辑结构" class="headerlink" title="2. 逻辑结构"></a>2. 逻辑结构</h2><p>数据的逻辑结构是指数据之间的逻辑关系，比如一对一、一对多、多对一、多对多等。通常，逻辑关系可以分为两种：线性关系和非线性关系。线性关系指：<strong>除第一个外，每个元素有且只有一个前驱；除最后一个元素外，每个元素有且只有一个后继</strong>。</p>
-<p>常见的逻辑结构有以下几种：</p>
-<ul>
-<li><strong>集合</strong>：数据元素间没有任何关系</li>
-<li><strong>线性结构</strong>：数据元素间存在线性关系</li>
-<li><strong>树</strong>：数据元素间有层次关系</li>
-<li><strong>图</strong>：数据元素间you网状关系</li>
-</ul>
-<p><strong>常见的线性结构</strong>：线性表、栈、队列、双队列、数组、串等<br><strong>常见的非线性结构</strong>：多维数组、树、图、广义表等</p>
-<hr>
-<h2 id="3-存储结构"><a href="#3-存储结构" class="headerlink" title="3. 存储结构"></a>3. 存储结构</h2><p>数据的存储结构是指数据在计算机中的存储形式，也是数据的物理结构。</p>
-<p>常见的存储结构有以下几种：</p>
-<ol>
-<li><strong>顺序存储</strong>：逻辑上相邻的节点存储在物理位置上相邻的存储单元中，节点之间的逻辑关系由存储单元的邻接关系体现<ul>
-<li>优点：可实现对节点的随机存取</li>
-<li>缺点：不便于插入、删除，因为要大量移动数据</li>
-</ul>
-</li>
-<li><strong>链式存储</strong>：逻辑上相邻的节点在物理存储上不相邻，而是通过指针等体现逻辑关系<ul>
-<li>优点：便于插入、删除，存储密度比顺序存储小</li>
-<li>缺点：不便于查找</li>
-</ul>
-</li>
-<li><strong>索引存储</strong>：通过建立索引表来标识节点的地址</li>
-<li><strong>散列存储</strong>：根据节点的关键字直接计算出节点的存储地址</li>
-</ol>
+<h3 id="1-2-复制粘贴删除"><a href="#1-2-复制粘贴删除" class="headerlink" title="1.2 复制粘贴删除"></a>1.2 复制粘贴删除</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yy # 复制当前行</span><br><span class="line">yw # 复制光标所在word</span><br><span class="line">p # 将内容粘贴到当前行上面</span><br><span class="line">P # 将内容粘贴到当前行下面</span><br><span class="line">dd # 删除当前行</span><br><span class="line">cc # 删除当前行并进入编辑模式</span><br><span class="line">dw # 删除光标所在word或符号</span><br><span class="line">cw # 删除光标所在word并进入编辑模式</span><br></pre></td></tr></table></figure>
 
+<h2 id="2-vimrc常用配置"><a href="#2-vimrc常用配置" class="headerlink" title="2. vimrc常用配置"></a>2. vimrc常用配置</h2>
         </div>
         
           
@@ -379,10 +347,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2014-09-23T00:00:00+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-30T20:47:46+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>last updated at Sep 23, 2014</p>
+    <p>last updated at Jul 30, 2020</p>
   </a>
 </div>
 
@@ -391,7 +359,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Data-Structure/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Data Structure</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Vim/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Vim</p></a></div>
 
 
         
@@ -409,40 +377,21 @@
         
             <div class="prev-next">
                 
-                    <section class="prev">
-                        <span class="art-item-left">
-                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2017/06/04/computer_science/Linux/install_ubuntu/" rel="prev" title="Ubuntu 18.10安装与配置">
-                                  
-                                      Ubuntu 18.10安装与配置
-                                  
+                                <a href="/2020/07/30/computer_science/Linux/cores-in-ubuntu/" rel="prev" title="Ubuntu下查看CPU个数">
+                                    
+                                        Ubuntu下查看CPU个数
+                                    
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
                                     <a class="tag" href="/tags/Ubuntu/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Ubuntu</a>
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
-                
-                    <section class="next">
-                        <span class="art-item-right" aria-hidden="true">
-                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
-                            <h4>
-                                <a href="/2015/05/27/computer_science/Computer-Network/congestion_control/" rel="prev" title="TCP中的拥塞控制简介">
-                                    
-                                        TCP中的拥塞控制简介
-                                    
-                                </a>
-                            </h4>
-                            
-                                
-                                <h6 class="tags">
-                                    <a class="tag" href="/tags/Network/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Network</a>
                                 </h6>
                             
                         </span>
@@ -469,49 +418,11 @@
 
 <!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
 
-  <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    "HTML-CSS": {
-      preferredFont: "TeX",
-      availableFonts: ["STIX","TeX"],
-      linebreaks: { automatic:true },
-      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-      inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-      processEscapes: true,
-      ignoreClass: "tex2jax_ignore|dno",
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: { autoNumber: "AMS" },
-      noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-      Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-  });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += (all[i].SourceElement().parentNode.className ? ' ' : '') + 'has-jax';
-    }
-  });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
 
 
   <script>
     window.subData = {
-      title: 'Introduction To Data Structure',
+      title: 'Vim常用命令',
       tools: true
     }
   </script>
@@ -539,7 +450,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-数据结构定义"><span class="toc-text">1. 数据结构定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-逻辑结构"><span class="toc-text">2. 逻辑结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-存储结构"><span class="toc-text">3. 存储结构</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-快捷键及命令"><span class="toc-text">1. 快捷键及命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-光标移动"><span class="toc-text">1 光标移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-复制粘贴删除"><span class="toc-text">1.2 复制粘贴删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-vimrc常用配置"><span class="toc-text">2. vimrc常用配置</span></a></li></ol>
     </div>
   </section>
 
