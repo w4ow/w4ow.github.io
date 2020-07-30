@@ -345,24 +345,15 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <a id="more"></a>
-
-<p>一台机器中基本上只有一个物理CPU核，不过为了提高机器的性能，通常生产厂商会在CPU上集成多个内核，而内核又可以被分为多个线程。其中，内核是物理上的划分，而多线程是逻辑上的划分。</p>
-<p>在Ubuntu系统中可以使用下列命令查询核心数</p>
-<ol>
-<li><p>查看物理CPU个数：</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看每个物理CPU中内核数：</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo| grep "cpu cores"| uniq</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看逻辑CPU个数</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo| grep "processor"| wc -l</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看线程数：</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep 'processor' /proc/cpuinfo | sort -u | wc -l</span><br></pre></td></tr></table></figure></li>
-</ol>
-
+      <p>一台机器中基本上只有一个物理CPU核，不过为了提高机器的性能，通常生产厂商会在CPU上集成多个内核，而内核又可以被分为多个线程。其中，内核是物理上的划分，而多线程是逻辑上的划分。</p>
+<hr>
+      
+        <div class="readmore">
+          <a href="/2020/07/30/computer_science/Linux/cores-in-ubuntu/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            Read More
+          </a>
+        </div>
       
     </div>
     
@@ -659,9 +650,9 @@
     
       <div class="full-width auto-padding tags">
         
-          <a href="/tags/Ubuntu/" rel="nofollow"><i class="fas fa-tag fa-fw"></i>Ubuntu</a>
-        
           <a href="/tags/LLVM/" rel="nofollow"><i class="fas fa-tag fa-fw"></i>LLVM</a>
+        
+          <a href="/tags/Ubuntu/" rel="nofollow"><i class="fas fa-tag fa-fw"></i>Ubuntu</a>
         
       </div>
     
