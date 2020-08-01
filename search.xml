@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Git常用操作</title>
+      <link href="/2020/08/01/computer_science/Tools/git-cmd/"/>
+      <url>/2020/08/01/computer_science/Tools/git-cmd/</url>
+      
+        <content type="html"><![CDATA[<p>一台机器中基本上只有一个物理CPU核，不过为了提高机器的性能，通常生产厂商会在CPU上集成多个内核，而内核又可以被分为多个线程。其中，内核是物理上的划分，而多线程是逻辑上的划分。</p><hr><a id="more"></a>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Science </category>
+          
+          <category> Tools </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Vim常用命令</title>
       <link href="/2020/07/30/computer_science/Linux/vim-cmd/"/>
       <url>/2020/07/30/computer_science/Linux/vim-cmd/</url>
@@ -247,33 +274,6 @@
     
     
     <entry>
-      <title>使用conda管理Python虚拟环境</title>
-      <link href="/2019/09/09/computer_science/Tools/python-virtualenv-conda/"/>
-      <url>/2019/09/09/computer_science/Tools/python-virtualenv-conda/</url>
-      
-        <content type="html"><![CDATA[<p>使用conda管理Python虚拟环境</p><hr><a id="more"></a><h2 id="1-安装Anaconda"><a href="#1-安装Anaconda" class="headerlink" title="1. 安装Anaconda"></a>1. 安装Anaconda</h2><p>可以在Anaconda官网下载相应Python版本的软件，或者使用如下命令：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.continuum.io/archive/Anaconda3-2018.12-Linux-x86_64.sh</span><br><span class="line"></span><br><span class="line">bash Anaconda3-2018.12-Linux-x86_64.sh</span><br></pre></td></tr></table></figure><h2 id="2-创建Python虚拟环境"><a href="#2-创建Python虚拟环境" class="headerlink" title="2. 创建Python虚拟环境"></a>2. 创建Python虚拟环境</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n virtual_env_name python=x.x</span><br></pre></td></tr></table></figure><h2 id="3-激活-关闭虚拟环境"><a href="#3-激活-关闭虚拟环境" class="headerlink" title="3. 激活/关闭虚拟环境"></a>3. 激活/关闭虚拟环境</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 激活</span></span><br><span class="line">source activate virtual_env_name</span><br><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">source deactivate</span><br></pre></td></tr></table></figure><h2 id="4-为相应的虚拟环境安装包"><a href="#4-为相应的虚拟环境安装包" class="headerlink" title="4. 为相应的虚拟环境安装包"></a>4. 为相应的虚拟环境安装包</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -n virtual_env_name [package]</span><br></pre></td></tr></table></figure><h2 id="5-删除虚拟环境"><a href="#5-删除虚拟环境" class="headerlink" title="5. 删除虚拟环境"></a>5. 删除虚拟环境</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env remove -n(--name) virtual_env_name</span><br></pre></td></tr></table></figure><h2 id="6-常用conda命令"><a href="#6-常用conda命令" class="headerlink" title="6. 常用conda命令"></a>6. 常用conda命令</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda env list  <span class="comment"># 列出所有已创建的虚拟环境</span></span><br><span class="line">conda upgrade conda <span class="comment"># 升级</span></span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> Computer Science </category>
-          
-          <category> Tools </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Conda </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Install Syntia with Ubuntu 18.04</title>
       <link href="/2019/09/09/computer_science/Information-Security/syntia_install/"/>
       <url>/2019/09/09/computer_science/Information-Security/syntia_install/</url>
@@ -293,6 +293,33 @@
         <tags>
             
             <tag> MBA Obfuscation </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用conda管理Python虚拟环境</title>
+      <link href="/2019/09/09/computer_science/Tools/python-virtualenv-conda/"/>
+      <url>/2019/09/09/computer_science/Tools/python-virtualenv-conda/</url>
+      
+        <content type="html"><![CDATA[<p>使用conda管理Python虚拟环境</p><hr><a id="more"></a><h2 id="1-安装Anaconda"><a href="#1-安装Anaconda" class="headerlink" title="1. 安装Anaconda"></a>1. 安装Anaconda</h2><p>可以在Anaconda官网下载相应Python版本的软件，或者使用如下命令：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.continuum.io/archive/Anaconda3-2018.12-Linux-x86_64.sh</span><br><span class="line"></span><br><span class="line">bash Anaconda3-2018.12-Linux-x86_64.sh</span><br></pre></td></tr></table></figure><h2 id="2-创建Python虚拟环境"><a href="#2-创建Python虚拟环境" class="headerlink" title="2. 创建Python虚拟环境"></a>2. 创建Python虚拟环境</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n virtual_env_name python=x.x</span><br></pre></td></tr></table></figure><h2 id="3-激活-关闭虚拟环境"><a href="#3-激活-关闭虚拟环境" class="headerlink" title="3. 激活/关闭虚拟环境"></a>3. 激活/关闭虚拟环境</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 激活</span></span><br><span class="line">source activate virtual_env_name</span><br><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">source deactivate</span><br></pre></td></tr></table></figure><h2 id="4-为相应的虚拟环境安装包"><a href="#4-为相应的虚拟环境安装包" class="headerlink" title="4. 为相应的虚拟环境安装包"></a>4. 为相应的虚拟环境安装包</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -n virtual_env_name [package]</span><br></pre></td></tr></table></figure><h2 id="5-删除虚拟环境"><a href="#5-删除虚拟环境" class="headerlink" title="5. 删除虚拟环境"></a>5. 删除虚拟环境</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env remove -n(--name) virtual_env_name</span><br></pre></td></tr></table></figure><h2 id="6-常用conda命令"><a href="#6-常用conda命令" class="headerlink" title="6. 常用conda命令"></a>6. 常用conda命令</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda env list  <span class="comment"># 列出所有已创建的虚拟环境</span></span><br><span class="line">conda upgrade conda <span class="comment"># 升级</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Science </category>
+          
+          <category> Tools </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Conda </tag>
             
         </tags>
       
@@ -797,11 +824,11 @@
     
     
     <entry>
-      <title>计算机网络物理层简介</title>
-      <link href="/2015/03/22/computer_science/Computer-Network/physical_layer_in_network/"/>
-      <url>/2015/03/22/computer_science/Computer-Network/physical_layer_in_network/</url>
+      <title>计算机网络的拓扑结构</title>
+      <link href="/2015/03/22/computer_science/Computer-Network/topology_of_network/"/>
+      <url>/2015/03/22/computer_science/Computer-Network/topology_of_network/</url>
       
-        <content type="html"><![CDATA[<p>物理层是OSI体系结构中的最底层，而在TCP/IP协议中并没有单独的物理层，其功能由网络访问层实现。本文介绍物理层的几个特性与协议</p><hr><a id="more"></a><h2 id="1-物理层的主要作用"><a href="#1-物理层的主要作用" class="headerlink" title="1. 物理层的主要作用"></a>1. 物理层的主要作用</h2><p>物理层有如下几个作用</p><ul><li>构建数据通路：即两个通信端之间的可以连续传输数据的物理通路</li><li>透明传输：作为物理通路的材质可能有很多，例如双绞线、光纤等，物理层需要确保数据对这些材质透明，即不管什么材质都不影响数据传输</li><li>传输数据：既然是通路其基本功能就是传输数据。物理层的<strong>基本传输单元是bit</strong></li><li>数据编码：不同传输介质所支持的数据编码可能不同，如归零码、曼彻斯特码、差分曼彻斯特码等。物理层需要确保不同编码的数据能够正常在通路上传输</li><li>数据传输管理：对比特流的数据传输流量控制、差错控制、物理线路的激活与释放等</li></ul><h2 id="2-物理层特性"><a href="#2-物理层特性" class="headerlink" title="2. 物理层特性"></a>2. 物理层特性</h2><p>物理层需要规范其接口的特性，有了统一的标准，不同的厂商能够以相同的标准来实现彼此产品的互联</p><ol><li>机械特性：定义了传输介质接线器、物理接口的形状和尺寸、引线数目和排列顺序以及连接器与接口之间的固定和锁定装置</li><li>电气特性：规定了在通路上传输比特流时线路上信号电压的高低、阻抗匹配情况，以及传输速率和传输距离限制等参数属性，主要分为三类：<ul><li>非平衡型</li><li>差分接收器的非平衡型</li><li>平衡型</li></ul></li><li>功能特性：指传输介质中各条线上所出现的某一电平的含义，以及物理接口各条信号线的用途，包括：接口信号线的功能规定，接口信号线的功能分类。</li><li>规程特性：利用接口传输比特流的全过程以及各项用于传输的事件发生的合法顺序，包括事件的执行顺序和数据传输方式，即在物理连接建立、维持和交换信息时，DTE/DEC双方在各自电路上的动作顺序。</li></ol><h2 id="3-物理层传输介质"><a href="#3-物理层传输介质" class="headerlink" title="3. 物理层传输介质"></a>3. 物理层传输介质</h2><ol><li>导向性传输介质<ul><li>双绞线</li><li>同轴电缆</li><li>光纤</li></ul></li><li>非导向性传输介质<ul><li>短波无线传输</li><li>地面微波接力通信</li><li>卫星通信</li></ul></li></ol>]]></content>
+        <content type="html"><![CDATA[<p>计算机网络拓扑结构是指网络中各个端点之间的逻辑结构，本文对其进行简单介绍</p><hr><a id="more"></a><h2 id="1-网络拓扑中的基本概念"><a href="#1-网络拓扑中的基本概念" class="headerlink" title="1. 网络拓扑中的基本概念"></a>1. 网络拓扑中的基本概念</h2><ol><li>节点：即一个网络端口，如PC；</li><li>结点：通常连接了多个节点，如路由器和交换机；</li><li>链路：两个节点之间的线路；</li><li>通路：两个节点之间的通信线路，可能包含多条链路。</li></ol><h2 id="2-星型拓扑结构"><a href="#2-星型拓扑结构" class="headerlink" title="2. 星型拓扑结构"></a>2. 星型拓扑结构</h2><p>目前应用最广的一种拓扑结构，各节点以交换机或集线器等设备连接在一起，其优点包括<strong>扩展方便</strong>、<strong>网速较快</strong>、<strong>易于维护</strong>，但缺点也很明显：<strong>核心交换机负载过重</strong>、<strong>通信过于依赖核心交换机</strong>等。</p><h2 id="3-环形拓扑结构"><a href="#3-环形拓扑结构" class="headerlink" title="3. 环形拓扑结构"></a>3. 环形拓扑结构</h2><p>这种网络因为传输速率低、扩展性差，已经被淘汰不用了，使用这种结构的有令牌环网。</p><h2 id="4-总线型拓扑结构"><a href="#4-总线型拓扑结构" class="headerlink" title="4. 总线型拓扑结构"></a>4. 总线型拓扑结构</h2><p>该结构中，所有设备都连接到一条总线上，和环形拓扑不同的是不形成闭环。总线型拓扑结构会在总线两端加装“终接器”的设备，主要用于与总线进行阻抗匹配，最大限度吸收传送端部的能量，避免信号反射回总线产生不必要的干扰。其优点有：<strong>结构简单</strong>、<strong>易于扩展</strong>、<strong>易于维护</strong>，缺点有：<strong>传输速率低</strong>、<strong>故障诊断苦难</strong>、<strong>难以实现大规模扩展</strong>；</p><h2 id="4-树形拓扑结构"><a href="#4-树形拓扑结构" class="headerlink" title="4. 树形拓扑结构"></a>4. 树形拓扑结构</h2><p>树根为核心交换机，叶节点为终端设备</p><h2 id="5-网状拓扑结构"><a href="#5-网状拓扑结构" class="headerlink" title="5. 网状拓扑结构"></a>5. 网状拓扑结构</h2><p>网络可靠性高、布线复杂</p><h2 id="6-混合型拓扑结构"><a href="#6-混合型拓扑结构" class="headerlink" title="6. 混合型拓扑结构"></a>6. 混合型拓扑结构</h2><p>应用广泛、维护困难</p><h2 id="7-WLAN的拓扑结构"><a href="#7-WLAN的拓扑结构" class="headerlink" title="7. WLAN的拓扑结构"></a>7. WLAN的拓扑结构</h2><ol><li>Ad-Hoc：点对点连接方式，只能单点通信，性能较差；</li><li>Infrastructure：和星型拓扑类似。</li></ol>]]></content>
       
       
       <categories>
@@ -824,11 +851,11 @@
     
     
     <entry>
-      <title>计算机网络的拓扑结构</title>
-      <link href="/2015/03/22/computer_science/Computer-Network/topology_of_network/"/>
-      <url>/2015/03/22/computer_science/Computer-Network/topology_of_network/</url>
+      <title>计算机网络物理层简介</title>
+      <link href="/2015/03/22/computer_science/Computer-Network/physical_layer_in_network/"/>
+      <url>/2015/03/22/computer_science/Computer-Network/physical_layer_in_network/</url>
       
-        <content type="html"><![CDATA[<p>计算机网络拓扑结构是指网络中各个端点之间的逻辑结构，本文对其进行简单介绍</p><hr><a id="more"></a><h2 id="1-网络拓扑中的基本概念"><a href="#1-网络拓扑中的基本概念" class="headerlink" title="1. 网络拓扑中的基本概念"></a>1. 网络拓扑中的基本概念</h2><ol><li>节点：即一个网络端口，如PC；</li><li>结点：通常连接了多个节点，如路由器和交换机；</li><li>链路：两个节点之间的线路；</li><li>通路：两个节点之间的通信线路，可能包含多条链路。</li></ol><h2 id="2-星型拓扑结构"><a href="#2-星型拓扑结构" class="headerlink" title="2. 星型拓扑结构"></a>2. 星型拓扑结构</h2><p>目前应用最广的一种拓扑结构，各节点以交换机或集线器等设备连接在一起，其优点包括<strong>扩展方便</strong>、<strong>网速较快</strong>、<strong>易于维护</strong>，但缺点也很明显：<strong>核心交换机负载过重</strong>、<strong>通信过于依赖核心交换机</strong>等。</p><h2 id="3-环形拓扑结构"><a href="#3-环形拓扑结构" class="headerlink" title="3. 环形拓扑结构"></a>3. 环形拓扑结构</h2><p>这种网络因为传输速率低、扩展性差，已经被淘汰不用了，使用这种结构的有令牌环网。</p><h2 id="4-总线型拓扑结构"><a href="#4-总线型拓扑结构" class="headerlink" title="4. 总线型拓扑结构"></a>4. 总线型拓扑结构</h2><p>该结构中，所有设备都连接到一条总线上，和环形拓扑不同的是不形成闭环。总线型拓扑结构会在总线两端加装“终接器”的设备，主要用于与总线进行阻抗匹配，最大限度吸收传送端部的能量，避免信号反射回总线产生不必要的干扰。其优点有：<strong>结构简单</strong>、<strong>易于扩展</strong>、<strong>易于维护</strong>，缺点有：<strong>传输速率低</strong>、<strong>故障诊断苦难</strong>、<strong>难以实现大规模扩展</strong>；</p><h2 id="4-树形拓扑结构"><a href="#4-树形拓扑结构" class="headerlink" title="4. 树形拓扑结构"></a>4. 树形拓扑结构</h2><p>树根为核心交换机，叶节点为终端设备</p><h2 id="5-网状拓扑结构"><a href="#5-网状拓扑结构" class="headerlink" title="5. 网状拓扑结构"></a>5. 网状拓扑结构</h2><p>网络可靠性高、布线复杂</p><h2 id="6-混合型拓扑结构"><a href="#6-混合型拓扑结构" class="headerlink" title="6. 混合型拓扑结构"></a>6. 混合型拓扑结构</h2><p>应用广泛、维护困难</p><h2 id="7-WLAN的拓扑结构"><a href="#7-WLAN的拓扑结构" class="headerlink" title="7. WLAN的拓扑结构"></a>7. WLAN的拓扑结构</h2><ol><li>Ad-Hoc：点对点连接方式，只能单点通信，性能较差；</li><li>Infrastructure：和星型拓扑类似。</li></ol>]]></content>
+        <content type="html"><![CDATA[<p>物理层是OSI体系结构中的最底层，而在TCP/IP协议中并没有单独的物理层，其功能由网络访问层实现。本文介绍物理层的几个特性与协议</p><hr><a id="more"></a><h2 id="1-物理层的主要作用"><a href="#1-物理层的主要作用" class="headerlink" title="1. 物理层的主要作用"></a>1. 物理层的主要作用</h2><p>物理层有如下几个作用</p><ul><li>构建数据通路：即两个通信端之间的可以连续传输数据的物理通路</li><li>透明传输：作为物理通路的材质可能有很多，例如双绞线、光纤等，物理层需要确保数据对这些材质透明，即不管什么材质都不影响数据传输</li><li>传输数据：既然是通路其基本功能就是传输数据。物理层的<strong>基本传输单元是bit</strong></li><li>数据编码：不同传输介质所支持的数据编码可能不同，如归零码、曼彻斯特码、差分曼彻斯特码等。物理层需要确保不同编码的数据能够正常在通路上传输</li><li>数据传输管理：对比特流的数据传输流量控制、差错控制、物理线路的激活与释放等</li></ul><h2 id="2-物理层特性"><a href="#2-物理层特性" class="headerlink" title="2. 物理层特性"></a>2. 物理层特性</h2><p>物理层需要规范其接口的特性，有了统一的标准，不同的厂商能够以相同的标准来实现彼此产品的互联</p><ol><li>机械特性：定义了传输介质接线器、物理接口的形状和尺寸、引线数目和排列顺序以及连接器与接口之间的固定和锁定装置</li><li>电气特性：规定了在通路上传输比特流时线路上信号电压的高低、阻抗匹配情况，以及传输速率和传输距离限制等参数属性，主要分为三类：<ul><li>非平衡型</li><li>差分接收器的非平衡型</li><li>平衡型</li></ul></li><li>功能特性：指传输介质中各条线上所出现的某一电平的含义，以及物理接口各条信号线的用途，包括：接口信号线的功能规定，接口信号线的功能分类。</li><li>规程特性：利用接口传输比特流的全过程以及各项用于传输的事件发生的合法顺序，包括事件的执行顺序和数据传输方式，即在物理连接建立、维持和交换信息时，DTE/DEC双方在各自电路上的动作顺序。</li></ol><h2 id="3-物理层传输介质"><a href="#3-物理层传输介质" class="headerlink" title="3. 物理层传输介质"></a>3. 物理层传输介质</h2><ol><li>导向性传输介质<ul><li>双绞线</li><li>同轴电缆</li><li>光纤</li></ul></li><li>非导向性传输介质<ul><li>短波无线传输</li><li>地面微波接力通信</li><li>卫星通信</li></ul></li></ol>]]></content>
       
       
       <categories>
