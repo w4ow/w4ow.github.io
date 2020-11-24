@@ -4,25 +4,23 @@
   
     
     <entry>
-      <title>Git常用操作</title>
-      <link href="/2020/08/01/computer_science/Tools/git-cmd/"/>
-      <url>/2020/08/01/computer_science/Tools/git-cmd/</url>
+      <title>子图同构</title>
+      <link href="/2020/08/01/Mathematics/subgraph-isomorphism/"/>
+      <url>/2020/08/01/Mathematics/subgraph-isomorphism/</url>
       
-        <content type="html"><![CDATA[<p>一台机器中基本上只有一个物理CPU核，不过为了提高机器的性能，通常生产厂商会在CPU上集成多个内核，而内核又可以被分为多个线程。其中，内核是物理上的划分，而多线程是逻辑上的划分。</p><hr><a id="more"></a>]]></content>
+        <content type="html"><![CDATA[<hr><a id="more"></a><h2 id="1-问题定义"><a href="#1-问题定义" class="headerlink" title="1. 问题定义"></a>1. 问题定义</h2><p>在图论中，子图同构问题是指：给定两个图$G$和$H$，判断$G$中是否包含子图$G_0$使得$G_0$和$H$同构。</p>]]></content>
       
       
       <categories>
           
-          <category> Computer Science </category>
-          
-          <category> Tools </category>
+          <category> Mathematics </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Git </tag>
+            <tag> Mathematics </tag>
             
         </tags>
       
@@ -35,7 +33,7 @@
       <link href="/2020/07/30/computer_science/Linux/vim-cmd/"/>
       <url>/2020/07/30/computer_science/Linux/vim-cmd/</url>
       
-        <content type="html"><![CDATA[<p>Vim常用快捷键及命令</p><hr><a id="more"></a><h2 id="1-快捷键及命令"><a href="#1-快捷键及命令" class="headerlink" title="1. 快捷键及命令"></a>1. 快捷键及命令</h2><h3 id="1-光标移动"><a href="#1-光标移动" class="headerlink" title="1 光标移动"></a>1 光标移动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gg # 跳至文档首部</span><br><span class="line">G # 跳至文档结尾</span><br><span class="line">^ # 跳至行首</span><br><span class="line">\$ # 跳至行尾</span><br><span class="line">ngg/nG/:n # 跳至第n行</span><br></pre></td></tr></table></figure><h3 id="1-2-复制粘贴删除"><a href="#1-2-复制粘贴删除" class="headerlink" title="1.2 复制粘贴删除"></a>1.2 复制粘贴删除</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yy # 复制当前行</span><br><span class="line">yw # 复制光标所在word</span><br><span class="line">p # 将内容粘贴到当前行上面</span><br><span class="line">P # 将内容粘贴到当前行下面</span><br><span class="line">dd # 删除当前行</span><br><span class="line">cc # 删除当前行并进入编辑模式</span><br><span class="line">dw # 删除光标所在word或符号</span><br><span class="line">cw # 删除光标所在word并进入编辑模式</span><br></pre></td></tr></table></figure><h2 id="2-vimrc常用配置"><a href="#2-vimrc常用配置" class="headerlink" title="2. vimrc常用配置"></a>2. vimrc常用配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set nu # 设置行号</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<p>Vim常用快捷键及命令</p><hr><a id="more"></a><h2 id="1-快捷键及命令"><a href="#1-快捷键及命令" class="headerlink" title="1. 快捷键及命令"></a>1. 快捷键及命令</h2><h3 id="1-光标移动"><a href="#1-光标移动" class="headerlink" title="1 光标移动"></a>1 光标移动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gg # 跳至文档首部</span><br><span class="line">G # 跳至文档结尾</span><br><span class="line">^ # 跳至行首</span><br><span class="line"><span class="meta">$</span> # 跳至行尾</span><br><span class="line">ngg/nG/:n # 跳至第n行</span><br></pre></td></tr></table></figure><h3 id="1-2-复制粘贴删除"><a href="#1-2-复制粘贴删除" class="headerlink" title="1.2 复制粘贴删除"></a>1.2 复制粘贴删除</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yy # 复制当前行</span><br><span class="line">yw # 复制光标所在word</span><br><span class="line">p # 将内容粘贴到当前行上面</span><br><span class="line">P # 将内容粘贴到当前行下面</span><br><span class="line">dd # 删除当前行</span><br><span class="line">cc # 删除当前行并进入编辑模式</span><br><span class="line">dw # 删除光标所在word或符号</span><br><span class="line">cw # 删除光标所在word并进入编辑模式</span><br></pre></td></tr></table></figure><h2 id="2-vimrc常用配置"><a href="#2-vimrc常用配置" class="headerlink" title="2. vimrc常用配置"></a>2. vimrc常用配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set nu # 设置行号</span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
@@ -481,9 +479,9 @@
       
         <tags>
             
-            <tag> Array </tag>
-            
             <tag> LeetCode </tag>
+            
+            <tag> Array </tag>
             
         </tags>
       
@@ -774,7 +772,7 @@
       <link href="/2015/05/27/computer_science/Computer-Network/congestion_control/"/>
       <url>/2015/05/27/computer_science/Computer-Network/congestion_control/</url>
       
-        <content type="html"><![CDATA[<p>TCP中的拥塞控制的目的是控制网络拥塞的出现，网络拥塞的原因多种多样，比如某结点的缓存太小、某段链路带宽太低等等。为了防止网络拥塞，V.Jacobson在1988年的论文中提出了用于TCP的拥塞控制，由慢开始和拥塞避免组成，后来在TCP Reno版本中又加入了快重传和快恢复。这4种技术能够很好的避免网络拥塞。</p><hr><a id="more"></a><h2 id="1-慢开始"><a href="#1-慢开始" class="headerlink" title="1. 慢开始"></a>1. 慢开始</h2><p>如果将网络通路比作高速公路，那么我们可以想象一下，如果这条路的出口只有一个车道，而入口却有很多车道，那么这条路必然会造成拥塞。慢开始就是针对这一情况而提出的。其基本思想是逐渐增大发送的数据大小(即拥塞窗口)直到指定的阈值(即慢开始阈值)。</p><p>在慢开始中，发送端除了要维护正常情况下根据接收端发来的窗口大小字段值而调整的<strong>发送窗口</strong>外，还要维护一个<strong>拥塞窗口(Congestion Window, CWND)</strong>，CWND的目的是为了避免发生拥塞，最终<strong>允许发送的字节数是CWND和发送窗口两者中的最小值</strong>。</p><p>下面介绍慢开始的具体步骤(假设CWND总是小于发送窗口)：</p><ol><li>在TCP传输连接建立时，发送端将CWND初始化为该连接上当前使用的最大数据段大小(Maximum Segment Size, MSS)，即CWND=MSS，然后发送端发送一个MSS大小的数据段M1。</li><li>如果在定时器过期前发送端收到了该数据段的确认(即对M1的确认)，则发送端将CWND大小翻倍，即CWND=2MSS，并发送2MSS大小的数据，假定发送的数据段位M2、M3。</li><li>同样的，如果在定时器过期前发送端接收到确定(收到M3的确认即可，即只用确认最后一个)，再次将CWND翻倍，并以此类推。</li><li>当出现数据丢失时，需要将<strong>慢开始阈值(Slow Start Threshold, SSTHRESH)</strong>设置为当前CWND的一半，并将CWND重设为1MSS。并重新开始慢开始，此时若CWND再次达到SSTHRESH便停止使用慢开始，转用拥塞避免。</li></ol><p>值得注意的是，一般SSTHRESH初始值为64KB。</p><p><img src="https://raw.githubusercontent.com/fengggggggg/figure_for_blog/master/13afefqewf23232f.png" alt></p><h2 id="2-拥塞避免"><a href="#2-拥塞避免" class="headerlink" title="2. 拥塞避免"></a>2. 拥塞避免</h2><p>拥塞避免的基本思想是，当CWND再次达到SSTHRESH时，让拥塞窗口的大小每经过一个RTT(数据传输往返时间)时仅增加1MSS。如果这时还是发生了数据丢失，同样的还是把SSTHRESH设为当前CWND的一半，把CWND设为1MSS，并重新开始慢开始。</p><h2 id="3-快重传-快恢复"><a href="#3-快重传-快恢复" class="headerlink" title="3. 快重传/快恢复"></a>3. 快重传/快恢复</h2><p>快重传的基本思想是，当接收端收到一个不是按序到达的数据段时，TCP实体迅速发送一个重复ACK数据段，而不用等到有数据需要发送时才顺带发出重复ACK。在连续收到3个重复ACK数据段后，即认为对应确认号字段的数据丢失，TCP不等重传定时器超时就会重传丢失的数据段。</p><p>快恢复是在快重传发挥作用时，确切的说是收到第三个重复ACK时，把当前CWND设为当前SSTHRESH的一半，以减轻网络负载，然后执行拥塞避免算法。</p>]]></content>
+        <content type="html"><![CDATA[<p>TCP中的拥塞控制的目的是控制网络拥塞的出现，网络拥塞的原因多种多样，比如某结点的缓存太小、某段链路带宽太低等等。为了防止网络拥塞，V.Jacobson在1988年的论文中提出了用于TCP的拥塞控制，由慢开始和拥塞避免组成，后来在TCP Reno版本中又加入了快重传和快恢复。这4种技术能够很好的避免网络拥塞。</p><hr><a id="more"></a><h2 id="1-慢开始"><a href="#1-慢开始" class="headerlink" title="1. 慢开始"></a>1. 慢开始</h2><p>如果将网络通路比作高速公路，那么我们可以想象一下，如果这条路的出口只有一个车道，而入口却有很多车道，那么这条路必然会造成拥塞。慢开始就是针对这一情况而提出的。其基本思想是逐渐增大发送的数据大小(即拥塞窗口)直到指定的阈值(即慢开始阈值)。</p><p>在慢开始中，发送端除了要维护正常情况下根据接收端发来的窗口大小字段值而调整的<strong>发送窗口</strong>外，还要维护一个<strong>拥塞窗口(Congestion Window, CWND)</strong>，CWND的目的是为了避免发生拥塞，最终<strong>允许发送的字节数是CWND和发送窗口两者中的最小值</strong>。</p><p>下面介绍慢开始的具体步骤(假设CWND总是小于发送窗口)：</p><ol><li>在TCP传输连接建立时，发送端将CWND初始化为该连接上当前使用的最大数据段大小(Maximum Segment Size, MSS)，即CWND=MSS，然后发送端发送一个MSS大小的数据段M1。</li><li>如果在定时器过期前发送端收到了该数据段的确认(即对M1的确认)，则发送端将CWND大小翻倍，即CWND=2MSS，并发送2MSS大小的数据，假定发送的数据段位M2、M3。</li><li>同样的，如果在定时器过期前发送端接收到确定(收到M3的确认即可，即只用确认最后一个)，再次将CWND翻倍，并以此类推。</li><li>当出现数据丢失时，需要将<strong>慢开始阈值(Slow Start Threshold, SSTHRESH)</strong>设置为当前CWND的一半，并将CWND重设为1MSS。并重新开始慢开始，此时若CWND再次达到SSTHRESH便停止使用慢开始，转用拥塞避免。</li></ol><p>值得注意的是，一般SSTHRESH初始值为64KB。</p><p><img src="https://raw.githubusercontent.com/w4ow/figure_for_blog/master/13afefqewf23232f.png" alt></p><h2 id="2-拥塞避免"><a href="#2-拥塞避免" class="headerlink" title="2. 拥塞避免"></a>2. 拥塞避免</h2><p>拥塞避免的基本思想是，当CWND再次达到SSTHRESH时，让拥塞窗口的大小每经过一个RTT(数据传输往返时间)时仅增加1MSS。如果这时还是发生了数据丢失，同样的还是把SSTHRESH设为当前CWND的一半，把CWND设为1MSS，并重新开始慢开始。</p><h2 id="3-快重传-快恢复"><a href="#3-快重传-快恢复" class="headerlink" title="3. 快重传/快恢复"></a>3. 快重传/快恢复</h2><p>快重传的基本思想是，当接收端收到一个不是按序到达的数据段时，TCP实体迅速发送一个重复ACK数据段，而不用等到有数据需要发送时才顺带发出重复ACK。在连续收到3个重复ACK数据段后，即认为对应确认号字段的数据丢失，TCP不等重传定时器超时就会重传丢失的数据段。</p><p>快恢复是在快重传发挥作用时，确切的说是收到第三个重复ACK时，把当前CWND设为当前SSTHRESH的一半，以减轻网络负载，然后执行拥塞避免算法。</p>]]></content>
       
       
       <categories>
