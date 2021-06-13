@@ -333,14 +333,14 @@
 <a id="more"></a>
 
 <p><strong>1. 生成配置文件</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Mac &amp; Ubuntu &amp; Windows在Terminal中运行下面命令</span></span><br><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> Mac &amp; Ubuntu &amp; Windows在Terminal中运行下面命令</span><br><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
 
 <p>如果在Windows中出现<em>‘jupyter’不是内部或外部命令，也不是可运行的批处理文件</em>，可以通过下面命令安装notebook</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install notebook</span><br></pre></td></tr></table></figure>
 
 <p><strong>2. 修改配置文件</strong></p>
 <p>找到如下所示的两行，第二行去注释并改成工作路径即可。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">macOS:</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># The directory to use for notebooks and kernels.</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">c.NotebookApp.notebook_dir = <span class="string">''</span></span></span><br><span class="line"></span><br><span class="line">Ubuntu &amp; Windows:</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># The default URL to redirect to from `/`</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">c.NotebookApp.default_url = <span class="string">'/tree'</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">macOS:</span><br><span class="line"><span class="meta">#</span># The directory to use for notebooks and kernels.</span><br><span class="line"><span class="meta">#</span>c.NotebookApp.notebook_dir = ''</span><br><span class="line"></span><br><span class="line">Ubuntu &amp; Windows:</span><br><span class="line"><span class="meta">#</span># The default URL to redirect to from `/`</span><br><span class="line"><span class="meta">#</span>c.NotebookApp.default_url = '/tree'</span><br></pre></td></tr></table></figure>
         </div>
         
           
