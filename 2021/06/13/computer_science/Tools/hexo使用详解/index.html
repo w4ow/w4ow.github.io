@@ -276,7 +276,12 @@
 
 <h1 id="1-基础设置"><a href="#1-基础设置" class="headerlink" title="1. 基础设置"></a>1. 基础设置</h1><h2 id="1-1-HEXO配置文件简介"><a href="#1-1-HEXO配置文件简介" class="headerlink" title="1.1 HEXO配置文件简介"></a>1.1 HEXO配置文件简介</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">source</span><br><span class="line">    _posts <span class="comment"># 所写的博客(即md文件)放在该目录下</span></span><br><span class="line">    ...</span><br><span class="line">themes <span class="comment"># 博客主题</span></span><br><span class="line">    example_theme</span><br><span class="line">        ...</span><br><span class="line">        less</span><br><span class="line">            ...</span><br><span class="line">            _layout.less <span class="comment"># 该主题的布局配置文件</span></span><br><span class="line">        _config.yml <span class="comment"># 该主题的配置文件</span></span><br><span class="line">_config.yml <span class="comment"># hexo配置文件，没多大用处</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="1-2-HEXO博客发布流程以及常用命令"><a href="#1-2-HEXO博客发布流程以及常用命令" class="headerlink" title="1.2 HEXO博客发布流程以及常用命令"></a>1.2 HEXO博客发布流程以及常用命令</h2><p>在写好一篇博客(md)后，首先应预览一下，使用<code>hexo s(erver)</code>命令可以启动本地服务器,<br>随后在浏览器中访问网址<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>即可实时预览博客。<br>最后，通过<code>hexo d(eploy)</code>命令可以将完成的博客部署到远程服务器(github)。</p>
+<h2 id="1-2-HEXO博客发布流程以及常用命令"><a href="#1-2-HEXO博客发布流程以及常用命令" class="headerlink" title="1.2 HEXO博客发布流程以及常用命令"></a>1.2 HEXO博客发布流程以及常用命令</h2><p>在写好一篇博客(md)后:</p>
+<ol>
+<li>首先通过<code>hexo g(enerate)</code>命令由md文件生成静态网页；</li>
+<li>随后应预览一下，使用<code>hexo s(erver)</code>命令可以启动本地服务器,<br>随后在浏览器中访问网址<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>即可实时预览博客；</li>
+<li>最后，通过<code>hexo d(eploy)</code>命令可以将完成的博客部署到远程服务器(github)。</li>
+</ol>
 
         </div>
         
@@ -288,7 +293,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-06-13T20:49:37+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-06-13T21:22:08+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
     <p>last updated at Jun 13, 2021</p>
