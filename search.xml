@@ -4,23 +4,25 @@
   
     
     <entry>
-      <title>子图同构</title>
-      <link href="/2020/08/01/Mathematics/subgraph-isomorphism/"/>
-      <url>/2020/08/01/Mathematics/subgraph-isomorphism/</url>
+      <title>HEXO的使用</title>
+      <link href="/2021/06/13/computer_science/Tools/hexo%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/"/>
+      <url>/2021/06/13/computer_science/Tools/hexo%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/</url>
       
-        <content type="html"><![CDATA[<hr><a id="more"></a><h2 id="1-问题定义"><a href="#1-问题定义" class="headerlink" title="1. 问题定义"></a>1. 问题定义</h2><p>在图论中，子图同构问题是指：给定两个图$G$和$H$，判断$G$中是否包含子图$G_0$使得$G_0$和$H$同构。</p>]]></content>
+        <content type="html"><![CDATA[<p><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">HEXO</a>是一个基于Markdown的静态网页博客生成框架</p><hr><a id="more"></a>]]></content>
       
       
       <categories>
           
-          <category> Mathematics </category>
+          <category> Computer Science </category>
+          
+          <category> Tools </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Mathematics </tag>
+            <tag> HEXO </tag>
             
         </tags>
       
@@ -33,7 +35,7 @@
       <link href="/2020/07/30/computer_science/Linux/vim-cmd/"/>
       <url>/2020/07/30/computer_science/Linux/vim-cmd/</url>
       
-        <content type="html"><![CDATA[<p>Vim常用快捷键及命令</p><hr><a id="more"></a><h2 id="1-快捷键及命令"><a href="#1-快捷键及命令" class="headerlink" title="1. 快捷键及命令"></a>1. 快捷键及命令</h2><h3 id="1-光标移动"><a href="#1-光标移动" class="headerlink" title="1 光标移动"></a>1 光标移动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gg # 跳至文档首部</span><br><span class="line">G # 跳至文档结尾</span><br><span class="line">^ # 跳至行首</span><br><span class="line"><span class="meta">$</span> # 跳至行尾</span><br><span class="line">ngg/nG/:n # 跳至第n行</span><br></pre></td></tr></table></figure><h3 id="1-2-复制粘贴删除"><a href="#1-2-复制粘贴删除" class="headerlink" title="1.2 复制粘贴删除"></a>1.2 复制粘贴删除</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yy # 复制当前行</span><br><span class="line">yw # 复制光标所在word</span><br><span class="line">p # 将内容粘贴到当前行上面</span><br><span class="line">P # 将内容粘贴到当前行下面</span><br><span class="line">dd # 删除当前行</span><br><span class="line">cc # 删除当前行并进入编辑模式</span><br><span class="line">dw # 删除光标所在word或符号</span><br><span class="line">cw # 删除光标所在word并进入编辑模式</span><br></pre></td></tr></table></figure><h2 id="2-vimrc常用配置"><a href="#2-vimrc常用配置" class="headerlink" title="2. vimrc常用配置"></a>2. vimrc常用配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set nu # 设置行号</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<p>Vim常用快捷键及命令</p><hr><a id="more"></a><h2 id="1-快捷键及命令"><a href="#1-快捷键及命令" class="headerlink" title="1. 快捷键及命令"></a>1. 快捷键及命令</h2><h3 id="1-光标移动"><a href="#1-光标移动" class="headerlink" title="1 光标移动"></a>1 光标移动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gg # 跳至文档首部</span><br><span class="line">G # 跳至文档结尾</span><br><span class="line">^ # 跳至行首</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="comment"># 跳至行尾</span></span></span><br><span class="line">ngg/nG/:n # 跳至第n行</span><br></pre></td></tr></table></figure><h3 id="1-2-复制粘贴删除"><a href="#1-2-复制粘贴删除" class="headerlink" title="1.2 复制粘贴删除"></a>1.2 复制粘贴删除</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yy # 复制当前行</span><br><span class="line">yw # 复制光标所在word</span><br><span class="line">p # 将内容粘贴到当前行上面</span><br><span class="line">P # 将内容粘贴到当前行下面</span><br><span class="line">dd # 删除当前行</span><br><span class="line">cc # 删除当前行并进入编辑模式</span><br><span class="line">dw # 删除光标所在word或符号</span><br><span class="line">cw # 删除光标所在word并进入编辑模式</span><br></pre></td></tr></table></figure><h2 id="2-vimrc常用配置"><a href="#2-vimrc常用配置" class="headerlink" title="2. vimrc常用配置"></a>2. vimrc常用配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set nu # 设置行号</span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
@@ -272,33 +274,6 @@
     
     
     <entry>
-      <title>Install Syntia with Ubuntu 18.04</title>
-      <link href="/2019/09/09/computer_science/Information-Security/syntia_install/"/>
-      <url>/2019/09/09/computer_science/Information-Security/syntia_install/</url>
-      
-        <content type="html"><![CDATA[<p><a href="https://github.com/RUB-SysSec/syntia" target="_blank" rel="noopener">Syntia</a>是基于程序合成的反混淆框架，它使用程序跟踪作为一个blackbox来产生随机的输入输出对，利用这些输入输出对，程序合成器可以学习代码的底层语义。本文介绍了Ubuntu下安装syntia</p><hr><a id="more"></a><h2 id="1-下载源码"><a href="#1-下载源码" class="headerlink" title="1. 下载源码"></a>1. 下载源码</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/RUB-SysSec/syntia</span><br></pre></td></tr></table></figure><h2 id="2-安装第三方Python库Syntia"><a href="#2-安装第三方Python库Syntia" class="headerlink" title="2. 安装第三方Python库Syntia"></a>2. 安装第三方Python库Syntia</h2><p>syntia是一个第三方Python库，使用的是<strong>Python2</strong>。为了避免Python版本紊乱，可以使用conda创建一个Python2.7的虚拟环境，在该环境中安装syntia。在下载的源码中有setup.py文件，使用下面命令可以安装该Python库：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure><h2 id="3-安装依赖软件"><a href="#3-安装依赖软件" class="headerlink" title="3. 安装依赖软件"></a>3. 安装依赖软件</h2><p>依赖软件包含在<em>install_deps.sh</em>脚本文件中，原则上可以通过执行该脚本文件来安装4个依赖，但是实际操作却总是报错。因此我使用手动安装</p><h3 id="3-1-安装Unicorn"><a href="#3-1-安装Unicorn" class="headerlink" title="3.1 安装Unicorn"></a>3.1 安装Unicorn</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/unicorn-engine/unicorn.git</span><br><span class="line"></span><br><span class="line">cd unicorn</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile</span></span><br><span class="line">./make.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># install</span></span><br><span class="line">sudo ./make.sh install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证，命令执行后出现success，可认为是安装成功了</span></span><br><span class="line">./samples/sample_all.sh</span><br></pre></td></tr></table></figure><h3 id="3-2-安装Capstone"><a href="#3-2-安装Capstone" class="headerlink" title="3.2 安装Capstone"></a>3.2 安装Capstone</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/aquynh/capstone.git</span><br><span class="line"></span><br><span class="line">cd capstone</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile</span></span><br><span class="line">./make.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># install</span></span><br><span class="line">sudo ./make.sh install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证，我也不清楚验证结果是什么样代表正确安装</span></span><br><span class="line">./tests/test*</span><br></pre></td></tr></table></figure><h3 id="3-3-安装Miasm"><a href="#3-3-安装Miasm" class="headerlink" title="3.3 安装Miasm"></a>3.3 安装Miasm</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 安装额外Python依赖库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/serpilliere/elfesteem.git elfesteem</span><br><span class="line"></span><br><span class="line">cd elfesteem</span><br><span class="line"></span><br><span class="line">python setup.py build</span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 安装miasm</span></span><br><span class="line"></span><br><span class="line">cd ..</span><br><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/cea-sec/miasm.git</span><br><span class="line"></span><br><span class="line">cd miasm</span><br><span class="line"></span><br><span class="line">python setup.py build</span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证</span></span><br><span class="line"><span class="comment"># 可以通过在Python编程环境中import miasm来验证，若不报错则说明成功安装</span></span><br></pre></td></tr></table></figure><h3 id="3-4-安装Z3"><a href="#3-4-安装Z3" class="headerlink" title="3.4 安装Z3"></a>3.4 安装Z3</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/Z3Prover/z3.git</span><br><span class="line"></span><br><span class="line">cd z3</span><br><span class="line"></span><br><span class="line">python scripts/mk_make.py --python</span><br><span class="line"></span><br><span class="line">cd build</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line">make install    <span class="comment"># 该语句执行后会打印 Z3 was successfully installed.</span></span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> Computer Science </category>
-          
-          <category> Information Security </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> MBA Obfuscation </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>使用conda管理Python虚拟环境</title>
       <link href="/2019/09/09/computer_science/Tools/python-virtualenv-conda/"/>
       <url>/2019/09/09/computer_science/Tools/python-virtualenv-conda/</url>
@@ -318,6 +293,33 @@
         <tags>
             
             <tag> Conda </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Install Syntia with Ubuntu 18.04</title>
+      <link href="/2019/09/09/computer_science/Information-Security/syntia_install/"/>
+      <url>/2019/09/09/computer_science/Information-Security/syntia_install/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://github.com/RUB-SysSec/syntia" target="_blank" rel="noopener">Syntia</a>是基于程序合成的反混淆框架，它使用程序跟踪作为一个blackbox来产生随机的输入输出对，利用这些输入输出对，程序合成器可以学习代码的底层语义。本文介绍了Ubuntu下安装syntia</p><hr><a id="more"></a><h2 id="1-下载源码"><a href="#1-下载源码" class="headerlink" title="1. 下载源码"></a>1. 下载源码</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/RUB-SysSec/syntia</span><br></pre></td></tr></table></figure><h2 id="2-安装第三方Python库Syntia"><a href="#2-安装第三方Python库Syntia" class="headerlink" title="2. 安装第三方Python库Syntia"></a>2. 安装第三方Python库Syntia</h2><p>syntia是一个第三方Python库，使用的是<strong>Python2</strong>。为了避免Python版本紊乱，可以使用conda创建一个Python2.7的虚拟环境，在该环境中安装syntia。在下载的源码中有setup.py文件，使用下面命令可以安装该Python库：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure><h2 id="3-安装依赖软件"><a href="#3-安装依赖软件" class="headerlink" title="3. 安装依赖软件"></a>3. 安装依赖软件</h2><p>依赖软件包含在<em>install_deps.sh</em>脚本文件中，原则上可以通过执行该脚本文件来安装4个依赖，但是实际操作却总是报错。因此我使用手动安装</p><h3 id="3-1-安装Unicorn"><a href="#3-1-安装Unicorn" class="headerlink" title="3.1 安装Unicorn"></a>3.1 安装Unicorn</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/unicorn-engine/unicorn.git</span><br><span class="line"></span><br><span class="line">cd unicorn</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile</span></span><br><span class="line">./make.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># install</span></span><br><span class="line">sudo ./make.sh install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证，命令执行后出现success，可认为是安装成功了</span></span><br><span class="line">./samples/sample_all.sh</span><br></pre></td></tr></table></figure><h3 id="3-2-安装Capstone"><a href="#3-2-安装Capstone" class="headerlink" title="3.2 安装Capstone"></a>3.2 安装Capstone</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/aquynh/capstone.git</span><br><span class="line"></span><br><span class="line">cd capstone</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile</span></span><br><span class="line">./make.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># install</span></span><br><span class="line">sudo ./make.sh install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证，我也不清楚验证结果是什么样代表正确安装</span></span><br><span class="line">./tests/test*</span><br></pre></td></tr></table></figure><h3 id="3-3-安装Miasm"><a href="#3-3-安装Miasm" class="headerlink" title="3.3 安装Miasm"></a>3.3 安装Miasm</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 安装额外Python依赖库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/serpilliere/elfesteem.git elfesteem</span><br><span class="line"></span><br><span class="line">cd elfesteem</span><br><span class="line"></span><br><span class="line">python setup.py build</span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 安装miasm</span></span><br><span class="line"></span><br><span class="line">cd ..</span><br><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/cea-sec/miasm.git</span><br><span class="line"></span><br><span class="line">cd miasm</span><br><span class="line"></span><br><span class="line">python setup.py build</span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证</span></span><br><span class="line"><span class="comment"># 可以通过在Python编程环境中import miasm来验证，若不报错则说明成功安装</span></span><br></pre></td></tr></table></figure><h3 id="3-4-安装Z3"><a href="#3-4-安装Z3" class="headerlink" title="3.4 安装Z3"></a>3.4 安装Z3</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/Z3Prover/z3.git</span><br><span class="line"></span><br><span class="line">cd z3</span><br><span class="line"></span><br><span class="line">python scripts/mk_make.py --python</span><br><span class="line"></span><br><span class="line">cd build</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line">make install    <span class="comment"># 该语句执行后会打印 Z3 was successfully installed.</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Science </category>
+          
+          <category> Information Security </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MBA Obfuscation </tag>
             
         </tags>
       
@@ -479,9 +481,9 @@
       
         <tags>
             
-            <tag> LeetCode </tag>
-            
             <tag> Array </tag>
+            
+            <tag> LeetCode </tag>
             
         </tags>
       
@@ -822,11 +824,11 @@
     
     
     <entry>
-      <title>计算机网络的拓扑结构</title>
-      <link href="/2015/03/22/computer_science/Computer-Network/topology_of_network/"/>
-      <url>/2015/03/22/computer_science/Computer-Network/topology_of_network/</url>
+      <title>计算机网络物理层简介</title>
+      <link href="/2015/03/22/computer_science/Computer-Network/physical_layer_in_network/"/>
+      <url>/2015/03/22/computer_science/Computer-Network/physical_layer_in_network/</url>
       
-        <content type="html"><![CDATA[<p>计算机网络拓扑结构是指网络中各个端点之间的逻辑结构，本文对其进行简单介绍</p><hr><a id="more"></a><h2 id="1-网络拓扑中的基本概念"><a href="#1-网络拓扑中的基本概念" class="headerlink" title="1. 网络拓扑中的基本概念"></a>1. 网络拓扑中的基本概念</h2><ol><li>节点：即一个网络端口，如PC；</li><li>结点：通常连接了多个节点，如路由器和交换机；</li><li>链路：两个节点之间的线路；</li><li>通路：两个节点之间的通信线路，可能包含多条链路。</li></ol><h2 id="2-星型拓扑结构"><a href="#2-星型拓扑结构" class="headerlink" title="2. 星型拓扑结构"></a>2. 星型拓扑结构</h2><p>目前应用最广的一种拓扑结构，各节点以交换机或集线器等设备连接在一起，其优点包括<strong>扩展方便</strong>、<strong>网速较快</strong>、<strong>易于维护</strong>，但缺点也很明显：<strong>核心交换机负载过重</strong>、<strong>通信过于依赖核心交换机</strong>等。</p><h2 id="3-环形拓扑结构"><a href="#3-环形拓扑结构" class="headerlink" title="3. 环形拓扑结构"></a>3. 环形拓扑结构</h2><p>这种网络因为传输速率低、扩展性差，已经被淘汰不用了，使用这种结构的有令牌环网。</p><h2 id="4-总线型拓扑结构"><a href="#4-总线型拓扑结构" class="headerlink" title="4. 总线型拓扑结构"></a>4. 总线型拓扑结构</h2><p>该结构中，所有设备都连接到一条总线上，和环形拓扑不同的是不形成闭环。总线型拓扑结构会在总线两端加装“终接器”的设备，主要用于与总线进行阻抗匹配，最大限度吸收传送端部的能量，避免信号反射回总线产生不必要的干扰。其优点有：<strong>结构简单</strong>、<strong>易于扩展</strong>、<strong>易于维护</strong>，缺点有：<strong>传输速率低</strong>、<strong>故障诊断苦难</strong>、<strong>难以实现大规模扩展</strong>；</p><h2 id="4-树形拓扑结构"><a href="#4-树形拓扑结构" class="headerlink" title="4. 树形拓扑结构"></a>4. 树形拓扑结构</h2><p>树根为核心交换机，叶节点为终端设备</p><h2 id="5-网状拓扑结构"><a href="#5-网状拓扑结构" class="headerlink" title="5. 网状拓扑结构"></a>5. 网状拓扑结构</h2><p>网络可靠性高、布线复杂</p><h2 id="6-混合型拓扑结构"><a href="#6-混合型拓扑结构" class="headerlink" title="6. 混合型拓扑结构"></a>6. 混合型拓扑结构</h2><p>应用广泛、维护困难</p><h2 id="7-WLAN的拓扑结构"><a href="#7-WLAN的拓扑结构" class="headerlink" title="7. WLAN的拓扑结构"></a>7. WLAN的拓扑结构</h2><ol><li>Ad-Hoc：点对点连接方式，只能单点通信，性能较差；</li><li>Infrastructure：和星型拓扑类似。</li></ol>]]></content>
+        <content type="html"><![CDATA[<p>物理层是OSI体系结构中的最底层，而在TCP/IP协议中并没有单独的物理层，其功能由网络访问层实现。本文介绍物理层的几个特性与协议</p><hr><a id="more"></a><h2 id="1-物理层的主要作用"><a href="#1-物理层的主要作用" class="headerlink" title="1. 物理层的主要作用"></a>1. 物理层的主要作用</h2><p>物理层有如下几个作用</p><ul><li>构建数据通路：即两个通信端之间的可以连续传输数据的物理通路</li><li>透明传输：作为物理通路的材质可能有很多，例如双绞线、光纤等，物理层需要确保数据对这些材质透明，即不管什么材质都不影响数据传输</li><li>传输数据：既然是通路其基本功能就是传输数据。物理层的<strong>基本传输单元是bit</strong></li><li>数据编码：不同传输介质所支持的数据编码可能不同，如归零码、曼彻斯特码、差分曼彻斯特码等。物理层需要确保不同编码的数据能够正常在通路上传输</li><li>数据传输管理：对比特流的数据传输流量控制、差错控制、物理线路的激活与释放等</li></ul><h2 id="2-物理层特性"><a href="#2-物理层特性" class="headerlink" title="2. 物理层特性"></a>2. 物理层特性</h2><p>物理层需要规范其接口的特性，有了统一的标准，不同的厂商能够以相同的标准来实现彼此产品的互联</p><ol><li>机械特性：定义了传输介质接线器、物理接口的形状和尺寸、引线数目和排列顺序以及连接器与接口之间的固定和锁定装置</li><li>电气特性：规定了在通路上传输比特流时线路上信号电压的高低、阻抗匹配情况，以及传输速率和传输距离限制等参数属性，主要分为三类：<ul><li>非平衡型</li><li>差分接收器的非平衡型</li><li>平衡型</li></ul></li><li>功能特性：指传输介质中各条线上所出现的某一电平的含义，以及物理接口各条信号线的用途，包括：接口信号线的功能规定，接口信号线的功能分类。</li><li>规程特性：利用接口传输比特流的全过程以及各项用于传输的事件发生的合法顺序，包括事件的执行顺序和数据传输方式，即在物理连接建立、维持和交换信息时，DTE/DEC双方在各自电路上的动作顺序。</li></ol><h2 id="3-物理层传输介质"><a href="#3-物理层传输介质" class="headerlink" title="3. 物理层传输介质"></a>3. 物理层传输介质</h2><ol><li>导向性传输介质<ul><li>双绞线</li><li>同轴电缆</li><li>光纤</li></ul></li><li>非导向性传输介质<ul><li>短波无线传输</li><li>地面微波接力通信</li><li>卫星通信</li></ul></li></ol>]]></content>
       
       
       <categories>
@@ -849,11 +851,11 @@
     
     
     <entry>
-      <title>计算机网络物理层简介</title>
-      <link href="/2015/03/22/computer_science/Computer-Network/physical_layer_in_network/"/>
-      <url>/2015/03/22/computer_science/Computer-Network/physical_layer_in_network/</url>
+      <title>计算机网络的拓扑结构</title>
+      <link href="/2015/03/22/computer_science/Computer-Network/topology_of_network/"/>
+      <url>/2015/03/22/computer_science/Computer-Network/topology_of_network/</url>
       
-        <content type="html"><![CDATA[<p>物理层是OSI体系结构中的最底层，而在TCP/IP协议中并没有单独的物理层，其功能由网络访问层实现。本文介绍物理层的几个特性与协议</p><hr><a id="more"></a><h2 id="1-物理层的主要作用"><a href="#1-物理层的主要作用" class="headerlink" title="1. 物理层的主要作用"></a>1. 物理层的主要作用</h2><p>物理层有如下几个作用</p><ul><li>构建数据通路：即两个通信端之间的可以连续传输数据的物理通路</li><li>透明传输：作为物理通路的材质可能有很多，例如双绞线、光纤等，物理层需要确保数据对这些材质透明，即不管什么材质都不影响数据传输</li><li>传输数据：既然是通路其基本功能就是传输数据。物理层的<strong>基本传输单元是bit</strong></li><li>数据编码：不同传输介质所支持的数据编码可能不同，如归零码、曼彻斯特码、差分曼彻斯特码等。物理层需要确保不同编码的数据能够正常在通路上传输</li><li>数据传输管理：对比特流的数据传输流量控制、差错控制、物理线路的激活与释放等</li></ul><h2 id="2-物理层特性"><a href="#2-物理层特性" class="headerlink" title="2. 物理层特性"></a>2. 物理层特性</h2><p>物理层需要规范其接口的特性，有了统一的标准，不同的厂商能够以相同的标准来实现彼此产品的互联</p><ol><li>机械特性：定义了传输介质接线器、物理接口的形状和尺寸、引线数目和排列顺序以及连接器与接口之间的固定和锁定装置</li><li>电气特性：规定了在通路上传输比特流时线路上信号电压的高低、阻抗匹配情况，以及传输速率和传输距离限制等参数属性，主要分为三类：<ul><li>非平衡型</li><li>差分接收器的非平衡型</li><li>平衡型</li></ul></li><li>功能特性：指传输介质中各条线上所出现的某一电平的含义，以及物理接口各条信号线的用途，包括：接口信号线的功能规定，接口信号线的功能分类。</li><li>规程特性：利用接口传输比特流的全过程以及各项用于传输的事件发生的合法顺序，包括事件的执行顺序和数据传输方式，即在物理连接建立、维持和交换信息时，DTE/DEC双方在各自电路上的动作顺序。</li></ol><h2 id="3-物理层传输介质"><a href="#3-物理层传输介质" class="headerlink" title="3. 物理层传输介质"></a>3. 物理层传输介质</h2><ol><li>导向性传输介质<ul><li>双绞线</li><li>同轴电缆</li><li>光纤</li></ul></li><li>非导向性传输介质<ul><li>短波无线传输</li><li>地面微波接力通信</li><li>卫星通信</li></ul></li></ol>]]></content>
+        <content type="html"><![CDATA[<p>计算机网络拓扑结构是指网络中各个端点之间的逻辑结构，本文对其进行简单介绍</p><hr><a id="more"></a><h2 id="1-网络拓扑中的基本概念"><a href="#1-网络拓扑中的基本概念" class="headerlink" title="1. 网络拓扑中的基本概念"></a>1. 网络拓扑中的基本概念</h2><ol><li>节点：即一个网络端口，如PC；</li><li>结点：通常连接了多个节点，如路由器和交换机；</li><li>链路：两个节点之间的线路；</li><li>通路：两个节点之间的通信线路，可能包含多条链路。</li></ol><h2 id="2-星型拓扑结构"><a href="#2-星型拓扑结构" class="headerlink" title="2. 星型拓扑结构"></a>2. 星型拓扑结构</h2><p>目前应用最广的一种拓扑结构，各节点以交换机或集线器等设备连接在一起，其优点包括<strong>扩展方便</strong>、<strong>网速较快</strong>、<strong>易于维护</strong>，但缺点也很明显：<strong>核心交换机负载过重</strong>、<strong>通信过于依赖核心交换机</strong>等。</p><h2 id="3-环形拓扑结构"><a href="#3-环形拓扑结构" class="headerlink" title="3. 环形拓扑结构"></a>3. 环形拓扑结构</h2><p>这种网络因为传输速率低、扩展性差，已经被淘汰不用了，使用这种结构的有令牌环网。</p><h2 id="4-总线型拓扑结构"><a href="#4-总线型拓扑结构" class="headerlink" title="4. 总线型拓扑结构"></a>4. 总线型拓扑结构</h2><p>该结构中，所有设备都连接到一条总线上，和环形拓扑不同的是不形成闭环。总线型拓扑结构会在总线两端加装“终接器”的设备，主要用于与总线进行阻抗匹配，最大限度吸收传送端部的能量，避免信号反射回总线产生不必要的干扰。其优点有：<strong>结构简单</strong>、<strong>易于扩展</strong>、<strong>易于维护</strong>，缺点有：<strong>传输速率低</strong>、<strong>故障诊断苦难</strong>、<strong>难以实现大规模扩展</strong>；</p><h2 id="4-树形拓扑结构"><a href="#4-树形拓扑结构" class="headerlink" title="4. 树形拓扑结构"></a>4. 树形拓扑结构</h2><p>树根为核心交换机，叶节点为终端设备</p><h2 id="5-网状拓扑结构"><a href="#5-网状拓扑结构" class="headerlink" title="5. 网状拓扑结构"></a>5. 网状拓扑结构</h2><p>网络可靠性高、布线复杂</p><h2 id="6-混合型拓扑结构"><a href="#6-混合型拓扑结构" class="headerlink" title="6. 混合型拓扑结构"></a>6. 混合型拓扑结构</h2><p>应用广泛、维护困难</p><h2 id="7-WLAN的拓扑结构"><a href="#7-WLAN的拓扑结构" class="headerlink" title="7. WLAN的拓扑结构"></a>7. WLAN的拓扑结构</h2><ol><li>Ad-Hoc：点对点连接方式，只能单点通信，性能较差；</li><li>Infrastructure：和星型拓扑类似。</li></ol>]]></content>
       
       
       <categories>
