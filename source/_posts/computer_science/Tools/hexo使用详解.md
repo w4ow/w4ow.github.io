@@ -86,3 +86,48 @@ tags:
     hexo g
     hexo s
     ```
+
+## 2.2 多设备同步
+
+使用多台设备同步更新blog，其原理与使用git推拉repo相同。假设原博客保存在设备A，通过以下一个步骤将其同步到新设备B。
+
+1. 打开设备A上的博客根目录下的**_config.yml**，添加如下内容：
+    ```shell
+    deploy:
+        type: git
+        repository: git@github.com:youname/youname.github.io.git
+        branch: master
+    ```
+2. 首先将完整的博客部署到GitHub上，随后在根目录下创建博客的git，该步骤需要注意一点：有的theme包含**.git**隐藏目录，需要将其删除。
+    ```shell
+    # 部署博客
+    hexo clean && hexo g && hexo d
+
+    # 初始化repo
+    git init
+    # 创建新的分支
+    git checkout -b your_branch
+    git add .
+    git commit -m "your_message"
+    git push origin your_branch
+    ```
+    即master分支用于部署博客，your_branch分支用于提交源文件。
+3. 在新设备B上将源文件克隆到本地
+    ```shell
+    git clone -b your_branch https://github.com/usrname/usrname.github.io.git your_blog
+    cd your blog
+    # 安装依赖
+    npm install
+    ```
+    如安装依赖报错可参考2.1节迁移新设备
+4. 测试。首先在设备B上编辑博客，并尝试部署提交
+    ```shell
+    hexo clean & hexo g & hexo d
+    git add .
+    git commit -m 'your message'
+    git push origin your_branch
+    ```
+    尝试在设备A上同步更新(即拉取更新)
+    ```shell
+    git pull origin your_branch
+    ```
