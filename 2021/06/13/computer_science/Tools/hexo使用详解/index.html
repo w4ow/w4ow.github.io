@@ -274,13 +274,30 @@
 <hr>
 <a id="more"></a>
 
-<h1 id="1-基础设置"><a href="#1-基础设置" class="headerlink" title="1. 基础设置"></a>1. 基础设置</h1><h2 id="1-1-HEXO配置文件简介"><a href="#1-1-HEXO配置文件简介" class="headerlink" title="1.1 HEXO配置文件简介"></a>1.1 HEXO配置文件简介</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">source</span><br><span class="line">    _posts <span class="comment"># 所写的博客(即md文件)放在该目录下</span></span><br><span class="line">    ...</span><br><span class="line">themes <span class="comment"># 博客主题</span></span><br><span class="line">    example_theme</span><br><span class="line">        ...</span><br><span class="line">        less</span><br><span class="line">            ...</span><br><span class="line">            _layout.less <span class="comment"># 该主题的布局配置文件</span></span><br><span class="line">        _config.yml <span class="comment"># 该主题的配置文件</span></span><br><span class="line">_config.yml <span class="comment"># hexo配置文件，没多大用处</span></span><br></pre></td></tr></table></figure>
-
+<h1 id="1-基础设置"><a href="#1-基础设置" class="headerlink" title="1. 基础设置"></a>1. 基础设置</h1><h2 id="1-1-HEXO目录文件简介"><a href="#1-1-HEXO目录文件简介" class="headerlink" title="1.1 HEXO目录文件简介"></a>1.1 HEXO目录文件简介</h2><p>.
+├── _config.yml # 全局配置文件<br>├── package.json<br>├── source<br>│　　├── …<br>│　　└── _posts # 博客文件(md)放于此处<br>└── themes # 主题<br>　　├── landscape<br>　　└── material-x<br>　　　　├── …<br>　　　　├── _config.yml # 主题配置文件<br>　　　　└── source<br>　　　　　　├── …<br>　　　　　　└── less<br>　　　　　　　　├── _layout.less # 主题布局配置文件<br>　　　　　　　　└── …</p>
 <h2 id="1-2-HEXO博客发布流程以及常用命令"><a href="#1-2-HEXO博客发布流程以及常用命令" class="headerlink" title="1.2 HEXO博客发布流程以及常用命令"></a>1.2 HEXO博客发布流程以及常用命令</h2><p>在写好一篇博客(md)后:</p>
 <ol>
 <li>首先通过<code>hexo g(enerate)</code>命令由md文件生成静态网页；</li>
 <li>随后应预览一下，使用<code>hexo s(erver)</code>命令可以启动本地服务器,<br>随后在浏览器中访问网址<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>即可实时预览博客；</li>
 <li>最后，通过<code>hexo d(eploy)</code>命令可以将完成的博客部署到远程服务器(github)。</li>
+</ol>
+<h1 id="2-设备迁移"><a href="#2-设备迁移" class="headerlink" title="2. 设备迁移"></a>2. 设备迁移</h1><h2 id="2-1-迁移到新设备"><a href="#2-1-迁移到新设备" class="headerlink" title="2.1 迁移到新设备"></a>2.1 迁移到新设备</h2><p>如果仅是迁移到新设备，其操作还是相对比较简单的</p>
+<h3 id="2-1-1-拷贝原数据"><a href="#2-1-1-拷贝原数据" class="headerlink" title="2.1.1 拷贝原数据"></a>2.1.1 拷贝原数据</h3><p>通过U盘等将原设备上的以下博客文件(夹)拷贝至新设备。</p>
+<p>.
+├── _config.yml<br>├── package.json<br>├── scaffolds<br>├── source<br>└── themes</p>
+<h3 id="2-1-2-配置新设备"><a href="#2-1-2-配置新设备" class="headerlink" title="2.1.2 配置新设备"></a>2.1.2 配置新设备</h3><ol>
+<li><p>确保新设备上正确安装nodejs以及npm</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nodejs #(不推荐，推荐官网下载编译版本)</span><br><span class="line">sudo apt install npm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全局安装hexo</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install -g hexl (--force) # 正常安装报错时可尝试使用--force命令</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入博客根目录配置hexo</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm install hexo-generator-feed --save</span><br><span class="line">npm install hexo-generator-sitemap --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查：通过本地服务器<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 检查能否正确生成博客</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure></li>
 </ol>
 
         </div>
@@ -293,10 +310,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-06-13T21:22:08+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-06-14T10:09:11+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>last updated at Jun 13, 2021</p>
+    <p>last updated at Jun 14, 2021</p>
   </a>
 </div>
 
@@ -328,16 +345,16 @@
                         <span class="art-item-right" aria-hidden="true">
                             <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2020/07/30/computer_science/Linux/vim-cmd/" rel="prev" title="Vim常用命令">
+                                <a href="/2019/11/07/computer_science/Tools/conda-channel-change/" rel="prev" title="Conda更改镜像源">
                                     
-                                        Vim常用命令
+                                        Conda更改镜像源
                                     
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/Vim/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Vim</a>
+                                    <a class="tag" href="/tags/Conda/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Conda</a>
                                 </h6>
                             
                         </span>
@@ -396,7 +413,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-基础设置"><span class="toc-text">1. 基础设置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-HEXO配置文件简介"><span class="toc-text">1.1 HEXO配置文件简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-HEXO博客发布流程以及常用命令"><span class="toc-text">1.2 HEXO博客发布流程以及常用命令</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-基础设置"><span class="toc-text">1. 基础设置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-HEXO目录文件简介"><span class="toc-text">1.1 HEXO目录文件简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-HEXO博客发布流程以及常用命令"><span class="toc-text">1.2 HEXO博客发布流程以及常用命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-设备迁移"><span class="toc-text">2. 设备迁移</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-迁移到新设备"><span class="toc-text">2.1 迁移到新设备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-拷贝原数据"><span class="toc-text">2.1.1 拷贝原数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-配置新设备"><span class="toc-text">2.1.2 配置新设备</span></a></li></ol></li></ol></li></ol>
     </div>
   </section>
 
@@ -493,7 +510,7 @@
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(36)</div></a></li>
+          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(34)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Algorithm/" href="/categories/Computer-Science/Algorithm/"><div class='name'>Algorithm</div><div class='badge'>(3)</div></a></li>
         
@@ -505,7 +522,7 @@
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Information-Security/" href="/categories/Computer-Science/Information-Security/"><div class='name'>Information Security</div><div class='badge'>(3)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Computer-Science/Linux/" href="/categories/Computer-Science/Linux/"><div class='name'>Linux</div><div class='badge'>(6)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Computer-Science/Linux/" href="/categories/Computer-Science/Linux/"><div class='name'>Linux</div><div class='badge'>(4)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Operating-System/" href="/categories/Computer-Science/Operating-System/"><div class='name'>Operating System</div><div class='badge'>(5)</div></a></li>
         
@@ -542,7 +559,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/Array/" style="font-size: 16.5px; color: #888">Array</a> <a href="/tags/C/" style="font-size: 24px; color: #555">C++</a> <a href="/tags/Conda/" style="font-size: 21.5px; color: #666">Conda</a> <a href="/tags/Data-Structure/" style="font-size: 16.5px; color: #888">Data Structure</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Latex/" style="font-size: 14px; color: #999">Latex</a> <a href="/tags/LeetCode/" style="font-size: 16.5px; color: #888">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 19px; color: #777">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/Network/" style="font-size: 21.5px; color: #666">Network</a> <a href="/tags/Process/" style="font-size: 19px; color: #777">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Queue/" style="font-size: 14px; color: #999">Queue</a> <a href="/tags/Route/" style="font-size: 14px; color: #999">Route</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Ubuntu/" style="font-size: 21.5px; color: #666">Ubuntu</a> <a href="/tags/Vim/" style="font-size: 14px; color: #999">Vim</a>
+      <a href="/tags/Array/" style="font-size: 16.5px; color: #888">Array</a> <a href="/tags/C/" style="font-size: 24px; color: #555">C++</a> <a href="/tags/Conda/" style="font-size: 21.5px; color: #666">Conda</a> <a href="/tags/Data-Structure/" style="font-size: 16.5px; color: #888">Data Structure</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Latex/" style="font-size: 14px; color: #999">Latex</a> <a href="/tags/LeetCode/" style="font-size: 16.5px; color: #888">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 19px; color: #777">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/Network/" style="font-size: 21.5px; color: #666">Network</a> <a href="/tags/Process/" style="font-size: 19px; color: #777">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Queue/" style="font-size: 14px; color: #999">Queue</a> <a href="/tags/Route/" style="font-size: 14px; color: #999">Route</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Ubuntu/" style="font-size: 19px; color: #777">Ubuntu</a>
     </div>
   </section>
 

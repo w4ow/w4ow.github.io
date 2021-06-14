@@ -8,7 +8,7 @@
       <link href="/2021/06/13/computer_science/Tools/hexo%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/"/>
       <url>/2021/06/13/computer_science/Tools/hexo%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/</url>
       
-        <content type="html"><![CDATA[<p><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">HEXO</a>是一个基于Markdown的静态网页博客生成框架</p><hr><a id="more"></a><h1 id="1-基础设置"><a href="#1-基础设置" class="headerlink" title="1. 基础设置"></a>1. 基础设置</h1><h2 id="1-1-HEXO配置文件简介"><a href="#1-1-HEXO配置文件简介" class="headerlink" title="1.1 HEXO配置文件简介"></a>1.1 HEXO配置文件简介</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">source</span><br><span class="line">    _posts <span class="comment"># 所写的博客(即md文件)放在该目录下</span></span><br><span class="line">    ...</span><br><span class="line">themes <span class="comment"># 博客主题</span></span><br><span class="line">    example_theme</span><br><span class="line">        ...</span><br><span class="line">        less</span><br><span class="line">            ...</span><br><span class="line">            _layout.less <span class="comment"># 该主题的布局配置文件</span></span><br><span class="line">        _config.yml <span class="comment"># 该主题的配置文件</span></span><br><span class="line">_config.yml <span class="comment"># hexo配置文件，没多大用处</span></span><br></pre></td></tr></table></figure><h2 id="1-2-HEXO博客发布流程以及常用命令"><a href="#1-2-HEXO博客发布流程以及常用命令" class="headerlink" title="1.2 HEXO博客发布流程以及常用命令"></a>1.2 HEXO博客发布流程以及常用命令</h2><p>在写好一篇博客(md)后:</p><ol><li>首先通过<code>hexo g(enerate)</code>命令由md文件生成静态网页；</li><li>随后应预览一下，使用<code>hexo s(erver)</code>命令可以启动本地服务器,<br>随后在浏览器中访问网址<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>即可实时预览博客；</li><li>最后，通过<code>hexo d(eploy)</code>命令可以将完成的博客部署到远程服务器(github)。</li></ol>]]></content>
+        <content type="html"><![CDATA[<p><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">HEXO</a>是一个基于Markdown的静态网页博客生成框架</p><hr><a id="more"></a><h1 id="1-基础设置"><a href="#1-基础设置" class="headerlink" title="1. 基础设置"></a>1. 基础设置</h1><h2 id="1-1-HEXO目录文件简介"><a href="#1-1-HEXO目录文件简介" class="headerlink" title="1.1 HEXO目录文件简介"></a>1.1 HEXO目录文件简介</h2><p>.├── _config.yml # 全局配置文件<br>├── package.json<br>├── source<br>│　　├── …<br>│　　└── _posts # 博客文件(md)放于此处<br>└── themes # 主题<br>　　├── landscape<br>　　└── material-x<br>　　　　├── …<br>　　　　├── _config.yml # 主题配置文件<br>　　　　└── source<br>　　　　　　├── …<br>　　　　　　└── less<br>　　　　　　　　├── _layout.less # 主题布局配置文件<br>　　　　　　　　└── …</p><h2 id="1-2-HEXO博客发布流程以及常用命令"><a href="#1-2-HEXO博客发布流程以及常用命令" class="headerlink" title="1.2 HEXO博客发布流程以及常用命令"></a>1.2 HEXO博客发布流程以及常用命令</h2><p>在写好一篇博客(md)后:</p><ol><li>首先通过<code>hexo g(enerate)</code>命令由md文件生成静态网页；</li><li>随后应预览一下，使用<code>hexo s(erver)</code>命令可以启动本地服务器,<br>随后在浏览器中访问网址<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>即可实时预览博客；</li><li>最后，通过<code>hexo d(eploy)</code>命令可以将完成的博客部署到远程服务器(github)。</li></ol><h1 id="2-设备迁移"><a href="#2-设备迁移" class="headerlink" title="2. 设备迁移"></a>2. 设备迁移</h1><h2 id="2-1-迁移到新设备"><a href="#2-1-迁移到新设备" class="headerlink" title="2.1 迁移到新设备"></a>2.1 迁移到新设备</h2><p>如果仅是迁移到新设备，其操作还是相对比较简单的</p><h3 id="2-1-1-拷贝原数据"><a href="#2-1-1-拷贝原数据" class="headerlink" title="2.1.1 拷贝原数据"></a>2.1.1 拷贝原数据</h3><p>通过U盘等将原设备上的以下博客文件(夹)拷贝至新设备。</p><p>.├── _config.yml<br>├── package.json<br>├── scaffolds<br>├── source<br>└── themes</p><h3 id="2-1-2-配置新设备"><a href="#2-1-2-配置新设备" class="headerlink" title="2.1.2 配置新设备"></a>2.1.2 配置新设备</h3><ol><li><p>确保新设备上正确安装nodejs以及npm</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nodejs #(不推荐，推荐官网下载编译版本)</span><br><span class="line">sudo apt install npm</span><br></pre></td></tr></table></figure></li><li><p>全局安装hexo</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install -g hexl (--force) # 正常安装报错时可尝试使用--force命令</span><br></pre></td></tr></table></figure></li><li><p>进入博客根目录配置hexo</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm install hexo-generator-feed --save</span><br><span class="line">npm install hexo-generator-sitemap --save</span><br></pre></td></tr></table></figure></li><li><p>检查：通过本地服务器<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 检查能否正确生成博客</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure></li></ol>]]></content>
       
       
       <categories>
@@ -23,60 +23,6 @@
         <tags>
             
             <tag> HEXO </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Vim常用命令</title>
-      <link href="/2020/07/30/computer_science/Linux/vim-cmd/"/>
-      <url>/2020/07/30/computer_science/Linux/vim-cmd/</url>
-      
-        <content type="html"><![CDATA[<p>Vim常用快捷键及命令</p><hr><a id="more"></a><h2 id="1-快捷键及命令"><a href="#1-快捷键及命令" class="headerlink" title="1. 快捷键及命令"></a>1. 快捷键及命令</h2><h3 id="1-光标移动"><a href="#1-光标移动" class="headerlink" title="1 光标移动"></a>1 光标移动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gg # 跳至文档首部</span><br><span class="line">G # 跳至文档结尾</span><br><span class="line">^ # 跳至行首</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="comment"># 跳至行尾</span></span></span><br><span class="line">ngg/nG/:n # 跳至第n行</span><br></pre></td></tr></table></figure><h3 id="1-2-复制粘贴删除"><a href="#1-2-复制粘贴删除" class="headerlink" title="1.2 复制粘贴删除"></a>1.2 复制粘贴删除</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yy # 复制当前行</span><br><span class="line">yw # 复制光标所在word</span><br><span class="line">p # 将内容粘贴到当前行上面</span><br><span class="line">P # 将内容粘贴到当前行下面</span><br><span class="line">dd # 删除当前行</span><br><span class="line">cc # 删除当前行并进入编辑模式</span><br><span class="line">dw # 删除光标所在word或符号</span><br><span class="line">cw # 删除光标所在word并进入编辑模式</span><br></pre></td></tr></table></figure><h2 id="2-vimrc常用配置"><a href="#2-vimrc常用配置" class="headerlink" title="2. vimrc常用配置"></a>2. vimrc常用配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set nu # 设置行号</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> Computer Science </category>
-          
-          <category> Linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Vim </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Ubuntu下查看CPU个数</title>
-      <link href="/2020/07/30/computer_science/Linux/cores-in-ubuntu/"/>
-      <url>/2020/07/30/computer_science/Linux/cores-in-ubuntu/</url>
-      
-        <content type="html"><![CDATA[<p>一台机器中基本上只有一个物理CPU核，不过为了提高机器的性能，通常生产厂商会在CPU上集成多个内核，而内核又可以被分为多个线程。其中，内核是物理上的划分，而多线程是逻辑上的划分。</p><hr><a id="more"></a><p>在Ubuntu系统中可以使用下列命令查询核心数</p><ol><li><p>查看物理CPU个数：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l</span><br></pre></td></tr></table></figure></li><li><p>查看每个物理CPU中内核数：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo| grep "cpu cores"| uniq</span><br></pre></td></tr></table></figure></li><li><p>查看逻辑CPU个数</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo| grep "processor"| wc -l</span><br></pre></td></tr></table></figure></li><li><p>查看线程数：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep 'processor' /proc/cpuinfo | sort -u | wc -l</span><br></pre></td></tr></table></figure></li></ol>]]></content>
-      
-      
-      <categories>
-          
-          <category> Computer Science </category>
-          
-          <category> Linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Ubuntu </tag>
             
         </tags>
       
@@ -274,33 +220,6 @@
     
     
     <entry>
-      <title>Install Syntia with Ubuntu 18.04</title>
-      <link href="/2019/09/09/computer_science/Information-Security/syntia_install/"/>
-      <url>/2019/09/09/computer_science/Information-Security/syntia_install/</url>
-      
-        <content type="html"><![CDATA[<p><a href="https://github.com/RUB-SysSec/syntia" target="_blank" rel="noopener">Syntia</a>是基于程序合成的反混淆框架，它使用程序跟踪作为一个blackbox来产生随机的输入输出对，利用这些输入输出对，程序合成器可以学习代码的底层语义。本文介绍了Ubuntu下安装syntia</p><hr><a id="more"></a><h2 id="1-下载源码"><a href="#1-下载源码" class="headerlink" title="1. 下载源码"></a>1. 下载源码</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/RUB-SysSec/syntia</span><br></pre></td></tr></table></figure><h2 id="2-安装第三方Python库Syntia"><a href="#2-安装第三方Python库Syntia" class="headerlink" title="2. 安装第三方Python库Syntia"></a>2. 安装第三方Python库Syntia</h2><p>syntia是一个第三方Python库，使用的是<strong>Python2</strong>。为了避免Python版本紊乱，可以使用conda创建一个Python2.7的虚拟环境，在该环境中安装syntia。在下载的源码中有setup.py文件，使用下面命令可以安装该Python库：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure><h2 id="3-安装依赖软件"><a href="#3-安装依赖软件" class="headerlink" title="3. 安装依赖软件"></a>3. 安装依赖软件</h2><p>依赖软件包含在<em>install_deps.sh</em>脚本文件中，原则上可以通过执行该脚本文件来安装4个依赖，但是实际操作却总是报错。因此我使用手动安装</p><h3 id="3-1-安装Unicorn"><a href="#3-1-安装Unicorn" class="headerlink" title="3.1 安装Unicorn"></a>3.1 安装Unicorn</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/unicorn-engine/unicorn.git</span><br><span class="line"></span><br><span class="line">cd unicorn</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile</span></span><br><span class="line">./make.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># install</span></span><br><span class="line">sudo ./make.sh install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证，命令执行后出现success，可认为是安装成功了</span></span><br><span class="line">./samples/sample_all.sh</span><br></pre></td></tr></table></figure><h3 id="3-2-安装Capstone"><a href="#3-2-安装Capstone" class="headerlink" title="3.2 安装Capstone"></a>3.2 安装Capstone</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/aquynh/capstone.git</span><br><span class="line"></span><br><span class="line">cd capstone</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile</span></span><br><span class="line">./make.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># install</span></span><br><span class="line">sudo ./make.sh install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证，我也不清楚验证结果是什么样代表正确安装</span></span><br><span class="line">./tests/test*</span><br></pre></td></tr></table></figure><h3 id="3-3-安装Miasm"><a href="#3-3-安装Miasm" class="headerlink" title="3.3 安装Miasm"></a>3.3 安装Miasm</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 安装额外Python依赖库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/serpilliere/elfesteem.git elfesteem</span><br><span class="line"></span><br><span class="line">cd elfesteem</span><br><span class="line"></span><br><span class="line">python setup.py build</span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 安装miasm</span></span><br><span class="line"></span><br><span class="line">cd ..</span><br><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/cea-sec/miasm.git</span><br><span class="line"></span><br><span class="line">cd miasm</span><br><span class="line"></span><br><span class="line">python setup.py build</span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证</span></span><br><span class="line"><span class="comment"># 可以通过在Python编程环境中import miasm来验证，若不报错则说明成功安装</span></span><br></pre></td></tr></table></figure><h3 id="3-4-安装Z3"><a href="#3-4-安装Z3" class="headerlink" title="3.4 安装Z3"></a>3.4 安装Z3</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/Z3Prover/z3.git</span><br><span class="line"></span><br><span class="line">cd z3</span><br><span class="line"></span><br><span class="line">python scripts/mk_make.py --python</span><br><span class="line"></span><br><span class="line">cd build</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line">make install    <span class="comment"># 该语句执行后会打印 Z3 was successfully installed.</span></span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> Computer Science </category>
-          
-          <category> Information Security </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> MBA Obfuscation </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>使用conda管理Python虚拟环境</title>
       <link href="/2019/09/09/computer_science/Tools/python-virtualenv-conda/"/>
       <url>/2019/09/09/computer_science/Tools/python-virtualenv-conda/</url>
@@ -320,6 +239,33 @@
         <tags>
             
             <tag> Conda </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Install Syntia with Ubuntu 18.04</title>
+      <link href="/2019/09/09/computer_science/Information-Security/syntia_install/"/>
+      <url>/2019/09/09/computer_science/Information-Security/syntia_install/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://github.com/RUB-SysSec/syntia" target="_blank" rel="noopener">Syntia</a>是基于程序合成的反混淆框架，它使用程序跟踪作为一个blackbox来产生随机的输入输出对，利用这些输入输出对，程序合成器可以学习代码的底层语义。本文介绍了Ubuntu下安装syntia</p><hr><a id="more"></a><h2 id="1-下载源码"><a href="#1-下载源码" class="headerlink" title="1. 下载源码"></a>1. 下载源码</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/RUB-SysSec/syntia</span><br></pre></td></tr></table></figure><h2 id="2-安装第三方Python库Syntia"><a href="#2-安装第三方Python库Syntia" class="headerlink" title="2. 安装第三方Python库Syntia"></a>2. 安装第三方Python库Syntia</h2><p>syntia是一个第三方Python库，使用的是<strong>Python2</strong>。为了避免Python版本紊乱，可以使用conda创建一个Python2.7的虚拟环境，在该环境中安装syntia。在下载的源码中有setup.py文件，使用下面命令可以安装该Python库：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure><h2 id="3-安装依赖软件"><a href="#3-安装依赖软件" class="headerlink" title="3. 安装依赖软件"></a>3. 安装依赖软件</h2><p>依赖软件包含在<em>install_deps.sh</em>脚本文件中，原则上可以通过执行该脚本文件来安装4个依赖，但是实际操作却总是报错。因此我使用手动安装</p><h3 id="3-1-安装Unicorn"><a href="#3-1-安装Unicorn" class="headerlink" title="3.1 安装Unicorn"></a>3.1 安装Unicorn</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/unicorn-engine/unicorn.git</span><br><span class="line"></span><br><span class="line">cd unicorn</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile</span></span><br><span class="line">./make.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># install</span></span><br><span class="line">sudo ./make.sh install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证，命令执行后出现success，可认为是安装成功了</span></span><br><span class="line">./samples/sample_all.sh</span><br></pre></td></tr></table></figure><h3 id="3-2-安装Capstone"><a href="#3-2-安装Capstone" class="headerlink" title="3.2 安装Capstone"></a>3.2 安装Capstone</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/aquynh/capstone.git</span><br><span class="line"></span><br><span class="line">cd capstone</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile</span></span><br><span class="line">./make.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># install</span></span><br><span class="line">sudo ./make.sh install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证，我也不清楚验证结果是什么样代表正确安装</span></span><br><span class="line">./tests/test*</span><br></pre></td></tr></table></figure><h3 id="3-3-安装Miasm"><a href="#3-3-安装Miasm" class="headerlink" title="3.3 安装Miasm"></a>3.3 安装Miasm</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 安装额外Python依赖库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/serpilliere/elfesteem.git elfesteem</span><br><span class="line"></span><br><span class="line">cd elfesteem</span><br><span class="line"></span><br><span class="line">python setup.py build</span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 安装miasm</span></span><br><span class="line"></span><br><span class="line">cd ..</span><br><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/cea-sec/miasm.git</span><br><span class="line"></span><br><span class="line">cd miasm</span><br><span class="line"></span><br><span class="line">python setup.py build</span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证</span></span><br><span class="line"><span class="comment"># 可以通过在Python编程环境中import miasm来验证，若不报错则说明成功安装</span></span><br></pre></td></tr></table></figure><h3 id="3-4-安装Z3"><a href="#3-4-安装Z3" class="headerlink" title="3.4 安装Z3"></a>3.4 安装Z3</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用git下载源码</span></span><br><span class="line">git clone https://github.com/Z3Prover/z3.git</span><br><span class="line"></span><br><span class="line">cd z3</span><br><span class="line"></span><br><span class="line">python scripts/mk_make.py --python</span><br><span class="line"></span><br><span class="line">cd build</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line">make install    <span class="comment"># 该语句执行后会打印 Z3 was successfully installed.</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Science </category>
+          
+          <category> Information Security </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MBA Obfuscation </tag>
             
         </tags>
       
