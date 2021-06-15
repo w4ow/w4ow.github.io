@@ -82,5 +82,5 @@ theme: material-x
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/w4ow/w4ow.github.io.git
+  repository: git@github.com:w4ow/w4ow.github.io.git
   branch: master
