@@ -1,15 +1,14 @@
 ---
 title: Latex常见数学符号整理
 date: 2019-09-22 11:00
-updated: 2019-09-22 11:00
 mathjax: true
 meta:
-    date: false
+    date: true
 categories: 
     - Computer Science
     - Tools
 tags:
-    - Latex
+    - Tex
 ---
 
 LaTeX常见数学符号整理
@@ -104,9 +103,20 @@ $...$ | ... | $\cdots$ | \cdots | $\forall$ | \forall | $\exists$ | \exists
 $'$ | ' | $\prime$ | \prime | $\triangle$ | \triangle | $\infty$ | \infty
 $\bot$ | \bot | $\top$ | \top | $\angle$ | \angle | $\surd$ | \surd
 $\nabla$ | \nabla | $\heartsuit$ | \heartsuit | $\clubsuit$ | \clubsuit | $\spadesuit$ | \spadesuit
-$\neg$ | \neg or \lnot | $\vdots$ | \vdots | | | |
+$\neg$ | \neg or \lnot | $\vdots$ | \vdots | $\emptyset$ | \emptyset | |
 
-## 10. 数学字母
+## 10. 各种帽子
+
+Show|Code| | |
+-|-|-|-
+$\hat{A}$ | \hat{A} | $\widehat{A}$ | \widehat{A}
+$\tilde{A}$ | \tilde{A} | $\widetilde{A}$ | \widetilde{A}
+$\overline{A}$ | \overline{A} | $\underline{A}$ | \underline{A}
+$\overbrace{A}$ | \overbrace{A} | $\underbrace{A}$ | \underbrace{A}
+$\overset{b}{A}$ | \overset{b}{A} | $\underset{b}{A}$ | \underset{b}{A}
+$\overleftarrow{A}$ | \overleftarrow{A} | $\overrightarrow{A}$ | \overrightarrow{A}
+
+## 11. 字符样式
 
 字样|命令|宏包
 -|-|-
