@@ -11,7 +11,7 @@ tags:
     - Lecture
 ---
 
-USTC2021春季学期研究生课程《形式语言与计算复杂性》。
+USTC2021春季学期研究生课程《形式语言与计算复杂性》
 
 教材:[Introduction to the Theory of Computation 2018](http://fuuu.be/polytech/INFOF408/Introduction-To-The-Theory-Of-Computation-Michael-Sipser.pdf)
 
@@ -26,13 +26,13 @@ USTC2021春季学期研究生课程《形式语言与计算复杂性》。
 
 <!-- more -->
 
-# 1. 绪论
+# Part Zero: 绪论
 
-## 1. 自动机、可计算性与复杂性
+## 1 自动机、可计算性与复杂性
 
 略
 
-## 2. 符号与术语
+## 2 符号与术语
 
 ### 2.1 集合
 
@@ -89,7 +89,7 @@ USTC2021春季学期研究生课程《形式语言与计算复杂性》。
 - 给定定义域$A$,满足以下三个性质的**2元关系**$R$称为等价关系
   - 自反性reflexive: 若$x=True$，则$xRx=True$
   - 对称性symmetric：若$xRy=True$， 则$yRx=True$
-  - 传递性transitive: 若$xRy=True,~yRz=True$，则$xRz=True$
+  - 传递性transitive: 若$xRy=True,yRz=True$，则$xRz=True$
 
 
 ### 2.4 图
@@ -116,7 +116,7 @@ USTC2021春季学期研究生课程《形式语言与计算复杂性》。
   - $P\land(Q\lor R)=(P\land Q)\lor(P\land R)$
   - $P\lor(Q\land R)=(P\lor Q)\land(P\lor R)$
 
-## 3. 定义、定理与证明
+## 3 定义、定理与证明
 
 - 定义：对目标的描述，不可存在二义性
 - 证明：说明一个声明为真的过程
@@ -125,7 +125,7 @@ USTC2021春季学期研究生课程《形式语言与计算复杂性》。
   - 推论：由定理推而广之得到的结论
 - 证明的手段：构造法、反证法、归纳法...
 
-## 4. 作业
+### 第一次作业
 
 1. Write formal descriptions of the following sets
    1. The set containing the numbers $1$, $10$, and $100$
@@ -174,17 +174,72 @@ USTC2021春季学期研究生课程《形式语言与计算复杂性》。
    3. $\lbrace(a,b),(b,a),(b,c),(c,b),(a,c),(c,a)\rbrace$
 
   
-4. Consider the undirected graph $G= (V,E)$ where $V$ , the set of nodes, is $\lbrace 1, 2, 3, 4\rbrace$ and $E$, the set of edges, is $\lbrace \lbrace 1, 2\rbrace, \lbrace 2, 3\rbrace, \lbrace 1, 3\rbrace, \lbrace 2, 4\rbrace, \lbrace 1, 4\rbrace\rbrace$. Draw the
+4. Consider the undirected graph $G= (V,E)$ where $V$ , the set of nodes, is $\lbrace 1,2,3,4\rbrace$ and $E$, the set of edges, is $\lbrace\lbrace 1,2\rbrace,\lbrace 2,3\rbrace,\lbrace 1,3\rbrace,\lbrace 2,4\rbrace,\lbrace 1,4\rbrace\rbrace$. Draw the
 graph $G$. What are the degrees of each node? Indicate a path from node $3$ to
 node $4$ on your drawing of $G$.
 
-     **Answer**
-     <img src="08.png" width="20%" height="20%">
+  **Answer**
+   <img src="08.png" width="20%" height="20%">
 
+# Part One: 自动机与语言
 
-  
-# 2. 自动机与语言
+有限状态机是，一个理想的计算机(或者称为计算模型)，可以通过正则化语言来区分。
 
-# 3. 可计算理论
+## 1 正则化语言
 
-# 4. 复杂性理论
+### 1.1 有限状态机
+
+一个包含*开*与*关*两个状态的自动门就是一个有限状态机
+
+<img src="finite_automata.png" width="80%" height="80%">
+
+**有限状态机的定义**：
+
+有限状态机是一个五元组$(Q,\Sigma,\sigma,q_0,F)$
+- $Q$是被称为状态的有限集合
+- $\Sigma$是被称为字母表的有限集合
+- $\sigma$是状态转移函数$Q\times\Sigma\to Q$
+- $q_0\in Q$是初始状态
+- $F\subseteq Q$是终止状态集
+
+下图是一个有限状态自动机的例子
+
+<img src="fa-1.png" width="80%" height="80%">
+
+给定一个布尔函数$f:S\to\lbrace{0,1}\rbrace$，$S$是基于字母表$\Sigma$的字符串集合(例如$S=\lbrace{0,10,010,...}\rbrace$), $S$的子集${A}\subseteq{S}$, 一个自动机$M$以及一种能被$M$识别的语言$L(M)=\lbrace{s}\in{S}|{M}\ {accepts}\ {s}\rbrace$，那么所有问题可以被形式化为布尔问题：给定${x}\in{S},{x}\in{A}$，求解${A}=L(M)$是否为真。
+
+- 例1：
+  <img src="ex1.png" width="50%" height="50%">
+  $\Sigma=\lbrace 0, 1\rbrace, A=\lbrace w|w至少包含一个1且以偶数个0结尾\rbrace$
+- 例2：
+  <img src="ex2.png" width="30%" height="30%">
+  $\Sigma=\lbrace 0, 1\rbrace, A=\lbrace w|w至少包含一个1且以1结尾\rbrace$
+- 例3：
+  <img src="ex3.png" width="30%" height="30%">
+  $\Sigma=\lbrace 0, 1\rbrace, A=\lbrace w|w以偶数个(包括0个)0结尾\rbrace$
+- 例4：
+  <img src="ex4.png" width="50%" height="50%">
+  $\Sigma=\lbrace a, b\rbrace, A=\lbrace w|w的开始符号与结束符号相同\rbrace$
+- 例5：
+  <img src="ex5.png" width="50%" height="50%">
+  $\Sigma=\lbrace {0, 1, 2}\rbrace$, 
+  $A=\lbrace w|w的和是3的倍数\rbrace$
+
+在以上的例子中,$A$就是正则化语言，**正则化语言**的定义： 能被某些有限自动机识别的语言称为正则化语言。
+
+在定义正则化语言后，可以定义这些语言的正则操作：
+- Union: $A\cup B=\lbrace x|x\in A\ or\ x\in B\rbrace$
+- Concatenation: $A\circ B=\lbrace xy|x\in A\ and\ y\in B\rbrace$
+- Star: $A^{\ast}=\lbrace x_1...x_k|k\ge 0\ and\ x_i\in A\rbrace$，类似于$\lbrace A^0, A^1, A^2,...\rbrace$缝合成一个集合。
+
+例如，$\Sigma=\lbrace a,...,z\rbrace$, $A=\lbrace good, bad\rbrace$, $\lbrace boy, girl\rbrace$，则有
+- $A\cup B=\lbrace good, bad, boy, girl\rbrace$
+- $A\circ B=\lbrace goodboy, goodgirl, badboy, badgirl\rbrace$
+- $A^{\ast}=\lbrace \epsilon, good, bad, goodgood, goodbad, badgood, badbad, goodgoodgood, goodgoodbad,...\rbrace$
+
+正则化语言有一个重要的特性，即**封闭性**。所谓的封闭性是指对集合中的任意对象进行某种操作，其结果仍在该集合中，我们称该集合在该操作上是封闭的。
+**正则化语言在Union和Concatenation上是封闭的**，即，若$A_1,A_2$是正则化语言，那么$A_1\cup A_2$和$A_1\circ A_2$也是正则化语言。
+
+# Part Two: 可计算理论
+
+# Part Three: 复杂性理论
