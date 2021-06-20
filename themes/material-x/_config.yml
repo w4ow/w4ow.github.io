@@ -65,15 +65,18 @@ cover:
   # search_placeholder: '搜索'
   # 主页封面菜单
   features:
-    # - name: HOME
-    #   icon: fas fa-home
-    #   url: /
-    # - name: CS
-    #   icon: fas fa-laptop-code
-    #   url: categories/Computer-Science
-    # - name: MATH
-    #   icon: fas fa-dice-d20
-    #   url: categories/Mathematics
+    - name: HOME
+      icon: fas fa-home
+      url: /
+    - name: CS
+      icon: fas fa-laptop-code
+      url: categories/Computer-Science
+    - name: MATH
+      icon: fas fa-dice-d20
+      url: categories/Mathematics
+    - name: LIT
+      icon: fas fa-book-reader
+      url: categories/Literature
     # - name: 2
     #   icon: fas fa-link
     #   url: categories/Algorithm
@@ -86,15 +89,15 @@ cover:
 
 # PC端顶部导航栏
 menu_desktop:
-  # - name: CS
-  #   icon: fas fa-laptop-code
-  #   url: categories/Computer-Science
-  # - name: MATH
-  #   icon: fas fa-dice-d20
-  #   url: categories/Mathematics
-  # - name: BOOKS
-  #   icon: fas fa-book-reader
-  #   url: categories/Books
+  - name: CS
+    icon: fas fa-laptop-code
+    url: categories/Computer-Science
+  - name: MATH
+    icon: fas fa-dice-d20
+    url: categories/Mathematics
+  - name: LIT
+    icon: fas fa-book-reader
+    url: categories/Literature
   # - name: 分类
   #   icon: fas fa-folder-open
   #   url: categories/
@@ -120,9 +123,9 @@ menu_mobile:
   - name: MATH
     icon: fas fa-dice-d20
     url: categories/Mathematics
-  - name: BOOKS
+  - name: LIT
     icon: fas fa-book-reader
-    url: categories/Books
+    url: categories/Literature
   - name: ARCHIVE
     icon: fas fa-archive
     url: archives/
@@ -155,11 +158,13 @@ menu_mobile:
 # 其中，title只在header中有效，music和thumbnail无需在这里设置，文章中有则显示
 # 如果tags放置在meta.header中，那么在post列表中不显示（因为卡片下方已经有了）
 meta:
-  header: [title, author, date, categories, counter, top]
-  footer: [updated, tags, share]
+  # header: [title, author, date, categories, counter, top]
+  # footer: [updated, tags, share]
+  header: [title, date, updated, categories, tags]
 
 # 主体元素，你也可以在页面的Front-matter中设置
-body: [article, comments]
+# body: [article, comments]
+body: [article]
 
 # PC端侧边栏小部件，默认按下面给定的顺序全部显示，文章中还可以自定义显示一部分以及顺序
 sidebar:
