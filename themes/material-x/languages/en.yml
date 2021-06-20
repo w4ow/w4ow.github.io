@@ -1,6 +1,6 @@
 sidebar:
   category: Categories
-  tagcloud: Hot Tags
+  tagcloud: Tags
   toc: TOC
   related_posts: Related Posts
 post:
@@ -12,7 +12,7 @@ post:
   copy_button: Copy
   copy_success: Copied
   copy_failure: Copy failed
-  updated: last updated at
+  updated: updated at
   prev_page: Previous
   next_page: Next
   copyright:
