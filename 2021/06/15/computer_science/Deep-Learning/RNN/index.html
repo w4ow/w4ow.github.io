@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Jupyter Notebook中添加、删除Python kernel的方法 | 柴</title>
+  <title>序列建模：循环神经网络 | 柴</title>
   
   
 
@@ -208,8 +208,8 @@
         
   
     <h1 class="title">
-      <a href="/2019/10/20/computer_science/Tools/manage-kernel-of-notebook/">
-        Jupyter Notebook中添加、删除Python kernel的方法
+      <a href="/2021/06/15/computer_science/Deep-Learning/RNN/">
+        序列建模：循环神经网络
       </a>
     </h1>
   
@@ -229,7 +229,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-10-20</p>
+    <p>2021-06-15</p>
   </a>
 </div>
 
@@ -239,9 +239,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Computer-Science/Tools/' rel="nofollow">
+    <a href='/categories/Computer-Science/Deep-Learning/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Computer Science&nbsp;/&nbsp;Tools</p>
+      <p>Computer Science&nbsp;/&nbsp;Deep Learning</p>
     </a>
   </div>
 
@@ -270,23 +270,12 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <p>在通过Anaconda使用Jupyter时，有时我们创建了多个Python环境(包括虚拟环境)，但是启动Jupyter Notebook后，在<em>新建</em>notebook选项中却找不到我们所创建的Python环境，此时我们可以通过向notebook中添加Python kernel解决该问题。</p>
+          <p><strong>循环神经网络</strong>(recurrent neural network, RNN)是一类用于处理序列数据的神经网络。</p>
 <hr>
 <a id="more"></a>
-<h2 id="1-添加Kernel"><a href="#1-添加Kernel" class="headerlink" title="1. 添加Kernel"></a>1. 添加Kernel</h2><h3 id="1-1-切换环境，安装内核"><a href="#1-1-切换环境，安装内核" class="headerlink" title="1.1 切换环境，安装内核"></a>1.1 切换环境，安装内核</h3><p>首先切换到想要使用的Python环境中，若是虚拟环境则激活该虚拟环境。随后可以使用如下命令查看该环境下搜索并安装Python内核：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda search ipykernel      # 搜索内核</span><br><span class="line"></span><br><span class="line">conda install ipykernel     # 安装内核</span><br></pre></td></tr></table></figure>
 
-<h3 id="1-2-在notebook中安装内核"><a href="#1-2-在notebook中安装内核" class="headerlink" title="1.2 在notebook中安装内核"></a>1.2 在notebook中安装内核</h3><p>使用以下命令安装notebook内核，</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m ipykernel install --name name_you_want (--user)</span><br></pre></td></tr></table></figure>
-
-<p>其中name_you_want是将在notebook的<em>新建</em>中所显示的Python环境名字，安装时若权限不够，则添加–user</p>
-<h3 id="1-3-重新启动Jupyter-Notebook"><a href="#1-3-重新启动Jupyter-Notebook" class="headerlink" title="1.3 重新启动Jupyter Notebook"></a>1.3 重新启动Jupyter Notebook</h3><p>重启Notebook，可以在<em>新建</em>下拉菜单中看到name_you_want选项，大功告成。</p>
-<h2 id="2-查看kernel"><a href="#2-查看kernel" class="headerlink" title="2. 查看kernel"></a>2. 查看kernel</h2><p>使用该命令可以查看notebook所有已安装kernel</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter kernelspec list</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-删除kernel"><a href="#3-删除kernel" class="headerlink" title="3. 删除kernel"></a>3. 删除kernel</h2><p>使用以下命令可以删除指定kernel</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter kernelspec remove kernel_name</span><br></pre></td></tr></table></figure>
-
+<h1 id="1-数学原理"><a href="#1-数学原理" class="headerlink" title="1. 数学原理"></a>1. 数学原理</h1><h2 id="1-1-语言模型"><a href="#1-1-语言模型" class="headerlink" title="1.1. 语言模型"></a>1.1. 语言模型</h2><p>给定一个长度为$\tau$的词序列或字符序列$x^{(1)},x^{(2)},…,x^{(\tau)}$，其中每个字词$x^{(i)}$都是依次生成的，那么传统RNN的工作原理可以认为是：<br>$$<br>P(x^{(1)},…,x^{(\tau)}) = \prod_{t=1}^{\tau}P(x^{(\tau)}|x^{(1)},,…,x^{(\tau-1)})<br>$$<br>即生成该序列的条件概率。例如，包含4个字符的文本序列的概率<br>$$<br>P(x^{(1)},x^{(2)},x^{(3)},x^{(4)}) = P(x^{(1)})P(x^{(2)}|x^{(1)})P(x^{(3)}|x^{(1)},x^{(2)})P(x^{(4)}|x^{(1)},x^{(2)},x^{(3)})<br>$$<br>而$P(x^{(1)})$可以通过计算$x^{(1)}$在语料库中出现的频率得到，同理$P(x^{(2)}|x^{(1)})$可以通过计算语料库中$x^{(2)}$紧跟$x^{(1)}$之后的频率，以此类推。</p>
+<h2 id="1-2-n-元语法"><a href="#1-2-n-元语法" class="headerlink" title="1.2. $n$元语法"></a>1.2. $n$元语法</h2><p>当序列长度增加时，所需要计算的概率会以指数级增长，为了简化计算的复杂度，可以利用基于<strong>马尔科夫假设</strong>的$n$元语法。$n$阶马尔科夫假设(Markov chain of order $n$)是指一个字词的出现仅与其前面的$n$个词有关，例如，如果$n=1$，上面的语言模型则可以改成<br>$$<br>P(x^{(1)},x^{(2)},x^{(3)},x^{(4)}) = P(x^{(1)})P(x^{(2)}|x^{(1)})P(x^{(3)}|x^{(2)})P(x^{(4)}|x^{(3)})<br>$$<br>这种语言模型因此也被称为$n$元语法。</p>
 
         </div>
         
@@ -298,10 +287,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-20T19:00:00+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-06-15T18:45:38+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>last updated at Oct 20, 2019</p>
+    <p>last updated at Jun 15, 2021</p>
   </a>
 </div>
 
@@ -310,7 +299,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Conda/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Conda</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/RNN/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>RNN</p></a></div>
 
 
         
@@ -332,16 +321,16 @@
                         <span class="art-item-left">
                             <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
                             <h4>
-                                <a href="/2019/11/06/computer_science/Tools/ssh-scp/" rel="prev" title="SSH中scp命令的使用">
+                                <a href="/2021/06/15/computer_science/Tools/hexo使用详解/" rel="prev" title="HEXO的使用">
                                   
-                                      SSH中scp命令的使用
+                                      HEXO的使用
                                   
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/SSH/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>SSH</a>
+                                    <a class="tag" href="/tags/HEXO/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>HEXO</a>
                                 </h6>
                             
                         </span>
@@ -352,9 +341,9 @@
                         <span class="art-item-right" aria-hidden="true">
                             <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2019/10/15/computer_science/Tools/work-dir-of-notebook/" rel="prev" title="修改jupyter notebook默认工作路径">
+                                <a href="/2019/11/07/computer_science/Tools/conda使用详解/" rel="prev" title="Conda的使用">
                                     
-                                        修改jupyter notebook默认工作路径
+                                        Conda的使用
                                     
                                 </a>
                             </h4>
@@ -388,11 +377,49 @@
 
 <!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
 
+  <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX","TeX"],
+      linebreaks: { automatic:true },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+      Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+  });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += (all[i].SourceElement().parentNode.className ? ' ' : '') + 'has-jax';
+    }
+  });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
 
 
   <script>
     window.subData = {
-      title: 'Jupyter Notebook中添加、删除Python kernel的方法',
+      title: '序列建模：循环神经网络',
       tools: true
     }
   </script>
@@ -420,7 +447,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-添加Kernel"><span class="toc-text">1. 添加Kernel</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-切换环境，安装内核"><span class="toc-text">1.1 切换环境，安装内核</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-在notebook中安装内核"><span class="toc-text">1.2 在notebook中安装内核</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-重新启动Jupyter-Notebook"><span class="toc-text">1.3 重新启动Jupyter Notebook</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-查看kernel"><span class="toc-text">2. 查看kernel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-删除kernel"><span class="toc-text">3. 删除kernel</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-数学原理"><span class="toc-text">1. 数学原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-语言模型"><span class="toc-text">1.1. 语言模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-n-元语法"><span class="toc-text">1.2. $n$元语法</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -517,7 +544,7 @@
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(34)</div></a></li>
+          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(32)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Algorithm/" href="/categories/Computer-Science/Algorithm/"><div class='name'>Algorithm</div><div class='badge'>(3)</div></a></li>
         
@@ -527,15 +554,19 @@
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Data-Structure/" href="/categories/Computer-Science/Data-Structure/"><div class='name'>Data Structure</div><div class='badge'>(3)</div></a></li>
         
+          <li><a class="flat-box child" title="/categories/Computer-Science/Deep-Learning/" href="/categories/Computer-Science/Deep-Learning/"><div class='name'>Deep Learning</div><div class='badge'>(1)</div></a></li>
+        
           <li><a class="flat-box child" title="/categories/Computer-Science/Information-Security/" href="/categories/Computer-Science/Information-Security/"><div class='name'>Information Security</div><div class='badge'>(3)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Linux/" href="/categories/Computer-Science/Linux/"><div class='name'>Linux</div><div class='badge'>(4)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Operating-System/" href="/categories/Computer-Science/Operating-System/"><div class='name'>Operating System</div><div class='badge'>(5)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(7)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(4)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(1)</div></a></li>
+          <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(2)</div></a></li>
         
       </ul>
     </div>
@@ -566,7 +597,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/Array/" style="font-size: 16.5px; color: #888">Array</a> <a href="/tags/C/" style="font-size: 24px; color: #555">C++</a> <a href="/tags/Conda/" style="font-size: 21.5px; color: #666">Conda</a> <a href="/tags/Data-Structure/" style="font-size: 16.5px; color: #888">Data Structure</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Latex/" style="font-size: 14px; color: #999">Latex</a> <a href="/tags/LeetCode/" style="font-size: 16.5px; color: #888">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 19px; color: #777">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/Network/" style="font-size: 21.5px; color: #666">Network</a> <a href="/tags/Process/" style="font-size: 19px; color: #777">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Queue/" style="font-size: 14px; color: #999">Queue</a> <a href="/tags/Route/" style="font-size: 14px; color: #999">Route</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Ubuntu/" style="font-size: 19px; color: #777">Ubuntu</a>
+      <a href="/tags/Array/" style="font-size: 16.5px; color: #888">Array</a> <a href="/tags/C/" style="font-size: 24px; color: #555">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Data-Structure/" style="font-size: 16.5px; color: #888">Data Structure</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 14px; color: #999">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 16.5px; color: #888">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 19px; color: #777">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/Network/" style="font-size: 21.5px; color: #666">Network</a> <a href="/tags/Process/" style="font-size: 19px; color: #777">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Queue/" style="font-size: 14px; color: #999">Queue</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/Route/" style="font-size: 14px; color: #999">Route</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 19px; color: #777">Ubuntu</a> <a href="/tags/短篇小说/" style="font-size: 14px; color: #999">短篇小说</a>
     </div>
   </section>
 
