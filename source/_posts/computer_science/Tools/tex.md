@@ -103,7 +103,7 @@ $...$ | ... | $\cdots$ | \cdots | $\forall$ | \forall | $\exists$ | \exists
 $'$ | ' | $\prime$ | \prime | $\triangle$ | \triangle | $\infty$ | \infty
 $\bot$ | \bot | $\top$ | \top | $\angle$ | \angle | $\surd$ | \surd
 $\nabla$ | \nabla | $\heartsuit$ | \heartsuit | $\clubsuit$ | \clubsuit | $\spadesuit$ | \spadesuit
-$\neg$ | \neg or \lnot | $\vdots$ | \vdots | $\emptyset$ | \emptyset | |
+$\neg$ | \neg or \lnot | $\vdots$ | \vdots | $\emptyset$ | \emptyset | $\partial$ | \partial
 
 ## 10. 各种帽子
 
