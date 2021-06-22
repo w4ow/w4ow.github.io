@@ -1,5 +1,5 @@
 ---
-title: Ubuntu下PDF工具的使用
+title: Ubuntu中的PDF工具的使用
 date: 2021-06-21 15:00
 # updated: 0000-00-00 10:00
 mathjax: true
