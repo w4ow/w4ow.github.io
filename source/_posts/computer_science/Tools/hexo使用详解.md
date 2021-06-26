@@ -28,8 +28,8 @@ tags:
 │　　├── ...
 │　　└── _posts # 博客文件(md)放于此处
 └── themes # 主题
-　　├── landscape
-　　└── material-x
+　　├── ...
+　　└── your_theme
 　　　　├── ...
 　　　　├── _config.yml # 主题配置文件
 　　　　└── source
@@ -72,7 +72,7 @@ tags:
     ```
 2. 全局安装hexo
     ```shell
-    sudo npm install -g hexl (--force) # 正常安装报错时可尝试使用--force命令
+    sudo npm install -g hexo (--force) # 正常安装报错时可尝试使用--force命令
     ```
 3. 进入博客根目录配置hexo
     ```shell
