@@ -49,7 +49,7 @@
     <cover class='cover post half'>
       
         
-  <h1 class='title'>柴</h1>
+  <h1 class='title'> </h1>
 
 
   <div class="m_search">
@@ -298,10 +298,10 @@
           
         
           
-            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-06-15T18:45:38+08:00">
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-06-23T07:51:08+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>last updated at Jun 15, 2021</p>
+    <p>updated at 2021-06-23</p>
   </a>
 </div>
 
@@ -342,8 +342,54 @@
 <hr>
 <a id="more"></a>
 
-<h1 id="1-数学原理"><a href="#1-数学原理" class="headerlink" title="1. 数学原理"></a>1. 数学原理</h1><h2 id="1-1-语言模型"><a href="#1-1-语言模型" class="headerlink" title="1.1. 语言模型"></a>1.1. 语言模型</h2><p>给定一个长度为$\tau$的词序列或字符序列$x^{(1)},x^{(2)},…,x^{(\tau)}$，其中每个字词$x^{(i)}$都是依次生成的，那么传统RNN的工作原理可以认为是：<br>$$<br>P(x^{(1)},…,x^{(\tau)}) = \prod_{t=1}^{\tau}P(x^{(\tau)}|x^{(1)},,…,x^{(\tau-1)})<br>$$<br>即生成该序列的条件概率。例如，包含4个字符的文本序列的概率<br>$$<br>P(x^{(1)},x^{(2)},x^{(3)},x^{(4)}) = P(x^{(1)})P(x^{(2)}|x^{(1)})P(x^{(3)}|x^{(1)},x^{(2)})P(x^{(4)}|x^{(1)},x^{(2)},x^{(3)})<br>$$<br>而$P(x^{(1)})$可以通过计算$x^{(1)}$在语料库中出现的频率得到，同理$P(x^{(2)}|x^{(1)})$可以通过计算语料库中$x^{(2)}$紧跟$x^{(1)}$之后的频率，以此类推。</p>
-<h2 id="1-2-n-元语法"><a href="#1-2-n-元语法" class="headerlink" title="1.2. $n$元语法"></a>1.2. $n$元语法</h2><p>当序列长度增加时，所需要计算的概率会以指数级增长，为了简化计算的复杂度，可以利用基于<strong>马尔科夫假设</strong>的$n$元语法。$n$阶马尔科夫假设(Markov chain of order $n$)是指一个字词的出现仅与其前面的$n$个词有关，例如，如果$n=1$，上面的语言模型则可以改成<br>$$<br>P(x^{(1)},x^{(2)},x^{(3)},x^{(4)}) = P(x^{(1)})P(x^{(2)}|x^{(1)})P(x^{(3)}|x^{(2)})P(x^{(4)}|x^{(3)})<br>$$<br>这种语言模型因此也被称为$n$元语法。</p>
+<h1 id="1-数学原理"><a href="#1-数学原理" class="headerlink" title="1. 数学原理"></a>1. 数学原理</h1><h2 id="1-1-语言模型及-n-元语法"><a href="#1-1-语言模型及-n-元语法" class="headerlink" title="1.1. 语言模型及$n$元语法"></a>1.1. 语言模型及$n$元语法</h2><p>给定一个长度为$\tau$的词序列或字符序列$x^{(1)},x^{(2)},…,x^{(\tau)}$，其中每个字词$x^{(i)}$都是依次生成的，那么传统RNN的工作原理可以认为是：</p>
+<p>$$<br>P(x^{(1)},…,x^{(\tau)}) = \prod_{t=1}^{\tau}P(x^{(\tau)}|x^{(1)},,…,x^{(\tau-1)})<br>$$</p>
+<p>即生成该序列的条件概率。例如，包含4个字符的文本序列的概率</p>
+<p>$$<br>P(x^{(1)},x^{(2)},x^{(3)},x^{(4)}) = P(x^{(1)})P(x^{(2)}|x^{(1)})P(x^{(3)}|x^{(1)},x^{(2)})P(x^{(4)}|x^{(1)},x^{(2)},x^{(3)})<br>$$</p>
+<p>而$P(x^{(1)})$可以通过计算$x^{(1)}$在语料库中出现的频率得到，同理$P(x^{(2)}|x^{(1)})$可以通过计算语料库中$x^{(2)}$紧跟$x^{(1)}$之后的频率，以此类推。</p>
+<p>当序列长度增加时，所需要计算的概率会以指数级增长，为了简化计算的复杂度，可以利用基于<strong>马尔科夫假设</strong>的$n$元语法。$n$阶马尔科夫假设(Markov chain of order $n$)是指一个字词的出现仅与其前面的$n$个词有关，例如，如果$n=1$，上面的语言模型则可以改成</p>
+<p>$$<br>P(x^{(1)},x^{(2)},x^{(3)},x^{(4)}) = P(x^{(1)})P(x^{(2)}|x^{(1)})P(x^{(3)}|x^{(2)})P(x^{(4)}|x^{(3)})<br>$$</p>
+<p>因此这种语言模型因此也被称为$n$元语法。</p>
+<h2 id="1-2-循环神经网络"><a href="#1-2-循环神经网络" class="headerlink" title="1.2. 循环神经网络"></a>1.2. 循环神经网络</h2><p>循环神经网络有三种主要的设计模式：</p>
+<ol>
+<li><p>每个时间步都有输出，并且隐藏单元之间有循环连接的循环网络，如下图所示：</p>
+<img src="/2021/06/15/computer_science/Deep-Learning/RNN/rnn1.png" width="90%" height="90%">
+
+<p>假设$\bm{x}^{(t)}$为$t$时刻的输入向量，那么时间步$t$的隐藏状态则可以通过以下公式计算：</p>
+<p>$$<br>\begin{aligned}<br>   \bm{h}^{(t)} &amp;= \phi(\bm{Wh}^{(t-1)}+\bm{Ux}^{(t)}+\bm{b}) \\<br>   \bm{o}^{(t)} &amp;= \bm{Vh}^{(t)}+\bm{c}<br>\end{aligned} \tag{1}<br>$$</p>
+<p>其中$\bm{U}$和$\bm{W}$分别对应输入-隐藏和隐藏-隐藏的连接，<br>$\bm{V}$则为隐藏-输出连接，而$\bm{b,c}$则是对应的偏置向量。这个循环网络将输入序列映射到相同长度的输出序列，与$\bm{x}$配对的$\bm{y}$的总损失就是所有时间步的损失之和，即</p>
+<p>$$<br>\begin{aligned}<br>   &amp;L(\lbrace \bm{x}^{(1)},…,\bm{x}^{(\tau)}\rbrace, \lbrace \bm{y}^{(1)},…,\bm{y}^{(\tau)}\rbrace) \\<br>   &amp;=\frac{1}{\tau}\sum_{t}l^{(t)} \\<br>   &amp;=-\frac{1}{\tau}\sum_{t}\log p_{model}(y^{(t)}|\lbrace \bm{x}^{(1)},…,\bm{x}^{(\tau)}\rbrace)<br>\end{aligned} \tag{2}<br>$$</p>
+</li>
+<li><p>每个时间步都有输出，当前时刻的输出与下时刻隐藏单元之间有连接。</p>
+<img src="/2021/06/15/computer_science/Deep-Learning/RNN/rnn2.png" width="90%" height="90%">
+
+<p>这一类的RNN唯一的循环是输出到隐藏的反馈，其表示没有前一种结构强大，只能表示更小的函数集合。由于只有$\bm{o}$是唯一传播到未来的信息，这使得该种RNN<strong>更容易训练</strong>。因为基于比较时刻$t$的预测及其真实值的损失函数中的所有时间步都解耦了，每个时间步可以与其他时间步分离训练，允许并行化。</p>
+<p>由输出反馈到模型而产生循环连接的模型可以用<strong>导师驱动过程</strong>(teacher forcing)进行训练，与前一种不同，该过程不再使用最大似然准则，而是在$t+1$时刻接受真实值$y^{(t)}$作为输入。使用导师是驱动的最初动机是为了避免在缺乏隐藏-隐藏连接的模型中使用<strong>通过时间反向传播</strong>(BPTT)算法。</p>
+</li>
+<li><p>隐藏单元之间有循环连接，但读取整个序列后产生单个输出的循环网络。</p>
+<img src="/2021/06/15/computer_science/Deep-Learning/RNN/rnn3.png" width="60%" height="60%">
+
+</li>
+</ol>
+<h2 id="1-3-通过时间的反向传播BPTT"><a href="#1-3-通过时间的反向传播BPTT" class="headerlink" title="1.3 通过时间的反向传播BPTT"></a>1.3 通过时间的反向传播BPTT</h2><p>简单起见，我们考虑无偏差项的循环神经网络，由前文公式(1)(2)有<br>$$L=\frac{1}{\tau}\sum_{t}l^{(t)} $$<br>首先考虑模型的输出层$\bm{o}^{(t)}$，其梯度容易计算：<br>$$\frac{\partial L}{\partial\bm{o}^{(t)}}=\frac{\partial l(\bm{o}^{(t)}, y^{(t)})}{\tau\cdot\partial\bm{o}^{(t)}}$$<br>更进一步的计算则需要根据$l(\bm{o}^{(t)}, y^{(t)})$的详细设计。</p>
+<p>随后可以计算隐藏-输出的模型参数$\bm{V}$， $L$通过$\bm{o}^{(t)}$依赖$\bm{V}$，即$\bm{o}^{(t)} = \bm{Vh}^{(t)}$，根据链式法则，有：</p>
+<p>$$\frac{\partial L}{\partial \bm{V}} = \sum_{t=1}^{\tau}(\frac{\partial L}{\partial\bm{o}^{(t)}}\cdot \frac{\partial \bm{o}^{(t)}}{\partial\bm{V}}) = \sum_{t=1}^{\tau}\frac{\partial L}{\partial\bm{o}^{(t)}}{\bm{h}^{(t)}}^{\top}<br>$$</p>
+<p>在最终时间步$\tau$，$\bm{o}^{(\tau)}$只依赖于$\bm{h}^{(\tau)}$，因此最终时间步的隐藏状态$\bm{h}^{(\tau)}$的梯度为：</p>
+<p>$$<br>\frac{\partial L}{\partial \bm{h}^{(\tau)}} = \frac{\partial L}{\partial\bm{o}^{(\tau)}}\cdot \frac{\partial \bm{o}^{(\tau)}}{\partial\bm{h}^{(\tau)}} = \bm{V}^{\top}\cdot\frac{\partial L}{\partial\bm{o}^{(\tau)}}<br>$$</p>
+<p>随后我们从序列的末尾开始，从时刻$t=\tau$反向迭代到$t=1$，因为$\bm{h}^{(t)}$同时具有$\bm{h}^{(t+1)}$和$\bm{o}^{(t)}$两个后续结点，因此其梯度计算为：</p>
+<p>$$<br>\frac{\partial L}{\partial \bm{h}^{(t)}}<br>= \frac{\partial L}{\partial\bm{h}^{(t+1)}}\cdot \frac{\partial \bm{h}^{(t+1)}}{\partial\bm{h}^{(t)}} + \frac{\partial L}{\partial\bm{o}^{(t)}}\cdot \frac{\partial \bm{o}^{(t)}}{\partial\bm{h}^{(t)}}<br>= \bm{W}^{\top}\cdot\frac{\partial L}{\partial\bm{h}^{(t+1)}} + \bm{V}^{\top}\cdot\frac{\partial L}{\partial\bm{o}^{(t)}}<br>$$</p>
+<p>将上面的式子展开，对任意时间步$t$有：</p>
+<p>$$<br>\frac{\partial L}{\partial \bm{h}^{(t)}}<br>=\sum_{i=t}^{\tau}{(\bm{W}^{\top})}^{\tau -i}\bm{V}^{\top}\frac{\partial L}{\partial \bm{o}^{(\tau + t - i)}}<br>$$</p>
+<p>由该式中的指数可以看出，当$\tau$较大或较小时，RNN十分容易出现梯度爆炸或者梯度消失的问题。<br>剩下的参数梯度如下：</p>
+<p>$$<br>\begin{aligned}<br>    \frac{\partial L}{\partial \bm{W}} &amp;= \sum_{t=1}^{\tau}\frac{\partial L}{\partial \bm{h}^{(t)}}{\bm{h}^{(t-1)}}^{\top} \\<br>    \frac{\partial L}{\partial \bm{U}} &amp;= \sum_{t=1}^{\tau}\frac{\partial L}{\partial \bm{h}^{(t)}}{\bm{x}^{(t)}}^{\top}<br>\end{aligned}<br>$$</p>
+<h1 id="2-双向RNN"><a href="#2-双向RNN" class="headerlink" title="2. 双向RNN"></a>2. 双向RNN</h1><p>到目前为止，我们所考虑的RNN是基于因果结构的，即时刻$t$的状态仅依赖于之前的序列$\bm{x}^{(1)},…,\bm{x}^{(t-1)}$以及当前输入$\bm{x}^{(t)}$。然而，在众多应用中，所要输出的$\bm{y}^{(t)}$可能依赖于整个输入序列，最典型的例子就是数学表达式求解(例如化简$x^2+y^2-2xy$)，其中的同一个变量可能出现在表达式中的不同位置。双向RNN为满足这种需求而生，该结构在手写识别、语音识别、生物信息学等领域十分成功。下图展示了典型的双向RNN结构。<br><img src="/2021/06/15/computer_science/Deep-Learning/RNN/birnn.png" width="40%" height="40%"></p>
+<p>对于双向RNN，其隐藏状态包含两个，$\bm{h}$是包含过去信息的隐藏状态，而$\bm{g}$则是包含将来信息的隐藏状态，因此其输出以以下公式计算：</p>
+<p>$$<br>\begin{aligned}<br>   \bm{h}^{(t)} &amp;= \phi(\bm{\overrightarrow{W}h}^{(t-1)}+\bm{\overrightarrow{U}x}^{(t)}+\bm{\overrightarrow{b}}) \\<br>   \bm{g}^{(t)} &amp;= \phi(\bm{\overleftarrow{W}g}^{(t-1)}+\bm{\overleftarrow{U}x}^{(t)}+\bm{\overleftarrow{b}}) \\<br>   \bm{o}^{(t)} &amp;= \bm{V}[\bm{h}^{(t)}; \bm{g}^{(t)}]+\bm{c}<br>\end{aligned}<br>$$</p>
+<h1 id="3-基于编解码的Seq2Seq架构"><a href="#3-基于编解码的Seq2Seq架构" class="headerlink" title="3. 基于编解码的Seq2Seq架构"></a>3. 基于编解码的Seq2Seq架构</h1><p>在以上展示的RNN都包含了一个隐藏约束，即输入序列的长度$n_x$和输出序列的长度$n_y$之间存在$n_x=n_y=\tau$，或者$\bm{y}^{(t)}$为一个固定大小的向量。然而在现实场景中，有许多任务涉及将不定长序列映射到另一个不定长序列，如语音识别、机器翻译以及问答系统。</p>
+<p>通常，我们将RNN的输入称为<strong>上下文</strong>，我们希望产生此上下文的表示$C$，它是一个概括输入序列$\bm{X}=(\bm{x}^{(1)},…,\bm{x}^{(n_x)})$的向量或者向量序列。基于这种想法，<a href="https://arxiv.org/pdf/1406.1078.pdf" target="_blank" rel="noopener">Cho等人</a>提出了编解码架构，该架构由两组RNN组合而成，前者称为编码器，编码器读取输入并产生上下文$C$。后者称为解码器，解码器则以固定长度的向量为条件产生输出序列(即输出序列的长度是固定的)。这种架构最大的优势是$n_x$和$n_y$可以彼此不同，这就允许了不同长度序列之间的互相映射，尽管解码器的输出序列是固定的，但我们可以对其进行截取从而取得不同长度的输出序列。同样的，我们也可以对输入序列进行填充从而得到相同长度的输入序列，从而便于编码器的计算。</p>
+<p>此类架构的一个明显不足是，编码器输出的上下文$C$的维度太小而难以适当地概括一个长序列，例如输入序列为一篇1000字的文章，很难用一个向量或向量组来概括。</p>
+<h1 id="4-递归神经网络-Recursive-NNs"><a href="#4-递归神经网络-Recursive-NNs" class="headerlink" title="4. 递归神经网络(Recursive NNs)"></a>4. 递归神经网络(Recursive NNs)</h1><p>递归神经网络是RNN的另一个扩展，其构造为深的树状结构，而不是通常RNN的链状结构，如下图所示。<br><img src="/2021/06/15/computer_science/Deep-Learning/RNN/recursive_nn.png" width="40%" height="40%"></p>
+<p>这类网络的潜在用途是<strong>学习推论</strong>，递归神经网络已成功的应用于输入是<em>数据结构</em>的神经网络，如<a href="https://www.aclweb.org/anthology/D13-1170.pdf" target="_blank" rel="noopener">自然语言处理</a>和计算机视觉。其一个明显优势是，对于具有相同长度$\tau$的序列，结构的深度可以从$\tau$减小为$\mathcal{O}(\log\tau)$，这可能有助于解决长期依赖。该网络的一个悬而未决的问题是<strong>如何以最佳的方式构造树</strong>，其中一个选择是使用平衡二叉树。处理自然语言句子时，用于递归网络的树结构可以被固定为句子语法分析树的结构。</p>
 
         </div>
         
@@ -366,16 +412,16 @@
                         <span class="art-item-left">
                             <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
                             <h4>
-                                <a href="/2021/06/15/computer_science/Tools/hexo使用详解/" rel="prev" title="HEXO的使用">
+                                <a href="/2021/06/16/Mathematics/形式语言1/" rel="prev" title="形式语言与计算复杂性(零)：绪论">
                                   
-                                      HEXO的使用
+                                      形式语言与计算复杂性(零)：绪论
                                   
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/HEXO/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>HEXO</a>
+                                    <a class="tag" href="/tags/Lecture/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Lecture</a>
                                 </h6>
                             
                         </span>
@@ -430,7 +476,7 @@
     TeX: {
       equationNumbers: { autoNumber: "AMS" },
       noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-      Macros: { href: "{}" }
+      Macros: { href: "{}", bm: "\\boldsymbol" }
     },
     messageStyle: "none"
   });
@@ -466,28 +512,6 @@
     
     
       
-        
-      
-        
-          
-          
-            
-  <section class='widget toc-wrapper'>
-    
-<header class='pure'>
-  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
-  
-    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
-  
-</header>
-
-    <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-数学原理"><span class="toc-text">1. 数学原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-语言模型"><span class="toc-text">1.1. 语言模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-n-元语法"><span class="toc-text">1.2. $n$元语法</span></a></li></ol></li></ol>
-    </div>
-  </section>
-
-
-          
         
       
         
@@ -560,6 +584,28 @@
           
           
             
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-数学原理"><span class="toc-text">1. 数学原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-语言模型及-n-元语法"><span class="toc-text">1.1. 语言模型及$n$元语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-循环神经网络"><span class="toc-text">1.2. 循环神经网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-通过时间的反向传播BPTT"><span class="toc-text">1.3 通过时间的反向传播BPTT</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-双向RNN"><span class="toc-text">2. 双向RNN</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-基于编解码的Seq2Seq架构"><span class="toc-text">3. 基于编解码的Seq2Seq架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-递归神经网络-Recursive-NNs"><span class="toc-text">4. 递归神经网络(Recursive NNs)</span></a></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
   <section class='widget category'>
     
 <header class='pure'>
@@ -579,15 +625,11 @@
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(32)</div></a></li>
+          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(23)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Algorithm/" href="/categories/Computer-Science/Algorithm/"><div class='name'>Algorithm</div><div class='badge'>(3)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Computer-Science/C-C/" href="/categories/Computer-Science/C-C/"><div class='name'>C & C++</div><div class='badge'>(5)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Computer-Science/Computer-Network/" href="/categories/Computer-Science/Computer-Network/"><div class='name'>Computer Network</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Computer-Science/Data-Structure/" href="/categories/Computer-Science/Data-Structure/"><div class='name'>Data Structure</div><div class='badge'>(3)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Computer-Science/C-C/" href="/categories/Computer-Science/C-C/"><div class='name'>C & C++</div><div class='badge'>(3)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Deep-Learning/" href="/categories/Computer-Science/Deep-Learning/"><div class='name'>Deep Learning</div><div class='badge'>(1)</div></a></li>
         
@@ -595,13 +637,13 @@
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Linux/" href="/categories/Computer-Science/Linux/"><div class='name'>Linux</div><div class='badge'>(4)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Computer-Science/Operating-System/" href="/categories/Computer-Science/Operating-System/"><div class='name'>Operating System</div><div class='badge'>(5)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Computer-Science/Operating-System/" href="/categories/Computer-Science/Operating-System/"><div class='name'>Operating System</div><div class='badge'>(4)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(4)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(5)</div></a></li>
         
           <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(2)</div></a></li>
+          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(5)</div></a></li>
         
       </ul>
     </div>
@@ -618,7 +660,7 @@
   <section class='widget tagcloud'>
     
 <header class='pure'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Tags</div>
   
     <a class="rightBtn"
     
@@ -632,14 +674,12 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/Array/" style="font-size: 16.5px; color: #888">Array</a> <a href="/tags/C/" style="font-size: 24px; color: #555">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Data-Structure/" style="font-size: 16.5px; color: #888">Data Structure</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 14px; color: #999">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 16.5px; color: #888">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 19px; color: #777">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/Network/" style="font-size: 21.5px; color: #666">Network</a> <a href="/tags/Process/" style="font-size: 19px; color: #777">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Queue/" style="font-size: 14px; color: #999">Queue</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/Route/" style="font-size: 14px; color: #999">Route</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 19px; color: #777">Ubuntu</a> <a href="/tags/短篇小说/" style="font-size: 14px; color: #999">短篇小说</a>
+      <a href="/tags/Array/" style="font-size: 14px; color: #999">Array</a> <a href="/tags/C/" style="font-size: 20.67px; color: #6c6c6c">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 24px; color: #555">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 17.33px; color: #828282">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 20.67px; color: #6c6c6c">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/PDF/" style="font-size: 14px; color: #999">PDF</a> <a href="/tags/Process/" style="font-size: 20.67px; color: #6c6c6c">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 20.67px; color: #6c6c6c">Ubuntu</a> <a href="/tags/短篇小说/" style="font-size: 14px; color: #999">短篇小说</a>
     </div>
   </section>
 
 
           
-        
-      
         
       
     
@@ -722,19 +762,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
     <script type="text/javascript">
       $(function(){
-        if ('.cover') {
-          $('.cover').backstretch(
-          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+        if ('') {
+          $('').backstretch(
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg"],
           {
-            duration: "6000",
-            fade: "2500"
+            duration: "60000",
+            fade: "25000"
           });
         } else {
           $.backstretch(
-          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg"],
           {
-            duration: "6000",
-            fade: "2500"
+            duration: "60000",
+            fade: "25000"
           });
         }
       });

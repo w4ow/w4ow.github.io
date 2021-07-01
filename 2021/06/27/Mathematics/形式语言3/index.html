@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>形式语言与计算复杂性(二)：上下文无关语言 | 柴</title>
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <h1 class='title'> </h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-home fa-fw'></i>&nbsp;HOME
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Computer-Science"
+            
+            
+            id="categoriesComputer-Science">
+            <i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Mathematics"
+            
+            
+            id="categoriesMathematics">
+            <i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Literature"
+            
+            
+            id="categoriesLiterature">
+            <i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          柴
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/categories/Computer-Science"
+                  
+                  
+                  id="categoriesComputer-Science">
+									<i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/Mathematics"
+                  
+                  
+                  id="categoriesMathematics">
+									<i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/Literature"
+                  
+                  
+                  id="categoriesLiterature">
+									<i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Computer-Science"
+                
+                  rel="nofollow"
+                
+                
+                id="categoriesComputer-Science">
+								<i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Mathematics"
+                
+                
+                id="categoriesMathematics">
+								<i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Literature"
+                
+                
+                id="categoriesLiterature">
+								<i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;ARCHIVE
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/"
+                
+                  rel="nofollow"
+                
+                
+                id="categories">
+								<i class='fas fa-folder-open fa-fw'></i>&nbsp;CATEGORIES
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/tags/"
+                
+                  rel="nofollow"
+                
+                
+                id="tags">
+								<i class='fas fa-tags fa-fw'></i>&nbsp;TAGS
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2021/06/27/Mathematics/形式语言3/">
+        形式语言与计算复杂性(二)：上下文无关语言
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2021-06-27</p>
+  </a>
+</div>
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-01T13:48:35+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>updated at 2021-07-01</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Mathematics/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Mathematics</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Lecture/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Lecture</p></a></div>
+
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <a href="/2021/06/16/Mathematics/形式语言1/" title="Lecture 0：绪论">Lecture 0：绪论</a><br>
+<a href="/2021/06/23/Mathematics/形式语言2/" title="Lecture 1：正则语言">Lecture 1：正则语言</a>
+<p>Lecture 2: 上下文无关语言</p>
+<a href="/2021/06/29/Mathematics/形式语言4/" title="Lecture 3：Church-Turing">Lecture 3：Church-Turing</a>
+
+<hr>
+<a id="more"></a>
+
+<h1 id="1-上下文无关文法"><a href="#1-上下文无关文法" class="headerlink" title="1. 上下文无关文法"></a>1. 上下文无关文法</h1><p>上下文无关文法(Contex-Free Grammars, CFG)是有一系列替换规则组成的文法，每个替换规则由终结符和非终结符组成。非终结符，亦称为变量，是可以被替换的。例如下例是一个CFG。</p>
+<p>$$\begin{aligned}<br>    &amp;A \to 0A1 \\<br>    &amp;A \to B \\<br>    &amp;B \to \sigma<br>\end{aligned}$$</p>
+<p>使用上下文无关文法，我们可以生成符合文法的字符串，例如使用上面描述的文法可以生成字符串$000\sigma111$： $A\Rightarrow0A1\Rightarrow00A11\Rightarrow000A111\Rightarrow000B111\Rightarrow000\sigma111$。相应的，该字符串的抽象语法书如图所示(此处用#代替了$\sigma$)：</p>
+<img src="/2021/06/27/Mathematics/形式语言3/1_1.png" width="30%" height="30%">
+
+<h2 id="1-1-CFG的定义"><a href="#1-1-CFG的定义" class="headerlink" title="1.1 CFG的定义"></a>1.1 CFG的定义</h2><blockquote>
+<p>一个上下文无关文法CFG是一个四元组$(V,\Sigma,R,S)$，其中</p>
+<ol>
+<li>$V$是变量集合</li>
+<li>$\Sigma$是终结符集合</li>
+<li>$R$是规则集</li>
+<li>$S\in V$是开始符</li>
+</ol>
+</blockquote>
+<p>此外，还有两个比较重要的概念：</p>
+<ul>
+<li>Yield，也就是直接推导，即能从$uAw$直接通过一步得到$uvw$</li>
+<li>Derives，是间接推导，即通过若干个步骤:$u\stackrel{\ast}{\Rightarrow}v=u\Rightarrow u_1\Rightarrow u_2 \Rightarrow\cdots\Rightarrow u_k\Rightarrow v$</li>
+<li>Language，一个语法的语言是一个集合$\lbrace w\in\Sigma^\ast|S\stackrel{\ast}{\Rightarrow} w\rbrace$</li>
+</ul>
+<h2 id="1-2-CFG的歧义性"><a href="#1-2-CFG的歧义性" class="headerlink" title="1.2 CFG的歧义性"></a>1.2 CFG的歧义性</h2><p>CFG中所谓的歧义性，是指一个语法能通过不同的方式生成同一个字符串，对这样的语法，我们称其为有歧义的语法，如下图所示，通常的字符串和语法规则，有两种不同的生成方式。</p>
+<img src="/2021/06/27/Mathematics/形式语言3/1_2.png" width="70%" height="70%">
+
+<p>为了准确定义歧义性，我们是首先定义最左推导</p>
+<blockquote>
+<p>给定文法$G$，一个字符串$w$的最左推导是指，每次推导步骤中首先替换的是最左边的变量。</p>
+</blockquote>
+<p>有了最左推导，我们可以将歧义性定义为$w$有多个不同的最左推导。例如上图中两种推导方式都是最左推导。</p>
+<h2 id="1-3-Chomsky-Normal-Form"><a href="#1-3-Chomsky-Normal-Form" class="headerlink" title="1.3 Chomsky Normal Form"></a>1.3 Chomsky Normal Form</h2><p>所谓的Chomsky Normal Form(CNF)，是一种形式上极其简单的CFG，其规则集$R$仅包含两种形式</p>
+<p>$$\begin{aligned}<br>    &amp;A \to BC \\<br>    &amp;A \to a<br>\end{aligned}$$</p>
+<p>其中$A,B,C$是变量，且$B,C$不能是开始符，$a$是终结符。除了这两种形式之外，有时会允许出现$S\to\varepsilon$这个特殊的规则，$S$是开始符。</p>
+<blockquote>
+<p><strong>定理</strong><br>所有的上下文无关语言都是有CNF形式的CFG生成的</p>
+</blockquote>
+<p>我们可以通过以下几个步骤将CFG转换为CNF形式(同样也是该定理的证明)：</p>
+<ol>
+<li>添加一个新的开始符$S_0$，并添加新规则$S_0\to S$，使新开始符生成旧开始符。该步骤保证了(新)开始符不会出现在规则的右边</li>
+<li>删除所有的涉及到非开始符的$\varepsilon$规则，即形如$A\to\varepsilon$的规则<ol>
+<li>如果存在规则$R\to uAv$，则再删除上述规则的同时添加$R\to uv$</li>
+<li>同样的，如果存在规则$R\to A$，则添加规则$R\to\varepsilon$(若之前删除过$R\to\varepsilon$则不添加)</li>
+</ol>
+</li>
+<li>删除所有的形如$A\to B$的规则，当存在规则$B\to u$时，添加规则$A\to u$(若之前删除过$A\to u$则不添加，$u$可以为变量或终结符)</li>
+<li>将剩下的规则转换为合适的形式<ol>
+<li>将规则$A\to u_1u_2\cdots u_k$($k\ge3$，$u_i$可以是终结符或变量)替换为多个规则：$A\to u_1A_1,A_1\to u_2A_2,…,A_{k-2}=u_{k-1}u_k$</li>
+<li>对所有的终结符$v_i$，将其替换为变量$V_i$并添加规则$V_i=v_i$</li>
+</ol>
+</li>
+</ol>
+<p>下面，我们通过一个例子将CFG转换为CNF形式：</p>
+<p>$$\begin{aligned}<br>    &amp; S \to ASA|aB \\<br>    &amp; A \to B|S \\<br>    &amp; B \to b|\varepsilon<br>\end{aligned}$$</p>
+<ol>
+<li><p>添加新的开始符<br>$$\begin{aligned}<br> &amp; S_0 \to S \\<br> &amp; S \to ASA|aB \\<br> &amp; A \to B|S \\<br> &amp; B \to b|\varepsilon<br>\end{aligned}$$</p>
+</li>
+<li><p>删除$\varepsilon$规则<br>$$\begin{aligned}<br> &amp; S_0 \to S \\<br> &amp; S \to ASA|aB|a \\<br> &amp; A \to B|S|\varepsilon \\<br> &amp; B \to b<br>\end{aligned}$$</p>
+<p>$$\begin{aligned}<br> &amp; S_0 \to S \\<br> &amp; S \to ASA|aB|a|SA|AS|S \\<br> &amp; A \to B|S \\<br> &amp; B \to b<br>\end{aligned}$$</p>
+</li>
+<li><p>删除形如$A\to B$的规则<br>$$\begin{aligned}<br> &amp; S_0 \to S \\<br> &amp; S \to ASA|aB|a|SA|AS \\<br> &amp; A \to B|S \\<br> &amp; B \to b<br>\end{aligned}$$</p>
+<p>$$\begin{aligned}<br> &amp; S_0 \to ASA|aB|a|SA|AS \\<br> &amp; S \to ASA|aB|a|SA|AS \\<br> &amp; A \to B|S \\<br> &amp; B \to b<br>\end{aligned}$$</p>
+<p>$$\begin{aligned}<br> &amp; S_0 \to ASA|aB|a|SA|AS \\<br> &amp; S \to ASA|aB|a|SA|AS \\<br> &amp; A \to b|ASA|aB|a|SA|AS \\<br> &amp; B \to b<br>\end{aligned}$$</p>
+</li>
+<li><p>转换为合适的形式<br>$$\begin{aligned}<br> &amp; S_0 \to AA_1|UB|a|SA|AS \\<br> &amp; S \to AA_1|UB|a|SA|AS \\<br> &amp; A \to b|AA_1|UB|a|SA|AS \\<br> &amp; A_1 \to SA \\<br> &amp; U \to a \\<br> &amp; B \to b<br>\end{aligned}$$</p>
+</li>
+</ol>
+<hr>
+<h1 id="2-Pushdown-Automata"><a href="#2-Pushdown-Automata" class="headerlink" title="2. Pushdown Automata"></a>2. Pushdown Automata</h1><h2 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h2><p>所谓的Pushdown Automata(PDA)，就是比NFA多了一个栈的自动机，</p>
+<blockquote>
+<p>一个PDA是一个六元组$(Q,\Sigma, \Gamma, \sigma, q_0, F)$，其中</p>
+<ol>
+<li>$Q$是状态的有限集</li>
+<li>$\Sigma$是输入字母表的有限集</li>
+<li>$\Gamma$是栈字母表的有限集</li>
+<li>$Q\times \Sigma_\varepsilon\times\Gamma_\varepsilon\to\mathcal{P}(Q\times\Gamma_\varepsilon)是转移函数$</li>
+<li>$q_0\in Q$是开始状态</li>
+<li>$F\subseteq Q$是终止状态集</li>
+</ol>
+</blockquote>
+<p>对于NFA中无法识别的语言$\lbrace 0^n1^n|n\ge0\rbrace$，我们就可以使用PDA来识别它：</p>
+<img src="/2021/06/27/Mathematics/形式语言3/2_1.png" width="60%" height="60%">
+
+<p>在这个PDA图中，结点之间的边的标签是一个形如$a,b\to c$的伪二元组，其中$a\in\Sigma$是PDA的输入信号，用于转移状态，而$b\to c$则是将当前栈顶元素$b$替换为$c$，例如上图中，$q_1$转移到$q_2$时，$\varepsilon,\varepsilon\to\$$，栈由空变为包含一个$\$$。有些让人让人迷惑的点，在$q_2$到$q_2$的自循环中，其栈变化是$\varepsilon\to0$，但此时的栈明明经过上一个转换，应当是包含了一个$\$$元素的。实际上这是对栈描述不同所引起的，在这里，<strong>我们认为在$\$$之上的$\varepsilon$才是真正的栈顶</strong>。即<strong>所有的形如$\varepsilon\to c$都被视为将$c$压入栈顶的操作</strong>，同样的，<strong>所有的形如$b\to\varepsilon$都将被视为栈顶元素$b$的出栈操作</strong>。</p>
+<p>此外，我们还给出一个能识别语言$\lbrace a^ib^jc^k|i,j,k\ge0\ and\ i=j\ or\ i=k\rbrace$的PDA，此图中，上半分支识别$a^ib^ic^k$，下半分支识别$a^ib^jc^i$。</p>
+<img src="/2021/06/27/Mathematics/形式语言3/2_2.png" width="50%" height="50%">
+
+<h2 id="2-2-PDA与CFG的等价性"><a href="#2-2-PDA与CFG的等价性" class="headerlink" title="2.2 PDA与CFG的等价性"></a>2.2 PDA与CFG的等价性</h2><blockquote>
+<p><strong>定理</strong><br>一个语言是上下文无关的当且仅当存在PDA能识别它<br><strong>引理1</strong><br>一个语言是上下文无关的，那么存在PDA能识别它<br><strong>引理2</strong><br>PDA能识别的语言是上下文无关的</p>
+</blockquote>
+<h3 id="2-2-1-证明引理一"><a href="#2-2-1-证明引理一" class="headerlink" title="2.2.1 证明引理一"></a>2.2.1 证明引理一</h3><p>给定一个CFG $G$，我们尝试证明引理1：</p>
+<ol>
+<li>将标志符$和开始变量入栈</li>
+<li>重复以下步骤：<ol>
+<li>如果栈顶元素是一个变量$A$，选择$A$的一个规则<strong>从右往左</strong>将$A$替换掉</li>
+<li>如果栈顶元素是终结符$a$，那么就从输入中读取下一个符号$u$。如果$u$和$a$相同，则将栈顶元素$a$退栈，否则拒绝该分支(reject on this branch of the nondeterminism)</li>
+<li>如果栈顶元素是$，输入终止状态。Doing so accepts the input if it has all been read.</li>
+</ol>
+</li>
+</ol>
+<p>上面的说明不清不楚，我们通过例子来说明</p>
+<p>例一：对于规则$s\to xyz$，PDA读取$a$后，我们应用从右往左的规则将栈中的$s$替换为$zyx$，首先将栈中的$s$替换为$z$，然后依次将$y,x$入栈</p>
+<img src="/2021/06/27/Mathematics/形式语言3/2_3.png" width="40%" height="40%">
+
+<p>例二：所有的CFG都可转换为以下形式</p>
+<img src="/2021/06/27/Mathematics/形式语言3/2_4.png" width="40%" height="40%">
+
+<p>例三：根据例一和例二，我们可以将以下CFG转换为PDA：<br>$$\begin{aligned}<br>    &amp;S \to aTb | b \\<br>    &amp;T \to Ta | \varepsilon<br>\end{aligned}$$</p>
+<img src="/2021/06/27/Mathematics/形式语言3/2_5.png" width="40%" height="40%">
+
+<h3 id="2-2-2-证明引理二"><a href="#2-2-2-证明引理二" class="headerlink" title="2.2.2 证明引理二"></a>2.2.2 证明引理二</h3><h2 id="2-3-总结"><a href="#2-3-总结" class="headerlink" title="2.3 总结"></a>2.3 总结</h2><blockquote>
+<p><strong>推论</strong>：所有的正则语言都是上下文无关的。</p>
+</blockquote>
+<p>这是因为，所有的正则语言都恒等于一个NFA，而任意NFA都是一个特殊的PDA，即没有栈空间的PDA，而PDA上下文无关语言是等价的。因此，正则语言都是上下文无关的。</p>
+<hr>
+<h1 id="3-非上下文无关语言"><a href="#3-非上下文无关语言" class="headerlink" title="3. 非上下文无关语言"></a>3. 非上下文无关语言</h1><p>与NFA相似，对于PDA无法识别的语言，我们称之为非上下文无关语言。同样的，我们可以用Pumping Lemma来证明一个语言是上下文无关的。</p>
+<blockquote>
+<p><strong>CFG的Pumping Lemma</strong><br>如果$A$是上下文无关语言，那么存在一个pumping length $p$，使得对于$A$中任意长度至少为$p$的字符串$s$，$s$可以被分为5部分$uvxyz$且满足以下情况：</p>
+<ol>
+<li>$uv^ixy^iz \in A, i\ge0$</li>
+<li>$|vy| &gt; 0$</li>
+<li>$|vxy| \le p$</li>
+</ol>
+</blockquote>
+<hr>
+<h1 id="4-确定的上下文无关语言"><a href="#4-确定的上下文无关语言" class="headerlink" title="4. 确定的上下文无关语言"></a>4. 确定的上下文无关语言</h1><p>在前文我们了解到，FA分为NFA和DFA。同样的，PDA也有确定性与非确定性之分，而且PDA是非确定的，当然也存在确定的PDA，我们称为DPDA，相对应的语言称为确定的CFL(DCFL)。在此我们给出DPDA的定义：</p>
+<blockquote>
+<p><strong>DPDA</strong><br>一个确定的DPA是一个六元组$(Q,\Sigma,\Gamma, \delta,q_0,F)$，其中</p>
+<ol>
+<li>$Q$是有限状态集</li>
+<li>$\Sigma$是有限输入字母表</li>
+<li>$\Gamma$是有限栈字母表</li>
+<li>$\delta:Q\times\Sigma_\varepsilon\times\Gamma_\varepsilon\to(Q\times\Gamma_\varepsilon)\cup\lbrace\emptyset\rbrace$是转移函数</li>
+<li>$q_0\in Q$是开始状态</li>
+<li>$F\subseteq Q$是终止状态集</li>
+</ol>
+</blockquote>
+<p>其转移函数$\delta$必须满足：对于每一个$q\in Q, a\in \Sigma, x\in\Gamma$，以下四个状态的值都不为$\emptyset$: $\delta(q,a,x),\delta(q,a,\varepsilon),\delta(q,\varepsilon,x),\delta(q,\varepsilon,\varepsilon)$</p>
+<p>最后，举两个例子，语言$\lbrace0^n1^n|n\ge0\rbrace$是DCFL，而$\lbrace a^ib^jc^k|i,j,k\ge0\ and\ i=j\ or\ i=k\rbrace$则是NCFL。</p>
+<hr>
+<h1 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h1><ol>
+<li><p>Recall the CFG $G_4$ that we gave in Example 2.4. For convenience, let’s rename its variables with single letters as follows.<br>$$\begin{aligned}<br> &amp;E \to E+T|T \\<br> &amp;T \to T\times F|F \\<br> &amp;F \to (E)|a<br>\end{aligned}$$</p>
+<p>Give parse trees and derivations for each string.</p>
+<ol>
+<li>a</li>
+<li>a+a</li>
+<li>a+a+a</li>
+<li>((a))</li>
+</ol>
+<p><strong>Answer</strong></p>
+<ol>
+<li>$$\begin{aligned}<br> E &amp;\Rightarrow T \\<br>   &amp;\Rightarrow F \\<br>   &amp; \Rightarrow a<br>\end{aligned}$$</li>
+</ol>
+<img src="/2021/06/27/Mathematics/形式语言3/e11.png" width="2%" height="2%">
+
+<hr>
+<ol start="2">
+<li>$$\begin{aligned}<br> E &amp;\Rightarrow E+T \\<br>   &amp;\Rightarrow T+T \\<br>   &amp;\Rightarrow F+T \\<br>   &amp;\Rightarrow a+T \\<br>   &amp;\Rightarrow a+F \\<br>   &amp;\Rightarrow a+a<br>\end{aligned}$$</li>
+</ol>
+<img src="/2021/06/27/Mathematics/形式语言3/e12.png" width="15%" height="15%">
+
+<hr>
+<ol start="3">
+<li>$$\begin{aligned}<br> E &amp;\Rightarrow E+T \\<br>   &amp;\Rightarrow E+T+T \\<br>   &amp;\Rightarrow T+T+T \\<br>   &amp; \Rightarrow F+T+T \\<br>   &amp; \Rightarrow a+T+T \\<br>   &amp; \Rightarrow a+F+T \\<br>   &amp; \Rightarrow a+a+T \\<br>   &amp; \Rightarrow a+a+F \\<br>   &amp; \Rightarrow a+a+a \\<br>\end{aligned}$$</li>
+</ol>
+<img src="/2021/06/27/Mathematics/形式语言3/e13.png" width="20%" height="20%">
+
+<hr>
+<ol start="4">
+<li><p>$$\begin{aligned}<br> E &amp;\Rightarrow T \\<br>   &amp;\Rightarrow F \\<br>   &amp;\Rightarrow (E) \\<br>   &amp; \Rightarrow (T) \\<br>   &amp; \Rightarrow (F) \\<br>   &amp; \Rightarrow ((E)) \\<br>   &amp; \Rightarrow ((T)) \\<br>   &amp; \Rightarrow ((F)) \\<br>   &amp; \Rightarrow ((a)) \\<br>\end{aligned}$$</p>
+<img src="/2021/06/27/Mathematics/形式语言3/e14.png" width="60%" height="60%">
+</li>
+</ol>
+</li>
+<li><p>Give a context-free grammar that generates the language<br>$$A=\lbrace a^ib^jc^k|i=j\ or\ j=k\ where\ i,j,j\ge0\rbrace$$<br>Is your grammar ambiguous? Why or why not?</p>
+<p><strong>Answer</strong><br>$$\begin{aligned}<br> S &amp;\to UT|XY \\<br> U &amp;\to aUb|\varepsilon \\<br> T &amp;\to cT|\varepsilon \\<br> X &amp;\to aX|\varepsilon \\<br> Y &amp;\to bYc|\varepsilon<br>\end{aligned}$$<br>该CFG是歧义的，例如对于字符串$abc$，有两种生成过程</p>
+<img src="/2021/06/27/Mathematics/形式语言3/e2.png" width="80%" height="80%">
+</li>
+<li><p>Give an informal description of a pushdown automaton that recognizes the language $A$ in Exercise above.</p>
+<p><strong>Answer</strong><br>$$\begin{aligned}<br> &amp;Q = \lbrace q_1,q_2,q_3,q_4,q_5,q_6,q_7,q_8\rbrace \\<br> &amp;\Sigma = \lbrace a,b,c\rbrace \\<br> &amp;\Gamma = \lbrace a,b,\$\rbrace \\<br> &amp; q_0 = q_1 \\<br> &amp; F = \lbrace q_4,q_8\rbrace \\<br> &amp; \delta 参考下图<br>\end{aligned}$$</p>
+<img src="/2021/06/27/Mathematics/形式语言3/e3.png" width="90%" height="90%">
+</li>
+<li><p>Convert the following CFG into an equivalent CFG in Chomsky normal form, using the procedure given in Theorem 2.9<br>$$\begin{aligned}<br>&amp;A \to BAB|B\varepsilon \\<br>&amp;B \to 00|\varepsilon<br>\end{aligned}$$</p>
+<p><strong>Answer</strong></p>
+<ol>
+<li>添加新的开始规则<br>$$\begin{aligned}<br>&amp;S \to A \\<br>&amp;A \to BAB|B\varepsilon \\<br>&amp;B \to 00|\varepsilon<br>\end{aligned}$$</li>
+<li>删除$\varepsilon$规则<br>$$\begin{aligned}<br>&amp;S \to A \\<br>&amp;A \to BAB|B\varepsilon|AB|BA|A|\varepsilon \\<br>&amp;B \to 00<br>\end{aligned}$$</li>
+</ol>
+<p>$$\begin{aligned}<br>   &amp;S \to A|\varepsilon \\<br>   &amp;A \to BAB|B|AB|BA|A \\<br>   &amp;B \to 00<br>\end{aligned}$$</p>
+<ol start="3">
+<li>删除形如$A\to B$的规则<br>$$\begin{aligned}<br>&amp;S \to BAB|00|AB|BA|\varepsilon \\<br>&amp;A \to BAB|00|AB|BA \\<br>&amp;B \to 00<br>\end{aligned}$$</li>
+<li>化为合适的形式<br>$$\begin{aligned}<br>&amp;S \to XB|YY|AB|BA|\varepsilon \\<br>&amp;A \to XB|YY|AB|BA \\<br>&amp;X \to BA \\<br>&amp;B \to YY \\<br>&amp;Y \to 0<br>\end{aligned}$$</li>
+</ol>
+</li>
+<li><p>Show that $F=\lbrace a^ib^j|i=kj\ for\ some\ positive\ integer\ k\rbrace$ is not context free.<br><strong>Answer(该证明未必正确)</strong><br>假设$F$是上下文无关的，那么根据pumping lemma，令$p$为$F$的pumping length。首先我们考虑$k=3$的字符串$s=a^{3p}b^p$，根据pumping lemma，$s$可以被任意划分为五个部分$s=uvxyz$，且$|vy|&gt;0$。现在我们分两种情况讨论：</p>
+<ol>
+<li>考虑$v$和$y$中至少有一个是同时包含$a$和$b$两种字符，那么上$s’=uv^2xy^2z$中因为$v^2$和$y^2$会导致$s’$中出现$b$在$a$前的乱序，即$s’\not\in F$，因此这种情况不符合$F的定义。</li>
+<li>考虑$v$和$y$都只包含一种字符：<ol>
+<li>$v$和$y$中都只包含$a$，假设$|v|=m$，$|y|=n$，则$s’=uv^2xy^2z=a^{3p+m+n}b^p$，此时当且仅当$m+n$是$p$的整数倍时$s’\in F$，然而事实上$p$可以是任意值，例如$m+n=5$对$p=5$成立，但对$p=4$却不成立。此外，我们选用的字符串$s=a^{3p}b^p$，我们也可以选定字符串$s=a^{3(p+2)}b^{p+2}$。</li>
+<li>$v$和$y$中都只包含$b$，与上相似，假设$|v|=m$，$|y|=n$，则$s’=uv^2xy^2z=a^{3p}b^{p+m+n}$，当且仅当$3p$是$p+m+n$的整数倍时才成立。</li>
+<li>$v$中只包含$a$，$y$中只包含$b$，假设$|v|=m$，$|y|=n$，则$s’=uv^2xy^2z=a^{3p+m}b^{p+n}$，当且仅当$3p+m$是$p+n$的整数倍时才成立。<br>同理，我们也可以证明$k=5,7,…$时与上述相同，综上该语言非上下文无关。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <hr>
+    <div class='new-meta-box'>
+      
+    </div>
+  </section>
+
+
+        
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                            <h4>
+                                <a href="/2021/06/29/Mathematics/形式语言4/" rel="prev" title="形式语言与计算复杂性(三)：Church-Turing">
+                                  
+                                      形式语言与计算复杂性(三)：Church-Turing
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Lecture/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Lecture</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2021/06/23/Mathematics/形式语言2/" rel="prev" title="形式语言与计算复杂性(一)：正则语言">
+                                    
+                                        形式语言与计算复杂性(一)：正则语言
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Lecture/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Lecture</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+  <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX","TeX"],
+      linebreaks: { automatic:true },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+      Macros: { href: "{}", bm: "\\boldsymbol" }
+    },
+    messageStyle: "none"
+  });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += (all[i].SourceElement().parentNode.className ? ' ' : '') + 'has-jax';
+    }
+  });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+  <script>
+    window.subData = {
+      title: '形式语言与计算复杂性(二)：上下文无关语言',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+        
+      
+        
+          
+          
+            <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;NAVIGATION</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-home fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/"
+          
+            rel="nofollow"
+          
+          
+          id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/tags/" href="/tags/"
+          
+            rel="nofollow"
+          
+          
+          id="tags">
+          
+            <i class="fas fa-tags fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/categories/" href="/categories/"
+          
+            rel="nofollow"
+          
+          
+          id="categories">
+          
+            <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-上下文无关文法"><span class="toc-text">1. 上下文无关文法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-CFG的定义"><span class="toc-text">1.1 CFG的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-CFG的歧义性"><span class="toc-text">1.2 CFG的歧义性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Chomsky-Normal-Form"><span class="toc-text">1.3 Chomsky Normal Form</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Pushdown-Automata"><span class="toc-text">2. Pushdown Automata</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-定义"><span class="toc-text">2.1 定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-PDA与CFG的等价性"><span class="toc-text">2.2 PDA与CFG的等价性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-证明引理一"><span class="toc-text">2.2.1 证明引理一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-证明引理二"><span class="toc-text">2.2.2 证明引理二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-总结"><span class="toc-text">2.3 总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-非上下文无关语言"><span class="toc-text">3. 非上下文无关语言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-确定的上下文无关语言"><span class="toc-text">4. 确定的上下文无关语言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#作业"><span class="toc-text">作业</span></a></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/categories/"
+    title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(23)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Algorithm/" href="/categories/Computer-Science/Algorithm/"><div class='name'>Algorithm</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/C-C/" href="/categories/Computer-Science/C-C/"><div class='name'>C & C++</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Deep-Learning/" href="/categories/Computer-Science/Deep-Learning/"><div class='name'>Deep Learning</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Information-Security/" href="/categories/Computer-Science/Information-Security/"><div class='name'>Information Security</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Linux/" href="/categories/Computer-Science/Linux/"><div class='name'>Linux</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Operating-System/" href="/categories/Computer-Science/Operating-System/"><div class='name'>Operating System</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(5)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Tags</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/tags/"
+    title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/Array/" style="font-size: 14px; color: #999">Array</a> <a href="/tags/C/" style="font-size: 20.67px; color: #6c6c6c">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 24px; color: #555">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 17.33px; color: #828282">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 20.67px; color: #6c6c6c">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/PDF/" style="font-size: 14px; color: #999">PDF</a> <a href="/tags/Process/" style="font-size: 20.67px; color: #6c6c6c">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 20.67px; color: #6c6c6c">Ubuntu</a> <a href="/tags/短篇小说/" style="font-size: 14px; color: #999">短篇小说</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+  <br>
+  <!-- <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div> -->
+  <!-- <div>
+    Use
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    as theme
+    
+    . 
+  </div> -->
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('') {
+          $('').backstretch(
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg"],
+          {
+            duration: "60000",
+            fade: "25000"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg"],
+          {
+            duration: "60000",
+            fade: "25000"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/app.js"></script>
+
+
+  <script src="/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
