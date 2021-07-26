@@ -298,10 +298,10 @@
           
         
           
-            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-01T13:48:35+08:00">
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-26T09:46:11+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>updated at 2021-07-01</p>
+    <p>updated at 2021-07-26</p>
   </a>
 </div>
 
@@ -342,6 +342,9 @@
 <a href="/2021/06/23/Mathematics/形式语言2/" title="Lecture 1：正则语言">Lecture 1：正则语言</a><br>
 <a href="/2021/06/27/Mathematics/形式语言3/" title="Lecture 2：上下文无关语言">Lecture 2：上下文无关语言</a>
 <p>Lecture 3: Church-Turing</p>
+<a href="/2021/07/04/Mathematics/形式语言5/" title="Lecture 4：可判定性">Lecture 4：可判定性</a><br>
+<a href="/2021/07/05/Mathematics/形式语言6/" title="Lecture 5：可规约性">Lecture 5：可规约性</a><br>
+<a href="/2021/07/05/Mathematics/形式语言7/" title="Lecture 6：时间复杂度">Lecture 6：时间复杂度</a>
 <hr>
 <a id="more"></a>
 
@@ -352,21 +355,17 @@
 <h1 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h1><ol>
 <li><p>This exercise concerns TM $M_2$ , whose description and state diagram appear in Example 3.7. In each of the parts, give the sequence of configurations that $M_2$ enters when started on the indicated input string.</p>
 <ol>
-<li><p>$0.$</p>
-</li>
-<li><p>$00.$</p>
-</li>
-<li><p>$000.$</p>
-</li>
-<li><p>$000000.$</p>
-<p><strong>Answer</strong><br>$M_2\ decides\ A=\lbrace0^{2^n}|n\ge0\rbrace$，此题需要对照状态转移图作答，我们以$\dot{\Gamma}$表示图灵机针头所要读取的磁带上下一个字符。</p>
+<li>$0.$</li>
+<li>$00.$</li>
+<li>$000.$</li>
+<li>$000000.$</li>
+</ol>
+<p> <strong>Answer</strong><br> $M_2\ decides\ A=\lbrace0^{2^n}|n\ge0\rbrace$，此题需要对照状态转移图作答，我们以$\dot{\Gamma}$表示图灵机针头所要读取的磁带上下一个字符。</p>
 <ol>
 <li>$q_1\dot{0}, \sqcup q_2\dot{\sqcup}, \sqcup\sqcup q_{accept}$</li>
 <li>$q_1\dot{0}0, \sqcup q_2\dot{0}\sqcup, \sqcup xq_3\dot{\sqcup}, \sqcup q_5\dot{x}\sqcup, q_5\dot{\sqcup} x\sqcup, \sqcup q_2\dot{x}\sqcup, \sqcup xq_2\dot{\sqcup}, \sqcup x\sqcup q_{accept}$</li>
 <li>$q_1\dot{0}00, \sqcup q_2\dot{0}0, \sqcup x q_3\dot{0}\sqcup, \sqcup x0q_4\dot{\sqcup}, \sqcup x0\sqcup q_{reject}$</li>
-<li>$$\begin{aligned}<br>&amp; q_1\dot{0}00000               &amp; \sqcup xq_5\dot{0}x0x\sqcup   \\<br>&amp; \sqcup q_2\dot{0}0000         &amp; \sqcup q_5\dot{x}0x0x\sqcup   \\<br>&amp; \sqcup x q_3 \dot{0}000       &amp; q_5\dot{\sqcup}x0x0x\sqcup    \\<br>&amp; \sqcup x0q_4\dot{0}00         &amp; \sqcup q_2\dot{x}0x0x\sqcup   \\<br>&amp; \sqcup x0xq_3\dot{0}0         &amp; \sqcup xq_2\dot{0}x0x\sqcup   \\<br>&amp; \sqcup x0x0q_4\dot{0}\sqcup   &amp; \sqcup xxq_3\dot{x}0x\sqcup   \\<br>&amp; \sqcup x0x0xq_3\dot{\sqcup}   &amp; \sqcup xxxq_3\dot{0}x\sqcup   \\<br>&amp; \sqcup x0x0q_5\dot{x}\sqcup   &amp; \sqcup xxxxq_4\dot{x}\sqcup   \\<br>&amp; \sqcup x0xq_5\dot{0}x\sqcup   &amp; \sqcup xxxxxq_4\dot{\sqcup}   \\<br>&amp; \sqcup x0q_5\dot{x}0x\sqcup   &amp; \sqcup xxxxx\sqcup q_{reject} \\<br>\end{aligned}$$</li>
-</ol>
-</li>
+<li>$$\begin{aligned}<br> &amp; q_1\dot{0}00000               &amp; \sqcup x0x0q_4\dot{0}\sqcup   \qquad   &amp; \sqcup xq_5\dot{0}x0x\sqcup   &amp; \sqcup xxq_3\dot{x}0x\sqcup   \\<br> &amp; \sqcup q_2\dot{0}0000         &amp; \sqcup x0x0xq_3\dot{\sqcup}   \qquad   &amp; \sqcup q_5\dot{x}0x0x\sqcup   &amp; \sqcup xxxq_3\dot{0}x\sqcup   \\<br> &amp; \sqcup x q_3 \dot{0}000       &amp; \sqcup x0x0q_5\dot{x}\sqcup   \qquad   &amp; q_5\dot{\sqcup}x0x0x\sqcup    &amp; \sqcup xxxxq_4\dot{x}\sqcup   \\<br> &amp; \sqcup x0q_4\dot{0}00         &amp; \sqcup x0xq_5\dot{0}x\sqcup   \qquad   &amp; \sqcup q_2\dot{x}0x0x\sqcup   &amp; \sqcup xxxxxq_4\dot{\sqcup}   \\<br> &amp; \sqcup x0xq_3\dot{0}0         &amp; \sqcup x0q_5\dot{x}0x\sqcup   \qquad   &amp; \sqcup xq_2\dot{0}x0x\sqcup   &amp; \sqcup xxxxx\sqcup q_{reject} \\<br>\end{aligned}$$</li>
 </ol>
 </li>
 <li><p>This exercise concerns TM $M_1$ , whose description and state diagram appear in Example 3.9. In each of the parts, give the sequence of configurations that $M_1$ enters when started on the indicated input string.</p>
@@ -377,7 +376,59 @@
 <li>$10\#11.$</li>
 <li>$10\#10.$</li>
 </ol>
-<p><strong>Answer</strong><br>此题同样需要对照状态转移图作答。<br>1. </p>
+<p> <strong>Answer</strong><br> 此题同样需要对照状态转移图作答。</p>
+<ol>
+<li>$$\begin{aligned}<br>&amp; q_1\dot{1}1 \\<br>&amp; xq_3\dot{1}\sqcup \\<br>&amp; x1q_3\dot{\sqcup} \\<br>&amp; x1\sqcup q_{reject} \\<br>\end{aligned}$$</li>
+</ol>
+<hr>
+<ol start="2">
+<li>$$\begin{aligned}<br> &amp; q_1\dot{1}\# 1 &amp; xq_1\dot{\# }x \\<br> &amp; xq_3\dot{\# }1 &amp; x\# q_8\dot{x} \\<br> &amp; x\# q_5\dot{1} &amp; x\# xq_8\dot{\sqcup} \\<br> &amp; xq_6\dot{\# }x &amp; x\# x\sqcup q_{accept} \\<br> &amp; q_7\dot{x}\# x \\<br>\end{aligned}$$</li>
+</ol>
+<hr>
+<ol start="3">
+<li>$$\begin{aligned}<br> &amp; q_1\dot{1}\#\# 1 \\<br> &amp; xq_3\dot{\# }\# 1 \\<br> &amp; x\# q_5\dot{\# }1 \\<br> &amp; x\#\# q_{reject}1 \\<br>\end{aligned}$$</li>
+</ol>
+<hr>
+<ol start="4">
+<li>$$\begin{aligned}<br> &amp; q_1\dot{1}0\# 11 &amp; q_7\dot{x}0\# x1 \\<br> &amp; xq_3\dot{0}\# 11 &amp; xq_1\dot{0}\# x1 \\<br> &amp; x0q_3\dot{\# }11 &amp; xxq_2\dot{\# }x1 \\<br> &amp; x0\# q_5\dot{1}1 &amp; xx\# q_4\dot{x}1 \\<br> &amp; x0q_6\dot{\# }x1 &amp; xx\# xq_4\dot{1} \\<br> &amp; xq_7\dot{0}\# x1 &amp; xx\# x1q_{reject}\sqcup \\<br>\end{aligned}$$</li>
+</ol>
+<hr>
+<ol start="5">
+<li>$$\begin{aligned}<br> &amp; q_1\dot{1}0\# 10    &amp; xq_7\dot{0}\# x0    \qquad  &amp; xx\# xq_4\dot{0}    &amp; xx\# q_8\dot{x}x    \\<br> &amp; xq_3\dot{0}\# 10    &amp; q_7\dot{x}0\# x0    \qquad  &amp; xx\# q_6\dot{x}x    &amp; xx\# xq_8\dot{x}\sqcup  \\<br> &amp; x0q_3\dot{\# }10    &amp; xq_1\dot{0}\# x0    \qquad  &amp; xxq_6\dot{\# }xx    &amp; xx\# xxq_8\dot{\sqcup}  \\<br> &amp; x0\# q_5\dot{1}0    &amp; xxq_2\dot{\# }x0    \qquad  &amp; xq_7\dot{x}\# xx    &amp; xx\# xx\sqcup q_{accept}    \\<br> &amp; x0q_6\dot{\# }x0    &amp; xx\# q_4\dot{x}0    \qquad  &amp; xxq_7\dot{\# }xx \\<br>\end{aligned}$$</li>
+</ol>
+</li>
+<li><p>Explain why the following is not a description of a legitimate Turing machine.<br> $M_{bad}$=”On input $\left\langle p\right\rangle$, a polynomial over variables $x_1,…,x_k$:</p>
+<ol>
+<li>Try all possible settings of $x_1,…,x_k$ to integer values.</li>
+<li>Evaluate p on all of these settings.</li>
+<li>If any of these settings evaluates to 0, accept ; otherwise, reject .”</li>
+</ol>
+<p> <strong>Answer</strong><br> 根据Matijasevic̆定理，我们无法为多变量的多项式表达式的每个变量计算bound，因此我们需要枚举每个变量的所有可能的值，这在时间上是不可接受的，甚至会陷入loop。一种似乎可行的图灵机是$k$-磁带图灵机，每条磁带$i$枚举变量$x_i$的可能值。不过这个图灵机的根本问题在于枚举所有可能解的组合所需要的时间是无穷的。</p>
+</li>
+<li><p>Give implementation-level descriptions of Turing machines that decide the following languages over the alphabet $\lbrace0,1\rbrace$.</p>
+<ol>
+<li>$\lbrace w|w\ \mathrm{contains\ an\ equal\ number\ of}\ 0s\ \mathrm{and}\ 1s\rbrace$</li>
+<li>$\lbrace w|w\ \mathrm{contains\ twice\ as\ many}\ 0s\ \mathrm{as}\ 1s\rbrace$</li>
+<li>$\lbrace w|w\ \mathrm{does\ not\ contain\ twice\ as\ many}\ 0s\ \mathrm{as}\ 1s\rbrace$</li>
+</ol>
+<p> <strong>Answer</strong></p>
+<ol>
+<li>On input string $w$:<ol>
+<li>Repeat the following two steps:<br>a. Scan the tape and mark the first unmarked $1$. If has no unmarked $1$, jump to step 2, else, move the head back to headmost.<br>b. Scan the tape and mark the first unmarked $0$. If has no unmarked $0$, $reject$, else, move the head back to headmost.</li>
+<li>Move the head back to headmost and scan the tape. If has unmarked $0$s, $reject$, else, $accept$.</li>
+</ol>
+</li>
+<li>On input string $w$:<ol>
+<li>Repeat the following two steps:<br>a. Scan the tape and mark first two unmarked $0$s. If has no unmarked $0$, jump to step 2, else if has noly one unmarked $0$, $reject$, else, move the head back to headmost.<br>b. Scan the tape and mark the first unmarked $1$. If has no unmarked $1$, $reject$, else, move the head back to headmost.</li>
+<li>Move the head back to headmost and scan the tape. If has unmarked $1$s, $reject$, else, $accept$.</li>
+</ol>
+</li>
+<li>On input string $w$:<ol>
+<li>Repeat the following two steps:<br>a. Scan the tape and mark first two unmarked $0$. If has no unmarked $0$, jump to step 2, else if has noly one unmarked $0$, $accept$, else, move the head back to headmost.<br>b. Scan the tape and mark the first unmarked $1$. If has no unmarked $1$, $accept$, else, move the head back to headmost.</li>
+<li>Move the head back to headmost and scan the tape. If has unmarked $1$s, $accept$, else, $reject$.</li>
+</ol>
+</li>
+</ol>
 </li>
 </ol>
 
@@ -631,9 +682,9 @@
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(5)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(1)</div></a></li>
+          <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(2)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(5)</div></a></li>
+          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(8)</div></a></li>
         
       </ul>
     </div>
@@ -664,7 +715,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/Array/" style="font-size: 14px; color: #999">Array</a> <a href="/tags/C/" style="font-size: 20.67px; color: #6c6c6c">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 24px; color: #555">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 17.33px; color: #828282">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 20.67px; color: #6c6c6c">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/PDF/" style="font-size: 14px; color: #999">PDF</a> <a href="/tags/Process/" style="font-size: 20.67px; color: #6c6c6c">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 20.67px; color: #6c6c6c">Ubuntu</a> <a href="/tags/短篇小说/" style="font-size: 14px; color: #999">短篇小说</a>
+      <a href="/tags/Array/" style="font-size: 14px; color: #999">Array</a> <a href="/tags/C/" style="font-size: 20.67px; color: #6c6c6c">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 24px; color: #555">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 17.33px; color: #828282">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 20.67px; color: #6c6c6c">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/PDF/" style="font-size: 14px; color: #999">PDF</a> <a href="/tags/Process/" style="font-size: 20.67px; color: #6c6c6c">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 20.67px; color: #6c6c6c">Ubuntu</a> <a href="/tags/哲学/" style="font-size: 14px; color: #999">哲学</a> <a href="/tags/短篇小说/" style="font-size: 14px; color: #999">短篇小说</a>
     </div>
   </section>
 
@@ -754,14 +805,14 @@
       $(function(){
         if ('') {
           $('').backstretch(
-          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg"],
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
           {
             duration: "60000",
             fade: "25000"
           });
         } else {
           $.backstretch(
-          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg"],
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
           {
             duration: "60000",
             fade: "25000"

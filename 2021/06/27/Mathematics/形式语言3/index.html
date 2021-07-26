@@ -298,10 +298,10 @@
           
         
           
-            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-01T13:48:35+08:00">
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-26T09:46:11+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>updated at 2021-07-01</p>
+    <p>updated at 2021-07-26</p>
   </a>
 </div>
 
@@ -341,15 +341,19 @@
           <a href="/2021/06/16/Mathematics/形式语言1/" title="Lecture 0：绪论">Lecture 0：绪论</a><br>
 <a href="/2021/06/23/Mathematics/形式语言2/" title="Lecture 1：正则语言">Lecture 1：正则语言</a>
 <p>Lecture 2: 上下文无关语言</p>
-<a href="/2021/06/29/Mathematics/形式语言4/" title="Lecture 3：Church-Turing">Lecture 3：Church-Turing</a>
+<a href="/2021/06/29/Mathematics/形式语言4/" title="Lecture 3：Church-Turing">Lecture 3：Church-Turing</a><br>
+<a href="/2021/07/04/Mathematics/形式语言5/" title="Lecture 4：可判定性">Lecture 4：可判定性</a><br>
+<a href="/2021/07/05/Mathematics/形式语言6/" title="Lecture 5：可规约性">Lecture 5：可规约性</a><br>
+<a href="/2021/07/05/Mathematics/形式语言7/" title="Lecture 6：时间复杂度">Lecture 6：时间复杂度</a>
 
 <hr>
 <a id="more"></a>
 
-<h1 id="1-上下文无关文法"><a href="#1-上下文无关文法" class="headerlink" title="1. 上下文无关文法"></a>1. 上下文无关文法</h1><p>上下文无关文法(Contex-Free Grammars, CFG)是有一系列替换规则组成的文法，每个替换规则由终结符和非终结符组成。非终结符，亦称为变量，是可以被替换的。例如下例是一个CFG。</p>
-<p>$$\begin{aligned}<br>    &amp;A \to 0A1 \\<br>    &amp;A \to B \\<br>    &amp;B \to \sigma<br>\end{aligned}$$</p>
-<p>使用上下文无关文法，我们可以生成符合文法的字符串，例如使用上面描述的文法可以生成字符串$000\sigma111$： $A\Rightarrow0A1\Rightarrow00A11\Rightarrow000A111\Rightarrow000B111\Rightarrow000\sigma111$。相应的，该字符串的抽象语法书如图所示(此处用#代替了$\sigma$)：</p>
-<img src="/2021/06/27/Mathematics/形式语言3/1_1.png" width="30%" height="30%">
+<h1 id="1-上下文无关文法"><a href="#1-上下文无关文法" class="headerlink" title="1. 上下文无关文法"></a>1. 上下文无关文法</h1><p>在这一节课中，我们将介绍表达能力更强、形式也更复杂的语言——上下文无关语言。上下文无关语言(Context Free Language, CFL)是由根据上下文无关文法所生成的字符串的集合，上下文无关文法(Contex-Free Grammars, CFG)是有一系列替换规则组成的语法规则，每个替换规则由终结符和非终结符组成。非终结符，亦称为变量，是可以被替换的。例如下例是一个CFG。</p>
+<p>$$\begin{aligned}<br>    &amp;A \to 0A1 \\<br>    &amp;A \to B \\<br>    &amp;B \to \#
+\end{aligned}$$</p>
+<p>使用上下文无关文法，我们可以生成符合文法的字符串，例如使用上面描述的文法可以生成字符串$000\#111$，$A\Rightarrow0A1\Rightarrow00A11\Rightarrow000A111\Rightarrow000B111\Rightarrow000\#111$，对应的解析树如图所示。我们将根据该文法生成的所有字符串组成的集合称为该语法的语言，即$\lbrace w\in\Sigma^\ast|A\stackrel{\ast}{\Rightarrow} w\rbrace$。</p>
+<img src="/2021/06/27/Mathematics/形式语言3/1_1.png" width="25%" height="25%">
 
 <h2 id="1-1-CFG的定义"><a href="#1-1-CFG的定义" class="headerlink" title="1.1 CFG的定义"></a>1.1 CFG的定义</h2><blockquote>
 <p>一个上下文无关文法CFG是一个四元组$(V,\Sigma,R,S)$，其中</p>
@@ -357,34 +361,33 @@
 <li>$V$是变量集合</li>
 <li>$\Sigma$是终结符集合</li>
 <li>$R$是规则集</li>
-<li>$S\in V$是开始符</li>
+<li>$S\in V$是开始变量</li>
 </ol>
 </blockquote>
+<p>从定义上看，CFG与FA相比十分类似，例如CFG的变量集等价于FA的符号集$\Sigma$，CFG的规则集$R$等价于FA的转移函数$\delta$。不过，两者不同的地方更多，例如CFG的终结符集$\Sigma$中的元素不可再被推导。</p>
 <p>此外，还有两个比较重要的概念：</p>
 <ul>
 <li>Yield，也就是直接推导，即能从$uAw$直接通过一步得到$uvw$</li>
 <li>Derives，是间接推导，即通过若干个步骤:$u\stackrel{\ast}{\Rightarrow}v=u\Rightarrow u_1\Rightarrow u_2 \Rightarrow\cdots\Rightarrow u_k\Rightarrow v$</li>
-<li>Language，一个语法的语言是一个集合$\lbrace w\in\Sigma^\ast|S\stackrel{\ast}{\Rightarrow} w\rbrace$</li>
 </ul>
-<h2 id="1-2-CFG的歧义性"><a href="#1-2-CFG的歧义性" class="headerlink" title="1.2 CFG的歧义性"></a>1.2 CFG的歧义性</h2><p>CFG中所谓的歧义性，是指一个语法能通过不同的方式生成同一个字符串，对这样的语法，我们称其为有歧义的语法，如下图所示，通常的字符串和语法规则，有两种不同的生成方式。</p>
-<img src="/2021/06/27/Mathematics/形式语言3/1_2.png" width="70%" height="70%">
-
-<p>为了准确定义歧义性，我们是首先定义最左推导</p>
+<h2 id="1-2-CFG的歧义性"><a href="#1-2-CFG的歧义性" class="headerlink" title="1.2 CFG的歧义性"></a>1.2 CFG的歧义性</h2><p>首先我们来认识一下最左推导：</p>
 <blockquote>
-<p>给定文法$G$，一个字符串$w$的最左推导是指，每次推导步骤中首先替换的是最左边的变量。</p>
+<p>给定文法$G$，一个字符串$w$的最左推导是指，每次推导步骤中最先替换最左边的变量。</p>
 </blockquote>
-<p>有了最左推导，我们可以将歧义性定义为$w$有多个不同的最左推导。例如上图中两种推导方式都是最左推导。</p>
+<p>CFG中所谓的歧义性，是指一个语法能通过不同的方式生成同一个字符串，即有多个不同的最左推导。对这样的语法，我们称其为有歧义的语法。下图是一个有歧义的语法的例子，两种不同的最左推导可以产生同样的字符串。</p>
+<img src="/2021/06/27/Mathematics/形式语言3/1_2.png" width="60%" height="60%">
+
 <h2 id="1-3-Chomsky-Normal-Form"><a href="#1-3-Chomsky-Normal-Form" class="headerlink" title="1.3 Chomsky Normal Form"></a>1.3 Chomsky Normal Form</h2><p>所谓的Chomsky Normal Form(CNF)，是一种形式上极其简单的CFG，其规则集$R$仅包含两种形式</p>
 <p>$$\begin{aligned}<br>    &amp;A \to BC \\<br>    &amp;A \to a<br>\end{aligned}$$</p>
-<p>其中$A,B,C$是变量，且$B,C$不能是开始符，$a$是终结符。除了这两种形式之外，有时会允许出现$S\to\varepsilon$这个特殊的规则，$S$是开始符。</p>
+<p>其中$A,B,C$是任意变量，且$B,C$不能是开始符，$a$是终结符。除了这两种形式之外，有时会允许出现$S\to\varepsilon$这个特殊的规则，其中$S$是开始符。基于CNF，我们可以跟好的研究CFG与CFL之间的等价性：</p>
 <blockquote>
-<p><strong>定理</strong><br>所有的上下文无关语言都是有CNF形式的CFG生成的</p>
+<p><strong>定理</strong><br>所有的上下文无关语言都是由CNF形式的CFG生成的</p>
 </blockquote>
-<p>我们可以通过以下几个步骤将CFG转换为CNF形式(同样也是该定理的证明)：</p>
+<p>因为CFL是由CFG生成的，即CFL$\equiv$CFG，而接下来我们将给出将任意CFG转换为CNF的方法，该方法证明了CNF$\equiv$CFG，因此上述定理也被证明了：</p>
 <ol>
-<li>添加一个新的开始符$S_0$，并添加新规则$S_0\to S$，使新开始符生成旧开始符。该步骤保证了(新)开始符不会出现在规则的右边</li>
+<li>添加一个新的开始符$S_0$，并添加新规则$S_0\to S$，即新开始符yield旧开始符。该步骤保证了新开始符不会出现在规则的右边</li>
 <li>删除所有的涉及到非开始符的$\varepsilon$规则，即形如$A\to\varepsilon$的规则<ol>
-<li>如果存在规则$R\to uAv$，则再删除上述规则的同时添加$R\to uv$</li>
+<li>如果存在规则$R\to uAv$，则在删除上述规则的同时添加$R\to uv$</li>
 <li>同样的，如果存在规则$R\to A$，则添加规则$R\to\varepsilon$(若之前删除过$R\to\varepsilon$则不添加)</li>
 </ol>
 </li>
@@ -411,49 +414,66 @@
 </li>
 </ol>
 <hr>
-<h1 id="2-Pushdown-Automata"><a href="#2-Pushdown-Automata" class="headerlink" title="2. Pushdown Automata"></a>2. Pushdown Automata</h1><h2 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h2><p>所谓的Pushdown Automata(PDA)，就是比NFA多了一个栈的自动机，</p>
+<h1 id="2-Pushdown-Automata"><a href="#2-Pushdown-Automata" class="headerlink" title="2. Pushdown Automata"></a>2. Pushdown Automata</h1><h2 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h2><p>正如正则语言可以被FA识别，CFG也可以被一种特殊的自动机所识别，即所谓的Pushdown Automata(PDA)，就是比NFA多了一个栈的自动机：</p>
 <blockquote>
 <p>一个PDA是一个六元组$(Q,\Sigma, \Gamma, \sigma, q_0, F)$，其中</p>
 <ol>
 <li>$Q$是状态的有限集</li>
 <li>$\Sigma$是输入字母表的有限集</li>
 <li>$\Gamma$是栈字母表的有限集</li>
-<li>$Q\times \Sigma_\varepsilon\times\Gamma_\varepsilon\to\mathcal{P}(Q\times\Gamma_\varepsilon)是转移函数$</li>
+<li>$Q\times \Sigma_\varepsilon\times\Gamma_\varepsilon\to\mathcal{P}(Q\times\Gamma_\varepsilon)$是转移函数，可以看到转移后得到的是状态集</li>
 <li>$q_0\in Q$是开始状态</li>
 <li>$F\subseteq Q$是终止状态集</li>
 </ol>
 </blockquote>
-<p>对于NFA中无法识别的语言$\lbrace 0^n1^n|n\ge0\rbrace$，我们就可以使用PDA来识别它：</p>
+<p>PDA与FA相比，其能力更为强大，可以识别NFA无法识别的上下文无关语言，如$\lbrace 0^n1^n|n\ge0\rbrace$：</p>
 <img src="/2021/06/27/Mathematics/形式语言3/2_1.png" width="60%" height="60%">
 
-<p>在这个PDA图中，结点之间的边的标签是一个形如$a,b\to c$的伪二元组，其中$a\in\Sigma$是PDA的输入信号，用于转移状态，而$b\to c$则是将当前栈顶元素$b$替换为$c$，例如上图中，$q_1$转移到$q_2$时，$\varepsilon,\varepsilon\to\$$，栈由空变为包含一个$\$$。有些让人让人迷惑的点，在$q_2$到$q_2$的自循环中，其栈变化是$\varepsilon\to0$，但此时的栈明明经过上一个转换，应当是包含了一个$\$$元素的。实际上这是对栈描述不同所引起的，在这里，<strong>我们认为在$\$$之上的$\varepsilon$才是真正的栈顶</strong>。即<strong>所有的形如$\varepsilon\to c$都被视为将$c$压入栈顶的操作</strong>，同样的，<strong>所有的形如$b\to\varepsilon$都将被视为栈顶元素$b$的出栈操作</strong>。</p>
+<p>在这个PDA中(图中右上角)，结点之间的边的标签是一个形如$a,b\to c$的伪二元组，其中$a\in\Sigma$是PDA的输入信号，PDA根据输入信号转移状态。$b\to c$则是将当前栈顶元素$b$替换为$c$。需要注意的是，在本课程的PDA的所有图例中，<strong>$\varepsilon\to a$都表示入栈操作，$a\to\varepsilon$表示出栈操作，相应的，$\varepsilon\to\varepsilon$表示不对栈进行任何操作</strong>。例如上图中，$q_1$转移到$q_2$时，$\varepsilon,\varepsilon\to\$$，栈由空变为包含一个$\$$，这就是一个入栈操作。</p>
 <p>此外，我们还给出一个能识别语言$\lbrace a^ib^jc^k|i,j,k\ge0\ and\ i=j\ or\ i=k\rbrace$的PDA，此图中，上半分支识别$a^ib^ic^k$，下半分支识别$a^ib^jc^i$。</p>
 <img src="/2021/06/27/Mathematics/形式语言3/2_2.png" width="50%" height="50%">
 
 <h2 id="2-2-PDA与CFG的等价性"><a href="#2-2-PDA与CFG的等价性" class="headerlink" title="2.2 PDA与CFG的等价性"></a>2.2 PDA与CFG的等价性</h2><blockquote>
-<p><strong>定理</strong><br>一个语言是上下文无关的当且仅当存在PDA能识别它<br><strong>引理1</strong><br>一个语言是上下文无关的，那么存在PDA能识别它<br><strong>引理2</strong><br>PDA能识别的语言是上下文无关的</p>
+<p><strong>定理</strong><br>一个语言是上下文无关的当且仅当存在PDA能识别它<br><strong>引理1</strong><br>一个语言是上下文无关的，那么存在PDA能识别它<br><strong>引理2</strong><br>PDA能识别的语言是上下文无关语言</p>
 </blockquote>
-<h3 id="2-2-1-证明引理一"><a href="#2-2-1-证明引理一" class="headerlink" title="2.2.1 证明引理一"></a>2.2.1 证明引理一</h3><p>给定一个CFG $G$，我们尝试证明引理1：</p>
+<h3 id="2-2-1-证明引理一"><a href="#2-2-1-证明引理一" class="headerlink" title="2.2.1 证明引理一"></a>2.2.1 证明引理一</h3><p>给定任意CFG $G$，我们可以将其转换为PDA，进而证明引理1：</p>
 <ol>
-<li>将标志符$和开始变量入栈</li>
+<li>首先我们构造一个仅包含开始状态$q_{start}$、循环状态$q_{loop}$、终止状态$q_{accept}$这三个状态的PDA，如下图所示。<img src="/2021/06/27/Mathematics/形式语言3/2_4.png" width="35%" height="35%"></li>
+<li>将标志符\$和开始变量入栈，并在$q_{start}$和$q_{loop}$之间添加边$\varepsilon,\varepsilon\to S\$$</li>
 <li>重复以下步骤：<ol>
-<li>如果栈顶元素是一个变量$A$，选择$A$的一个规则<strong>从右往左</strong>将$A$替换掉</li>
-<li>如果栈顶元素是终结符$a$，那么就从输入中读取下一个符号$u$。如果$u$和$a$相同，则将栈顶元素$a$退栈，否则拒绝该分支(reject on this branch of the nondeterminism)</li>
-<li>如果栈顶元素是$，输入终止状态。Doing so accepts the input if it has all been read.</li>
+<li>对所有形如$A\to BCD$的语法，我们按<strong>从右至左</strong>的规则在PDA中添加一个从$q_{loop}$到$q_{loop}$的自循环。即$q_{loop} \stackrel{\varepsilon,A\to D}{\longrightarrow}\bigcirc \stackrel{\varepsilon,\varepsilon\to C}{\longrightarrow}\bigcirc \stackrel{\varepsilon,\varepsilon\to B}{\longrightarrow}q_{loop}$<img src="/2021/06/27/Mathematics/形式语言3/2_3.png" width="30%" height="30%"></li>
+<li>对所有的终结符$a$，我们同样添加一个从$q_{loop}$到$q_{loop}$的自循环，即$q_{loop} \stackrel{\varepsilon,a\to\varepsilon}{\longrightarrow}q_{loop}$</li>
 </ol>
 </li>
+<li>最后，添加$q_{loop}$到$q_{accept}$的边$\varepsilon,\$\to\varepsilon$</li>
 </ol>
-<p>上面的说明不清不楚，我们通过例子来说明</p>
-<p>例一：对于规则$s\to xyz$，PDA读取$a$后，我们应用从右往左的规则将栈中的$s$替换为$zyx$，首先将栈中的$s$替换为$z$，然后依次将$y,x$入栈</p>
-<img src="/2021/06/27/Mathematics/形式语言3/2_3.png" width="40%" height="40%">
-
-<p>例二：所有的CFG都可转换为以下形式</p>
-<img src="/2021/06/27/Mathematics/形式语言3/2_4.png" width="40%" height="40%">
-
-<p>例三：根据例一和例二，我们可以将以下CFG转换为PDA：<br>$$\begin{aligned}<br>    &amp;S \to aTb | b \\<br>    &amp;T \to Ta | \varepsilon<br>\end{aligned}$$</p>
+<p>上面的文字描述不清不楚，我们通过例子进行更形象的说明，我们可以将以下CFG转换为PDA：<br>$$\begin{aligned}<br>    &amp;S \to aTb | b \\<br>    &amp;T \to Ta | \varepsilon<br>\end{aligned}$$</p>
 <img src="/2021/06/27/Mathematics/形式语言3/2_5.png" width="40%" height="40%">
 
-<h3 id="2-2-2-证明引理二"><a href="#2-2-2-证明引理二" class="headerlink" title="2.2.2 证明引理二"></a>2.2.2 证明引理二</h3><h2 id="2-3-总结"><a href="#2-3-总结" class="headerlink" title="2.3 总结"></a>2.3 总结</h2><blockquote>
+<h3 id="2-2-2-证明引理二"><a href="#2-2-2-证明引理二" class="headerlink" title="2.2.2 证明引理二"></a>2.2.2 证明引理二</h3><p>该引理的证明思路，给定一个PDA $P$，我们想要构造出对应的CFG $G$，使得$G$所生成的字符串能被$P$识别。如何做呢？首先，对$P$中的任意两个状态$p$和$q$，我们先构造一个变量$A_{pq}\in G$。我们给$A_{pq}$赋予一个特殊的性质，它能生成所有让$P$从状态$p$转移到状态$q$的字符串，并且$p$和$q$这两个状态的栈都为空。即，$P$从状态$p$转移到状态$q$的过程中，栈可能会变化，但在$p$和$q$这两个状态时栈一定为空。<br>然后我们稍微的修改给定的$P$，使它具备以下性质：</p>
+<ol>
+<li>只有一个接受状态</li>
+<li>在进入接受状态之前，栈被清空</li>
+<li>在每次状态转移时，它的栈只能进栈或者退栈，不能使用替换操作。我们可以使用先出栈再进栈来模拟替换操作。</li>
+</ol>
+<p>那么，基于以上修改后的$P$以及$A_{pq}$，我们考虑一个字符串$x=a,…,b$，$P$对$x$的计算的第一步肯定是将$a$入栈。而计算的最后一步则分为两种情况：</p>
+<ol>
+<li>第一种情况是$a$出栈(先入后出)，这时候我们可以使用规则$A_{pq}\to aA_{rs}b$来模拟这种情况，其中$r$是$P$接收$a$后的状态，$s$是$P$接收$b$之前的状态。<img src="/2021/06/27/Mathematics/形式语言3/3_1.png" width="60%" height="60%"></li>
+<li>第二种情况是某个中间字符$x_i$出栈，这说明$P$在中间某个过程中栈被清空了,我们可以使用规则$A_{pq}\to A_{pr}A_{rq}$来模拟，其中$P$在状态$r$时栈为空。<img src="/2021/06/27/Mathematics/形式语言3/3_2.png" width="60%" height="60%">
+
+</li>
+</ol>
+<p>接下来我们就可以进行引理2的证明了。给定PDA $P=(Q,\Sigma, \Gamma, \delta, q_0, \lbrace q_{accept}\rbrace)$，我们首先构造CFG $G$的开始变量，令其为$A_{q_0,q_{accept}}$，然后以下面的规则构造$G$的语法：</p>
+<ol>
+<li><strong>对每个$p,q,r,s\in Q, u\in\Gamma$以及$a,b\in\Sigma_{\varepsilon}$，如果$\delta(p,a,\varepsilon)$包含$(r,u)$</strong>(意味着$P$接收输入$a$，从状态$p$转移到$r$，并将$u$入栈)<strong>并且$\delta(s,b,u)$包含$(q,\varepsilon)$</strong>(意味着$P$接收输入$b$，从状态$s$转移到$q$，并将$u$出栈)，<strong>那么我们添加语法$A_{pq}\to aA_{rs}b$</strong></li>
+<li><strong>对每个$p,q,r\in Q$，我们添加语法$A_{pq}\to A_{pr}A_{rq}$</strong></li>
+<li><strong>最后，对每个$p\in Q$，我们添加语法$A_{pp}\to\varepsilon$</strong></li>
+</ol>
+<h2 id="2-3-总结"><a href="#2-3-总结" class="headerlink" title="2.3 总结"></a>2.3 总结</h2><p>首先，由引理2我们可以得到两个声明：</p>
+<blockquote>
+<p><strong>声明1</strong>：如果$A_{pq}$生成$x$，那么$x$能将$P$从空栈的状态$p$转移到空栈的状态$q$。<br><strong>声明2</strong>：如果$x$能将$P$从空栈的状态$p$转移到空栈的状态$q$，那么$A_{pq}$生成$x$。</p>
+</blockquote>
+<blockquote>
 <p><strong>推论</strong>：所有的正则语言都是上下文无关的。</p>
 </blockquote>
 <p>这是因为，所有的正则语言都恒等于一个NFA，而任意NFA都是一个特殊的PDA，即没有栈空间的PDA，而PDA上下文无关语言是等价的。因此，正则语言都是上下文无关的。</p>
@@ -496,28 +516,28 @@
 <ol>
 <li>$$\begin{aligned}<br> E &amp;\Rightarrow T \\<br>   &amp;\Rightarrow F \\<br>   &amp; \Rightarrow a<br>\end{aligned}$$</li>
 </ol>
-<img src="/2021/06/27/Mathematics/形式语言3/e11.png" width="2%" height="2%">
+<img src="/2021/06/27/Mathematics/形式语言3/e11.png" width="1.2%" height="1.2%">
 
 <hr>
 <ol start="2">
 <li>$$\begin{aligned}<br> E &amp;\Rightarrow E+T \\<br>   &amp;\Rightarrow T+T \\<br>   &amp;\Rightarrow F+T \\<br>   &amp;\Rightarrow a+T \\<br>   &amp;\Rightarrow a+F \\<br>   &amp;\Rightarrow a+a<br>\end{aligned}$$</li>
 </ol>
-<img src="/2021/06/27/Mathematics/形式语言3/e12.png" width="15%" height="15%">
+<img src="/2021/06/27/Mathematics/形式语言3/e12.png" width="12%" height="12%">
 
 <hr>
 <ol start="3">
 <li>$$\begin{aligned}<br> E &amp;\Rightarrow E+T \\<br>   &amp;\Rightarrow E+T+T \\<br>   &amp;\Rightarrow T+T+T \\<br>   &amp; \Rightarrow F+T+T \\<br>   &amp; \Rightarrow a+T+T \\<br>   &amp; \Rightarrow a+F+T \\<br>   &amp; \Rightarrow a+a+T \\<br>   &amp; \Rightarrow a+a+F \\<br>   &amp; \Rightarrow a+a+a \\<br>\end{aligned}$$</li>
 </ol>
-<img src="/2021/06/27/Mathematics/形式语言3/e13.png" width="20%" height="20%">
+<img src="/2021/06/27/Mathematics/形式语言3/e13.png" width="15%" height="15%">
 
 <hr>
 <ol start="4">
 <li><p>$$\begin{aligned}<br> E &amp;\Rightarrow T \\<br>   &amp;\Rightarrow F \\<br>   &amp;\Rightarrow (E) \\<br>   &amp; \Rightarrow (T) \\<br>   &amp; \Rightarrow (F) \\<br>   &amp; \Rightarrow ((E)) \\<br>   &amp; \Rightarrow ((T)) \\<br>   &amp; \Rightarrow ((F)) \\<br>   &amp; \Rightarrow ((a)) \\<br>\end{aligned}$$</p>
-<img src="/2021/06/27/Mathematics/形式语言3/e14.png" width="60%" height="60%">
+<img src="/2021/06/27/Mathematics/形式语言3/e14.png" width="55%" height="55%">
 </li>
 </ol>
 </li>
-<li><p>Give a context-free grammar that generates the language<br>$$A=\lbrace a^ib^jc^k|i=j\ or\ j=k\ where\ i,j,j\ge0\rbrace$$<br>Is your grammar ambiguous? Why or why not?</p>
+<li><p>Give a context-free grammar that generates the language<br>$$A=\lbrace a^ib^jc^k|i=j\ or\ j=k\ \mathrm{where}\ i,j,j\ge0\rbrace$$<br>Is your grammar ambiguous? Why or why not?</p>
 <p><strong>Answer</strong><br>$$\begin{aligned}<br> S &amp;\to UT|XY \\<br> U &amp;\to aUb|\varepsilon \\<br> T &amp;\to cT|\varepsilon \\<br> X &amp;\to aX|\varepsilon \\<br> Y &amp;\to bYc|\varepsilon<br>\end{aligned}$$<br>该CFG是歧义的，例如对于字符串$abc$，有两种生成过程</p>
 <img src="/2021/06/27/Mathematics/形式语言3/e2.png" width="80%" height="80%">
 </li>
@@ -528,7 +548,7 @@
 <li><p>Convert the following CFG into an equivalent CFG in Chomsky normal form, using the procedure given in Theorem 2.9<br>$$\begin{aligned}<br>&amp;A \to BAB|B\varepsilon \\<br>&amp;B \to 00|\varepsilon<br>\end{aligned}$$</p>
 <p><strong>Answer</strong></p>
 <ol>
-<li>添加新的开始规则<br>$$\begin{aligned}<br>&amp;S \to A \\<br>&amp;A \to BAB|B\varepsilon \\<br>&amp;B \to 00|\varepsilon<br>\end{aligned}$$</li>
+<li>添加新的开始规则<br>$$\begin{aligned}<br>&amp;S \to A \\<br>&amp;A \to BAB|B|\varepsilon \\<br>&amp;B \to 00|\varepsilon<br>\end{aligned}$$</li>
 <li>删除$\varepsilon$规则<br>$$\begin{aligned}<br>&amp;S \to A \\<br>&amp;A \to BAB|B\varepsilon|AB|BA|A|\varepsilon \\<br>&amp;B \to 00<br>\end{aligned}$$</li>
 </ol>
 <p>$$\begin{aligned}<br>   &amp;S \to A|\varepsilon \\<br>   &amp;A \to BAB|B|AB|BA|A \\<br>   &amp;B \to 00<br>\end{aligned}$$</p>
@@ -800,9 +820,9 @@
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(5)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(1)</div></a></li>
+          <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(2)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(5)</div></a></li>
+          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(8)</div></a></li>
         
       </ul>
     </div>
@@ -833,7 +853,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/Array/" style="font-size: 14px; color: #999">Array</a> <a href="/tags/C/" style="font-size: 20.67px; color: #6c6c6c">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 24px; color: #555">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 17.33px; color: #828282">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 20.67px; color: #6c6c6c">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/PDF/" style="font-size: 14px; color: #999">PDF</a> <a href="/tags/Process/" style="font-size: 20.67px; color: #6c6c6c">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 20.67px; color: #6c6c6c">Ubuntu</a> <a href="/tags/短篇小说/" style="font-size: 14px; color: #999">短篇小说</a>
+      <a href="/tags/Array/" style="font-size: 14px; color: #999">Array</a> <a href="/tags/C/" style="font-size: 20.67px; color: #6c6c6c">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 24px; color: #555">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 17.33px; color: #828282">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 20.67px; color: #6c6c6c">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/PDF/" style="font-size: 14px; color: #999">PDF</a> <a href="/tags/Process/" style="font-size: 20.67px; color: #6c6c6c">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 20.67px; color: #6c6c6c">Ubuntu</a> <a href="/tags/哲学/" style="font-size: 14px; color: #999">哲学</a> <a href="/tags/短篇小说/" style="font-size: 14px; color: #999">短篇小说</a>
     </div>
   </section>
 
@@ -923,14 +943,14 @@
       $(function(){
         if ('') {
           $('').backstretch(
-          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg"],
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
           {
             duration: "60000",
             fade: "25000"
           });
         } else {
           $.backstretch(
-          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg"],
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
           {
             duration: "60000",
             fade: "25000"

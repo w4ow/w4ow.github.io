@@ -298,10 +298,10 @@
           
         
           
-            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-01T13:48:35+08:00">
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-26T09:46:11+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>updated at 2021-07-01</p>
+    <p>updated at 2021-07-26</p>
   </a>
 </div>
 
@@ -341,109 +341,82 @@
           <a href="/2021/06/16/Mathematics/形式语言1/" title="Lecture 0：绪论">Lecture 0：绪论</a>
 <p>Lecture 1：正则语言</p>
 <a href="/2021/06/27/Mathematics/形式语言3/" title="Lecture 2：上下文无关语言">Lecture 2：上下文无关语言</a><br>
-<a href="/2021/06/29/Mathematics/形式语言4/" title="Lecture 3：Church-Turing">Lecture 3：Church-Turing</a>
-
+<a href="/2021/06/29/Mathematics/形式语言4/" title="Lecture 3：Church-Turing">Lecture 3：Church-Turing</a><br>
+<a href="/2021/07/04/Mathematics/形式语言5/" title="Lecture 4：可判定性">Lecture 4：可判定性</a><br>
+<a href="/2021/07/05/Mathematics/形式语言6/" title="Lecture 5：可规约性">Lecture 5：可规约性</a><br>
+<a href="/2021/07/05/Mathematics/形式语言7/" title="Lecture 6：时间复杂度">Lecture 6：时间复杂度</a>
 <hr>
 <a id="more"></a>
 
-<h1 id="1-有限状态机"><a href="#1-有限状态机" class="headerlink" title="1 有限状态机"></a>1 有限状态机</h1><blockquote>
-<p><strong>定义</strong>：</p>
-<p>有限状态机(DFA)是一个五元组$(Q,\Sigma,\delta,q_0,F)$</p>
+<h1 id="1-有限自动机"><a href="#1-有限自动机" class="headerlink" title="1 有限自动机"></a>1 有限自动机</h1><p>有限自动机(Finite Antomata, FA)是本课程中所涉及到的最简单的“计算机”，我们可以认为FA是一个内存大小仅为$1$的计算机，FA在该每个时刻接收输入信号(即$\Sigma$中的字母)，并根据状态转移函数$\delta$来改变当前内存的状态。</p>
+<blockquote>
+<p><strong>FA形式化定义</strong>：</p>
+<p>有限状态机(FA)是一个五元组$(Q,\Sigma,\delta,q_0,F)$</p>
 <ul>
 <li>$Q$是被称为状态的有限集合</li>
-<li>$\Sigma$是被称为字母表的有限集合</li>
+<li>$\Sigma$是被称为字母表的有限集合，代表FA的输入信号</li>
 <li>$\delta$是状态转移函数$Q\times\Sigma\to Q$</li>
 <li>$q_0\in Q$是初始状态</li>
 <li>$F\subseteq Q$是终止状态集</li>
 </ul>
 </blockquote>
-<p>我们可以认为FA是一个内存大小仅为$1$的机器，该机器在每个时刻接收输入字符串(输入信号)$\Sigma$中的一个字符，并根据状态转移函数$\delta$来改变当前内存的状态。</p>
+<p>我们提出FA是为了求解特定类型的问题，更具体的说是关于“语言”的问题。<strong>所谓的语言，在形式上是字符串的集合$A=\lbrace w|w\in\Sigma^\ast\rbrace$</strong>(语言是字母表幂集的子集)，而我们在这门课所要学习的就是:给定一个能识别特定语言$A$的机器$M$，判断一个字符串$w$是否能被$M$<strong>识别</strong>。<strong>FA的主要作用就是判断一个字符串是否属于某种语言</strong>。举个更贴地气的例子，我们可以把语言比作我们人类所使用的语言(如汉语)，把机器$M$比作一个人(比如会汉语和英语的小明)。我们现在对小明输入了一个字符串$w$，如果$w$是一句俄语，那么小明自然无法识别，普通话则反之。</p>
+<p>一些简单的语言可以用FA来表示，我们将这类<strong>能被FA识别的语言称为正则语言(Regular Language, RL)</strong>。例如语言$A=\lbrace w|w至少包含一个1且以偶数个0结尾\rbrace$(如$100,0100,0110000$)就是一个正则语言，我们可以构造如下图的FA来识别$A$，即$L(M)=A$。</p>
 <img src="/2021/06/23/Mathematics/形式语言2/fa-1.png" width="60%" height="60%">
 
-<h2 id="1-1-有限状态机的作用"><a href="#1-1-有限状态机的作用" class="headerlink" title="1.1 有限状态机的作用"></a>1.1 有限状态机的作用</h2><p>我们提出有限状态机的是为了求解特定类型的问题，更具体的说，FA是用于判断一个字符串是否属于一种语言。首先对问题进行定义：</p>
-<p><strong>问题定义</strong></p>
-<p>给定字符串集合$S$以及布尔函数$f:S\to\lbrace 0,1\rbrace$，$x\in S$，计算$f(x)$。更进一步地，可以将上述问题转换为：给定集合$A\subseteq S, x\in S$，计算$x\in A$是否成立。在该定义中$x\in A\Rightarrow f(x)=1$, $x\not\in A\Rightarrow f(x)=0$。</p>
-<p><strong>问题求解</strong></p>
-<p>给定一个布尔函数$f:S\to\lbrace{0,1}\rbrace$，$S$是基于字母表$\Sigma$的字符串集合(例如$S=\lbrace{0,10,010,…}\rbrace$), 语言${A}\subseteq{S}$是$S$的子集。 定义一个自动机$M$以及一种能被$M$识别的语言$L(M)=\lbrace{s}\in{S}|{M}\ {accepts}\ {s}\rbrace$，那么所有问题可以被形式化为布尔问题：给定${x}\in{S},{x}\in{A}$，求解${A}=L(M)$是否为真，即判断$A$是否是一种能被$M$识别的语言。</p>
-<p><strong>有限状态机示例</strong></p>
 <ul>
-<li><p>例1：</p>
-<img src="/2021/06/23/Mathematics/形式语言2/ex1.png" width="40%" height="40%">
-
-<p>$\Sigma=\lbrace 0, 1\rbrace, A=\lbrace w|w至少包含一个1且以偶数个0结尾\rbrace$</p>
-</li>
-<li><p>例2：</p>
+<li><p>例2：$A=\lbrace w|w至少包含一个1且以1结尾\rbrace$</p>
 <img src="/2021/06/23/Mathematics/形式语言2/ex2.png" width="25%" height="25%">
-
-<p>$\Sigma=\lbrace 0, 1\rbrace, A=\lbrace w|w至少包含一个1且以1结尾\rbrace$</p>
 </li>
-<li><p>例3：</p>
+<li><p>例3：$A=\lbrace w|w以0结尾\rbrace$</p>
 <img src="/2021/06/23/Mathematics/形式语言2/ex3.png" width="25%" height="25%">
-
-<p>$\Sigma=\lbrace 0, 1\rbrace, A=\lbrace w|w以偶数个(包括0个)0结尾\rbrace$</p>
 </li>
-<li><p>例4：</p>
+<li><p>例4：$A=\lbrace w|w的开始符号与结束符号相同\rbrace$</p>
 <img src="/2021/06/23/Mathematics/形式语言2/ex4.png" width="40%" height="40%">
-
-<p>$\Sigma=\lbrace a, b\rbrace, A=\lbrace w|w的开始符号与结束符号相同\rbrace$</p>
 </li>
-<li><p>例5：</p>
+<li><p>例5：$A=\lbrace w|w的和是3的倍数\rbrace$</p>
 <img src="/2021/06/23/Mathematics/形式语言2/ex5.png" width="45%" height="45%">
 
-<p>$\Sigma=\lbrace {0, 1, 2}\rbrace， A=\lbrace w|w的和是3的倍数\rbrace$</p>
 </li>
 </ul>
-<h2 id="1-2-正则语言"><a href="#1-2-正则语言" class="headerlink" title="1.2 正则语言"></a>1.2 正则语言</h2><blockquote>
-<p>在以上的例子中,$A$就是正则语言。所谓<strong>正则语言，就是能被某些有限自动机识别的语言。</strong>而<strong>识别</strong>就是，给定机器$M$以及语言$A$，$A=\lbrace w|M\ accepts\ w\rbrace$</p>
-</blockquote>
 <hr>
-<h1 id="2-预备知识"><a href="#2-预备知识" class="headerlink" title="2 预备知识"></a>2 预备知识</h1><h2 id="2-1-有限自动机的设计"><a href="#2-1-有限自动机的设计" class="headerlink" title="2.1 有限自动机的设计"></a>2.1 有限自动机的设计</h2><p>对于一个给定的正则语言$A$设计一个对应FA总共有四步操作，下面以一个例子来说明。</p>
-<p>例：假设字符表$\Sigma=\lbrace 0,1\rbrace$，语言$A$是包含奇数个$1$的字符串集合。</p>
+<h1 id="2-FA的构造与相关性质"><a href="#2-FA的构造与相关性质" class="headerlink" title="2 FA的构造与相关性质"></a>2 FA的构造与相关性质</h1><h2 id="2-1-构造FA"><a href="#2-1-构造FA" class="headerlink" title="2.1 构造FA"></a>2.1 构造FA</h2><p>那么，给定一个正则语言$A$，如何设计对应的FA呢？总共有四个步骤，我们以语言$A=\lbrace w|w包含奇数个1\rbrace$为例说明(这个过于简单，其实挺难的)：</p>
 <ol>
-<li><p>列出所有的可能性。在该例子中，一个字符串$x$只有两种可能：包含偶数个$1$或者包含奇数个$1$</p>
-<ul>
-<li>even</li>
-<li>odd</li>
-</ul>
-</li>
-<li><p>将可能性表示为状态。</p>
-<img src="/2021/06/23/Mathematics/形式语言2/1_2_1_1.png" width="15%" height="15%">
-</li>
-<li><p>标出状态转移箭头。该FA只能接受字母表$\Sigma$的信号，即$01$信号，且字符串$x$会随着输入信号改变奇偶性</p>
-<img src="/2021/06/23/Mathematics/形式语言2/1_2_1_2.png" width="15%" height="15%">
-</li>
-<li><p>标出初始状态和结束状态</p>
-<img src="/2021/06/23/Mathematics/形式语言2/1_2_1_3.png" width="15%" height="15%">
+<li>列出所有可能，本例中就俩可能：奇数个$1$或偶数个$1$。</li>
+<li>将所有可能表示为状态：$q_{odd}$和$q_{even}$，并画为节点。</li>
+<li>在结点之间标出状态转移。例如本例中，$q_{even}$接收了$1$则会转移到$q_{odd}$。</li>
+<li>标出初始状态和结束状态。本例中，开始时$w$为空，也就是偶数个$1$，所以开始状态为$q_{even}$，而我们希望$w$最终为奇数个$1$，所以终止状态为$q_{odd}$。<img src="/2021/06/23/Mathematics/形式语言2/1_2.png" width="25%" height="25%">
 
 </li>
 </ol>
-<h2 id="2-2-基于语言的运算"><a href="#2-2-基于语言的运算" class="headerlink" title="2.2 基于语言的运算"></a>2.2 基于语言的运算</h2><p>假定$A,B$为语言，我们可以定义基于语言的三种运算：</p>
+<p>在实际应用中，如果不事先给出所有状态，我们很难应用这个方法，在后面的习题中就可以看出来。</p>
+<h2 id="2-2-基于语言的运算"><a href="#2-2-基于语言的运算" class="headerlink" title="2.2 基于语言的运算"></a>2.2 基于语言的运算</h2><p>假定$A,B$为任意语言语言，我们可以定义基于语言的三种运算：</p>
 <ul>
 <li>Union: $A\cup B=\lbrace x|x\in A\ or\ x\in B\rbrace$</li>
 <li>Concatenation: $A\circ B=\lbrace xy|x\in A\ and\ y\in B\rbrace$</li>
 <li>Star: $A^{\ast}=\lbrace x_1…x_k|k\ge 0\ and\ x_i\in A\rbrace$，类似于幂集。</li>
 </ul>
-<p>例如，$\Sigma=\lbrace a,…,z\rbrace$, $A=\lbrace good, bad\rbrace$, $\lbrace boy, girl\rbrace$，则有</p>
+<p>例如，$\Sigma=\lbrace a,…,z\rbrace$, $A=\lbrace good, bad\rbrace$, $B=\lbrace boy, girl\rbrace$，则有</p>
 <ul>
 <li>$A\cup B=\lbrace good, bad, boy, girl\rbrace$</li>
 <li>$A\circ B=\lbrace goodboy, goodgirl, badboy, badgirl\rbrace$</li>
-<li>$A^{\ast}=\lbrace \epsilon, good, bad, goodgood, goodbad, badgood, badbad, goodgoodgood, goodgoodbad,…\rbrace$</li>
+<li>$A^{\ast}=\lbrace \epsilon, good, bad, goodgood, goodbad, \cdots\rbrace$</li>
 </ul>
 <blockquote>
-<p>正则语言有一个重要的特性，即<strong>封闭性</strong>。所谓的封闭性是指对集合中的任意对象进行某种运算，如果其结果仍在该集合中，则称该集合在该操作上是封闭的。<strong>正则语言在以上三种运算上是封闭的</strong>，即，若$A_1,A_2$是正则语言，那么$A_1\cup A_2$、$A_1\circ A_2$和$A^{\ast}$也是正则语言。</p>
+<p>正则语言有一个重要的特性，即<strong>封闭性</strong>。所谓的封闭性是指对集合中的任意对象进行某种运算，如果其结果仍在该集合中，则称该集合在该操作上是封闭的(例如在自然数集合$\mathcal{N}$上，加法和乘法操作是封闭的)。<strong>正则语言在以上三种运算上是封闭的</strong>，即，若$A_1,A_2$是正则语言，那么$A_1\cup A_2$、$A_1\circ A_2$和$A^{\ast}$也是正则语言。</p>
 </blockquote>
 <p>我们可以通过构造法先证明正则语言在$\cup$运算上的封闭性</p>
 <p><strong>构造法证明$A_1\cup A_2$的封闭性</strong><span id="prof1"></span><br>假定$M_1=\lbrace Q_1, \Sigma, \delta_1, q_1, F_1\rbrace$识别$A_1$，$M_2=\lbrace Q_2, \Sigma, \delta_2, q_2, F_2\rbrace$识别$A_2$，下面构造$M=\lbrace Q, \Sigma, \delta, q_0, F\rbrace$来识别$A_1\cup A_2$</p>
 <ol>
-<li>$Q=\lbrace(r_1, r_2)|r_1\in Q_1\ and\ r_2\in Q_2\rbrace$</li>
-<li>字母表$\Sigma$与$M_1,M_2$的字母表相同</li>
+<li>$Q=\lbrace(r_1, r_2)|r_1\in Q_1\ \mathrm{and}\ r_2\in Q_2\rbrace$</li>
+<li>三个FA的字母表相同，都为$\Sigma$</li>
 <li>$\delta((r_1, r_2),a) = (\delta_1(r_1,a), \delta_2(r_2, a))$</li>
 <li>$q_0=(q_1,q_2)$</li>
 <li>$F=\lbrace (r_1, r_2)|r_1\in F_1\ or\ r_2\in F_2\rbrace$</li>
 </ol>
-<p>对于另外两种操作的证明需要引入新的概念，即非确定自动机NFA。</p>
+<p>证明另外两种操作的封闭性需要引入新的概念，非确定自动机NFA。</p>
 <hr>
-<h1 id="3-非确定性"><a href="#3-非确定性" class="headerlink" title="3 非确定性"></a>3 非确定性</h1><h2 id="3-1-非确定自动机NFA"><a href="#3-1-非确定自动机NFA" class="headerlink" title="3.1 非确定自动机NFA"></a>3.1 非确定自动机NFA</h2><p>在一个自动机FA中，如果下一个状态是确定的，则称其为确定自动机DFA，反之则为非确定自动机NFA。</p>
+<h1 id="3-非确定自动机"><a href="#3-非确定自动机" class="headerlink" title="3 非确定自动机"></a>3 非确定自动机</h1><h2 id="3-1-NFA与DFA"><a href="#3-1-NFA与DFA" class="headerlink" title="3.1 NFA与DFA"></a>3.1 NFA与DFA</h2><p>前两节我们所涉及的都是确定的自动机，在一个自动机FA中，当前状态在接受了一个信号后，如果所转移的下一个状态是确定的，则称其为确定自动机DFA，反之则为非确定自动机NFA。</p>
 <blockquote>
 <p>形式地，一个NFA是一个五元组$(Q, \Sigma, \delta, q_0, F)$</p>
 <ul>
@@ -454,43 +427,42 @@
 <li>$F\subseteq Q$是终止状态集</li>
 </ul>
 </blockquote>
-<p>与在定义中，NFA与DFA最大的不同是第三条，DFA的状态转移函数是$Q\times\Sigma\to Q$，即<strong>转移后的状态是一个确定的状态</strong>；NFA的状态转移函数$Q\times\Sigma_{\varepsilon}\to \mathcal{P}(Q)$，该函数<strong>允许接收空信号$\varepsilon$，且转移后的状态是一个状态集合</strong>。下图就是一个NFA的例子，$q_1$在接收$1$后可以跳转到$q_1$或者$q_2$，而$q_2$则允许接收$\varepsilon$。</p>
+<p>NFA与DFA最大的不同在于，DFA的状态转移函数是$Q\times\Sigma\to Q$，即<strong>转移后的状态是一个确定的状态</strong>；NFA的状态转移函数$Q\times\Sigma_{\varepsilon}\to \mathcal{P}(Q)$，该函数<strong>允许接收空信号$\varepsilon$，且转移后的状态是一个状态集合</strong>。下图就是一个NFA的例子，$q_1$在接收$1$后可以跳转到$q_1$或者$q_2$，而$q_2$则允许接收$\varepsilon$。</p>
 <img src="/2021/06/23/Mathematics/形式语言2/2_1_1.png" width="60%" height="60%">
 
-<h2 id="3-2-NFA与DFA的等价性"><a href="#3-2-NFA与DFA的等价性" class="headerlink" title="3.2 NFA与DFA的等价性"></a>3.2 NFA与DFA的等价性</h2><p>所谓FA的等价，是指两个机器能识别相同的语言。</p>
+<p>NFA与DFA的语言识别能力是完全相同的，且对任意一个NFA，都可以将其转换为等价的DFA。首先我们给出一个定理以及一个推理：</p>
 <blockquote>
-<p><strong>定理：每一个NFA都有一个等价的DNA</strong><br><strong>推论：一个语言是正则的当且仅当存在NFA能识别它</strong></p>
+<p><strong>定理：每一个NFA都有一个等价的DFA。等价是指两个机器能识别相同的语言。</strong><br><strong>推论：一个语言是正则的当且仅当存在NFA能识别它</strong><span id="lemma1"></span></p>
 </blockquote>
-<p><strong>等价性的证明</strong>：</p>
-<p>证明思路：将NFA转换为等价的DFA。</p>
-<p>令$N=(Q,\Sigma,\delta,q_0,F)$是能识别语言$A$的NFA，我们可以构造一个对应的DFA $M=(Q’,\Sigma’,\delta’,q_0’,F’)$来识别$A$:</p>
+<p>随后，我们给出如何构造与NFA等价的DFA的方法，这个方法可以将任意NFA转换为DFA，因此该方法<strong>也是对上述定理的证明</strong>：</p>
+<p><strong>构造与NFA等价的DFA</strong>：</p>
+<p>令$N=(Q,\Sigma,\delta,q_0,F)$是能识别语言$A$的NFA，我们可以构造一个对应的DFA $M=(Q’,\Sigma,\delta’,q_0’,F’)$来识别$A$:</p>
 <ol>
-<li>$N$和$M$的字母表$\Sigma$相同。</li>
-<li>将$N$的状态集$Q’$构造为$Q’=\mathcal{P}(Q)$，$\mathcal{P}(Q)$为$Q$的幂集。</li>
-<li>$N$的终止状态为$F’=\lbrace R\in Q’|R\ contains\ an\ accept\ state\ of\ N\rbrace$</li>
-<li>接下来考虑两种情况：<ol>
-<li>当$N$中不包含$\varepsilon$边时：<ol>
-<li>$\delta’(R,a)=\lbrace q\in Q|q\in\delta(r,a)\ for\ some\ r\in R\rbrace$，其中$R$是$Q’$中的一个状态，$a$是一个输入信号。</li>
+<li>$M$和$N$的字母表相同，都为$\Sigma$。</li>
+<li>令$M$的状态集$Q’=\mathcal{P}(Q)$，即$Q$的幂集。</li>
+<li>$M$的终止状态为$F’=\lbrace R\in Q’|R\ \mathrm{contains\ an\ accept\ state\ of}\ N\rbrace$，即$Q’$中所有包含$F$中的任意状态的集合。</li>
+<li>对于转移函数$\delta’$和开始状态$q_0’$，我们考虑两种情况：<ol>
+<li>当$M$中不包含$\varepsilon$边时：<ol>
+<li>$\delta’(R,a)=\lbrace q\in Q|q\in\delta(r,a)\ \mathrm{for\ some}\ r\in R\rbrace$，其中$R$是$Q’$中的一个状态，$a$是一个输入信号。</li>
 <li>$q_0’=\lbrace q_0\rbrace$</li>
 </ol>
 </li>
-<li>当$N$中包含$\varepsilon$边时，对于$M$中的任意状态$R$，定义$E(R)$是一个包含了所有从$R$通过$0$或多条$\varepsilon$边可以到达的状态的集合：<ol>
-<li>$\delta’(R, a)=\lbrace q\in Q|q\in E(\delta(r,a))\ for\ some\ r\in R\rbrace$</li>
+<li>当$M$中包含$\varepsilon$边时，对于$M$中的任意状态$R$，定义$E(R)$是一个包含了所有从$R$通过$0$或多条$\varepsilon$边可以到达的状态的集合：<ol>
+<li>$\delta’(R, a)=\lbrace q\in Q|q\in E(\delta(r,a))\ \mathrm{for\ some}\ r\in R\rbrace$</li>
 <li>$q_0’=E(\lbrace q_0\rbrace)$</li>
 </ol>
 </li>
 </ol>
 </li>
+<li>(可选)最后删除所有没有入边的状态及其出边，因为没有入边的状态是无法到达的。</li>
 </ol>
-<p>基于以上方法可以将任意NFA转换为对应的DFA。例如，给定如下的不包含$\varepsilon$的NFA：</p>
-<img src="/2021/06/23/Mathematics/形式语言2/2_1.png" width="20%" height="20%">
+<p>基于以上方法可以将任意NFA转换为对应的DFA。例如，给定如下的不包含$\varepsilon$的NFA，我们可以将其转换为对应的DFA:</p>
+<img src="/2021/06/23/Mathematics/形式语言2/2_1.png" width="25%" height="25%">
 
-<p>我们可以将其转换为对应的DFA:</p>
 <ol>
 <li><p>列出状态幂集</p>
-<img src="/2021/06/23/Mathematics/形式语言2/2_2.png" width="30%" height="30%">
 </li>
-<li><p>因为$\Sigma=\lbrace a,b\rbrace$，我们需要对幂集中的每个状态画出其状态转移</p>
+<li><p>对幂集中的每个状态画出其状态转移。可以看到在NFA中状态$2$通过信号$a$可以转移到$2$或$3$两个状态，因此在DFA中$2$需要转移到$\lbrace2,3\rbrace$状态，其余类推。</p>
 <img src="/2021/06/23/Mathematics/形式语言2/2_3.png" width="30%" height="30%">
 </li>
 <li><p>添加开始和结束</p>
@@ -504,12 +476,12 @@
 <p>同样的，我们也可以给出包含$\varepsilon$边NFA-DFA转换</p>
 <center><img src="/2021/06/23/Mathematics/形式语言2/2_6.png" width="20%" height="20%" style="display: inline-block"><img src="/2021/06/23/Mathematics/形式语言2/2_7.png" width="45%" height="45%" style="display: inline-block"></center>
 
-<p>通过该定理，我们可以证明正则语言封闭性:</p>
+<h2 id="3-2-正则语言封闭性证明"><a href="#3-2-正则语言封闭性证明" class="headerlink" title="3.2 正则语言封闭性证明"></a>3.2 正则语言封闭性证明</h2><p>通过该定理，我们可以证明正则语言封闭性:</p>
 <ol>
-<li><p>构造如图的机器NFA $N$来识别$A_1\cup A_2$。</p>
+<li><p>构造如图的NFA $N$来识别$A_1\cup A_2$。</p>
 <img src="/2021/06/23/Mathematics/形式语言2/3_1.png" width="40%" height="40%">
 
-<p>证明见<a href="#prof1">前文证明</a></p>
+<p>证明见<a href="#prof1">前文</a></p>
 </li>
 <li><p>构造如图的NFA $N$来识别$A_1\circ A_2$。</p>
 <img src="/2021/06/23/Mathematics/形式语言2/3_2.png" width="45%" height="45%">
@@ -519,10 +491,10 @@
 <li>$Q=Q_1\cup Q_2$</li>
 <li>$q_0=q_1$</li>
 <li>$F=F_2$</li>
-<li>定义状态转移函数$\delta$<br>$$\delta(q,a)=\begin{cases}<br> \delta_1(q,a) &amp; q\in Q_1\ and\ q\not\in F_1 \\<br> \delta_1(q,a) &amp; q\in F_1\ and\ a\not=\varepsilon \\<br> \delta_1(q,a)\cup\lbrace q_2\rbrace &amp; q\in F_1\ and\ a=\varepsilon \\<br> \delta_2(q,a) &amp; q\in Q_2<br> \end{cases}$$</li>
+<li>定义状态转移函数$\delta$<br>$$\delta(q,a)=\begin{cases}<br> \delta_1(q,a) &amp; q\in Q_1\ \mathrm{and}\ q\not\in F_1 \\<br> \delta_1(q,a) &amp; q\in F_1\ \mathrm{and}\ a\not=\varepsilon \\<br> \delta_1(q,a)\cup\lbrace q_2\rbrace &amp; q\in F_1\ \mathrm{and}\ a=\varepsilon \\<br> \delta_2(q,a) &amp; q\in Q_2<br> \end{cases}$$</li>
 </ol>
 </li>
-<li><p>构造如图的机器NFA $N$来识别$A^\ast$。</p>
+<li><p>构造如图的NFA $N$来识别$A^\ast$。</p>
 <img src="/2021/06/23/Mathematics/形式语言2/3_3.png" width="46%" height="46%">
 
 <p>证明：令$N_1=\lbrace Q_1, \Sigma, \delta_1, q_1, F_1\rbrace$识别$A_1$，构造$N=\lbrace Q, \Sigma, \delta, q_0, F\rbrace$</p>
@@ -530,16 +502,16 @@
 <li>$Q=Q_1\cup \lbrace q_0\rbrace$</li>
 <li>$q_0$是新的开始状态</li>
 <li>$F=F_1\cup\lbrace q_0\rbrace$，新的开始状态也是结束状态</li>
-<li>定义状态转移函数$\delta$<br> $$\delta(q,a)=\begin{cases}<br>  \delta_1(q,a) &amp; q\in Q_1\ and\ q\not\in F_1 \\<br>  \delta_1(q,a) &amp; q\in F_1\ and\ a\not=\varepsilon \\<br>  \delta_1(q,a)\cup\lbrace q_1\rbrace &amp; q\in F_1\ and\ a=\varepsilon \\<br>  \lbrace q_1\rbrace &amp; q=q_0\ and\ a=\varepsilon \\<br>  \emptyset &amp; q=q_0\ and\ a\not=\varepsilon<br>  \end{cases}$$</li>
+<li>定义状态转移函数$\delta$<br> $$\delta(q,a)=\begin{cases}<br>  \delta_1(q,a) &amp; q\in Q_1\ \mathrm{and}\ q\not\in F_1 \\<br>  \delta_1(q,a) &amp; q\in F_1\ \mathrm{and}\ a\not=\varepsilon \\<br>  \delta_1(q,a)\cup\lbrace q_1\rbrace &amp; q\in F_1\ \mathrm{and}\ a=\varepsilon \\<br>  \lbrace q_1\rbrace &amp; q=q_0\ \mathrm{and}\ a=\varepsilon \\<br>  \emptyset &amp; q=q_0\ \mathrm{and}\ a\not=\varepsilon<br>  \end{cases}$$</li>
 </ol>
 </li>
 </ol>
 <hr>
-<h1 id="4-正则语言与正则表达式的关系"><a href="#4-正则语言与正则表达式的关系" class="headerlink" title="4. 正则语言与正则表达式的关系"></a>4. 正则语言与正则表达式的关系</h1><h2 id="4-1-定义"><a href="#4-1-定义" class="headerlink" title="4.1 定义"></a>4.1 定义</h2><p>我们可以使用正则运算$\cup,\circ, ^{\ast}$构建正则表达式，并描述正则语言。例如，对于正则表达式$(0\cup 1)^\ast$描述了所有由$0$和$1$组成的语言。</p>
-<blockquote>
-<p>正则表达式的定义：<br>如果$R$满足以下条件之一，则$R$是正则表达式：</p>
+<h1 id="4-正则表达式"><a href="#4-正则表达式" class="headerlink" title="4. 正则表达式"></a>4. 正则表达式</h1><p>正则表达式是用于描述正则语言的一套符号系统，该符号系统由$\Sigma$和正则运算$\cup,\circ, ^{\ast}$构成。例如，对于正则表达式$(0\cup 1)^\ast$描述了所有由$0$和$1$组成的语言。</p>
+<h2 id="4-1-定义"><a href="#4-1-定义" class="headerlink" title="4.1 定义"></a>4.1 定义</h2><blockquote>
+<p><strong>正则表达式</strong>：<span id="def1"></span><br>如果$R$满足以下条件之一，则$R$是正则表达式：</p>
 <ol>
-<li>$\lbrace a\rbrace$, $a\in\Sigma$</li>
+<li>$\lbrace a\rbrace$, $a\in\Sigma$。即一个字母表$\Sigma$中的字母就是一个最简单的正则表达式</li>
 <li>$\lbrace\varepsilon\rbrace$</li>
 <li>$\emptyset$</li>
 <li>$R_1\cup R_2$，其中$R_1$和$R_2$都是正则表达式</li>
@@ -556,14 +528,15 @@
 <li>$1^\ast\emptyset=\emptyset$，注意$\emptyset$代表不被任何FA接收，任意包含$\emptyset$的字符串都等价于$\emptyset$</li>
 <li>$\emptyset^\ast=\lbrace\varepsilon\rbrace$，这种情况十分特殊</li>
 </ul>
-<h2 id="4-2-正则表达式与FA的等价性"><a href="#4-2-正则表达式与FA的等价性" class="headerlink" title="4.2 正则表达式与FA的等价性"></a>4.2 正则表达式与FA的等价性</h2><blockquote>
+<h2 id="4-2-正则表达式与FA的等价性"><a href="#4-2-正则表达式与FA的等价性" class="headerlink" title="4.2 正则表达式与FA的等价性"></a>4.2 正则表达式与FA的等价性</h2><p>正则表达式与FA都会用于描述正则语言的一种形式化的方式，且正则表达式与FA等价的，换句话说，NFA$\equiv$DFA$\equiv$正则表达式$\equiv$正则语言。</p>
+<blockquote>
 <p>定理：一个语言是正则的，当且仅当存在一个正则表达式能描述它</p>
 </blockquote>
-<p>下面，我们通过两个引理，来证明上述定理，即正则表达式与正则语言的等价性。</p>
-<blockquote>
+<p>下面，我们通过两个引理来阐述NFA和正则表达式之间的相互转换。</p>
+<h3 id="4-2-1-正则表达式转换为NFA"><a href="#4-2-1-正则表达式转换为NFA" class="headerlink" title="4.2.1 正则表达式转换为NFA"></a>4.2.1 正则表达式转换为NFA</h3><blockquote>
 <p>引理1：如果一个语言能被正则表达式描述，那么该语言是正则的</p>
 </blockquote>
-<p>证明：<br>我们可以将任意正则表达式$R$转换为NFA，而NFA与FA是等价的，故而正则表达式与FA是等价的。考虑六种情况</p>
+<p>证明：<br>我们可以将任意描述语言的正则表达式$R$转换为NFA，而N由前面的<a href="#lemma1">NFA-RL等价定理</a>可知NFA能识别的语言是正则的。考虑我们根据<a href="#def1">正则表达式的定义</a>给出6条正则表达式-NFA转换规则:</p>
 <ol>
 <li><p>$R=a$, $a\in\Sigma$。那么$L(R)=\lbrace a\rbrace$，并且下图的NFA可以识别$L(R)$</p>
 <img src="/2021/06/23/Mathematics/形式语言2/4_1.png" width="10%" height="10%">
@@ -581,13 +554,12 @@
 <li><p>$R=R_1^\ast$</p>
 </li>
 </ol>
-<p>相应的，给定一个正则表达式，我们可以构造出对应的NFA，例如$(ab\cup a)^\ast$</p>
+<p>根据以上转换规则，我们可以尝试转换一个正则表达式，例如$(ab\cup a)^\ast$</p>
    <img src="/2021/06/23/Mathematics/形式语言2/4_4.png" width="45%" height="45%">
 
-<blockquote>
+<h3 id="4-2-2-DFA转换为正则表达式"><a href="#4-2-2-DFA转换为正则表达式" class="headerlink" title="4.2.2 DFA转换为正则表达式"></a>4.2.2 DFA转换为正则表达式</h3><blockquote>
 <p>引理2：如果一个语言是正则的，那么它能被正则表达式描述</p>
 </blockquote>
-<p>对该引理的证明思路：DFA$\Rightarrow$GNFA$\Rightarrow$正则表达式</p>
 <p>首先我们引入一个新的概念：广义NFA(Generalized NFA, GNFA)，如下图所示：</p>
 <img src="/2021/06/23/Mathematics/形式语言2/4_5.png" width="35%" height="35%">
 
@@ -598,45 +570,36 @@
 <li>只有一个结束状态，所有状态都直接与结束状态相连，结束状态没有出边。</li>
 <li>除了开始状态和结束状态，任意一个状态都会到达其他所有状态，且任意一个状态都有自身环转移。</li>
 </ol>
-<p>给定一个DFA，我们可以通过以下几个步骤将其转换为GNFA：</p>
+<p>有了GNFA，我们可以通过DFA$\Rightarrow$GNFA$\Rightarrow$正则表达式来证明上述引理。给定一个DFA，我们可以通过以下几个步骤将其转换为GNFA：</p>
 <ol>
 <li>添加一个新的初始状态，并通过$\varepsilon$转移到旧的初始状态</li>
 <li>添加一个新的结束状态，并通过$\varepsilon$转移自旧的结束状态集</li>
 <li>如果两个结点之间存在多条方向相同的边，通过$\cup$将其合并为一条边</li>
 <li>如果两个状态之间没有边，则添加label为$\emptyset$的新边。</li>
 </ol>
-<p>随后，通过逐个删除GNFA中的节点，并修改相应的边的label，直至GNFA中只剩开始结点和终止结点。这两个结点之间的边的label就是最终的正则表达式。下图是一个DFA转换为正则表达式的例子：</p>
+<p>构造完成GNFA后，我们逐个删除GNFA中的节点，并修改相应的边的label，直至GNFA中只剩开始结点和终止结点。这两个结点之间的边的label就是最终的正则表达式。下图是一个DFA转换为正则表达式的例子：</p>
 <img src="/2021/06/23/Mathematics/形式语言2/4_6.png" width="40%" height="40%">
 
 <p>一个更复杂的例子</p>
 <img src="/2021/06/23/Mathematics/形式语言2/4_7.png" width="60%" height="60%">
 
 <hr>
-<h1 id="4-非正则语言"><a href="#4-非正则语言" class="headerlink" title="4. 非正则语言"></a>4. 非正则语言</h1><p>FA的能力十分有限，大多数的语言都不能被FA所识别，例如$B=\lbrace 0^n1^n|n\ge0\rbrace$，机器需要记住目前为止读取了多少个$0$，而FA因为没有额外内存而无法做到这一点。对这样的语言，我们称为非正则语言。</p>
-<p>首先介绍两个术语：pumping lemma以及pumping length</p>
-<blockquote>
-<p><strong>Pumping Lemma定理</strong><br>如果$A$是正则语言，那么存在一个数$p$(即pumping length)，当$s$是$A$中任意一个长度至少为$p$的子串时，$s$可以被分为三部分，即$s=xyz$，并且$s$满足以下三种情况</p>
+<h1 id="4-非正则语言"><a href="#4-非正则语言" class="headerlink" title="4. 非正则语言"></a>4. 非正则语言</h1><p>FA的能力十分有限，大多数的语言都不能被FA所识别，例如$B=\lbrace 0^n1^n|n\ge0\rbrace$，机器需要记住目前为止读取了多少个$0$，而FA因为没有额外内存而无法做到这一点。对这样的语言，我们称为非正则语言。给定一个语言，如何判定它是否正则呢？这时就轮到pumping lemma出场了</p>
+<h2 id="4-1-Pumping-Lemma"><a href="#4-1-Pumping-Lemma" class="headerlink" title="4.1 Pumping Lemma"></a>4.1 Pumping Lemma</h2><blockquote>
+<p><strong>Pumping Length</strong><br>pumping length是指：同一个语言内的所有字符串都存在一个特殊的子串，该子串可以被重复任意次，重复后的字符串仍然属于该语言，这个子串的长度即为pumping length<br><br><br><strong>Pumping Lemma</strong><br>如果$A$是正则语言，那么存在一个数$p$(即pumping length)，当$s$是$A$中任意一个长度至少为$p$的子串时，$s$可以被分为三部分，即$s=xyz$，并且$s$满足以下三个性质</p>
 <ol>
 <li>对于任意$i\ge0, xy^iz\in A$</li>
-<li>$|y|&gt;0$，而$x$和$y$允许为$\varepsilon$</li>
+<li>$|y|&gt;0$，$x$和$y$允许为$\varepsilon$</li>
 <li>$|xy|\le p$，即$x$和$y$的总长度不超过$p$</li>
 </ol>
 </blockquote>
-<blockquote>
-<p>Pumping Length<br>pumping length是指所有字符串都存在一个相邻子串，该部分可以被重复任意次，重复后的字符串仍然是该语言，这个子串的长度即为pumping length</p>
-</blockquote>
-<h2 id="4-1-Pumping-Lemma的证明"><a href="#4-1-Pumping-Lemma的证明" class="headerlink" title="4.1 Pumping Lemma的证明"></a>4.1 Pumping Lemma的证明</h2><p>令$M=(Q,\Sigma,\delta,q_0,F)$</p>
+<p><strong>Pumping Lemma的证明</strong><br>令$M=(Q,\Sigma,\delta,q_0,F)$</p>
 <ul>
 <li>令$p$是$M$的状态数，即$p=|Q|$</li>
-<li>$A$中任意字符串$s$都可转换为三部分$xyz$</li>
-<li>如果$s$的长度$n$大于等于$p$，我们考虑$M$接收$s$时的状态序列：<ul>
-<li>这个状态序列的长度为$n+1$(因为包含开始状态)，而$n\ge p$</li>
-<li>因此这状态序列肯定包含一个重复状态</li>
-<li>根据这个重复状态将$s$划分为$xyz$</li>
+<li>$A$中任意长度至少为$p$字符串$s$都可划分为三部分$xyz$</li>
+<li>对$s$，我们考虑$M$接收$s$时的<strong>状态序列</strong>：假设这个状态序列的长度为$n+1$(因为包含开始状态)，而$n\ge p$，因此这状态序列肯定包含一个重复状态$p_r$。我们可以根据这个重复状态将$s$划分为$xyz$，其中$x$是第一个$p_r$之前的状态序列，$y$是两个$p_r$之间的状态序列，$z$是第二个$p_r$之后的状态序列。因为$y$从$p_r$出发最终又回到$p_r$，因此它重复任意次，该字符串依然属于该语言。</li>
 </ul>
-</li>
-</ul>
-<h2 id="4-2-举例"><a href="#4-2-举例" class="headerlink" title="4.2 举例"></a>4.2 举例</h2><p>证明$B=\lbrace 0^n1^n|n\ge0\rbrace$不是正则的</p>
+<h2 id="4-2-非正则语言的证明"><a href="#4-2-非正则语言的证明" class="headerlink" title="4.2 非正则语言的证明"></a>4.2 非正则语言的证明</h2><p>证明语言$B=\lbrace 0^n1^n|n\ge0\rbrace$不是正则的</p>
 <p><strong>证明</strong></p>
 <ol>
 <li>假设$B$是正则的，那么$B$中存在pumping length $p$</li>
@@ -647,57 +610,25 @@
 <li>子串$y$由$0$和$1$组成，那么$xyyz$中，$yy$的存在会导致$1$出现在$0$前的乱序，也是不可取的</li>
 </ol>
 </li>
-<li>因此，无论怎么划分，划分后的子串都不属于$B$，因此$B$不是正则的。</li>
+<li>因此，无论怎么划分，划分后的子串都不属于$B$，因此语言$B$不是正则的。</li>
 </ol>
 <hr>
 <h1 id="第二次作业"><a href="#第二次作业" class="headerlink" title="第二次作业"></a>第二次作业</h1><ol>
 <li><p>The formal description of a DFA $M$ is $(\lbrace q_1,q_2,q_3,q_4,q_5\rbrace,\lbrace u,d\rbrace, \delta, q_3, \lbrace q_3\rbrace)$, where $\delta$ is given by the following table. Give the state diagram of this machine.</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>$u$</th>
-<th>$d$</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>$q_1$</td>
-<td>$q_1$</td>
-<td>$q_2$</td>
-</tr>
-<tr>
-<td>$q_2$</td>
-<td>$q_1$</td>
-<td>$q_3$</td>
-</tr>
-<tr>
-<td>$q_3$</td>
-<td>$q_2$</td>
-<td>$q_4$</td>
-</tr>
-<tr>
-<td>$q_4$</td>
-<td>$q_3$</td>
-<td>$q_5$</td>
-</tr>
-<tr>
-<td>$q_5$</td>
-<td>$q_4$</td>
-<td>$q_6$</td>
-</tr>
-</tbody></table>
+<img src="/2021/06/23/Mathematics/形式语言2/e1_1.png" width="14%" height="14%">
+
 <p><strong>Answer</strong></p>
 <img src="/2021/06/23/Mathematics/形式语言2/e1.png" width="60%" height="60%">
 </li>
 <li><p>Give state diagrams of DFAs recognizing the following languages. In all parts, the alphabet is $\lbrace 0, 1\rbrace$</p>
 <ol>
-<li>$\lbrace w|w\ begins\ with\ a\ 1\ and\ ends\ with\ a\ 0\rbrace$</li>
-<li>$\lbrace w|w\ contains\ at\ least\ three\ 1s\rbrace$</li>
-<li>$\lbrace w|w\ contains\ the\ substring\ 0101(i.e.,\ w=x0101y\ for\ some\ x\ and\ y)\rbrace$</li>
+<li>$\lbrace w|w\ \mathrm{begins\ with\ a}\ 1\ \mathrm{and\ ends\ with\ a}\ 0\rbrace$</li>
+<li>$\lbrace w|w\ \mathrm{contains\ at\ least\ three}\ 1s\rbrace$</li>
+<li>$\lbrace w|w\ \mathrm{contains\ the\ substring}\ 0101(\mathrm{i.e.,}\ w=x0101y\ \mathrm{for\ some}\ x\ \mathrm{and}\ y)\rbrace$</li>
 </ol>
 <p><strong>Answer</strong></p>
 <ol>
-<li><img src="/2021/06/23/Mathematics/形式语言2/e21.png" width="35%" height="35%">
+<li><img src="/2021/06/23/Mathematics/形式语言2/e21.png" width="25%" height="25%">
 </li>
 </ol>
 <hr>
@@ -743,9 +674,9 @@
 <p><strong>Answer</strong></p>
 <ol>
 <li>假定$A_1$是正则的，那么$A_1$肯定存在pumping length，假设为$p$，考虑字符串$s=0^p1^p2^p\in A_1$</li>
-<li>因为$A_1$是正则的，根据pumping lemma，$s$可以被分为$xyz$三部分，且对任意$i\ge0$，有$xy^i\in A_1$</li>
+<li>因为$A_1$是正则的，根据pumping lemma，$s$可以被分为$xyz$三部分，且对任意$i\ge0$，有$xy^iz\in A_1$</li>
 <li>现考虑以下几种情况：<ol>
-<li>子串$y$全由$0$组成，则$x=0^i,y=0^j,z=0^{p-i-j}1^p2^p$，那么$xyyz=0^{p+j}y^pz^p$，$0$的个数多于$1$和$2$，不属于$A_1$</li>
+<li>子串$y$全由$0$组成，令$x=0^i,y=0^j,z=0^{p-i-j}1^p2^p$，那么$xyyz=0^{p+j}y^pz^p$，$0$的个数多于$1$和$2$，不属于$A_1$</li>
 <li>子串$y$全由$1$组成，同上</li>
 <li>子串$y$全由$2$组成，同上</li>
 <li>子串$y$由$0$和$1$组成，则$xyyz$中会出现$1$在$0$前的乱序</li>
@@ -962,7 +893,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-有限状态机"><span class="toc-text">1 有限状态机</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-有限状态机的作用"><span class="toc-text">1.1 有限状态机的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-正则语言"><span class="toc-text">1.2 正则语言</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-预备知识"><span class="toc-text">2 预备知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-有限自动机的设计"><span class="toc-text">2.1 有限自动机的设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-基于语言的运算"><span class="toc-text">2.2 基于语言的运算</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-非确定性"><span class="toc-text">3 非确定性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-非确定自动机NFA"><span class="toc-text">3.1 非确定自动机NFA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-NFA与DFA的等价性"><span class="toc-text">3.2 NFA与DFA的等价性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-正则语言与正则表达式的关系"><span class="toc-text">4. 正则语言与正则表达式的关系</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-定义"><span class="toc-text">4.1 定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-正则表达式与FA的等价性"><span class="toc-text">4.2 正则表达式与FA的等价性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-非正则语言"><span class="toc-text">4. 非正则语言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Pumping-Lemma的证明"><span class="toc-text">4.1 Pumping Lemma的证明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-举例"><span class="toc-text">4.2 举例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二次作业"><span class="toc-text">第二次作业</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-有限自动机"><span class="toc-text">1 有限自动机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-FA的构造与相关性质"><span class="toc-text">2 FA的构造与相关性质</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-构造FA"><span class="toc-text">2.1 构造FA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-基于语言的运算"><span class="toc-text">2.2 基于语言的运算</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-非确定自动机"><span class="toc-text">3 非确定自动机</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-NFA与DFA"><span class="toc-text">3.1 NFA与DFA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-正则语言封闭性证明"><span class="toc-text">3.2 正则语言封闭性证明</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-正则表达式"><span class="toc-text">4. 正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-定义"><span class="toc-text">4.1 定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-正则表达式与FA的等价性"><span class="toc-text">4.2 正则表达式与FA的等价性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1-正则表达式转换为NFA"><span class="toc-text">4.2.1 正则表达式转换为NFA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2-DFA转换为正则表达式"><span class="toc-text">4.2.2 DFA转换为正则表达式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-非正则语言"><span class="toc-text">4. 非正则语言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Pumping-Lemma"><span class="toc-text">4.1 Pumping Lemma</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-非正则语言的证明"><span class="toc-text">4.2 非正则语言的证明</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二次作业"><span class="toc-text">第二次作业</span></a></li></ol>
     </div>
   </section>
 
@@ -1009,9 +940,9 @@
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(5)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(1)</div></a></li>
+          <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(2)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(5)</div></a></li>
+          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(8)</div></a></li>
         
       </ul>
     </div>
@@ -1042,7 +973,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/Array/" style="font-size: 14px; color: #999">Array</a> <a href="/tags/C/" style="font-size: 20.67px; color: #6c6c6c">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 24px; color: #555">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 17.33px; color: #828282">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 20.67px; color: #6c6c6c">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/PDF/" style="font-size: 14px; color: #999">PDF</a> <a href="/tags/Process/" style="font-size: 20.67px; color: #6c6c6c">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 20.67px; color: #6c6c6c">Ubuntu</a> <a href="/tags/短篇小说/" style="font-size: 14px; color: #999">短篇小说</a>
+      <a href="/tags/Array/" style="font-size: 14px; color: #999">Array</a> <a href="/tags/C/" style="font-size: 20.67px; color: #6c6c6c">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 24px; color: #555">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 17.33px; color: #828282">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 20.67px; color: #6c6c6c">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/PDF/" style="font-size: 14px; color: #999">PDF</a> <a href="/tags/Process/" style="font-size: 20.67px; color: #6c6c6c">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 20.67px; color: #6c6c6c">Ubuntu</a> <a href="/tags/哲学/" style="font-size: 14px; color: #999">哲学</a> <a href="/tags/短篇小说/" style="font-size: 14px; color: #999">短篇小说</a>
     </div>
   </section>
 
@@ -1132,14 +1063,14 @@
       $(function(){
         if ('') {
           $('').backstretch(
-          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg"],
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
           {
             duration: "60000",
             fade: "25000"
           });
         } else {
           $.backstretch(
-          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg"],
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
           {
             duration: "60000",
             fade: "25000"

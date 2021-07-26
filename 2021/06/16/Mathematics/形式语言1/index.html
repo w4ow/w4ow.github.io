@@ -298,10 +298,10 @@
           
         
           
-            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-01T13:48:35+08:00">
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-26T09:46:11+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>updated at 2021-07-01</p>
+    <p>updated at 2021-07-26</p>
   </a>
 </div>
 
@@ -350,14 +350,15 @@
 <p>Lecture 0：绪论</p>
 <a href="/2021/06/23/Mathematics/形式语言2/" title="Lecture 1：正则语言">Lecture 1：正则语言</a><br>
 <a href="/2021/06/27/Mathematics/形式语言3/" title="Lecture 2：上下文无关语言">Lecture 2：上下文无关语言</a><br>
-<a href="/2021/06/29/Mathematics/形式语言4/" title="Lecture 3：Church-Turing">Lecture 3：Church-Turing</a>
+<a href="/2021/06/29/Mathematics/形式语言4/" title="Lecture 3：Church-Turing">Lecture 3：Church-Turing</a><br>
+<a href="/2021/07/04/Mathematics/形式语言5/" title="Lecture 4：可判定性">Lecture 4：可判定性</a><br>
+<a href="/2021/07/05/Mathematics/形式语言6/" title="Lecture 5：可规约性">Lecture 5：可规约性</a><br>
+<a href="/2021/07/05/Mathematics/形式语言7/" title="Lecture 6：时间复杂度">Lecture 6：时间复杂度</a>
 
 <hr>
 <a id="more"></a>
 
-<h1 id="1-自动机、可计算性与复杂性"><a href="#1-自动机、可计算性与复杂性" class="headerlink" title="1 自动机、可计算性与复杂性"></a>1 自动机、可计算性与复杂性</h1><p>略</p>
-<hr>
-<h1 id="2-符号与术语"><a href="#2-符号与术语" class="headerlink" title="2 符号与术语"></a>2 符号与术语</h1><h2 id="2-1-集合"><a href="#2-1-集合" class="headerlink" title="2.1 集合"></a>2.1 集合</h2><ul>
+<h1 id="1-符号与术语"><a href="#1-符号与术语" class="headerlink" title="1 符号与术语"></a>1 符号与术语</h1><h2 id="1-1-集合"><a href="#1-1-集合" class="headerlink" title="1.1 集合"></a>1.1 集合</h2><ul>
 <li>集合(set)：一组不包含重复对象的整体，无顺序关系</li>
 <li>$\in$和$\not\in$，表示元素和集合的从属关系</li>
 <li>$\subseteq$和$\not\subseteq$，表集合与集合之间的从属关系</li>
@@ -367,22 +368,21 @@
 <li>$\lbrace n|\mathrm{rule\ about\ }n\rbrace$:集合的另一种写法</li>
 <li>$\cup,\cap, \overline{A}$:交、并、补</li>
 </ul>
-<h2 id="2-2-序列与元组"><a href="#2-2-序列与元组" class="headerlink" title="2.2 序列与元组"></a>2.2 序列与元组</h2><ul>
+<h2 id="1-2-序列与元组"><a href="#1-2-序列与元组" class="headerlink" title="1.2 序列与元组"></a>1.2 序列与元组</h2><ul>
 <li><p>序列：有序的对象组合</p>
 </li>
 <li><p>元组(tuple)：有限序列，$k$个对象的序列称为$k$-元组，$2$-元组亦称为有序对</p>
 </li>
 <li><p>幂集(power set)：集合的所有子集(包括空集)</p>
 </li>
-<li><p>笛卡尔积：两个集合$A,B$中的元素组成的所有有序对的集合，其中第一个元素来自$A$，第二个元素来自$B$。例：</p>
-<p>$A = \lbrace 1, 2\rbrace$</p>
-<p>$B = \lbrace x, y, z\rbrace$</p>
+<li><p>笛卡尔积$\times$：两个集合$A,B$中的元素组成的所有有序对的集合，其中第一个元素来自$A$，第二个元素来自$B$。例：</p>
+<p>$A = \lbrace 1, 2\rbrace,B = \lbrace x, y, z\rbrace$</p>
 <p>$A \times B = \lbrace (1, x),(1, y),(1, z),(2, x),(2, y),(2, z)\rbrace$</p>
 </li>
 <li><p>$A^k=\underset{k}{\underbrace{A\times A\times \cdots\times A}}$</p>
 </li>
 </ul>
-<h2 id="2-3-函数与关系"><a href="#2-3-函数与关系" class="headerlink" title="2.3 函数与关系"></a>2.3 函数与关系</h2><p><strong>函数与映射</strong><br>函数是输入输出之间的映射关系</p>
+<h2 id="1-3-函数与关系"><a href="#1-3-函数与关系" class="headerlink" title="1.3 函数与关系"></a>1.3 函数与关系</h2><p><strong>函数与映射</strong><br>函数是输入输出之间的映射关系</p>
 <p><strong>定义域(doamin)与值域(range)</strong></p>
 <ul>
 <li>函数的输入所可能取到的值的集合称为定义域</li>
@@ -407,27 +407,26 @@
 <p>谓词(predicate)，是声明的数学形式化术语，表示一个断言，其值域为<em>true</em>或<em>false</em>。
 给定一个谓词，若其定义域为$A\times\cdots\times A$，则称该谓词为一个关系(relation)，亦称之为($A$上的)$k$元关系。例如，2元关系谓词$aRb$意味着$aRb=True$</p>
 <ul>
-<li>给定定义域$A$,满足以下三个性质的<strong>2元关系</strong>$R$称为等价关系<ul>
+<li>给定定义域$A$,<strong>满足以下三个性质的2元关系$R$称为等价关系</strong><ul>
 <li>自反性reflexive: 若$x=True$，则$xRx=True$</li>
 <li>对称性symmetric：若$xRy=True$， 则$yRx=True$</li>
 <li>传递性transitive: 若$xRy=True,yRz=True$，则$xRz=True$</li>
 </ul>
 </li>
 </ul>
-<h2 id="2-4-图"><a href="#2-4-图" class="headerlink" title="2.4 图"></a>2.4 图</h2><p>略</p>
-<h2 id="2-5-字符串与语言"><a href="#2-5-字符串与语言" class="headerlink" title="2.5 字符串与语言"></a>2.5 字符串与语言</h2><ul>
+<h2 id="1-4-字符串与语言"><a href="#1-4-字符串与语言" class="headerlink" title="1.4 字符串与语言"></a>1.4 字符串与语言</h2><ul>
 <li>字母表Alphabet：任意非空有限集合</li>
 <li>符号Symbols：字母表中的元素</li>
 <li>本课程中表示字母表的符号包括:$\Sigma, \Gamma$</li>
-<li>字符串：基于给定字母表的有限符号序列，例如$01001$是基于$\Gamma=\lbrace0,1\rbrace$的字符串。</li>
+<li>字符串：本课程中的字符串都是基于给定字母表的有限符号序列，例如$01001$是基于$\Sigma=\lbrace0,1\rbrace$的字符串。</li>
 <li>字符串$w$的长度记为$|w|$</li>
 <li>空字符串记为$\varepsilon$</li>
-<li>字典序(lexicographic order),shortlex order等价于字典序，但短字符排在长字符之前</li>
+<li>lexicographic order就是字典序,shortlex order等价于字典序，但短字符排在长字符之前</li>
 <li>语言是字符串的集合</li>
 <li>前缀：如果存在字符串$x$和$y$的拼接使得$xy=z$，则称$x$是$z$的前缀。若$x\not=z$则称为真前缀</li>
 <li><strong>前缀无关</strong>：一个语言中(即字符串集合)，不存在一个元素是另一个元素的真前缀，则称该语言前缀无关。</li>
 </ul>
-<h2 id="2-6-布尔逻辑"><a href="#2-6-布尔逻辑" class="headerlink" title="2.6 布尔逻辑"></a>2.6 布尔逻辑</h2><ul>
+<h2 id="1-5-布尔逻辑"><a href="#1-5-布尔逻辑" class="headerlink" title="1.5 布尔逻辑"></a>1.5 布尔逻辑</h2><ul>
 <li>符号：$\lnot, \land, \lor, \oplus$(左右不等则为真), $\leftrightarrow$(左右相等则为真)，$\to$(左假右真则为假)</li>
 <li>分配律：<ul>
 <li>$P\land(Q\lor R)=(P\land Q)\lor(P\land R)$</li>
@@ -436,7 +435,7 @@
 </li>
 </ul>
 <hr>
-<h1 id="3-定义、定理与证明"><a href="#3-定义、定理与证明" class="headerlink" title="3 定义、定理与证明"></a>3 定义、定理与证明</h1><ul>
+<h1 id="2-定义、定理与证明"><a href="#2-定义、定理与证明" class="headerlink" title="2 定义、定理与证明"></a>2 定义、定理与证明</h1><ul>
 <li>定义：对目标的描述，不可存在二义性</li>
 <li>证明：说明一个声明为真的过程</li>
 <li>定理：已经被证明为真的数学声明<ul>
@@ -484,7 +483,7 @@
 <li>Yes</li>
 <li>$\lbrace x, y, z\rbrace$</li>
 <li>$\lbrace x, y\rbrace$</li>
-<li>$\lbrace (x,y), (x,y), (y,x), (y,y), (z,x), (z, y)\rbrace$</li>
+<li>$\lbrace (x,x), (x,y), (y,x), (y,y), (z,x), (z, y)\rbrace$</li>
 <li>$\lbrace \emptyset, \lbrace x\rbrace, \lbrace y\rbrace, \lbrace x, y\rbrace \rbrace$</li>
 </ol>
 </li>
@@ -716,7 +715,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-自动机、可计算性与复杂性"><span class="toc-text">1 自动机、可计算性与复杂性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-符号与术语"><span class="toc-text">2 符号与术语</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-集合"><span class="toc-text">2.1 集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-序列与元组"><span class="toc-text">2.2 序列与元组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-函数与关系"><span class="toc-text">2.3 函数与关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-图"><span class="toc-text">2.4 图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-字符串与语言"><span class="toc-text">2.5 字符串与语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-布尔逻辑"><span class="toc-text">2.6 布尔逻辑</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-定义、定理与证明"><span class="toc-text">3 定义、定理与证明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一次作业"><span class="toc-text">第一次作业</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-符号与术语"><span class="toc-text">1 符号与术语</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-集合"><span class="toc-text">1.1 集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-序列与元组"><span class="toc-text">1.2 序列与元组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-函数与关系"><span class="toc-text">1.3 函数与关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-字符串与语言"><span class="toc-text">1.4 字符串与语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-布尔逻辑"><span class="toc-text">1.5 布尔逻辑</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-定义、定理与证明"><span class="toc-text">2 定义、定理与证明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一次作业"><span class="toc-text">第一次作业</span></a></li></ol>
     </div>
   </section>
 
@@ -763,9 +762,9 @@
         
           <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(5)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(1)</div></a></li>
+          <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(2)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(5)</div></a></li>
+          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(8)</div></a></li>
         
       </ul>
     </div>
@@ -796,7 +795,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/Array/" style="font-size: 14px; color: #999">Array</a> <a href="/tags/C/" style="font-size: 20.67px; color: #6c6c6c">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 24px; color: #555">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 17.33px; color: #828282">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 20.67px; color: #6c6c6c">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/PDF/" style="font-size: 14px; color: #999">PDF</a> <a href="/tags/Process/" style="font-size: 20.67px; color: #6c6c6c">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 20.67px; color: #6c6c6c">Ubuntu</a> <a href="/tags/短篇小说/" style="font-size: 14px; color: #999">短篇小说</a>
+      <a href="/tags/Array/" style="font-size: 14px; color: #999">Array</a> <a href="/tags/C/" style="font-size: 20.67px; color: #6c6c6c">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 24px; color: #555">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 17.33px; color: #828282">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 20.67px; color: #6c6c6c">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/PDF/" style="font-size: 14px; color: #999">PDF</a> <a href="/tags/Process/" style="font-size: 20.67px; color: #6c6c6c">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 20.67px; color: #6c6c6c">Ubuntu</a> <a href="/tags/哲学/" style="font-size: 14px; color: #999">哲学</a> <a href="/tags/短篇小说/" style="font-size: 14px; color: #999">短篇小说</a>
     </div>
   </section>
 
@@ -886,14 +885,14 @@
       $(function(){
         if ('') {
           $('').backstretch(
-          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg"],
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
           {
             duration: "60000",
             fade: "25000"
           });
         } else {
           $.backstretch(
-          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg"],
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
           {
             duration: "60000",
             fade: "25000"

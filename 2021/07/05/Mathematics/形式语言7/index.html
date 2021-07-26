@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>形式语言与计算复杂性(六)：时间复杂度 | 柴</title>
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <h1 class='title'> </h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-home fa-fw'></i>&nbsp;HOME
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Computer-Science"
+            
+            
+            id="categoriesComputer-Science">
+            <i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Mathematics"
+            
+            
+            id="categoriesMathematics">
+            <i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Literature"
+            
+            
+            id="categoriesLiterature">
+            <i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          柴
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/categories/Computer-Science"
+                  
+                  
+                  id="categoriesComputer-Science">
+									<i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/Mathematics"
+                  
+                  
+                  id="categoriesMathematics">
+									<i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/Literature"
+                  
+                  
+                  id="categoriesLiterature">
+									<i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Computer-Science"
+                
+                  rel="nofollow"
+                
+                
+                id="categoriesComputer-Science">
+								<i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Mathematics"
+                
+                
+                id="categoriesMathematics">
+								<i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Literature"
+                
+                
+                id="categoriesLiterature">
+								<i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;ARCHIVE
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/"
+                
+                  rel="nofollow"
+                
+                
+                id="categories">
+								<i class='fas fa-folder-open fa-fw'></i>&nbsp;CATEGORIES
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/tags/"
+                
+                  rel="nofollow"
+                
+                
+                id="tags">
+								<i class='fas fa-tags fa-fw'></i>&nbsp;TAGS
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2021/07/05/Mathematics/形式语言7/">
+        形式语言与计算复杂性(六)：时间复杂度
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2021-07-05</p>
+  </a>
+</div>
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-26T09:46:11+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>updated at 2021-07-26</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Mathematics/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Mathematics</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Lecture/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Lecture</p></a></div>
+
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <a href="/2021/06/16/Mathematics/形式语言1/" title="Lecture 0：绪论">Lecture 0：绪论</a><br>
+<a href="/2021/06/23/Mathematics/形式语言2/" title="Lecture 1：正则语言">Lecture 1：正则语言</a><br>
+<a href="/2021/06/27/Mathematics/形式语言3/" title="Lecture 2：上下文无关语言">Lecture 2：上下文无关语言</a><br>
+<a href="/2021/06/29/Mathematics/形式语言4/" title="Lecture 3：Church-Turing">Lecture 3：Church-Turing</a><br>
+<a href="/2021/07/04/Mathematics/形式语言5/" title="Lecture 4：可判定性">Lecture 4：可判定性</a><br>
+<a href="/2021/07/05/Mathematics/形式语言7/" title="Lecture 5：可规约性">Lecture 5：可规约性</a>
+<p>Lecture 6：时间复杂度</p>
+<hr>
+<a id="more"></a>
+
+<p>在前面的章节中，我们学习到了，不可判定的问题会因为陷入loop而无法使用图灵机解决。在实际应用中，由于内存和执行时间的限制，某些可判定问题依然无法被图灵机解决。我们根据执行求解问题的算法所需要花费的时间，将问题划分为不同的难度，即时间复杂度。</p>
+<h1 id="1-复杂度衡量"><a href="#1-复杂度衡量" class="headerlink" title="1. 复杂度衡量"></a>1. 复杂度衡量</h1><h2 id="1-1-大O与小o"><a href="#1-1-大O与小o" class="headerlink" title="1.1 大O与小o"></a>1.1 大O与小o</h2><p>令$M$是一个能对任何输入都给出判定的<strong>确定的图灵机</strong>，$M$的时间复杂度是一个函数$f:\mathcal{N}\to\mathcal{N}$，其中$n$是输入的长度，$f(n)$是$M$运行的最大步数。实际上由于$f(n)$很难精确计算，因此我们通常使用渐进分析来估算：我们仅考虑$f(n)$的最高次项，并忽略该项的系数，作为该图灵机的时间复杂度。例如给出$f(n)=6n^3+2n^2+20n+45$，则渐进估算$f(n)=O(n^3)$。下面我们形式化的定义大O标记：</p>
+<blockquote>
+<p><strong>Big-O标记</strong><br>令$f$和$g$为两个函数$f,g:\mathcal{N}\to\mathcal{R}^+$。我们认为$f(n)=O(g(n))$当且仅当存在正整数$c$和$n_0$使得当$n\ge n_0$时，下式始终成立<br>$$f(n)\le cg(n)$$<br>当$f(n)=O(g(n))$时，我们称$g(n)$为$f(n)$的<strong>渐进上界(asymptotic upper bound)</strong></p>
+</blockquote>
+<p>例如，令$f(n)=6n^3+2n^2+20n+45$，$g(n)=n^3$，我们令$c=6,n_0=10$，则有$f(n)=O(g(n))$。当然，$f(n)$的渐进上界不止$g(n^3)$，$g(n^4)$同样也是。同样的，$f(n)=3n\log n+5n\log\log n + 2$的渐进上界为$O(n\log n)$。</p>
+<p>更进一步的，我们对渐进上界进行分类：</p>
+<blockquote>
+<p>多项式上界：上界形如$n^c,c&gt;0$<br>指数上界：上界形如$2^{(n^\delta)},\delta&gt;0$</p>
+</blockquote>
+<p>小o标记是大O标记的严格版本，即对任意的$c$，都有$f(n)&lt;cg(n)$。举几个例子：</p>
+<ol>
+<li>$\sqrt{n}=o(n)$</li>
+<li>$n=o(n\log\log n)$</li>
+<li>$n\log\log n = o(n\log n)$</li>
+<li>$n\log n=o(n^2)$</li>
+<li>$n^2=o(n^3)$</li>
+</ol>
+<p>需要注意的是，$f(n)\not=o(f(n))$</p>
+<h2 id="1-2-算法分析"><a href="#1-2-算法分析" class="headerlink" title="1.2 算法分析"></a>1.2 算法分析</h2><blockquote>
+<p>令$t:\mathcal{N}\to\mathcal{R}^+$，我们定义<strong>时间复杂度类$TIME(t(n))$</strong>为一个语言的集合，该集合中所有的语言都是在$O(t(n))$时间复杂度内可判定的。</p>
+</blockquote>
+<p>教材举例分析了用于判定语言$A=\{0^k1^k|k\ge0\}$的图灵机的时间复杂度，并给出了其时间复杂度为$O(n^2)$，即$A\in TIME(n^2)$。同时，教材给出了两个优化版本的图灵机用于判定$A$，使得时间复杂度能下降到$O(n\log n)$甚至$O(n)$，这也引出了接下来的内容。</p>
+<h2 id="1-3-模型与时间复杂度"><a href="#1-3-模型与时间复杂度" class="headerlink" title="1.3 模型与时间复杂度"></a>1.3 模型与时间复杂度</h2><blockquote>
+<p><strong>定理</strong><br>令$t(n)\ge n$，每一个$O(t(n))$的多磁带TM都有一个等价的$O(t^2(n))$的单磁带图灵机。</p>
+</blockquote>
+<p>在Lecture 3中介绍了如何将单磁带图灵机和多磁带图灵机之间的相互转换。给定一个$O(t(n))$的$k-$磁带图灵机$M$，我们可以将这多个磁带首尾相接拼成一个单磁带$S$，并用#作为标识符分割这些磁带。因为$k-$磁带中每条磁带使用$t(n)$时间执行，所以$S$应当使用$kt(n)$、也就是$O(t(n))$时间来执行，然后$S$在执行之前，还需要额外的$t(n)$时间来扫描整条磁带，以找到$M$在$S$中的每个磁带头的位置，因此总时间为$t(n)O(t(n))=O(t^2(n))$。</p>
+<blockquote>
+<p>令$t(n)\ge n$，则每一个$t(n)$时间复杂度的<strong>非确定单磁带图灵机</strong>有一个等价的$2^{O(t(n))}$时间复杂度的<strong>确定单磁带图灵机</strong></p>
+</blockquote>
+<p>简单证明一下。假设$N$是$t(n)$的非确定单磁带图灵机，则$N$对应的计算树的深度为$t(n)$，我们假设其计算树每个结点都有$b$个分支（即每个状态都可能转移到其他$b$个状态），则计算树有至多$b^{t(n)}$个叶子。那么我们构造确定的单磁带图灵机$N$，则$N$从开始便利到叶子共花费$t(n)$时间，而总共有$b^{t(n)}$个叶子，所以总共花费$O(t(n)b^{t(n)})=2^{O(t(n))}$时间。</p>
+<hr>
+<h1 id="2-P类问题"><a href="#2-P类问题" class="headerlink" title="2. P类问题"></a>2. P类问题</h1><blockquote>
+<p>所谓的P类，是指能在多项式时间内能被<strong>确定的单磁带图灵机</strong>判定的语言，即$P=TIME(n^k)$</p>
+</blockquote>
+<h2 id="2-1-图路径问题"><a href="#2-1-图路径问题" class="headerlink" title="2.1 图路径问题"></a>2.1 图路径问题</h2><blockquote>
+<p><strong>定理</strong><br>$PATH\in P$，$PATH=\{\langle G,s,t\rangle|G\ \mathrm{is\ a\ directed\ graph\ that\ has\ a\ directed\ path\ from\ } s\ \mathrm{to\ }t\}$</p>
+</blockquote>
+<p>该问题是判断两点$s$和$t$之间是否存在路径，我们可以构造如下的图灵机</p>
+<p>$M$ = 给定输入$\langle G,s,t\rangle$，其中$G$是一个有向图，$s$和$t$是图中的结点：<br>　　1. 标记$s$<br>　　2. 扫描图的所有节点，如果图中存在边$(a,b)$，且$a$被标记了，则标记$b$<br>　　3. 如果$t$被标记，$accept$，反之$reject$</p>
+<p>分析以上算法，第2步最多执行$m$次，$m$为路径的长度，每次花费多项式时间来寻找被标记的$a$，因此是算法时间复杂度为多项式级。</p>
+<h2 id="2-2-互素问题"><a href="#2-2-互素问题" class="headerlink" title="2.2 互素问题"></a>2.2 互素问题</h2><blockquote>
+<p><strong>定理</strong><br>$RELPRIME\in P$，$RELPRIME=\{\langle x,y\rangle|x,y\ \mathrm{are\ relatively\ prime}\}$</p>
+</blockquote>
+<p>即判断$x$和$y$是否互为素数，所使用的算法为辗转相除法</p>
+<p>$E$ = 给定输入$\langle x,y\rangle$，其中$x,y$为自然数：<br>　　1. Repeat until $y=0$<br>　　2. 　　Assign $x\gets x\ \mathrm{mod}\ y$<br>　　3. 　　Exchange $x$ and $y$<br>　　4. Output $x$</p>
+<p>图灵机$E$就算是辗转相除法求最大公约数，然后我们用$E判定两数互为素数：</p>
+<p>$R$ = 给定输入$\langle x,y\rangle$，其中$x,y$为自然数：<br>　　1. Run $E on $\langle x,y\rangle$<br>　　2. If the result is $1$, $accept$, else $reject$</p>
+<p>可以看到，$E$中第2步每次会把$x$的值减半，因此$E$中整个循环执行$\log n$次，因此算法时间复杂度为多项式级</p>
+<h2 id="2-3-CFL的复杂度"><a href="#2-3-CFL的复杂度" class="headerlink" title="2.3 CFL的复杂度"></a>2.3 CFL的复杂度</h2><blockquote>
+<p><strong>定理</strong><br>每个CFL都是P问题</p>
+</blockquote>
+<p>这个定理的证明，首先需要将CFL转换为CNF形式地CFG，然后使用动态规划来求解，其时间复杂度为$O(n^3)$，证明过程看书。</p>
+<hr>
+<h1 id="3-NP问题"><a href="#3-NP问题" class="headerlink" title="3. NP问题"></a>3. NP问题</h1><p>有些问题无法找出多项式时间复杂度的算法，因此想要求解它们只能用暴力法，而暴力法的时间复杂度通常是指数级的。此外，这一类问题通常是可以相互转换的，就如我们在Lecture 5中所作的那样，可以将问题相互规约。首先，我们给出一个最经典的、无法再多项式时间内求解的问题：<strong>哈密尔顿路径问题</strong>，找出图中从$s$到$t$，且刚好经过每个结点一次的路径。求解一个图中是否存在哈密尔顿路径是很困难的，但如果我们给出一条路径，判断这条路径是否是哈密尔顿路径是简单的，我们称之为<strong>多项式可验证的</strong>。类似多项式可验证的问题还有COMPOSITES：判断一个数是否为另外两个数的乘积。</p>
+<blockquote>
+<p><strong>定义</strong><br>一个语言$A$的验证器是一个算法$V$，<br>$$A=\{w|V\ \mathrm{accepts}\ \langle w,c\rangle\mathrm{\ for\ some\ string\ }c\}$$<br>我们使用$w$的长度来衡量验证器的时间复杂度，一个多项式时间复杂度的验证器能在多项式时间内验证$w$，一个语言是<strong>多项式可验证的</strong>是指它有多项式时间的验证器。</p>
+</blockquote>
+<p>验证器需要额外的信息，表示为$c$，这个额外的信息称为certificate。例如，在哈密尔顿路径问题中，$c$就是一条cong$s$到$t$的哈密尔顿路径，在COMPOSITES问题中，$c$就是$x$的一个因子。</p>
+<blockquote>
+<p><strong>定义</strong><br>NP类是指那些有多项式时间验证器的语言集合。NP = Nondeterministic polynomial time</p>
+</blockquote>
+<h2 id="3-1-NP语言与非确定图灵机"><a href="#3-1-NP语言与非确定图灵机" class="headerlink" title="3.1 NP语言与非确定图灵机"></a>3.1 NP语言与非确定图灵机</h2><blockquote>
+<p><strong>定理</strong><br>一个语言是NP的，当且仅当他可以被某些非确定多项式时间图灵机判定</p>
+</blockquote>
+<p><strong>证明</strong></p>
+<ol>
+<li><p>令$A\in$NP，令$V$是$A$的多项式时间验证器，即$V$是一个图灵机且运行时间为$n^k$，我们构造图灵机$N$<br>$N$ = 给定长度为$n$的输入$w$:<br>　　1. 非确定的选择字符串$c$，$c$是一个certificate且长度最多为$n^k$<br>　　2. 在$V$上验证$\langle w,c\rangle$<br>　　3. 如果$V\ accept$，则$N\ accept$，否则$reject$</p>
+<p>可以看到，如果$A$是NP的，我们构造的$N$可以在多项式时间内判定它</p>
+</li>
+<li><p>假定$A$可以被一个多项式时间的图灵机$N$判定，我们构造一个多项式判定器$V$:<br>$V$ = 给定输入$\langle w,c\rangle$，其中$w$和$c$是字符串:<br>　　1. 模拟$N$且其输入为$w$，将$c$的每一个符号视为每一步要做的非确定选择的描述。<br>　　2. 如果$N$基于$c$则计算返回了$accept$，则$V\ accpet$，否则$reject$</p>
+<p>这样的一个判定器可以判定$\langle w,c\rangle$</p>
+</li>
+</ol>
+<p>综上，定理得证。</p>
+<blockquote>
+<p><strong>NTIME</strong><br>$NTIME(t(n)) = \{L|L\ \mathrm{is\ a\ language\ decidec\ by\ an\ }O(t(n))\ \mathrm{time\ nondeterministic\ TM}\}$</p>
+</blockquote>
+<blockquote>
+<p><strong>推论</strong><br>$NP = \cup_k NTIME(n^k)$</p>
+</blockquote>
+<h2 id="3-2-其他的NP问题"><a href="#3-2-其他的NP问题" class="headerlink" title="3.2 其他的NP问题"></a>3.2 其他的NP问题</h2><p>团问题是个NP问题，所谓的团，是指<strong>任意两个节点之间都有边的子图(完全图)</strong>，$k-$团是指这样的子图有$k$个结点。对其证明与上面类似，要从正反两个方向分别构造验证器$V$和图灵机$N$。详细证明见教材。</p>
+<p>子数组和是个NP问题，即从数组中找出一个子数组，使该子数组的和为指定值。</p>
+<p>总的来说，P类问题是能在多项式时间内解决的问题，而NP问题是能在多项式时间内验证的问题，即$P\subset NP$，但对于$P=NP$</p>
+<hr>
+<h1 id="4-NPC问题"><a href="#4-NPC问题" class="headerlink" title="4. NPC问题"></a>4. NPC问题</h1><hr>
+<h1 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h1><ol>
+<li><p>Answer each part $TRUE$ or $FALSE$.</p>
+<ol>
+<li>$2n=O(n)$</li>
+<li>$n^2=O(n)$</li>
+<li>$n^2=O(n\log^2n)$</li>
+<li>$n\log n=O(n^2)$</li>
+<li>$3^n=2^{O(n)}$</li>
+<li>$2^{2^n}=O(2^{2^n})$</li>
+</ol>
+<p><strong>Answer</strong></p>
+<ol>
+<li>$TRUE$</li>
+<li>$FALSE$</li>
+<li>$FALSE$，无论$c$的值为多少，两者总会有三个交点，且在最右交点之后，$n^2&gt;cn\log^2n$</li>
+<li>$TRUE$</li>
+<li>$FALSE$</li>
+<li>$TRUE$</li>
+</ol>
+</li>
+<li><p>Answer each part $TRUE$ or $FALSE$.</p>
+<ol>
+<li>$n=o(2n)$ </li>
+<li>$2n=o(n^2)$</li>
+<li>$2^n=o(3^n)$</li>
+<li>$1=o(n)$</li>
+<li>$n=o(\log n)$</li>
+<li>$1=o(1/n)$</li>
+</ol>
+<p><strong>Answer</strong></p>
+<ol>
+<li>$TRUE$</li>
+<li>$TRUE$</li>
+<li>$TRUE$</li>
+<li>$TRUE$</li>
+<li>$FALSE$</li>
+<li>$FALSE$</li>
+</ol>
+</li>
+<li><p>Is the following formula satisfiable?<br>$$(x\lor y)\land(x\lor\overline{y})\land(\overline{x}\lor y)\land(\overline{x}\lor\overline{y})$$</p>
+<p><strong>Answer</strong><br>No</p>
+</li>
+<li><p>A <strong>triangle</strong> in an undirected graph is a 3-clique. Show that $TRIANGLE\in P$, where $TRIANGLE=\{\langle G\rangle | G\ \mathrm{contains\ a\ triangle}\}$.</p>
+<p><strong>Answer</strong><br>我们可以构造图灵机$M$，且$M$可在多项式时间内判定$TRIANGLE$.<br>$M$ = “给定输入$\langle G\rangle$，$G=(V,E)$是一个无向图:</p>
+<ol>
+<li>扫描节点集$V$，枚举所有的节点三元组$(u,v,w)$，其中$u,v,w\in V$</li>
+<li>扫描边集$E$，检查无向边$(u,v),(v,w),(u,w)$是否存在</li>
+<li>如果有任意一个节点三元组$(u,v,w)$满足步骤2，则$accept$，否则$reject$”</li>
+</ol>
+<p><strong>分析</strong><br>步骤1需要$|V|^3$时间，步骤2需要$|E|$时间，总计需要$O(|V|^3|E|)$时间，该时间属于多项式时间，所以$TRIANGLE\in P$</p>
+</li>
+</ol>
+
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <hr>
+    <div class='new-meta-box'>
+      
+    </div>
+  </section>
+
+
+        
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                            <h4>
+                                <a href="/2021/07/26/Literature/中国哲学简史/" rel="prev" title="《中国哲学简史》笔记">
+                                  
+                                      《中国哲学简史》笔记
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/哲学/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>哲学</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2021/07/05/Mathematics/形式语言6/" rel="prev" title="形式语言与计算复杂性(五)：可规约性">
+                                    
+                                        形式语言与计算复杂性(五)：可规约性
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Lecture/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Lecture</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+  <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX","TeX"],
+      linebreaks: { automatic:true },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+      Macros: { href: "{}", bm: "\\boldsymbol" }
+    },
+    messageStyle: "none"
+  });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += (all[i].SourceElement().parentNode.className ? ' ' : '') + 'has-jax';
+    }
+  });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+  <script>
+    window.subData = {
+      title: '形式语言与计算复杂性(六)：时间复杂度',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+        
+      
+        
+          
+          
+            <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;NAVIGATION</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-home fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/"
+          
+            rel="nofollow"
+          
+          
+          id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/tags/" href="/tags/"
+          
+            rel="nofollow"
+          
+          
+          id="tags">
+          
+            <i class="fas fa-tags fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/categories/" href="/categories/"
+          
+            rel="nofollow"
+          
+          
+          id="categories">
+          
+            <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-复杂度衡量"><span class="toc-text">1. 复杂度衡量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-大O与小o"><span class="toc-text">1.1 大O与小o</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-算法分析"><span class="toc-text">1.2 算法分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-模型与时间复杂度"><span class="toc-text">1.3 模型与时间复杂度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-P类问题"><span class="toc-text">2. P类问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-图路径问题"><span class="toc-text">2.1 图路径问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-互素问题"><span class="toc-text">2.2 互素问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-CFL的复杂度"><span class="toc-text">2.3 CFL的复杂度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-NP问题"><span class="toc-text">3. NP问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-NP语言与非确定图灵机"><span class="toc-text">3.1 NP语言与非确定图灵机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-其他的NP问题"><span class="toc-text">3.2 其他的NP问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-NPC问题"><span class="toc-text">4. NPC问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#作业"><span class="toc-text">作业</span></a></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/categories/"
+    title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(23)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Algorithm/" href="/categories/Computer-Science/Algorithm/"><div class='name'>Algorithm</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/C-C/" href="/categories/Computer-Science/C-C/"><div class='name'>C & C++</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Deep-Learning/" href="/categories/Computer-Science/Deep-Learning/"><div class='name'>Deep Learning</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Information-Security/" href="/categories/Computer-Science/Information-Security/"><div class='name'>Information Security</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Linux/" href="/categories/Computer-Science/Linux/"><div class='name'>Linux</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Operating-System/" href="/categories/Computer-Science/Operating-System/"><div class='name'>Operating System</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(8)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Tags</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/tags/"
+    title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/Array/" style="font-size: 14px; color: #999">Array</a> <a href="/tags/C/" style="font-size: 20.67px; color: #6c6c6c">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 24px; color: #555">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 17.33px; color: #828282">LeetCode</a> <a href="/tags/MBA-Obfuscation/" style="font-size: 20.67px; color: #6c6c6c">MBA Obfuscation</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/PDF/" style="font-size: 14px; color: #999">PDF</a> <a href="/tags/Process/" style="font-size: 20.67px; color: #6c6c6c">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 20.67px; color: #6c6c6c">Ubuntu</a> <a href="/tags/哲学/" style="font-size: 14px; color: #999">哲学</a> <a href="/tags/短篇小说/" style="font-size: 14px; color: #999">短篇小说</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+  <br>
+  <!-- <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div> -->
+  <!-- <div>
+    Use
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    as theme
+    
+    . 
+  </div> -->
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('') {
+          $('').backstretch(
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
+          {
+            duration: "60000",
+            fade: "25000"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
+          {
+            duration: "60000",
+            fade: "25000"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/app.js"></script>
+
+
+  <script src="/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
