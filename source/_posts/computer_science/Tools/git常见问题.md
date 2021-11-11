@@ -57,3 +57,13 @@ fatal: Could not read from remote repository.
 ```bash
 fatal: unable to access 'https://github.com/***/***.git/': Failed to connect to github.com port 443: Connection timed out
 ```
+
+**解决方法**
+
+1. 首先尝试能不能ping通github.com，我的无法ping通
+2. 前往<https://websites.ipaddress.com/www.github.com>查询当前github.com的实际ip
+3. 拷贝实际IP并添加到/etc/hosts文件下，注意权限
+    ```shell
+    140.82.114.4 github.com
+    ```
+4. 再次ping发现可以ping通了，此时上传没有问题
