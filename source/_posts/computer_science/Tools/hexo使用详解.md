@@ -11,7 +11,7 @@ tags:
     - HEXO
 ---
 
-[HEXO](https://hexo.io/zh-cn/)是一个基于Markdown的静态网页博客生成框架
+[HEXO](https://hexo.io/zh-cn/)是一个基于Markdown的静态网页博客生成框架，本文简单介绍其使用方法以及多设备迁移部署。
 
 ---
 
