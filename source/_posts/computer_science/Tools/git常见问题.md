@@ -1,5 +1,5 @@
 ---
-title: GitHub常见问题及解决方法
+title: Git常见问题及解决方法
 date: 2021-11-11 13:35
 # updated: 0000-00-00 10:00
 mathjax: true
@@ -9,10 +9,10 @@ categories:
     - Computer Science
     - Tools
 tags:
-    - GitHub
+    - Git
 ---
 
-GitHub常见问题及解决方法
+Git常见问题及解决方法
 
 ---
 
@@ -20,9 +20,9 @@ GitHub常见问题及解决方法
 
 ## 1 网络问题
 
-### 1.1 无法连接到GitHub端口
+### 1.1 连接GitHub端口超时
 
-**问题**：上传代码到GitHub时报如下连接端口错误
+**问题**：上传代码到GitHub时报连接超时
 
 ```text
 ssh: connect to host github.com port 22: Connection timed out
@@ -50,3 +50,10 @@ fatal: Could not read from remote repository.
     Hi your_github_name! You've successfully authenticated, but GitHub does not provide shell access.
     ```
 
+### 1.2 连接GitHub端口超时
+
+**问题**：与上面不太一样的端口超时
+
+```bash
+fatal: unable to access 'https://github.com/***/***.git/': Failed to connect to github.com port 443: Connection timed out
+```
