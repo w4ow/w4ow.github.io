@@ -11,13 +11,13 @@ tags:
     - Lecture
 ---
 
-{% post_link Mathematics/形式语言1 Lecture 0：绪论 %}<br>
-{% post_link Mathematics/形式语言2 Lecture 1：正则语言 %}
+{% post_link Mathematics/Lecture1 Lecture 0：绪论 %}<br>
+{% post_link Mathematics/Lecture2 Lecture 1：正则语言 %}
 Lecture 2: 上下文无关语言
-{% post_link Mathematics/形式语言4 Lecture 3：Church-Turing %}<br>
-{% post_link Mathematics/形式语言5 Lecture 4：可判定性 %}<br>
-{% post_link Mathematics/形式语言6 Lecture 5：可规约性 %}<br>
-{% post_link Mathematics/形式语言7 Lecture 6：时间复杂度 %}
+{% post_link Mathematics/Lecture4 Lecture 3：Church-Turing %}<br>
+{% post_link Mathematics/Lecture5 Lecture 4：可判定性 %}<br>
+{% post_link Mathematics/Lecture6 Lecture 5：可规约性 %}<br>
+{% post_link Mathematics/Lecture7 Lecture 6：时间复杂度 %}
 
 ---
 
