@@ -99,11 +99,12 @@ $($ | ( | $)$ | ) | $\left( \right)$ | \left( \right) | $\lbrace \rbrace$ | \{ \
 
 Show|Code| | | | | | |
 -|-|-|-|-|-|-|-
-$...$ | ... | $\cdots$ | \cdots | $\forall$ | \forall | $\exists$ | \exists
+$...$ | ... | $\cdots$ | \cdots | $\vdots$ | \vdots | $\ddots$ | \ddots
 $'$ | ' | $\prime$ | \prime | $\triangle$ | \triangle | $\infty$ | \infty
 $\bot$ | \bot | $\top$ | \top | $\angle$ | \angle | $\surd$ | \surd
 $\nabla$ | \nabla | $\heartsuit$ | \heartsuit | $\clubsuit$ | \clubsuit | $\spadesuit$ | \spadesuit
-$\neg$ | \neg or \lnot | $\vdots$ | \vdots | $\emptyset$ | \emptyset | $\partial$ | \partial
+$\neg$ | \neg or \lnot | $\exists$ | \exists | $\emptyset$ | \emptyset | $\partial$ | \partial
+$\forall$ | \forall
 
 ## 10. 各种帽子
 
