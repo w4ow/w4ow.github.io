@@ -214,7 +214,7 @@ Image size: torch.Size([1, 28, 28])
 Image class: ankle boot
 ```
 
-<img src="softmax_reg_1.png" width="60%" height="60%">
+<img src="softmax_reg_1.png" width="15%" height="15%">
 <img src="softmax_reg_2.png" width="60%" height="60%">
 
 
@@ -335,7 +335,7 @@ titles = [true + '\n' + pred for true, pred in zip(true_labels, pred_labels)]
 get_images(list(torch.squeeze(x[10:19], dim=1)), titles[10:19])
 ```
     
-<img src="softmax_reg_3s.png" width="60%" height="60%">
+<img src="softmax_reg_3.png" width="60%" height="60%">
     
 
 
