@@ -9,7 +9,7 @@ categories:
     - Computer Science
     - Information Security
 tags:
-    - MBA Obfuscation
+    - MBA
 ---
 
 基础介绍

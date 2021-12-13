@@ -9,7 +9,7 @@ categories:
     - Computer Science
     - Information Security
 tags:
-    - MBA Obfuscation
+    - MBA
 ---
 
 [Syntia](https://github.com/RUB-SysSec/syntia)是基于程序合成的反混淆框架，它使用程序跟踪作为一个blackbox来产生随机的输入输出对，利用这些输入输出对，程序合成器可以学习代码的底层语义。本文介绍了Ubuntu下安装syntia

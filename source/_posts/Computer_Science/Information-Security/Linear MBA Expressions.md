@@ -9,7 +9,7 @@ categories:
     - Computer Science
     - Information Security
 tags:
-    - MBA Obfuscation
+    - MBA
 ---
 
 定理来源参见论文*Information Hiding in Software with Mixed Boolean-Arithmetic Transforms*中定理1.
