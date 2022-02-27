@@ -23,12 +23,12 @@ USTC2021春季学期研究生课程《形式语言与计算复杂性》
 - 压轴：课件中所提到的证明，20分
 
 Lecture 0：绪论
-{% post_link Mathematics/Lecture2 Lecture 1：正则语言 %}<br>
-{% post_link Mathematics/Lecture3 Lecture 2：上下文无关语言 %}<br>
-{% post_link Mathematics/Lecture4 Lecture 3：Church-Turing %}<br>
-{% post_link Mathematics/Lecture5 Lecture 4：可判定性 %}<br>
-{% post_link Mathematics/Lecture6 Lecture 5：可规约性 %}<br>
-{% post_link Mathematics/Lecture7 Lecture 6：时间复杂度 %}
+{% post_link Mathematics/Formal_lang/Lec1 Lecture 1：正则语言 %}<br>
+{% post_link Mathematics/Formal_lang/Lec2 Lecture 2：上下文无关语言 %}<br>
+{% post_link Mathematics/Formal_lang/Lec3 Lecture 3：Church-Turing %}<br>
+{% post_link Mathematics/Formal_lang/Lec4 Lecture 4：可判定性 %}<br>
+{% post_link Mathematics/Formal_lang/Lec5 Lecture 5：可规约性 %}<br>
+{% post_link Mathematics/Formal_lang/Lec6 Lecture 6：时间复杂度 %}
 
 ---
 
