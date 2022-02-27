@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>死锁问题 | 柴</title>
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <h1 class='title'> </h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-home fa-fw'></i>&nbsp;HOME
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Computer-Science"
+            
+            
+            id="categoriesComputer-Science">
+            <i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Mathematics"
+            
+            
+            id="categoriesMathematics">
+            <i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Literature"
+            
+            
+            id="categoriesLiterature">
+            <i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          柴
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/categories/Computer-Science"
+                  
+                  
+                  id="categoriesComputer-Science">
+									<i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/Mathematics"
+                  
+                  
+                  id="categoriesMathematics">
+									<i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/Literature"
+                  
+                  
+                  id="categoriesLiterature">
+									<i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Computer-Science"
+                
+                  rel="nofollow"
+                
+                
+                id="categoriesComputer-Science">
+								<i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Mathematics"
+                
+                
+                id="categoriesMathematics">
+								<i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Literature"
+                
+                
+                id="categoriesLiterature">
+								<i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;ARCHIVE
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/"
+                
+                  rel="nofollow"
+                
+                
+                id="categories">
+								<i class='fas fa-folder-open fa-fw'></i>&nbsp;CATEGORIES
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/tags/"
+                
+                  rel="nofollow"
+                
+                
+                id="tags">
+								<i class='fas fa-tags fa-fw'></i>&nbsp;TAGS
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2015/03/16/CS/Operating-System/deadlock/">
+        死锁问题
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2015-03-16</p>
+  </a>
+</div>
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2015-03-16T14:12:00+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>updated at 2015-03-16</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Computer-Science/Operating-System/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Computer Science&nbsp;/&nbsp;Operating System</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Deadlock/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Deadlock</p></a></div>
+
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <p>关于死锁的一些归纳和总结</p>
+<hr>
+<a id="more"></a>
+
+<h2 id="1-死锁产生的原因和必要条件"><a href="#1-死锁产生的原因和必要条件" class="headerlink" title="1. 死锁产生的原因和必要条件"></a>1. 死锁产生的原因和必要条件</h2><p>进程共享资源可能会导致死锁，而这些能导致死锁产生的资源基本上都是不可抢占性资源。</p>
+<ol>
+<li>可抢占性资源。即：即使该资源正在被一个进程使用，但当另一个优先级更高的进行想要使用该资源时，就可以将该资源抢占。例如CPU。</li>
+<li>不可抢占性资源。某进程在获得这类资源后，该资源就不能再被其他进程所使用。因此该类资源通常都是互斥的。</li>
+</ol>
+<p>因此，死锁产生的中心就是资源问题，死锁的原因可以归纳为一下两点：</p>
+<ol>
+<li>系统资源不足。这是<strong>根本原因</strong>，当资源不足时，多个进程就可能因为竞争不可抢占资源而导致死锁，并且死锁总是发生在进程提出资源请求时；</li>
+<li>进程推进顺序不当。由于系统中各进程都是独立向前推进，导致不能很好地协商如何分配资源。</li>
+</ol>
+<p>对死锁问题而言，其关键是找出死锁产生的必要条件，若必要条件不成立，则死锁可解，其必要条件有4：</p>
+<ol>
+<li>互斥条件。即资源应为互斥的，任一时刻一个资源仅能被一个进程占用；</li>
+<li>请求和保持。一个进程请求资源得不到满足而阻塞自己时，并不释放自己已经占有的资源；</li>
+<li>不可抢占。进程所获得的资源在未使用完毕前不可被其他进程抢占；</li>
+<li>循环等待。若干个进程形成循环等待链。</li>
+</ol>
+<h2 id="2-死锁的预防"><a href="#2-死锁的预防" class="headerlink" title="2. 死锁的预防"></a>2. 死锁的预防</h2><p>通过破坏死锁的必要条件来控制死锁的策略称为<strong>死锁预防</strong>，但是由于条件1无法破坏(进行互斥访问是不可抢占资源的固有特性)因此可以破坏其他3个条件。</p>
+<ol>
+<li>破坏请求和保持：可以在每个进程运行之前一次性将它运行所需的所有资源都分配给它，并在资源得不到满足前不投入运行，一旦投入运行就不可再申请新资源。这种方法的<strong>优点是安全简单易实现</strong>，<strong>缺点是：1. 浪费系统资源(一次性分配所有资源，但这些资源通常不会被全程使用)；2. 可能导致另一些进程因为分不到资源而长时间得不到运行；3. 很多进行在运行前并不确切的知道需要多少资源</strong>。</li>
+<li>破坏不可抢占：当一个已拥有某些资源的进行提出新的要求而未被满足时，该进程应当释放自己已获得的资源。<strong>缺点很明显：1. 释放资源会导致前功尽弃；2. 该方法实现复杂代价大，反复申请和释放资源会使进程推进很慢；3. 可能存在某些进程的资源总是被抢占而造成“饥饿”</strong>。</li>
+<li>破坏循环等待：采用资源有序分配策略，将系统中所有资源编号，并严格按照资源编号递增或递减的顺序申请资源。<strong>缺点是进程的资源使用顺序通常与资源编号顺序不一致，且添加新资源后不好编号，局限性太高</strong>。</li>
+</ol>
+<h2 id="3-死锁的避免"><a href="#3-死锁的避免" class="headerlink" title="3. 死锁的避免"></a>3. 死锁的避免</h2><p>与死锁预防相比，死锁避免是在不改变资源固有特性的前提下，对资源的分配策略施加较少的限制来避免死锁的发生。死锁避免的<strong>前提是每个进程清除自己需要多少资源</strong>，因此死锁避免还是有局限性的。</p>
+<ol>
+<li>系统的安全状态与不安全状态：在某一时刻，若能给出一个进程分配资源并执行的策略，该策略能指导所有的进程安全执行完，这称该时刻系统处于安全状态，否则不安全；</li>
+<li>银行家算法：即动态的分配资源。系统在分配资源前先计算资源分配的安全性，保证至少有一个进程能够运行到结束，并在安全运行过程中回收已结束进程的资源，并将这些资源分配给其他进程，直到所有进程执行结束。</li>
+</ol>
+<h2 id="4-银行家算法"><a href="#4-银行家算法" class="headerlink" title="4. 银行家算法"></a>4. 银行家算法</h2><p>银行家算法有5种数据结构：</p>
+<ol>
+<li>系统可用资源向量Available：一个大小为m的数组，每个数组元素代表一类资源当前可用的数量，例如$Available[i]=k$代表第i类资源现有k个空闲；</li>
+<li>最大需求矩阵Max。一个n*m矩阵，定义了所有的n个进程对m类资源的最大需求，M[i][j]=k代码第i个进程对第j类资源的总需求为k；</li>
+<li>分配矩阵Allocation。n*m矩阵，表示n个进程当前已获得的m类资源的总数；</li>
+<li>需求矩阵Need。n*m矩阵，表示当前n个进程还需要多少个m类资源；</li>
+<li>请求向量Request。m大小的数组，每个元素代表正在运行的进程i此时请求某类资源总量，例如Request[j]=k表示进程i请求k个j类资源。</li>
+</ol>
+<p>当某个进程i对j类资源提出k个请求是，需要<strong>按照下列步骤检查</strong>：</p>
+<ol>
+<li>若$Request[j]&lt;=Need[i][j]$，转步骤2，否则因为进程i申请的资源已经超过它宣称的最大资源而认为出错；</li>
+<li>若$Request[j]&lt;=Available[j]$，转步骤3，否则因为当前可供的j类资源不足而阻塞进程i；</li>
+<li>系统进行试探性分配，并修改相应的表：<ul>
+<li>Available[j] -= Request[j];</li>
+<li>Allocation[i][j] += Request[j];</li>
+<li>Need[i][j] -= Request[j];</li>
+</ul>
+</li>
+<li>调用“判断当前状态是否安全”的子算法，若安全则按照步骤3的分配资源，否则拒绝i的资源申请请求。</li>
+</ol>
+<p><strong>判断当前状态是否安全</strong></p>
+<p>添加两个数组：</p>
+<ul>
+<li>Work，m维数组，代表在检测过程中的某个时刻没类资源空闲的数量，初值等于Availa；</li>
+<li>Finish，n维数组，Finish[i]代表进程i能否得到足够的资源而运行结束。其值为bool型，初值为false。</li>
+</ul>
+<p>检查当前状态的完整过程如下：</p>
+<ol>
+<li>初始化Work和Finish。Work[j]=Available[j], Finish[i]=false;</li>
+<li>在进程集合中尝试寻找一个能满足以下条件的进程h，找到转步骤3，否则转步骤4:<ul>
+<li>Finish[h] = false;</li>
+<li>Need[h][j] &lt;= Work[j]</li>
+</ul>
+</li>
+<li>由于步骤2中找到的h其全部资源均可得到满足，因此h获得资源后可顺利运行完毕，然后释放h所占有的资源，因此Work[j]+=Allocation[j][j], Finish[h]=true，回到步骤2</li>
+<li>若对所有的进程i， Finish[i]均为true，则表示系统处于安全状态，否则不安全。</li>
+</ol>
+<h2 id="5-死锁检测"><a href="#5-死锁检测" class="headerlink" title="5. 死锁检测"></a>5. 死锁检测</h2><h2 id="6-死锁解除"><a href="#6-死锁解除" class="headerlink" title="6. 死锁解除"></a>6. 死锁解除</h2>
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <hr>
+    <div class='new-meta-box'>
+      
+    </div>
+  </section>
+
+
+        
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                            <h4>
+                                <a href="/2017/06/04/CS/Linux/install_ubuntu/" rel="prev" title="Ubuntu 18.10安装与配置">
+                                  
+                                      Ubuntu 18.10安装与配置
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Ubuntu/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Ubuntu</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2015/03/12/CS/Operating-System/process-and-thread-coroutines/" rel="prev" title="进程、线程与协程之间的区别与联系">
+                                    
+                                        进程、线程与协程之间的区别与联系
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Process/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Process</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+  <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX","TeX"],
+      linebreaks: { automatic:true },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+      Macros: { href: "{}", bm: "\\boldsymbol" }
+    },
+    messageStyle: "none"
+  });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += (all[i].SourceElement().parentNode.className ? ' ' : '') + 'has-jax';
+    }
+  });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+  <script>
+    window.subData = {
+      title: '死锁问题',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+        
+      
+        
+          
+          
+            <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;NAVIGATION</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-home fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/"
+          
+            rel="nofollow"
+          
+          
+          id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/tags/" href="/tags/"
+          
+            rel="nofollow"
+          
+          
+          id="tags">
+          
+            <i class="fas fa-tags fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/categories/" href="/categories/"
+          
+            rel="nofollow"
+          
+          
+          id="categories">
+          
+            <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-死锁产生的原因和必要条件"><span class="toc-text">1. 死锁产生的原因和必要条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-死锁的预防"><span class="toc-text">2. 死锁的预防</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-死锁的避免"><span class="toc-text">3. 死锁的避免</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-银行家算法"><span class="toc-text">4. 银行家算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-死锁检测"><span class="toc-text">5. 死锁检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-死锁解除"><span class="toc-text">6. 死锁解除</span></a></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/categories/"
+    title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(28)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Algorithm/" href="/categories/Computer-Science/Algorithm/"><div class='name'>Algorithm</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/C-C/" href="/categories/Computer-Science/C-C/"><div class='name'>C & C++</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Deep-Learning/" href="/categories/Computer-Science/Deep-Learning/"><div class='name'>Deep Learning</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Information-Security/" href="/categories/Computer-Science/Information-Security/"><div class='name'>Information Security</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Linux/" href="/categories/Computer-Science/Linux/"><div class='name'>Linux</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Operating-System/" href="/categories/Computer-Science/Operating-System/"><div class='name'>Operating System</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(6)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(8)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Tags</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/tags/"
+    title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/AI/" style="font-size: 14px; color: #999">AI</a> <a href="/tags/C/" style="font-size: 20.67px; color: #6c6c6c">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/GNN/" style="font-size: 14px; color: #999">GNN</a> <a href="/tags/Git/" style="font-size: 14px; color: #999">Git</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 24px; color: #555">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 14px; color: #999">LeetCode</a> <a href="/tags/MBA/" style="font-size: 20.67px; color: #6c6c6c">MBA</a> <a href="/tags/ML/" style="font-size: 17.33px; color: #828282">ML</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/PDF/" style="font-size: 14px; color: #999">PDF</a> <a href="/tags/Process/" style="font-size: 20.67px; color: #6c6c6c">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 20.67px; color: #6c6c6c">Ubuntu</a> <a href="/tags/哲学/" style="font-size: 14px; color: #999">哲学</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+  <br>
+  <!-- <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div> -->
+  <!-- <div>
+    Use
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    as theme
+    
+    . 
+  </div> -->
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('') {
+          $('').backstretch(
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
+          {
+            duration: "60000",
+            fade: "25000"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
+          {
+            duration: "60000",
+            fade: "25000"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/app.js"></script>
+
+
+  <script src="/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

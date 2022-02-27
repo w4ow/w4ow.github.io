@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Softmax回归：原理与实践 | 柴</title>
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <h1 class='title'> </h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-home fa-fw'></i>&nbsp;HOME
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Computer-Science"
+            
+            
+            id="categoriesComputer-Science">
+            <i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Mathematics"
+            
+            
+            id="categoriesMathematics">
+            <i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Literature"
+            
+            
+            id="categoriesLiterature">
+            <i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          柴
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/categories/Computer-Science"
+                  
+                  
+                  id="categoriesComputer-Science">
+									<i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/Mathematics"
+                  
+                  
+                  id="categoriesMathematics">
+									<i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/Literature"
+                  
+                  
+                  id="categoriesLiterature">
+									<i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Computer-Science"
+                
+                  rel="nofollow"
+                
+                
+                id="categoriesComputer-Science">
+								<i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Mathematics"
+                
+                
+                id="categoriesMathematics">
+								<i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Literature"
+                
+                
+                id="categoriesLiterature">
+								<i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;ARCHIVE
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/"
+                
+                  rel="nofollow"
+                
+                
+                id="categories">
+								<i class='fas fa-folder-open fa-fw'></i>&nbsp;CATEGORIES
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/tags/"
+                
+                  rel="nofollow"
+                
+                
+                id="tags">
+								<i class='fas fa-tags fa-fw'></i>&nbsp;TAGS
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2021/12/13/Deep_Learning/softmax_regression/">
+        Softmax回归：原理与实践
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2021-12-13</p>
+  </a>
+</div>
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-12-13T18:10:53+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>updated at 2021-12-13</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Computer-Science/Deep-Learning/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Computer Science&nbsp;/&nbsp;Deep Learning</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/ML/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>ML</p></a></div>
+
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <p>不同于线性回归输出连续值，有的任务需要输出离散值，例如对图像的分类。对于离散值预测问题，我们可以使用softmax回归模型进行建模。softmax回归实际上是逻辑回归的一般形式，逻辑回归用于二分类，而softmax回归用于多分类。</p>
+<hr>
+<a id="more"></a>
+
+<h2 id="1-理论模型"><a href="#1-理论模型" class="headerlink" title="1. 理论模型"></a>1. 理论模型</h2><p>考虑一个花朵的分类问题，每个花朵样本$\bm{x}=[x_1,…,x_d]$有$d$个特征，例如花萼长度、宽度等等。花朵可以被分为$k$个类别。在现实生活中，我们通常使用离散值来表示类别，例如3种花我们可以将其分配标签1、2、3，但考虑到模型的输入，即<strong>样本的特征通常都是连续值，如果输出是离散的，那么这种从连续值到离散值的转化通常都会影响到分类结果的质量</strong>，因此我们引入了softmax回归。softmax的任务就是计算输入个例$\bm{x}$属于每一类的概率，其输出是一个大小为$1\times k$的向量$o\in\mathbb{R}^{1\times k}$，其中每个分量的值都介于0到1之间，且各分量之和为1。我们可以认为该个例属于概率最高的那一类，例如当某样本经模型模型预测的输出为$[0.25,0.5,0.1,0.15]$，我们可以判断该样本属于第二类。</p>
+<p>因为softmax对于一个样本$\bm{x}$要计算其属于每一个类别的概率，因为样本包含$d$个特征、输出有$k$中类别，因此softmax回归模型包含$d\times k$个权重以及$k$个偏差，对于每个类别，其输出结果计算为：</p>
+<p>$$<br>\begin{aligned}<br>&amp; o_1 = x_1w_{11} + x_2w{21} + … + x_dw_{d1} + b_1 \\<br>&amp; o_2 = x_1w_{12} + x_2w{22} + … + x_dw_{d2} + b_2 \\<br>&amp; \cdots \\<br>&amp; o_k = x_1w_{1k} + x_2w{2k} + … + x_dw_{dk} + b_k<br>\end{aligned}<br>$$</p>
+<p>一个简单的办法是直接用$o_i$中最大值对应的类作为输出结果，但这样做主要有两方面的问题：</p>
+<ol>
+<li>输出值$o_i$的范围不确定，直观上很难判断这些值的意义。</li>
+<li>真实标签是离散值，这些离散值与不确定范围的输出值之间的误差难以衡量。</li>
+</ol>
+<p>因此我们对这些输出$o_i$进行softmax运算，使得其输出变为分布在0和1之间且和为1的概率分布：</p>
+<p>$$<br>y_1, y_2, …, y_k = \mathrm{softmax}(o_1, o_2, …, o_k)<br>$$<br>其中<br>$$<br>y_i = \frac{e^{o_i}}{\sum_{j=1}^k e^{o_j}}<br>$$</p>
+<p>从该式可以看出$\mathrm{sum}(\hat y_i=1)$且$0 \le \hat y_i \le 1$，因此输出是一个合法的概率分布。</p>
+<p>综上，我们可以总结基于softmax回归的多分类模型的计算表达式：</p>
+<h3 id="1-1-单样本分类的矢量计算表达式"><a href="#1-1-单样本分类的矢量计算表达式" class="headerlink" title="1.1 单样本分类的矢量计算表达式"></a>1.1 单样本分类的矢量计算表达式</h3><p>给定一个样本$\bm{x}=[x_1, x_2, …, x_d]$，样本被分为$k$类中的某一类</p>
+<p>模型参数为<br>$$<br>\bm{W}=\begin{bmatrix}<br>w_{11} &amp; w_{21} &amp; &amp; w_{d1}\\<br>w_{12} &amp; w_{22} &amp; &amp; w_{d2}\\<br>&amp; &amp; \ddots &amp; \\<br>w_{1k} &amp; w_{2k} &amp; &amp; w_{dk}<br>\end{bmatrix},<br>\bm{b}=\begin{bmatrix}b_1 &amp; b_2 &amp; \cdots &amp; b_d\end{bmatrix}<br>$$</p>
+<p>模型输出层的输出为</p>
+<p>$$<br>\bm{o} = \begin{bmatrix}o_1, o_2, \cdots, o_k\end{bmatrix}<br>$$</p>
+<p>随后我们队输出层的输出做softmax运算，得到分类的概率分布</p>
+<p>$$<br>\bm{y} = \begin{bmatrix}y_1, y_2, \cdots, y_k\end{bmatrix}<br>$$</p>
+<p>整个单样本过程计算为：<br>$$\begin{aligned}<br>\bm{o} &amp;= \bm{xW}+\bm{b} \\<br>\bm{y} &amp;= \mathrm{softmax}(\bm{o})<br>\end{aligned}$$</p>
+<h3 id="1-2-小批量多样本分类的矢量计算表达式"><a href="#1-2-小批量多样本分类的矢量计算表达式" class="headerlink" title="1.2 小批量多样本分类的矢量计算表达式"></a>1.2 小批量多样本分类的矢量计算表达式</h3><p>给定一个小批量输入$\bm{X} = [\bm{x}_1, \bm{x}_2, \cdots, \bm{x}_n]^\top \in \mathbb{R}^{n\times d}$，其批量大小为$n$，每个样本的特征数为$d$，输出类别数为$k$，$\bm{W}\in\mathbb{R}^{d\times k}, \bm{b}\in\mathbb{R}^{1\times k}$，整个计算过程为</p>
+<p>$$\begin{aligned}<br>\bm{O} &amp;= \bm{XW}+\bm{b} \\<br>\bm{Y} &amp;= \mathrm{softmax}(\bm{O})<br>\end{aligned}$$</p>
+<p>特别要注意的是这里参数矩阵的尺寸为$d\times k$</p>
+<hr>
+<h2 id="2-模型求解"><a href="#2-模型求解" class="headerlink" title="2. 模型求解"></a>2. 模型求解</h2><h3 id="2-1-损失函数定义"><a href="#2-1-损失函数定义" class="headerlink" title="2.1 损失函数定义"></a>2.1 损失函数定义</h3><p>不同于线性回归经常使用均方误差作为损失函数，在分类预测中，想要预测的结果正确，我们并不需要预测概率完全等于标签概率，即我们只需要确保输入样本的某个分类的预测概率大于其他分类的预测概率即可。例如对于两种预测结果$\bm{\hat y}=[0.1, 0.7, 0.2]$和$\bm{\hat y}=[0.3, 0.4, 0.3]$对于分类结果来说都是一样的，而这对均方误差来说差别就很大。为了缓解这种现象，我们一般使用交叉熵损失。<br>对于单样本$\bm{x}$，<strong>假设其只有一个标签</strong>，那么我们可以为其构造真实标签$\bm{y}\in\mathbb{R}^k$，并使$\bm{y}$中对应该样本分类的分量为1，其余分量为0。那么，对于单样本其损失函数为<br>$$<br>l = -\sum_{i=1}^kI(y_i)\log y_i<br>$$<br>其中$I(y_i)$为指示性函数，我们假设该样本的分类为$y_i$，即$\hat y_j=1$。那么当且仅当$y_i$的下标$i=j$时，$I(y_i)=1$,且此时上式等价于$l = -\log y_j$；当$i\not=j$时，$I(y_i)=0$。也就是说，交叉熵只关心对正确类别的预测概率，因为只要其值足够大，就可以确保分类结果正确。</p>
+<p>同样的，对于多样本，假设样本数为$n$，那么总体的损失函数定义为<br>$$<br>L = \frac{1}{n}\sum_{i=1}^nl^{(i)} = -\frac{1}{n}\sum_{i=1}^n \sum_{j=1}^k I(y_j^{(i)})\log y_j^{(i)}<br>$$<br>同样地，如果每个样本只有一个标签且分类为$k$，那么$L$可以简化为$L = -\frac{1}{n}\sum_{i=1}^n\log y_k^{(i)}$。从另一个角度来看，最小化$L$等价于最大化$\exp(-nL)=\prod_{i=1}^n\hat y_k^{(i)}$，即最小化交叉熵等价于最大化数据集所有标签类别的联合概率分布。</p>
+<h3 id="2-2-损失函数的反向传播"><a href="#2-2-损失函数的反向传播" class="headerlink" title="2.2 损失函数的反向传播"></a>2.2 损失函数的反向传播</h3><p>考虑到softmax函数为<br>$$<br>y_i = \frac{e^{o_i}}{\sum_{j=1}^k e^{o_j}}<br>$$</p>
+<p>应用链式法则，可以得到：<br>$$<br>    \frac{\partial l}{\partial o_i} = \frac{\partial l}{\partial y_j}\cdot\frac{\partial y_j}{\partial o_i}<br>$$<br>注意上式中各符号的下标，$y$的下标是$j$而不是$i$的原因是在softmax中，其分母$\sum_{j=1}^k\exp(o_j)$包含了所有的输出。因此，我们对$w_i$求导时，对于下标$j\not=i$时也要进行计算。</p>
+<ol>
+<li>对于$\frac{\partial l}{\partial y_j}$，我们有<br>$$\frac{\partial l}{\partial y_j}=-\sum_{j=1}^k \frac{I(y_j)}{y_j}$$</li>
+<li>对于$\frac{\partial y_j}{\partial o_i}$，分两种情况讨论：<ol>
+<li>当$i=j$时：<br>$$\begin{aligned}<br>\frac{\partial y_i}{\partial o_i} &amp;= \frac{\partial(\frac{e^{o_i}}{\sum_{j=1}^k e^{o_j}})}{\partial o_i} \\<br>&amp;= \frac{\sum_{j=1}^k e^{o_j} e^{o_i} - (e^{o_i})^2}{\sum_{j=1}^k(e^{o_j})^2} \\<br>&amp;= \left( \frac{e^{o_i}}{\sum_{j=1}^k e^{o_j}} \right) \left( 1 - \frac{e^{o_i}}{\sum_{j=1}^k e^{o_j}} \right) \\<br>&amp;= y_i (1 - y_i)<br>\end{aligned}$$</li>
+<li>当$i\not= j$时：<br>$$\frac{\partial y_j}{\partial o_i} = \frac{\partial(\frac{e^{o_j}}{\sum_{t=1}^k e^{o_t}})}{\partial o_i} = \frac{-e^{o_i}e^{o_j}}{(\sum_{t=1}^k e^{o_t})^2} = -y_iy_j$$</li>
+</ol>
+</li>
+</ol>
+<p>将1.2.相乘，有：<br>$$\begin{aligned}<br>\frac{\partial l}{\partial o_i} &amp;=(-\sum_{j=1}^k \frac{I(y_j)}{y_j})(y_i (1-y_i) - y_iy_j) \\<br>&amp;= -\sum_{j=1, i=j}^k\frac{I(y_j)}{y_j} y_i(1-y_i) + \sum_{j=1, i\not=j}^k \frac{I(y_j)}{y_j}y_iy_j \\<br>&amp;= -\frac{I(y_i)}{y_i}y_i(1-y_i) + \sum_{j=1, i\not=j}^k \frac{I(y_j)}{y_j}y_iy_j \\<br>&amp;= -I(y_i)(1-y_i) + \sum_{j=1,j\not=i}^kI(y_j)y_i \\<br>&amp;= -I(y_i) + I(y_i)y_i + \sum_{j=1,j\not=i}^kI(y_j)y_i \\<br>&amp;= -I(y_i) + y_i\sum_{j=1}^k I(y_j)<br>\end{aligned}$$</p>
+<p>当样本只有一个分类时，上式中$I(y_j)$只有一个值为1，因此上式又等价为$y_i-I(y_i)$</p>
+<p>当我们对各参数$w_i$求偏导时，有<br>$$\frac{\partial L}{\partial w_i} = \frac{\partial L}{\partial o_i}\cdot\frac{\partial o_i}{\partial w_i} = \frac{1}{n}\sum_{i=1}^n(y_i-I(y_i))\cdot \bm{x}_i$$</p>
+<h2 id="3-PyTorch实战"><a href="#3-PyTorch实战" class="headerlink" title="3. PyTorch实战"></a>3. PyTorch实战</h2><p>图像分类数据集FashionMNIST是一个10分类图片数据集，每一张图片的大小为28*28像素。由于数据集是用0~9折十个数字给图片分类，不利于人类阅读，因此我们为其分配文字标签。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">mnist_train = torchvision.datasets.FashionMNIST(root=<span class="string">'./Datasets/FashionMNIST'</span>, train=<span class="literal">True</span>, download=<span class="literal">True</span>, transform=transforms.ToTensor())</span><br><span class="line">mnist_test = torchvision.datasets.FashionMNIST(root=<span class="string">'./Datasets/FashionMNIST'</span>, train=<span class="literal">False</span>, download=<span class="literal">True</span>, transform=transforms.ToTensor())</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_labels</span><span class="params">(labels)</span>:</span></span><br><span class="line">    text_labels = [<span class="string">'t-shirt'</span>, <span class="string">'trouser'</span>, <span class="string">'pullover'</span>, <span class="string">'dress'</span>, <span class="string">'coat'</span>, <span class="string">'sandal'</span>, <span class="string">'shirt'</span>, <span class="string">'sneaker'</span>, <span class="string">'bag'</span>, <span class="string">'ankle boot'</span>]</span><br><span class="line">    <span class="keyword">if</span> isinstance(labels, list):</span><br><span class="line">        <span class="keyword">return</span> [text_labels[i] <span class="keyword">for</span> i <span class="keyword">in</span> labels]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> text_labels[labels]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_images</span><span class="params">(images, labels)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> isinstance(images, list):</span><br><span class="line">        _, figs = plt.subplots(<span class="number">1</span>, len(images), figsize=(<span class="number">12</span>, <span class="number">12</span>))</span><br><span class="line">        <span class="keyword">for</span> f, img, lbl <span class="keyword">in</span> zip(figs, images, labels):</span><br><span class="line">            f.imshow(img.view((<span class="number">28</span>, <span class="number">28</span>)).numpy())</span><br><span class="line">            f.set_title(lbl)</span><br><span class="line">            f.axes.get_xaxis().set_visible(<span class="literal">False</span>)</span><br><span class="line">            f.axes.get_yaxis().set_visible(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        plt.imshow(images)</span><br><span class="line">        plt.title(labels)</span><br><span class="line">        <span class="comment"># plt.axes.get_xaxis().set_visible(False)</span></span><br><span class="line">        <span class="comment"># plt.axes.get_yaxis().set_visible(False)</span></span><br><span class="line">    plt.axis(<span class="string">'off'</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">feature, label = mnist_train[<span class="number">0</span>]</span><br><span class="line">print(<span class="string">f'Image size: <span class="subst">&#123;feature.shape&#125;</span> \nImage class: <span class="subst">&#123;get_labels(label)&#125;</span>'</span>)</span><br><span class="line">get_images(feature[<span class="number">0</span>], get_labels(label))</span><br><span class="line"></span><br><span class="line"><span class="comment"># more samples</span></span><br><span class="line">x, y = [], []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    x.append(mnist_train[i][<span class="number">0</span>])</span><br><span class="line">    y.append(mnist_train[i][<span class="number">1</span>])</span><br><span class="line">get_images(x, get_labels(y))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Image size: torch.Size([1, 28, 28]) </span><br><span class="line">Image class: ankle boot</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/12/13/Deep_Learning/softmax_regression/softmax_reg_1.png" width="15%" height="15%">
+<img src="/2021/12/13/Deep_Learning/softmax_regression/softmax_reg_2.png" width="60%" height="60%">
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''封装数据'''</span></span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line"></span><br><span class="line">train_iter = torch.utils.data.DataLoader(mnist_train, batch_size=batch_size, shuffle=<span class="literal">True</span>)</span><br><span class="line">test_iter = torch.utils.data.DataLoader(mnist_test, batch_size=batch_size, shuffle=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">'''定义训练函数'''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, train_iter, test_iter, loss, num_epochs, batch_size, params=None, lr=None, optimizer=None)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):</span><br><span class="line">        train_l_sum, train_acc_sum, n = <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> x, y_hat <span class="keyword">in</span> train_iter:</span><br><span class="line">            y = model(x)</span><br><span class="line">            l = loss(y, y_hat).sum()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> optimizer <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                optimizer.zero_grad()</span><br><span class="line">            <span class="keyword">elif</span> params <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> params[<span class="number">0</span>].grad <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                <span class="keyword">for</span> param <span class="keyword">in</span> params:</span><br><span class="line">                    param.grad.data.zero_()</span><br><span class="line">            l.backward()</span><br><span class="line">            <span class="keyword">if</span> optimizer <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                sgd(params, lr, batch_size)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                optimizer.step()</span><br><span class="line"></span><br><span class="line">            train_l_sum += l.item()</span><br><span class="line">            train_acc_sum += (y.argmax(dim=<span class="number">1</span>) == y_hat).sum().item()</span><br><span class="line">            n += y.shape[<span class="number">0</span>]</span><br><span class="line">        test_acc = evaluate_accuracy(test_iter, model)</span><br><span class="line">        print(<span class="string">f'epoch <span class="subst">&#123;epoch + <span class="number">1</span>&#125;</span>, \ttrain loss: <span class="subst">&#123;train_l_sum / n:<span class="number">.4</span>f&#125;</span>, \t train accuracy: <span class="subst">&#123;train_acc_sum / n:<span class="number">.4</span>f&#125;</span>, \t test accuracuy: <span class="subst">&#123;test_acc:<span class="number">.4</span>f&#125;</span>'</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">'''计算准确率'''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">accuracy</span><span class="params">(y_hat, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (y_hat.argmax(dim=<span class="number">1</span>) == y).float().mean().item()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evaluate_accuracy</span><span class="params">(data_iter, net)</span>:</span></span><br><span class="line">    acc_sum, n = <span class="number">0.0</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> x, y_hat <span class="keyword">in</span> data_iter:</span><br><span class="line">        acc_sum += (net(x).argmax(dim=<span class="number">1</span>) == y_hat).float().sum().item()</span><br><span class="line">        n += y_hat.shape[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> acc_sum / n</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-从零实现"><a href="#3-1-从零实现" class="headerlink" title="3.1 从零实现"></a>3.1 从零实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="string">'''定义模型参数'''</span></span><br><span class="line"></span><br><span class="line">num_inputs = <span class="number">28</span> * <span class="number">28</span></span><br><span class="line">num_outputs = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">w = torch.tensor(np.random.normal(<span class="number">0</span>, <span class="number">0.01</span>, (num_inputs, num_outputs)), dtype=torch.float)</span><br><span class="line">b = torch.zeros(num_outputs, dtype=torch.float)</span><br><span class="line"></span><br><span class="line">w.requires_grad_(requires_grad=<span class="literal">True</span>)</span><br><span class="line">b.requires_grad_(requires_grad=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">'''实现softmax'''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax</span><span class="params">(x)</span>:</span></span><br><span class="line">    x_exp = x.exp()</span><br><span class="line">    partition = x_exp.sum(dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">return</span> x_exp / partition</span><br><span class="line"></span><br><span class="line"><span class="string">'''定义模型'''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">net</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> softmax(torch.mm(x.view((<span class="number">-1</span>, num_inputs)), w) + b)</span><br><span class="line"></span><br><span class="line"><span class="string">'''定义交叉熵损失函数'''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cross_entropy</span><span class="params">(y_hat, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> - torch.log(y_hat.gather(<span class="number">1</span>, y.view(<span class="number">-1</span>, <span class="number">1</span>)))</span><br><span class="line"></span><br><span class="line"><span class="string">'''定义优化函数'''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sgd</span><span class="params">(params, lr, batch_size)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> param <span class="keyword">in</span> params:</span><br><span class="line">        param.data -= lr * param.grad / batch_size</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">'''训练'''</span></span><br><span class="line"></span><br><span class="line">num_epochs = <span class="number">5</span></span><br><span class="line">lr = <span class="number">0.1</span></span><br><span class="line">device = torch.device(<span class="string">'cuda'</span>)</span><br><span class="line">train(net, train_iter, test_iter, cross_entropy, num_epochs, batch_size, [w, b], lr)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">epoch 1, 	train loss: 0.7856, 	 train accuracy: 0.7476, 	 test accuracuy: 0.7952</span><br><span class="line">epoch 2, 	train loss: 0.5710, 	 train accuracy: 0.8127, 	 test accuracuy: 0.8086</span><br><span class="line">epoch 3, 	train loss: 0.5266, 	 train accuracy: 0.8246, 	 test accuracuy: 0.8214</span><br><span class="line">epoch 4, 	train loss: 0.5014, 	 train accuracy: 0.8318, 	 test accuracuy: 0.8247</span><br><span class="line">epoch 5, 	train loss: 0.4850, 	 train accuracy: 0.8367, 	 test accuracuy: 0.8290</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''预测'''</span></span><br><span class="line"></span><br><span class="line">x, y = iter(test_iter).next()</span><br><span class="line"></span><br><span class="line">true_labels = get_labels(list(y.numpy()))</span><br><span class="line">pred_labels = get_labels(list(net(x).argmax(dim=<span class="number">1</span>).numpy()))</span><br><span class="line">titles = [true + <span class="string">'\n'</span> + pred <span class="keyword">for</span> true, pred <span class="keyword">in</span> zip(true_labels, pred_labels)]</span><br><span class="line"></span><br><span class="line">get_images(list(torch.squeeze(x[<span class="number">10</span>:<span class="number">19</span>], dim=<span class="number">1</span>)), titles[<span class="number">10</span>:<span class="number">19</span>])</span><br></pre></td></tr></table></figure>
+
+
+<img src="/2021/12/13/Deep_Learning/softmax_regression/softmax_reg_3.png" width="60%" height="60%">
+
+
+
+<h3 id="3-2-简洁实现"><a href="#3-2-简洁实现" class="headerlink" title="3.2 简洁实现"></a>3.2 简洁实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line">device = torch.device(<span class="string">'cuda'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Linear</span><span class="params">(torch.nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, input_dim, output_dim)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.linear = nn.Linear(input_dim, output_dim)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.linear(x.view(x.shape[<span class="number">0</span>], <span class="number">-1</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">input_dim = <span class="number">28</span>*<span class="number">28</span></span><br><span class="line">output_dim = <span class="number">10</span></span><br><span class="line">model = Linear(input_dim, output_dim)</span><br><span class="line">loss = nn.CrossEntropyLoss()</span><br><span class="line">optimizer = torch.optim.SGD(model.parameters(), lr=<span class="number">.1</span>)</span><br><span class="line">num_epochs = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">train(model, train_iter, test_iter, loss, num_epochs, batch_size, <span class="literal">None</span>, <span class="literal">None</span>, optimizer)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">epoch 1, 	train loss: 0.0031, 	 train accuracy: 0.7475, 	 test accuracuy: 0.7869</span><br><span class="line">epoch 2, 	train loss: 0.0022, 	 train accuracy: 0.8133, 	 test accuracuy: 0.7666</span><br><span class="line">epoch 3, 	train loss: 0.0021, 	 train accuracy: 0.8261, 	 test accuracuy: 0.8168</span><br><span class="line">epoch 4, 	train loss: 0.0020, 	 train accuracy: 0.8328, 	 test accuracuy: 0.8224</span><br><span class="line">epoch 5, 	train loss: 0.0019, 	 train accuracy: 0.8368, 	 test accuracuy: 0.8237</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <hr>
+    <div class='new-meta-box'>
+      
+    </div>
+  </section>
+
+
+        
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                            <h4>
+                                <a href="/2022/02/27/CS/Tools/Hexo_manual/" rel="prev" title="HEXO的使用">
+                                  
+                                      HEXO的使用
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/HEXO/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>HEXO</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2021/12/13/Deep_Learning/linear_regression/" rel="prev" title="线性回归：原理与实践">
+                                    
+                                        线性回归：原理与实践
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/ML/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>ML</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+  <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX","TeX"],
+      linebreaks: { automatic:true },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+      Macros: { href: "{}", bm: "\\boldsymbol" }
+    },
+    messageStyle: "none"
+  });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += (all[i].SourceElement().parentNode.className ? ' ' : '') + 'has-jax';
+    }
+  });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+  <script>
+    window.subData = {
+      title: 'Softmax回归：原理与实践',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+        
+      
+        
+          
+          
+            <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;NAVIGATION</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-home fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/"
+          
+            rel="nofollow"
+          
+          
+          id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/tags/" href="/tags/"
+          
+            rel="nofollow"
+          
+          
+          id="tags">
+          
+            <i class="fas fa-tags fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/categories/" href="/categories/"
+          
+            rel="nofollow"
+          
+          
+          id="categories">
+          
+            <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-理论模型"><span class="toc-text">1. 理论模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-单样本分类的矢量计算表达式"><span class="toc-text">1.1 单样本分类的矢量计算表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-小批量多样本分类的矢量计算表达式"><span class="toc-text">1.2 小批量多样本分类的矢量计算表达式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-模型求解"><span class="toc-text">2. 模型求解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-损失函数定义"><span class="toc-text">2.1 损失函数定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-损失函数的反向传播"><span class="toc-text">2.2 损失函数的反向传播</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PyTorch实战"><span class="toc-text">3. PyTorch实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-从零实现"><span class="toc-text">3.1 从零实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-简洁实现"><span class="toc-text">3.2 简洁实现</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/categories/"
+    title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(28)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Algorithm/" href="/categories/Computer-Science/Algorithm/"><div class='name'>Algorithm</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/C-C/" href="/categories/Computer-Science/C-C/"><div class='name'>C & C++</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Deep-Learning/" href="/categories/Computer-Science/Deep-Learning/"><div class='name'>Deep Learning</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Information-Security/" href="/categories/Computer-Science/Information-Security/"><div class='name'>Information Security</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Linux/" href="/categories/Computer-Science/Linux/"><div class='name'>Linux</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Operating-System/" href="/categories/Computer-Science/Operating-System/"><div class='name'>Operating System</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(6)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(8)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Tags</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/tags/"
+    title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/AI/" style="font-size: 14px; color: #999">AI</a> <a href="/tags/C/" style="font-size: 20.67px; color: #6c6c6c">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/GNN/" style="font-size: 14px; color: #999">GNN</a> <a href="/tags/Git/" style="font-size: 14px; color: #999">Git</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 24px; color: #555">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 14px; color: #999">LeetCode</a> <a href="/tags/MBA/" style="font-size: 20.67px; color: #6c6c6c">MBA</a> <a href="/tags/ML/" style="font-size: 17.33px; color: #828282">ML</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/PDF/" style="font-size: 14px; color: #999">PDF</a> <a href="/tags/Process/" style="font-size: 20.67px; color: #6c6c6c">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 20.67px; color: #6c6c6c">Ubuntu</a> <a href="/tags/哲学/" style="font-size: 14px; color: #999">哲学</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+  <br>
+  <!-- <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div> -->
+  <!-- <div>
+    Use
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    as theme
+    
+    . 
+  </div> -->
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('') {
+          $('').backstretch(
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
+          {
+            duration: "60000",
+            fade: "25000"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
+          {
+            duration: "60000",
+            fade: "25000"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/app.js"></script>
+
+
+  <script src="/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
