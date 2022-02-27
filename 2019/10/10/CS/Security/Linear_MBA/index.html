@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>进程间的通信方式 | 柴</title>
+  <title>线性MBA表达式存在定理证明 | 柴</title>
   
   
 
@@ -275,8 +275,8 @@
         
   
     <h1 class="title">
-      <a href="/2015/03/09/CS/Operating-System/communication-of-process/">
-        进程间的通信方式
+      <a href="/2019/10/10/CS/Security/Linear_MBA/">
+        线性MBA表达式存在定理证明
       </a>
     </h1>
   
@@ -291,17 +291,17 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2015-03-09</p>
+    <p>2019-10-10</p>
   </a>
 </div>
 
           
         
           
-            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2015-03-09T14:12:00+08:00">
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-10T16:41:00+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>updated at 2015-03-09</p>
+    <p>updated at 2019-10-10</p>
   </a>
 </div>
 
@@ -311,9 +311,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Computer-Science/Operating-System/' rel="nofollow">
+    <a href='/categories/Computer-Science/Information-Security/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Computer Science&nbsp;/&nbsp;Operating System</p>
+      <p>Computer Science&nbsp;/&nbsp;Information Security</p>
     </a>
   </div>
 
@@ -323,7 +323,7 @@
           
             
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Process/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Process</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/MBA/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>MBA</p></a></div>
 
 
           
@@ -338,42 +338,27 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <p>同步与通信是并发进程交互的两个基本要求。进程同步主要解决临界区问题，进程通信指进程间的信息交换。</p>
+          <p>定理来源参见论文<em>Information Hiding in Software with Mixed Boolean-Arithmetic Transforms</em>中定理1.</p>
 <hr>
 <a id="more"></a>
 
-<h2 id="1-进程通信的概念"><a href="#1-进程通信的概念" class="headerlink" title="1. 进程通信的概念"></a>1. 进程通信的概念</h2><p>进程的特征之一是其具有独立性，一个进程不能访问另一个进程的程序或者数据，以保证进程之间不会相互干扰，但这样也造成了进程间无法直接交换数据。</p>
-<p>一般而言，进程通过两种方案来实现进程间的通信</p>
+<h2 id="1-MBA表达式的定义"><a href="#1-MBA表达式的定义" class="headerlink" title="1. MBA表达式的定义"></a>1. MBA表达式的定义</h2><p><strong>多项式MBA表达式</strong>形如：<br>$$\sum_{i \in I} a_i (\prod_{j \in J} e_{i,j}(x_1,…,x_t))$$<br>其中$a_i$是整数，$x_i$是在$B^n$上的变量，$e_{i,j}$是对变量$x_i$的按位表达式。例如：<br>$$f(x,y,z,t)=8458(x \lor y \land z)^3((xy)\land x \lor t) + x + 9(x \lor y)yz^3$$<br>是一个多项式MBA表达式，其中，表达式中变量总共有4个，即$t = 4$,即$x_1 = x, x_2 = y, x_3 = z$, $x_4 = t$，另外，$a$总共有3个值，分别是$a_0=8458, a_1=1, a_2 = 9$。<br>对于$a_0$，总共有4个$e_{i,j}$作为其右部累积，即$e_{0,0}=e_{0,1}=e_{0,2}=x \lor y \land z,e_{0,3}=(xy) \land x \lor t$。<br>同样的，$a_1$仅又结合了一个$e_{0,0}=x$。<br>至此算是比较清晰的解释了什么是MBA表达式</p>
+<p><strong>线性MBA表达式</strong>形如：<br>$$\sum_{i \in I}a_i e_i(x_1,…x_t)$$<br>线性MBA表达式是多项式MBA表达式的子集，例如：<br>$$f(x,y)=x+y-(x \oplus (\lnot y)) - 2(x \lor y) + 12564$$<br>是一个线性MBA表达式，其变量仅两个$x,y$，而$a=\lbrace 1,1,-1,-2,12564 \rbrace$，对于每个$a_i$，<strong>仅右结合一个$e_i$</strong>，这是线性MBA和多项式MBA的区别。</p>
+<h2 id="2-定理1-线性MBA表达式存在定理"><a href="#2-定理1-线性MBA表达式存在定理" class="headerlink" title="2. 定理1:线性MBA表达式存在定理"></a>2. 定理1:线性MBA表达式存在定理</h2><p>假设$n,s,t$为正整数，</p>
 <ol>
-<li>发送、接受双方通过磁盘等外设交换数据。这种通信方式需要I/O操作的支持。</li>
-<li>利用内核运行在内核态的特点，通过对内核空间读写来交换数据。这种通信方式是在内存中完成的。</li>
+<li>变量$x_i \in B^n, i=1,…,t$，即$x_i$形如$1011…010_{(n)}$；</li>
+<li>$a_j$是一个正整数，$j=0,1,…,s-1$;</li>
+<li>$e_j$是对$x_i$的<strong>按位表达式</strong>，$j=0,1,…,s-1$。由于该定理适用于线性MBA，因此对每个$a_j$仅右结合一个$e_j$，例如$e_j(x_1,x_2,x_3)=x_1 \lor x_2 \oplus x_3$,尤其需要注意的是，由于$e_j$是按位运算，因此有：$e_j(x_1,…,x_t)=\left( \begin{matrix} f_j(x_{1,0},…,x_{t,0}) \\ \vdots \\f_j(x_{1,n-1},…,x_{t,n-1}) \end{matrix} \right) = \left( \begin{matrix} f_j(y_0) \\ \vdots \\f_j(y_0) \end{matrix} \right)$</li>
+<li>$e=\sum_{j=0}^{s-1}a_j e_j$是一个线性MBA表达式，则$e_j$是一个映射：$e_j:B^{n \times t} \to B$，由于$B$这个二进制数可以转换成模$2^n$的整数(在计算机中整数由补码表示，假设所有整数的二进制位数为$n$，则计算机中所有的数都需要模$2^n$)，因此$e_j:B^{n \times t} \to Z/2^n$，同样的,$e:B^{n \times t} \to Z/2^t$；</li>
+<li>$F=\left( \begin{matrix} f_0(0) \cdots f_{s-1}(0) \\ \vdots \\f_0(2^t-1) \cdots f_{s-1}(2^t-1) \end{matrix} \right)$是一个$2^t \times s$的矩阵，表示$f_j$对每一bit位操作的所有可能的值，在Zhou的论文中说$F$是一个真值表；</li>
+<li>$V=(a_0,…,a_{s-1})^T$；</li>
 </ol>
-<p>根据进程通信交换信息量的大小，可以将进程通信分为两种：</p>
-<ol>
-<li>低级通信。进程之间一次只传输少量数据，速度快，效率低，通信过程对用户不透明。这类通信主要用于互斥与同步的工具，P、V原语是低级通信原语</li>
-<li>高级通信。一次可以传输大量信息，效率高，对用户透明，编程简单。高级通信又分为三种：<ul>
-<li>共享内存通信方式：利用共享内存通信；</li>
-<li>消息传递通信方式：利用OS提供的消息系统通信；</li>
-<li>共享文件通信方式：又被称为管道通信。</li>
-</ul>
-</li>
-</ol>
-<p>高级通信方式既适用于集中式操作系统，又适用于分布式操作系统。</p>
-<h2 id="2-共享内存通信方式"><a href="#2-共享内存通信方式" class="headerlink" title="2. 共享内存通信方式"></a>2. 共享内存通信方式</h2><p>共享内存是指在内存中划出一块区域作为数据共享区，称为共享内存分区，<strong>通信双方将自己的虚拟地址空间映射到共享内存分区上</strong>。通信时通过对该分区读写实现通信。该方式是进程间最快捷、最有效的通信方式，Unix、Windows和OSX都采用了这种通信方式。</p>
-<h2 id="3-消息缓冲-消息队列-通信方式"><a href="#3-消息缓冲-消息队列-通信方式" class="headerlink" title="3. 消息缓冲(消息队列)通信方式"></a>3. 消息缓冲(消息队列)通信方式</h2><p>消息缓冲属于<strong>直接通信</strong>方式，该方法中，发送进程直接发送原语到接收进程的消息队列，而接受进程使用接受原语从消息队列中取出信息，进程间以<strong>消息</strong>为单位进行信息交换。该方法与生产者-消费者问题类似。该方式与共享内存有点相似，该方法<strong>使用内存中的公用消息缓冲区来传递消息</strong>。</p>
-<h2 id="4-信箱通信方式"><a href="#4-信箱通信方式" class="headerlink" title="4. 信箱通信方式"></a>4. 信箱通信方式</h2><p>该方式是<strong>间接通信</strong>方式，通信双方通过一种叫<strong>信箱</strong>的共享数据结构来进行交互。该方法和消息队列没什么区别，也是在内存中设置一种特殊的数据结构。</p>
-<h2 id="5-管道通信方式"><a href="#5-管道通信方式" class="headerlink" title="5. 管道通信方式"></a>5. 管道通信方式</h2><p>所谓的<strong>管道就是一种共享通信文件</strong>，也称为pipe文件，专门用于进程间通信。管道有三个特点：</p>
-<ol>
-<li>管道专门用于特性</li>
-<li>管道只能<strong>单向传送数据</strong></li>
-<li>管道对用户透明</li>
-</ol>
-<p>管道分为两种：</p>
-<ol>
-<li>无名管道。无名管道是利用系统调用pipe建立起来的无路径名的无名文件，并且是一个临时文件，该文件物理上由文件系统的高速缓冲区构成，且很少启动外部设备。当进程不再需要无名管道时，系统关闭并回收与它相关联的索引节点。此外，通过文件系统看不到无名管道的存在。</li>
-<li>有名管道。有名管道是一个有目录和索引的长期存在的真实文件，不能与文件系统中的任何文件重名，且在文件系统中能看到该有名管道。</li>
-</ol>
-<h2 id="6-信号量"><a href="#6-信号量" class="headerlink" title="6. 信号量"></a>6. 信号量</h2><h2 id="7-套接字"><a href="#7-套接字" class="headerlink" title="7. 套接字"></a>7. 套接字</h2>
+<p>$e=0$当且仅当$F \cdot V = 0$在环$Z/2^n$上有非平凡的解。</p>
+<h2 id="3-证明"><a href="#3-证明" class="headerlink" title="3. 证明"></a>3. 证明</h2><p>对于定理中的第5点，$F$为什么是$2^t \times s$，原因是，首先$f_j$也就是$e_j$总共有$s-1$个不同的表达式，这是列数为$s$的原因，其次，$y_i$是一个$t \times 1$的向量，$y_i$中的每个分量都是从$x_j$中第$i$个位置取出，例如$y_i=(1,0,1)$，那么对这个$t$位的$y_i$，其可能取值自然是$(0,1,…,2^t-1)$，也就有了$f_j$所有可能的取值是$(f(0),f(1),…,f(2^t-1))$，矩阵因此而来。</p>
+<p>假设$F \cdot V = 0$，有：<br>$\forall x_1,…x_t \in B^n, y_i = (x_{1,i},…,x_{t,i}), i=0,…,n-1$,<br>$$<br>e(x_1,…,x_t)=\sum_{j=0}^{s-1}a_je_j(x_1,…,x_t)<br>$$</p>
+<p>对于$e_j$有:<br>$$e_j(x_1,…,x_t) = [f_j(y_0),…,f_j(y_{n-1})] = \sum_{i=0}^{n-1}2^i f_j(y_i) \tag{1}$$<br>例如，$(x_1,x_2,x_3) = (101,110,001)$，且$e_j(x_1,x_2,x_3)=x_1 \land x_2 \oplus x_3$,则将$x_1,x_2,x_3$代入后可得$e_j(x_1,x_2,x_3)=101=5$,因为$e_j$是按位运算，因此可以把$e_j$拆分为$n$个$f_j$，每个$f_j$都是相同的，且每个$f_j$都是对一个不同变量的同一bit位操作的，这样就可以得到$e_j(x_1,x_2,x_3) = e_j(101,110,001)=[f_j(110), f_j(010), f_j(101)]=2^0f_j(110) + 2^1f_j(010) + 2^2f_j(101) = 5$;<br>将$(1)$带入$e$中可以得到：<br>$$e = \sum_{j=0}^{s-1}a_j e_j(x_1,…x_t) = \sum_{j=0}^{s-1}a_j \sum_{i=0}^{n-1}2^if_j(y_i)=\sum_{i=0}^{n-1}2^i \sum_{j=0}^{s-1}a_j f_j (y_i) \tag{2}$$<br>在$F \cdot V=0$中，有$\left(\begin{matrix} \vdots \\f_0(y_i) \cdots f_{s-1}(y_i) \\ \vdots \end{matrix} \right) \cdot \left( \begin{matrix} a_0 \\ a_1 \\ \vdots \\ a_{s-1}\end{matrix} \right) = \left( \begin{matrix} 0 \\ 0 \\ \vdots \\ 0\end{matrix} \right)$,即$\sum_{j=0}^{s-1}a_j f_j(y_i)=0$,代入$(2)$中可以得到：<br>$$<br>(2)=\sum_{i=0}^{n-1}2^i \sum_{j=0}^{s-1}a_j f_j (y_i)=\sum_{i=0}^{n-1}2^i \times 0 = 0<br>$$<br>以上证明了$F \cdot V = 0 \Rightarrow e = 0$,下面证明$e=0 \Rightarrow F \cdot V = 0$:</p>
+<p>假设$e \equiv 0$，令$m_i = \sum_{j=0}^{s-1}a_j f_j (x_{1,i}, … , x_{t,i})$，则有：<br>$$e=\sum_{i=0}^{n-1}2^i \cdot m_i = 2^0m_0 + 2^1m_1 +…+2^{n-1}m_{n-1} \equiv 0 \tag{3}$$<br>假定我们有任意输入$x_{1,k},…,x_{t,k}$，且其$m_k = \bar{m} \not = 0$,则将其代入$(3)$中有：<br>$$e=2^0 \bar{m} + 2^1 \bar{m} +…+2^{n-1} \bar{m} \equiv 0 \Rightarrow \bar{m} = 0$$<br>但是$\bar{m}=0$与假设的$\bar{m} \not = 0$矛盾，因此可以得出结论对任意的$m_i$都有$m_i=0$，即$\sum_{j=0}^{s-1}a_j f_j (x_{1,i}, … , x_{t,i})=0$，进而有$F \cdot V = 0$.</p>
+
         </div>
         
           
@@ -395,16 +380,16 @@
                         <span class="art-item-left">
                             <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
                             <h4>
-                                <a href="/2015/03/12/CS/Operating-System/process-and-thread-coroutines/" rel="prev" title="进程、线程与协程之间的区别与联系">
+                                <a href="/2019/11/06/CS/Tools/ssh-scp/" rel="prev" title="SSH中scp命令的使用">
                                   
-                                      进程、线程与协程之间的区别与联系
+                                      SSH中scp命令的使用
                                   
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/Process/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Process</a>
+                                    <a class="tag" href="/tags/SSH/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>SSH</a>
                                 </h6>
                             
                         </span>
@@ -415,16 +400,16 @@
                         <span class="art-item-right" aria-hidden="true">
                             <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2015/03/07/CS/Operating-System/process/" rel="prev" title="进程的基本概念">
+                                <a href="/2019/09/22/CS/Tools/Tex_manual/" rel="prev" title="Latex常见数学符号整理">
                                     
-                                        进程的基本概念
+                                        Latex常见数学符号整理
                                     
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/Process/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Process</a>
+                                    <a class="tag" href="/tags/Tex/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Tex</a>
                                 </h6>
                             
                         </span>
@@ -483,7 +468,7 @@
 
   <script>
     window.subData = {
-      title: '进程间的通信方式',
+      title: '线性MBA表达式存在定理证明',
       tools: true
     }
   </script>
@@ -577,7 +562,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-进程通信的概念"><span class="toc-text">1. 进程通信的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-共享内存通信方式"><span class="toc-text">2. 共享内存通信方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-消息缓冲-消息队列-通信方式"><span class="toc-text">3. 消息缓冲(消息队列)通信方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-信箱通信方式"><span class="toc-text">4. 信箱通信方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-管道通信方式"><span class="toc-text">5. 管道通信方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-信号量"><span class="toc-text">6. 信号量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-套接字"><span class="toc-text">7. 套接字</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-MBA表达式的定义"><span class="toc-text">1. MBA表达式的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-定理1-线性MBA表达式存在定理"><span class="toc-text">2. 定理1:线性MBA表达式存在定理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-证明"><span class="toc-text">3. 证明</span></a></li></ol>
     </div>
   </section>
 

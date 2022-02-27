@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>线性MBA表达式存在定理证明 | 柴</title>
+  <title>进程、线程与协程之间的区别与联系 | 柴</title>
   
   
 
@@ -275,8 +275,8 @@
         
   
     <h1 class="title">
-      <a href="/2019/10/10/CS/Security/Linear MBA Expressions/">
-        线性MBA表达式存在定理证明
+      <a href="/2015/03/12/CS/Operating-System/process_thread/">
+        进程、线程与协程之间的区别与联系
       </a>
     </h1>
   
@@ -291,17 +291,17 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-10-10</p>
+    <p>2015-03-12</p>
   </a>
 </div>
 
           
         
           
-            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-10T16:41:00+08:00">
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2015-03-12T14:12:00+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>updated at 2019-10-10</p>
+    <p>updated at 2015-03-12</p>
   </a>
 </div>
 
@@ -311,9 +311,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Computer-Science/Information-Security/' rel="nofollow">
+    <a href='/categories/Computer-Science/Operating-System/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Computer Science&nbsp;/&nbsp;Information Security</p>
+      <p>Computer Science&nbsp;/&nbsp;Operating System</p>
     </a>
   </div>
 
@@ -323,7 +323,7 @@
           
             
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/MBA/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>MBA</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Process/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Process</p></a></div>
 
 
           
@@ -338,26 +338,35 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <p>定理来源参见论文<em>Information Hiding in Software with Mixed Boolean-Arithmetic Transforms</em>中定理1.</p>
+          <p>进程、线程与协程之间的区别与联系</p>
 <hr>
 <a id="more"></a>
 
-<h2 id="1-MBA表达式的定义"><a href="#1-MBA表达式的定义" class="headerlink" title="1. MBA表达式的定义"></a>1. MBA表达式的定义</h2><p><strong>多项式MBA表达式</strong>形如：<br>$$\sum_{i \in I} a_i (\prod_{j \in J} e_{i,j}(x_1,…,x_t))$$<br>其中$a_i$是整数，$x_i$是在$B^n$上的变量，$e_{i,j}$是对变量$x_i$的按位表达式。例如：<br>$$f(x,y,z,t)=8458(x \lor y \land z)^3((xy)\land x \lor t) + x + 9(x \lor y)yz^3$$<br>是一个多项式MBA表达式，其中，表达式中变量总共有4个，即$t = 4$,即$x_1 = x, x_2 = y, x_3 = z$, $x_4 = t$，另外，$a$总共有3个值，分别是$a_0=8458, a_1=1, a_2 = 9$。<br>对于$a_0$，总共有4个$e_{i,j}$作为其右部累积，即$e_{0,0}=e_{0,1}=e_{0,2}=x \lor y \land z,e_{0,3}=(xy) \land x \lor t$。<br>同样的，$a_1$仅又结合了一个$e_{0,0}=x$。<br>至此算是比较清晰的解释了什么是MBA表达式</p>
-<p><strong>线性MBA表达式</strong>形如：<br>$$\sum_{i \in I}a_i e_i(x_1,…x_t)$$<br>线性MBA表达式是多项式MBA表达式的子集，例如：<br>$$f(x,y)=x+y-(x \oplus (\lnot y)) - 2(x \lor y) + 12564$$<br>是一个线性MBA表达式，其变量仅两个$x,y$，而$a=\lbrace 1,1,-1,-2,12564 \rbrace$，对于每个$a_i$，<strong>仅右结合一个$e_i$</strong>，这是线性MBA和多项式MBA的区别。</p>
-<h2 id="2-定理1-线性MBA表达式存在定理"><a href="#2-定理1-线性MBA表达式存在定理" class="headerlink" title="2. 定理1:线性MBA表达式存在定理"></a>2. 定理1:线性MBA表达式存在定理</h2><p>假设$n,s,t$为正整数，</p>
+<h2 id="1-进程"><a href="#1-进程" class="headerlink" title="1. 进程"></a>1. 进程</h2><p>进程是程序的动态执行。保存在硬盘上的程序运行以后，会在内存空间里形成一个独立的内存体，这个内存体有自己独立的地址空间，有自己的堆，上级挂靠单位是操作系统。操作系统会以进程为单位，分配系统资源（CPU时间片、内存等资源），<strong>进程是资源分配的最小单位</strong>。一块CPU在某一时刻只能运行一个进程，多进程是通过进程调度抢占CPU来实现的。</p>
+<p><strong>进程间的通信方式</strong></p>
+<p>无名管道(Pipe)、有名管道(FIFO)、消息队列(Message Queue) 、信号量(Semaphore) 、共享内存(Shared Memory)、套接字(Socket)。</p>
+<h2 id="2-线程"><a href="#2-线程" class="headerlink" title="2. 线程"></a>2. 线程</h2><p>线程也被称为轻量级进程(Lightweight Process，LWP)，是操作系统调度(CPU调度)执行的最小单位。</p>
+<h3 id="2-1-线程与进程的区别与联系"><a href="#2-1-线程与进程的区别与联系" class="headerlink" title="2.1 线程与进程的区别与联系"></a>2.1 线程与进程的区别与联系</h3><p><strong>联系</strong></p>
 <ol>
-<li>变量$x_i \in B^n, i=1,…,t$，即$x_i$形如$1011…010_{(n)}$；</li>
-<li>$a_j$是一个正整数，$j=0,1,…,s-1$;</li>
-<li>$e_j$是对$x_i$的<strong>按位表达式</strong>，$j=0,1,…,s-1$。由于该定理适用于线性MBA，因此对每个$a_j$仅右结合一个$e_j$，例如$e_j(x_1,x_2,x_3)=x_1 \lor x_2 \oplus x_3$,尤其需要注意的是，由于$e_j$是按位运算，因此有：$e_j(x_1,…,x_t)=\left( \begin{matrix} f_j(x_{1,0},…,x_{t,0}) \\ \vdots \\f_j(x_{1,n-1},…,x_{t,n-1}) \end{matrix} \right) = \left( \begin{matrix} f_j(y_0) \\ \vdots \\f_j(y_0) \end{matrix} \right)$</li>
-<li>$e=\sum_{j=0}^{s-1}a_j e_j$是一个线性MBA表达式，则$e_j$是一个映射：$e_j:B^{n \times t} \to B$，由于$B$这个二进制数可以转换成模$2^n$的整数(在计算机中整数由补码表示，假设所有整数的二进制位数为$n$，则计算机中所有的数都需要模$2^n$)，因此$e_j:B^{n \times t} \to Z/2^n$，同样的,$e:B^{n \times t} \to Z/2^t$；</li>
-<li>$F=\left( \begin{matrix} f_0(0) \cdots f_{s-1}(0) \\ \vdots \\f_0(2^t-1) \cdots f_{s-1}(2^t-1) \end{matrix} \right)$是一个$2^t \times s$的矩阵，表示$f_j$对每一bit位操作的所有可能的值，在Zhou的论文中说$F$是一个真值表；</li>
-<li>$V=(a_0,…,a_{s-1})^T$；</li>
+<li>一个线程只能属于一个进程，而一个进程可以有多个线程，但至少有一个线程；</li>
+<li>资源分配给进程，同一进程的所有线程共享该进程的所有资源；</li>
+<li>处理机分给线程，即真正在处理机上运行的是线程；</li>
+<li>线程在执行过程中，需要协作同步。不同进程的线程间要利用消息通信的办法实现同步。</li>
 </ol>
-<p>$e=0$当且仅当$F \cdot V = 0$在环$Z/2^n$上有非平凡的解。</p>
-<h2 id="3-证明"><a href="#3-证明" class="headerlink" title="3. 证明"></a>3. 证明</h2><p>对于定理中的第5点，$F$为什么是$2^t \times s$，原因是，首先$f_j$也就是$e_j$总共有$s-1$个不同的表达式，这是列数为$s$的原因，其次，$y_i$是一个$t \times 1$的向量，$y_i$中的每个分量都是从$x_j$中第$i$个位置取出，例如$y_i=(1,0,1)$，那么对这个$t$位的$y_i$，其可能取值自然是$(0,1,…,2^t-1)$，也就有了$f_j$所有可能的取值是$(f(0),f(1),…,f(2^t-1))$，矩阵因此而来。</p>
-<p>假设$F \cdot V = 0$，有：<br>$\forall x_1,…x_t \in B^n, y_i = (x_{1,i},…,x_{t,i}), i=0,…,n-1$,<br>$$<br>e(x_1,…,x_t)=\sum_{j=0}^{s-1}a_je_j(x_1,…,x_t)<br>$$</p>
-<p>对于$e_j$有:<br>$$e_j(x_1,…,x_t) = [f_j(y_0),…,f_j(y_{n-1})] = \sum_{i=0}^{n-1}2^i f_j(y_i) \tag{1}$$<br>例如，$(x_1,x_2,x_3) = (101,110,001)$，且$e_j(x_1,x_2,x_3)=x_1 \land x_2 \oplus x_3$,则将$x_1,x_2,x_3$代入后可得$e_j(x_1,x_2,x_3)=101=5$,因为$e_j$是按位运算，因此可以把$e_j$拆分为$n$个$f_j$，每个$f_j$都是相同的，且每个$f_j$都是对一个不同变量的同一bit位操作的，这样就可以得到$e_j(x_1,x_2,x_3) = e_j(101,110,001)=[f_j(110), f_j(010), f_j(101)]=2^0f_j(110) + 2^1f_j(010) + 2^2f_j(101) = 5$;<br>将$(1)$带入$e$中可以得到：<br>$$e = \sum_{j=0}^{s-1}a_j e_j(x_1,…x_t) = \sum_{j=0}^{s-1}a_j \sum_{i=0}^{n-1}2^if_j(y_i)=\sum_{i=0}^{n-1}2^i \sum_{j=0}^{s-1}a_j f_j (y_i) \tag{2}$$<br>在$F \cdot V=0$中，有$\left(\begin{matrix} \vdots \\f_0(y_i) \cdots f_{s-1}(y_i) \\ \vdots \end{matrix} \right) \cdot \left( \begin{matrix} a_0 \\ a_1 \\ \vdots \\ a_{s-1}\end{matrix} \right) = \left( \begin{matrix} 0 \\ 0 \\ \vdots \\ 0\end{matrix} \right)$,即$\sum_{j=0}^{s-1}a_j f_j(y_i)=0$,代入$(2)$中可以得到：<br>$$<br>(2)=\sum_{i=0}^{n-1}2^i \sum_{j=0}^{s-1}a_j f_j (y_i)=\sum_{i=0}^{n-1}2^i \times 0 = 0<br>$$<br>以上证明了$F \cdot V = 0 \Rightarrow e = 0$,下面证明$e=0 \Rightarrow F \cdot V = 0$:</p>
-<p>假设$e \equiv 0$，令$m_i = \sum_{j=0}^{s-1}a_j f_j (x_{1,i}, … , x_{t,i})$，则有：<br>$$e=\sum_{i=0}^{n-1}2^i \cdot m_i = 2^0m_0 + 2^1m_1 +…+2^{n-1}m_{n-1} \equiv 0 \tag{3}$$<br>假定我们有任意输入$x_{1,k},…,x_{t,k}$，且其$m_k = \bar{m} \not = 0$,则将其代入$(3)$中有：<br>$$e=2^0 \bar{m} + 2^1 \bar{m} +…+2^{n-1} \bar{m} \equiv 0 \Rightarrow \bar{m} = 0$$<br>但是$\bar{m}=0$与假设的$\bar{m} \not = 0$矛盾，因此可以得出结论对任意的$m_i$都有$m_i=0$，即$\sum_{j=0}^{s-1}a_j f_j (x_{1,i}, … , x_{t,i})=0$，进而有$F \cdot V = 0$.</p>
+<p><strong>区别</strong></p>
+<ol>
+<li>调度：线程作为调度和分配的基本单位，进程作为拥有资源的基本单位；</li>
+<li>并发性：不仅进程之间可以并发执行，同一个进程的多个线程之间也可并发执行；</li>
+<li>拥有资源：进程是拥有资源的一个独立单位，线程不拥有系统资源，但可以访问隶属进程的资源。进程维护的是程序所包含的资源(静态资源)，如：地址空间、打开的文件句柄集、文件系统状态、信号处理handler等；线程所维护的运行相关的资源(动态资源)，如：运行栈、调度相关的控制信息、待处理的信号集等；</li>
+<li>系统开销：在创建或撤消进程时，由于系统都要为之分配和回收资源，导致创建进程的系统开销明显大于创建或撤消线程时的开销。但是进程有独立的地址空间，一个进程崩溃后，在保护模式下不会对其它进程产生影响。而线程只是一个进程中的不同执行路径。线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，一个进程死掉就等于所有的线程死掉，所以多进程的程序要比多线程的程序健壮，但在进程切换时，耗费资源较大，效率要差一些。</li>
+</ol>
+<h2 id="3-协程"><a href="#3-协程" class="headerlink" title="3. 协程"></a>3. 协程</h2><p>协程，是一种比线程更加轻量级的存在，协程不是被操作系统内核所管理，而完全是由程序所控制(也就是在用户态执行)。这样带来的好处就是性能得到了很大的提升，不会像线程切换那样消耗资源。</p>
+<p>子程序，或者称为函数，在所有语言中都是层级调用，比如A调用B，B在执行过程中又调用了C，C执行完毕返回，B执行完毕返回，最后是A执行完毕。所以子程序调用是通过栈实现的，一个线程就是执行一个子程序。子程序调用总有一个入口，一次返回，并且调用顺序是明确的。而协程的调用和子程序不同，协程在子程序内部是可中断的，然后转而执行别的子程序，在适当的时候再返回来接着执行。</p>
+<p><strong>协程的优点</strong></p>
+<ol>
+<li>极高的执行效率：因为子程序切换不是线程切换，而是由程序自身控制，因此，没有线程切换的开销，和多线程比，线程数量越多，协程的性能优势就越明显；</li>
+<li>不需要多线程的锁机制：因为只有一个线程，也不存在同时写变量冲突，在协程中控制共享资源不加锁，只需要判断状态就好了，所以执行效率比多线程高很多。</li>
+</ol>
 
         </div>
         
@@ -380,16 +389,16 @@
                         <span class="art-item-left">
                             <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
                             <h4>
-                                <a href="/2019/11/06/CS/Tools/ssh-scp/" rel="prev" title="SSH中scp命令的使用">
+                                <a href="/2015/03/16/CS/Operating-System/deadlock/" rel="prev" title="死锁问题">
                                   
-                                      SSH中scp命令的使用
+                                      死锁问题
                                   
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/SSH/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>SSH</a>
+                                    <a class="tag" href="/tags/Deadlock/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Deadlock</a>
                                 </h6>
                             
                         </span>
@@ -400,16 +409,16 @@
                         <span class="art-item-right" aria-hidden="true">
                             <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2019/09/22/CS/Tools/Tex_manual/" rel="prev" title="Latex常见数学符号整理">
+                                <a href="/2015/03/09/CS/Operating-System/process_communication/" rel="prev" title="进程间的通信方式">
                                     
-                                        Latex常见数学符号整理
+                                        进程间的通信方式
                                     
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/Tex/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Tex</a>
+                                    <a class="tag" href="/tags/Process/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>Process</a>
                                 </h6>
                             
                         </span>
@@ -468,7 +477,7 @@
 
   <script>
     window.subData = {
-      title: '线性MBA表达式存在定理证明',
+      title: '进程、线程与协程之间的区别与联系',
       tools: true
     }
   </script>
@@ -562,7 +571,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-MBA表达式的定义"><span class="toc-text">1. MBA表达式的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-定理1-线性MBA表达式存在定理"><span class="toc-text">2. 定理1:线性MBA表达式存在定理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-证明"><span class="toc-text">3. 证明</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-进程"><span class="toc-text">1. 进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-线程"><span class="toc-text">2. 线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-线程与进程的区别与联系"><span class="toc-text">2.1 线程与进程的区别与联系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-协程"><span class="toc-text">3. 协程</span></a></li></ol>
     </div>
   </section>
 
