@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Conda的使用 | 柴</title>
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <h1 class='title'> </h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-home fa-fw'></i>&nbsp;HOME
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Computer-Science"
+            
+            
+            id="categoriesComputer-Science">
+            <i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Mathematics"
+            
+            
+            id="categoriesMathematics">
+            <i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/Literature"
+            
+            
+            id="categoriesLiterature">
+            <i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          柴
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/categories/Computer-Science"
+                  
+                  
+                  id="categoriesComputer-Science">
+									<i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/Mathematics"
+                  
+                  
+                  id="categoriesMathematics">
+									<i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/Literature"
+                  
+                  
+                  id="categoriesLiterature">
+									<i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Computer-Science"
+                
+                  rel="nofollow"
+                
+                
+                id="categoriesComputer-Science">
+								<i class='fas fa-laptop-code fa-fw'></i>&nbsp;CS
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Mathematics"
+                
+                
+                id="categoriesMathematics">
+								<i class='fas fa-dice-d20 fa-fw'></i>&nbsp;MATH
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/Literature"
+                
+                
+                id="categoriesLiterature">
+								<i class='fas fa-book-reader fa-fw'></i>&nbsp;LIT
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;ARCHIVE
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/"
+                
+                  rel="nofollow"
+                
+                
+                id="categories">
+								<i class='fas fa-folder-open fa-fw'></i>&nbsp;CATEGORIES
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/tags/"
+                
+                  rel="nofollow"
+                
+                
+                id="tags">
+								<i class='fas fa-tags fa-fw'></i>&nbsp;TAGS
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2019/11/07/CS/Tools/Conda/">
+        Conda的使用
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-11-07</p>
+  </a>
+</div>
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-02-28T11:59:40+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>updated at 2022-02-28</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Computer-Science/Tools/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Computer Science&nbsp;/&nbsp;Tools</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Conda/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;<p>Conda</p></a></div>
+
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <p>Conda是一个开源跨平台语言无关的包管理与环境管理系统，我们常用的Anaconda、Bioconda(计算生物学)、miniconda等都是基于conda的发行版。</p>
+<hr>
+<a id="more"></a>
+
+<h1 id="1-Conda相关"><a href="#1-Conda相关" class="headerlink" title="1. Conda相关"></a>1. Conda相关</h1><h2 id="1-1-Anaconda的安装以及配置"><a href="#1-1-Anaconda的安装以及配置" class="headerlink" title="1.1 Anaconda的安装以及配置"></a>1.1 Anaconda的安装以及配置</h2><ol>
+<li><p>安装Anaconda</p>
+<p>可以在Anaconda官网下载相应Python版本的软件，或者使用如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.continuum.io/archive/Anaconda3-2018.12-Linux-x86_64.sh</span><br><span class="line"></span><br><span class="line">bash Anaconda3-2018.12-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建Python虚拟环境</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n virtual_env_name python=x.x</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>激活/关闭虚拟环境</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 激活</span></span><br><span class="line">source activate virtual_env_name</span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭</span></span><br><span class="line">source deactivate</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为相应的虚拟环境安装包</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -n virtual_env_name [package]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除虚拟环境</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env remove -n(--name) virtual_env_name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用conda命令</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda env list  <span class="comment"># 列出所有已创建的虚拟环境</span></span><br><span class="line">conda upgrade conda <span class="comment"># 升级conda本身</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="1-2-Conda镜像源的修改"><a href="#1-2-Conda镜像源的修改" class="headerlink" title="1.2 Conda镜像源的修改"></a>1.2 Conda镜像源的修改</h2><p>由于国外镜像访问速度较慢，推荐使用国内镜像。国内经Anaconda Inc.授权的为清华镜像。</p>
+<ol>
+<li><p>修改为Tsinghua源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free</span><br><span class="line"></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main</span><br><span class="line"></span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>换回默认源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda config --remove-key channels</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="2-Jupyter-Notebook的配置"><a href="#2-Jupyter-Notebook的配置" class="headerlink" title="2. Jupyter Notebook的配置"></a>2. Jupyter Notebook的配置</h1><p>通过<code>pip install notebook</code>或者<code>conda install notebook</code>可以安装交互式计算环境notebook。</p>
+<h2 id="2-1-Notebook工作路径的修改"><a href="#2-1-Notebook工作路径的修改" class="headerlink" title="2.1 Notebook工作路径的修改"></a>2.1 Notebook工作路径的修改</h2><p>Jupyter Notebook的默认工作路径为用户根目录，可以修改为指定目录。</p>
+<ol>
+<li><p>生成配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Mac &amp; Ubuntu &amp; Windows在Terminal中运行下面命令</span></span><br><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
+
+<p>如果在Windows中出现<em>‘jupyter’不是内部或外部命令，也不是可运行的批处理文件</em>，则说明没有安装notebook，可以通过下面命令安装notebook</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install notebook</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改配置文件</p>
+<p>找到如下所示的两行，第二行去注释并改成工作路径即可。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">macOS:</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># The directory to use for notebooks and kernels.</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">c.NotebookApp.notebook_dir = <span class="string">''</span></span></span><br><span class="line"></span><br><span class="line">Ubuntu &amp; Windows:</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># The default URL to redirect to from `/`</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">c.NotebookApp.default_url = <span class="string">'/tree'</span></span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="2-2-Jupyter的Python内核管理"><a href="#2-2-Jupyter的Python内核管理" class="headerlink" title="2.2 Jupyter的Python内核管理"></a>2.2 Jupyter的Python内核管理</h2><p>Conda可以创建多个Python虚拟环境，有时启动Jupyter Notebook后，在<em>新建</em>notebook选项中却找不到我们所创建的Python环境，此时可以通过向notebook中添加Python kernel解决该问题。</p>
+<h3 id="1-添加Kernel"><a href="#1-添加Kernel" class="headerlink" title="1. 添加Kernel"></a>1. 添加Kernel</h3><ol>
+<li><p>切换环境，安装内核</p>
+<p>首先切换到想要使用的Python环境中，若是虚拟环境则激活该虚拟环境。随后可以使用如下命令查看该环境下搜索并安装Python内核：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda search ipykernel      # 搜索内核</span><br><span class="line">conda install ipykernel     # 安装内核</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在notebook中安装内核</p>
+<p>使用以下命令安装notebook内核，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m ipykernel install --name name_you_want (--user)</span><br></pre></td></tr></table></figure>
+
+<p>其中name_you_want是将在notebook的<em>新建</em>中所显示的Python环境名字，安装时若权限不够，则添加–user</p>
+</li>
+<li><p>重新启动Jupyter Notebook</p>
+<p>重启Notebook，可以在<em>新建</em>下拉菜单中看到name_you_want选项，大功告成。</p>
+</li>
+</ol>
+<h3 id="2-查看kernel"><a href="#2-查看kernel" class="headerlink" title="2. 查看kernel"></a>2. 查看kernel</h3><p>   使用该命令可以查看notebook所有已安装kernel<br>   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter kernelspec list</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-删除kernel"><a href="#3-删除kernel" class="headerlink" title="3. 删除kernel"></a>3. 删除kernel</h3><p>   使用以下命令可以删除指定kernel<br>   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter kernelspec remove kernel_name</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <hr>
+    <div class='new-meta-box'>
+      
+    </div>
+  </section>
+
+
+        
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                            <h4>
+                                <a href="/2021/06/15/DL/RNN/" rel="prev" title="序列建模：循环神经网络">
+                                  
+                                      序列建模：循环神经网络
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/RNN/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>RNN</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2019/11/06/CS/Tools/SSH/" rel="prev" title="SSH中scp命令的使用">
+                                    
+                                        SSH中scp命令的使用
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/SSH/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i>SSH</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Conda的使用',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+        
+      
+        
+          
+          
+            <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;NAVIGATION</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-home fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/"
+          
+            rel="nofollow"
+          
+          
+          id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/tags/" href="/tags/"
+          
+            rel="nofollow"
+          
+          
+          id="tags">
+          
+            <i class="fas fa-tags fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="/categories/" href="/categories/"
+          
+            rel="nofollow"
+          
+          
+          id="categories">
+          
+            <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+          
+          
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Conda相关"><span class="toc-text">1. Conda相关</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Anaconda的安装以及配置"><span class="toc-text">1.1 Anaconda的安装以及配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Conda镜像源的修改"><span class="toc-text">1.2 Conda镜像源的修改</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Jupyter-Notebook的配置"><span class="toc-text">2. Jupyter Notebook的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Notebook工作路径的修改"><span class="toc-text">2.1 Notebook工作路径的修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Jupyter的Python内核管理"><span class="toc-text">2.2 Jupyter的Python内核管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-添加Kernel"><span class="toc-text">1. 添加Kernel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-查看kernel"><span class="toc-text">2. 查看kernel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-删除kernel"><span class="toc-text">3. 删除kernel</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/categories/"
+    title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/Computer-Science/" href="/categories/Computer-Science/"><div class='name'>Computer Science</div><div class='badge'>(29)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Algorithm/" href="/categories/Computer-Science/Algorithm/"><div class='name'>Algorithm</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/C-C/" href="/categories/Computer-Science/C-C/"><div class='name'>C & C++</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Deep-Learning/" href="/categories/Computer-Science/Deep-Learning/"><div class='name'>Deep Learning</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Information-Security/" href="/categories/Computer-Science/Information-Security/"><div class='name'>Information Security</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Linux/" href="/categories/Computer-Science/Linux/"><div class='name'>Linux</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Operating-System/" href="/categories/Computer-Science/Operating-System/"><div class='name'>Operating System</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Computer-Science/Tools/" href="/categories/Computer-Science/Tools/"><div class='name'>Tools</div><div class='badge'>(6)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Literature/" href="/categories/Literature/"><div class='name'>Literature</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Mathematics/" href="/categories/Mathematics/"><div class='name'>Mathematics</div><div class='badge'>(8)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Tags</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/tags/"
+    title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/AI/" style="font-size: 14px; color: #999">AI</a> <a href="/tags/C/" style="font-size: 20.67px; color: #6c6c6c">C++</a> <a href="/tags/Conda/" style="font-size: 14px; color: #999">Conda</a> <a href="/tags/Deadlock/" style="font-size: 14px; color: #999">Deadlock</a> <a href="/tags/GDB/" style="font-size: 14px; color: #999">GDB</a> <a href="/tags/GNN/" style="font-size: 14px; color: #999">GNN</a> <a href="/tags/Git/" style="font-size: 14px; color: #999">Git</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #999">HEXO</a> <a href="/tags/LLVM/" style="font-size: 14px; color: #999">LLVM</a> <a href="/tags/Lecture/" style="font-size: 24px; color: #555">Lecture</a> <a href="/tags/LeetCode/" style="font-size: 14px; color: #999">LeetCode</a> <a href="/tags/MBA/" style="font-size: 20.67px; color: #6c6c6c">MBA</a> <a href="/tags/ML/" style="font-size: 17.33px; color: #828282">ML</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #999">MacOS</a> <a href="/tags/Mathematics/" style="font-size: 14px; color: #999">Mathematics</a> <a href="/tags/PDF/" style="font-size: 14px; color: #999">PDF</a> <a href="/tags/Process/" style="font-size: 20.67px; color: #6c6c6c">Process</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/RNN/" style="font-size: 14px; color: #999">RNN</a> <a href="/tags/SSH/" style="font-size: 14px; color: #999">SSH</a> <a href="/tags/Sort/" style="font-size: 14px; color: #999">Sort</a> <a href="/tags/String/" style="font-size: 14px; color: #999">String</a> <a href="/tags/Tex/" style="font-size: 14px; color: #999">Tex</a> <a href="/tags/Ubuntu/" style="font-size: 20.67px; color: #6c6c6c">Ubuntu</a> <a href="/tags/哲学/" style="font-size: 14px; color: #999">哲学</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+  <br>
+  <!-- <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div> -->
+  <!-- <div>
+    Use
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    as theme
+    
+    . 
+  </div> -->
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('') {
+          $('').backstretch(
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
+          {
+            duration: "60000",
+            fade: "25000"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/a3/7909fde90ed22e7a8d8e27883ba6650d45b234.jpg", "https://img.vim-cn.com/29/793fd576933026ea4e21cdbe298b45fa15eb44.jpg", "https://img.vim-cn.com/1e/7c48afe6c9733c82b31d7c1043e43e9a00bc85.jpg", "https://img.vim-cn.com/74/c4f8924aba84f9ea2bbd1d2b397082c5ed8985.jpg"],
+          {
+            duration: "60000",
+            fade: "25000"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/app.js"></script>
+
+
+  <script src="/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
