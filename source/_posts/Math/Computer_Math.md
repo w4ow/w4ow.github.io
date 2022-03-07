@@ -1,5 +1,5 @@
 ---
-title: 计算机数学Lec 1:递归式
+title: 中科大2022春季博士课程：计算机数学
 date: 2022-02-23 00:00
 # updated: 0000-00-00 00:00
 mathjax: true
@@ -10,7 +10,6 @@ categories:
 tags:
     - Lecture
 ---
-中科大2022春季博士课程
 
 考核分数构成：
 - 作业35%，六次
@@ -54,7 +53,7 @@ $$\begin{aligned}
     &=L_{n-2}+(n-1)+n \\\\
     &=L_{n-3}+(n-2)+(n-1)+n\\\\
     &\ \ \ \ \ \vdots\\\\
-    &=L_0+1+2+\cdots+n\\
+    &=L_0+1+2+\cdots+n\\\\
     &=L_0+\frac{n(n+1)}{2}\\\\
     &=1+\frac{n(n+1)}{2}, n\ge0
 \end{aligned}$$
@@ -90,13 +89,14 @@ $J(n)$ | 1 | 1 | 3 | 1 | 3 | 5
 2. 总共有$2n+1$个人：经过第一轮后，还剩下$1,3,5,\cdots,2n-1, 2n+1$，而$1$号则是下个被杀死的人剔除$1$后，序列为$3,5,\cdots,2n-1, 2n+1$，显然，相对于序列$1,2,\cdots,n-1,n$，有
    $$J(2n+1)=2J(n)+1,n\ge1$$
 3. 综上我们可以得到$J(n)$的递归式：
-   $$\begin{aligned}
-       J(1) &= 1; \\\\
-       J(2n) &= 2J(n) - 1, n\ge 1; \\\\
-       J(2n+1) &= Jf(n) + 1, n\ge 1; \\\\
-   \end{aligned} \tag{1.8}$$
+$$\begin{aligned}
+    J(1) &= 1; \\\\
+    J(2n) &= 2J(n) - 1, n\ge 1; \\\\
+    J(2n+1) &= Jf(n) + 1, n\ge 1; \\\\
+\end{aligned} \tag{1.8}$$
 
 由$(1.8)$给出的递归式，我们尝试求出$J(n)$的封闭形式，首先还是枚举看看
+
 $n$|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16
 -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-
 $J(n)$|1|1|3|1|3|5|7|1|3|5|7|9|11|13|15|1
@@ -113,14 +113,18 @@ $$J(2^m+l)=2l+1, m\ge 0,0\le l< 2^m \tag{1.9}$$
    $$J(2^m+l)=2J(2^{m-1}+(l-1)/2)+1=2(2(l-1)/2+1)+1=2l+1$$
 
 更深一步的，我们可以考虑$(1.9)$的隐藏结构。对任意一个数$n$，都可以写成二进制形式$n=(b_m2^m+b_{m-1}2^{m-1}+\cdots+b_12+b_0)=(b_mb_{m-1}\cdots b_1b_0)_2$，其中$b_i$为0或1而首位数字$b_m=1$。注意$n=2^m+l$，我们有
+
 $$\begin{aligned}
-    n&=(1b_{m-1}b_{m-2}\cdots b_1b_0)_2\\\\
-    l&=(0b_{m-1}b_{m-2}\cdots b_1b_0)_2\\\\
-    2l&=(b_{m-1}b_{m-2}\cdots b_1b_00)_2\\\\
-    2l+1&=(b_{m-1}b_{m-2}\cdots b_1b_01)_2\\\\
+    n&=(1b_{m-1}b_{m-2}\cdots b_1b_0)_2 \\\\
+    l&=(0b_{m-1}b_{m-2}\cdots b_1b_0)_2 \\\\
+    2l&=(b_{m-1}b_{m-2}\cdots b_1b_00)_2 \\\\
+    2l+1&=(b_{m-1}b_{m-2}\cdots b_1b_01)_2 \\\\
     J(n)&=(b_{m-1}b_{m-2}\cdots b_1b_0b_m)_2
 \end{aligned}$$
-即$J((b_mb_{m-1}b_{m-2}\cdots b_1b_0)_2)=(b_{m-1}b_{m-2}\cdots b_1b_0b_m)_2$，即$J(n)$等于$n$循环左移一位。
+
+即$J({(b_m b_{m-1} ... b_1 b_0)}_2) = {(b_{m-1} ... b_1 b_0 b_m)}_2$
+
+即$J(n)$等于$n$循环左移一位。
 
 **约瑟夫环推广到一般形式**
 
@@ -157,7 +161,12 @@ $$\begin{aligned}
 
 ---
 
-## Homework
+# Lec 2 和式
+
+
+---
+
+# Homework 1
 
 **Problem 1.** Let $z_1 < z_2 < \cdots < z_n$ be the correct order of all elements in the array $A$. Then
 consider those pivots chosen in the natural order of \textsc{QuickSort}. For any $z_j$ and $z_k$, argue that
@@ -201,3 +210,23 @@ $$I(n)=\begin{cases}
     1, &n = 2 \\
     2k+1, &n > 2, n = 3\cdot 2^m+k
 \end{cases}$$
+
+---
+
+**Problem 4.** C2.19 利用求和因子来求解递归式
+$$
+\begin{aligned}
+    & T_0=5;\\
+    & 2T_n=nT_{n-1}+3\times n!, n>0.  
+\end{aligned}
+$$
+
+---
+
+**Problem 5.** C2.22 不用归纳法证明拉格朗日恒等式
+$$
+\sum_{1\le j < k \le n}(a_jb_k - a_kb_j)^2=\left( \sum_{k=1}^n a_k^2 \right)\left( \sum_{k=1}^n b_k^2 \right) - \left( \sum_{k=1}^n a_kb^k \right)^2.
+$$
+事实上，可证明一个关于更一般的二重和式
+$$\sum_{1 \le j < k \le n}(a_jb_k-a_kb_j)(A_jB_k-A_kB_j)$$
+的恒等式
