@@ -1,6 +1,6 @@
 ---
 title: Softmax回归：原理与实践
-# date: 2021-06-15 10:00
+date: 2021-09-15 10:00
 # updated: 0000-00-00 10:00
 mathjax: true
 meta:

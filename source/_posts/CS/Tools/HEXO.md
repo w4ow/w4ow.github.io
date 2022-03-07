@@ -1,6 +1,6 @@
 ---
 title: HEXO的使用
-# date: 2021-06-13 10:00
+date: 2021-06-13 10:00
 # updated: 0000-00-00 00:00
 meta:
     date: true

@@ -1,6 +1,6 @@
 ---
 title: 序列建模：循环神经网络
-date: 2021-06-15 10:00
+date: 2021-08-15 10:00
 # updated: 0000-00-00 10:00
 mathjax: true
 meta:

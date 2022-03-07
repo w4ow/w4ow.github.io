@@ -11,12 +11,12 @@ tags:
     - Lecture
 ---
 
-{% post_link Mathematics/Formal_lang/Lec0 Lecture 0：绪论 %}<br>
-{% post_link Mathematics/Formal_lang/Lec1 Lecture 1：正则语言 %}<br>
-{% post_link Mathematics/Formal_lang/Lec2 Lecture 2：上下文无关语言 %}<br>
-{% post_link Mathematics/Formal_lang/Lec3 Lecture 3：Church-Turing %}<br>
-{% post_link Mathematics/Formal_lang/Lec4 Lecture 4：可判定性 %}<br>
-{% post_link Mathematics/Formal_lang/Lec5 Lecture 5：可规约性 %}
+{% post_link Math/Formal_lang/Lec0 Lecture 0：绪论 %}<br>
+{% post_link Math/Formal_lang/Lec1 Lecture 1：正则语言 %}<br>
+{% post_link Math/Formal_lang/Lec2 Lecture 2：上下文无关语言 %}<br>
+{% post_link Math/Formal_lang/Lec3 Lecture 3：Church-Turing %}<br>
+{% post_link Math/Formal_lang/Lec4 Lecture 4：可判定性 %}<br>
+{% post_link Math/Formal_lang/Lec5 Lecture 5：可规约性 %}
 Lecture 6：时间复杂度
 
 ---

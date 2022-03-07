@@ -1,6 +1,6 @@
 ---
 title: 图表示与表征学习
-# date: 0000-00-00 00:00
+date: 2021-01-17 00:00
 # updated: 0000-00-00 00:00
 mathjax: true
 meta:
