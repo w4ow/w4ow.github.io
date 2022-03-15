@@ -112,17 +112,17 @@ $$J(2^m+l)=2l+1, m\ge 0,0\le l< 2^m \tag{1.9}$$
 3. 当$l$为奇数时(即$n$为奇数)，由$(1.3.2)$有
    $$J(2^m+l)=2J(2^{m-1}+(l-1)/2)+1=2(2(l-1)/2+1)+1=2l+1$$
 
-更深一步的，我们可以考虑$(1.9)$的隐藏结构。对任意一个数$n$，都可以写成二进制形式$n=(b_m2^m+b_{m-1}2^{m-1}+\cdots+b_12+b_0)=(b_mb_{m-1}\cdots b_1b_0)_2$，其中$b_i$为0或1而首位数字$b_m=1$。注意$n=2^m+l$，我们有
+更深一步的，我们可以考虑$(1.9)$的隐藏结构。对任意一个数$n$，都可以写成二进制形式$n=(b_m 2^m + b_{m - 1} 2^{m - 1} + \cdots + b_1 2 + b_0)=(b_m b_{m - 1} \cdots b_1 b_0)_2$，其中$b_i$为0或1且首位数字$b_m = 1$。注意$n = 2^m + l$，我们有
 
 $$\begin{aligned}
-    n&=(1b_{m-1}b_{m-2}\cdots b_1b_0)_2 \\\\
-    l&=(0b_{m-1}b_{m-2}\cdots b_1b_0)_2 \\\\
-    2l&=(b_{m-1}b_{m-2}\cdots b_1b_00)_2 \\\\
-    2l+1&=(b_{m-1}b_{m-2}\cdots b_1b_01)_2 \\\\
-    J(n)&=(b_{m-1}b_{m-2}\cdots b_1b_0b_m)_2
+    n &= (1 b_{m - 1} b_{m - 2} \cdots b_1 b_0)\_2 \\\\
+    l &= (0 b\_{m - 1} b_{m - 2} \cdots b_1 b_0)\_2 \\\\
+    2 l &= (b\_{m - 1} b_{m - 2} \cdots b_1 b_0 0)\_2 \\\\
+    2 l + 1 &= (b\_{m - 1} b_{m - 2} \cdots b_1 b_0 1)\_2 \\\\
+    J(n) &= (b_{m - 1} b_{m - 2} \cdots b_1 b_0 b_m)_2
 \end{aligned}$$
 
-即$J({(b_m b_{m-1} ... b_1 b_0)}_2) = {(b_{m-1} ... b_1 b_0 b_m)}_2$
+即$J((b_m b_{m - 1} \cdots b_1 b_0)\_2) = (b\_{m - 1} \cdots b_1 b_0 b_m)_2$
 
 即$J(n)$等于$n$循环左移一位。
 
@@ -197,36 +197,111 @@ consider those pivots chosen in the natural order of \textsc{QuickSort}. For any
 
 对其前若干项进行枚举：
 
-$n$ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
-$J(n)$ | 1 | 1 | 3 | 1 | 3 | 5 | 7 | 1 | 3 | 5 | 7 | 9 | 11 | 13 | 15 | 1
-$I(n)$ | - | 2 | 1 | 3 | 5 | 1 | 3 | 5 | 7 | 9 | 11 | 1 | 3 | 5 | 7 | 9
+|$n$ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 |
+|-  |-  |-  |-  |-  |-  |-  |-  |-  |-  |-   |-   |   -|-   |-   |-   |-|
+|$J(n)$ | 1 | 1 | 3 | 1 | 3 | 5 | 7 | 1 | 3 | 5 | 7 | 9 | 11 | 13 | 15 | 1|
+|$I(n)$ | - | 2 | 1 | 3 | 5 | 1 | 3 | 5 | 7 | 9 | 11 | 1 | 3 | 5 | 7 | 9|
 
 当$n=1$时，$I(n)$无意义；当$n=2$时，$I(n)=2$；
 随后，$I(n)$的规律与$J(n)$类似：
 在$J(n)$中，$J(n)$每隔$2^(m)$次重置为1，因此可以令$n=2^m+l$；
 在$I(n)$中，$I(n)$在$n>2$时，可以看到每隔$3\cdot 2^m$次重置为1，因此可以令$n=3\cdot 2^m+k$，那么我们就可以得到
 $$I(n)=\begin{cases}
-    1, &n = 2 \\
+    2, &n = 2 \\\\
     2k+1, &n > 2, n = 3\cdot 2^m+k
 \end{cases}$$
 
 ---
 
 **Problem 4.** C2.19 利用求和因子来求解递归式
-$$
-\begin{aligned}
-    & T_0=5;\\
+
+$$\begin{aligned}
+    & T_0=5;\\\\
     & 2T_n=nT_{n-1}+3\times n!, n>0.  
-\end{aligned}
-$$
+\end{aligned}$$
+
+**Answer**
+
+选取$s_n$使得$s_n * n = s_{n-1} * 2$，对$s_n$进行求解，有：
+$$\begin{aligned}
+    s_n &= s_{n-1} * 2/n \\\\
+    &= s_{n-2} * \frac{2}{n-1} * \frac{2}{n} \\\\
+    &\ \ \ \ \vdots \\\\
+    &= s_0 * \frac{2}{1} * \cdots * \frac{2}{n-1} * \frac{2}{n}\\\\
+    &= s_0 * \frac{2^n}{n!}
+\end{aligned}$$
+
+
+不妨考虑$s_0=1,s_n=\frac{2^n}{n!}$
+
+两边同乘$s_n$有：
+$$\frac{2^{n+1}}{n!}T_n=\frac{2^n}{(n-1)!}T_{n-1}+3*2^n$$
+
+记$S_n=\frac{2^{n+1}}{n!}T_n$，则有:
+$$\begin{aligned}
+    S_n &= S_{n-1} + 3 * 2^n \\\\
+    &= S_{n-2} + 3 * 2^{n-1} + 3 * 2^n \\\\
+    &\ \ \ \ \vdots \\\\
+    & = S_0 + 3 * 2^1 + 3 * 2^2 + \cdots + 3 * 2^n \\\\
+    & = \frac{2^{0 + 1}}{0!} T_0 + 3 * \sum_{k=1}^n 2^k\\\\
+    & = 10 + 3 * \sum_{k=1}^n 2^k \\\\
+    & = 10 + 3 * 2 * \frac{2^n - 1}{2 - 1} \\\\
+    & = 10 + 6 * 2^n - 6 \\\\
+    & = 4 + 3 * 2^{n + 1}
+\end{aligned}$$
+
+
+那么可以得到
+$$\begin{aligned}
+    T_n &= S_n*\frac{n!}{2^{n+1}} \\\\
+    & = (4 + 3 * 2^{n + 1}) * \frac{n!}{2^{n+1}}\\\\
+    & = \frac{n!}{2^{n-1}} + 3\cdot n!
+\end{aligned}$$
 
 ---
 
 **Problem 5.** C2.22 不用归纳法证明拉格朗日恒等式
 $$
-\sum_{1\le j < k \le n}(a_jb_k - a_kb_j)^2=\left( \sum_{k=1}^n a_k^2 \right)\left( \sum_{k=1}^n b_k^2 \right) - \left( \sum_{k=1}^n a_kb^k \right)^2.
+\sum_{1\le j < k \le n}(a_jb_k - a_kb_j)^2=\left( \sum_{k=1}^n a_k^2 \right)\left( \sum_{k=1}^n b_k^2 \right) - \left( \sum_{k=1}^n a_kb_k \right)^2.
 $$
 事实上，可证明一个关于更一般的二重和式
 $$\sum_{1 \le j < k \le n}(a_jb_k-a_kb_j)(A_jB_k-A_kB_j)$$
 的恒等式
+
+**Answer**
+
+考虑证明一般的二重和式，令
+$$\begin{aligned}
+    S=\sum_{1 \le j < k \le n}(a_jb_k-a_kb_j)(A_jB_k-A_kB_j)
+\end{aligned}$$
+
+利用交换律，可以将$k, j$互换从而得到
+$$\begin{aligned}
+    S &= \sum_{1 \le k < j \le n}(a_kb_j-a_jb_k)(A_kB_j-A_jB_k)\\\\
+    &= \sum_{1 \le k < j \le n}(a_kb_jA_kB_j-a_kb_jA_jB_k-a_jb_kA_kB_j+a_jb_kA_jB_k) \\\\
+    &= \sum_{1 \le k < j \le n}((a_jb_k-a_kb_j)A_jB_k-(a_jb_k-a_kb_j)A_kB_j) \\\\
+    &= \sum_{1 \le k < j \le n}(a_jb_k-a_kb_j)(A_jB_k-A_kB_j)
+\end{aligned}$$
+
+考虑到
+$$\sum_{1\le j < k \le n}a + \sum_{1\le k < j \le n}a  = \sum_{1\le j, k \le n}a  - \sum_{1\le j = k \le n}a$$
+
+则有
+$$\begin{aligned}
+    2S &= \sum_{1 \le j < k \le n}(a_jb_k-a_kb_j)(A_jB_k-A_kB_j) + \sum_{1 \le k < j \le n}(a_jb_k-a_kb_j)(A_jB_k-A_kB_j) \\\\
+    &= \sum_{1 \le j, k \le n} (a_jb_k-a_kb_j)(A_jB_k-A_kB_j) - \sum_{1 \le j = k \le n}(a_jb_k-a_kb_j)(A_jB_k-A_kB_j) \\\\
+    &= \sum_{1 \le j, k \le n} (a_jb_kA_jB_k-a_jb_kA_kB_j-a_kb_jA_jB_k+a_kb_jA_kB_j) - 0 \\\\
+    &= \sum_{1 \le j, k \le n}(a_jb_kA_jB_k + a_kb_jA_kB_j) - \sum_{1 \le j, k \le n}(a_jb_kA_kB_j+a_kb_jA_jB_k) \\\\
+    &= 2\sum_{1 \le k \le n}a_kA_k\sum_{1 \le k \le n}b_kB_k-2\sum_{1 \le k \le n}a_kB_k\sum_{1 \le k \le n}b_kA_k \\\\
+\end{aligned}$$
+
+故而
+$$S=\sum_{1 \le k \le n}a_kA_k\sum_{1 \le k \le n}b_kB_k - \sum_{1 \le k \le n}a_kB_k\sum_{1 \le k \le n}b_kA_k$$
+
+将$A=a, B=b$带入可得
+$$
+\begin{aligned}
+    \sum_{1\le j < k \le n}(a_jb_k - a_kb_j)^2 &= \sum_{1 \le k \le n}a_ka_k\sum_{1 \le k \le n}b_kb_k - \sum_{1 \le k \le n}a_kb_k\sum_{1 \le k \le n}b_ka_k \\\\
+    &=\left( \sum_{k=1}^n a_k^2 \right)\left( \sum_{k=1}^n b_k^2 \right) - \left( \sum_{k=1}^n a_kb_k \right)^2
+\end{aligned}
+$$
